@@ -1,4 +1,4 @@
 
-const cavnas = document.querySelector("#game-cavnas");
+const canvas = document.querySelector("#game-canvas");
 
 

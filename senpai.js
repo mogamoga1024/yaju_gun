@@ -16,8 +16,8 @@ class Senpai {
             image.src = `asset/走る野獣先輩/${i}.png`;
             this.#imageList.push(image);
         }
-        this.#width = this.#imageList[0].width * 2;
-        this.#height = this.#imageList[0].height * 2;
+        this.#width = this.#imageList[0].width * 2.5;
+        this.#height = this.#imageList[0].height * 2.5;
     }
 
     draw() {
@@ -25,11 +25,12 @@ class Senpai {
         const height = this.#height * this.#temaeRate;
 
         const x = this.#centerX - width / 2;
-        const bottomY0 = canvas.height + this.#height / 2;
-        const bottomY1 = canvas.height / 2;
-        // this.#temaeRate: 1でoffsetY: 0
-        const offsetY = canvas.height * (1 - this.#temaeRate);
-        const y = bottomY0 - height - offsetY;
+        // 水平線でのbottomY
+        const bottomY0 = canvas.height / 2;
+        // 一番手前のbottomY
+        const bottomY1 = canvas.height + this.#height / 2;
+        const bottomY = bottomY0 * (1 - this.#temaeRate) + bottomY1 * this.#temaeRate;
+        const y = bottomY - height;
 
         const image = this.#imageList[this.#frameCount % this.#animeFrameMax];
         context.drawImage(image, x, y, width, height);

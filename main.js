@@ -2,15 +2,19 @@
 const canvas = document.querySelector("#game-canvas");
 const context = canvas.getContext("2d");
 
-const enemy = new Senpai(canvas.width / 2);
-enemy.draw();
-
-function update() {
-    context.clearRect(0, 0, canvas.width, canvas.height);
-
-    enemy.update();
+loadImage("asset/草原.png").then(backgroundImage => {
+    drawBackgroundImage(backgroundImage);
+    const enemy = new Senpai(canvas.width / 2);
     enemy.draw();
-    requestAnimationFrame(update);
-};
 
-update();
+    function update() {
+        drawBackgroundImage(backgroundImage);
+
+        enemy.update();
+        enemy.draw();
+
+        requestAnimationFrame(update);
+    };
+
+    update();
+});

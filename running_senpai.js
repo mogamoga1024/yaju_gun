@@ -1,5 +1,5 @@
 
-class Senpai {
+class RunningSenpai {
     #width = 0;
     #height = 0;
     #centerX = 0;

@@ -6,11 +6,11 @@ class ShoutingSenpai {
     #temaeRate = 1;
     #frameCount = 0;
     #imageList = [];
-    #animeFrameMax = 11;
+    #animeFrameMax = 5;
     #imageListIndex = 0;
     #imageListIndexDelta = 1;
 
-    constructor(centerX, temaeRate = 0.5) {
+    constructor(centerX, temaeRate = 0.15) {
         this.#centerX = centerX;
         this.#temaeRate = temaeRate;
         for (let i = 0; i <= this.#animeFrameMax; i++) {
@@ -18,8 +18,8 @@ class ShoutingSenpai {
             image.src = `asset/くねくね先輩/${i}.png`;
             this.#imageList.push(image);
         }
-        this.#width = this.#imageList[0].width * 1.89;
-        this.#height = this.#imageList[0].height * 1.89;
+        this.#width = this.#imageList[0].width * 2.07;
+        this.#height = this.#imageList[0].height * 2.07;
     }
 
     draw() {

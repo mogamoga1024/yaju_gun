@@ -43,6 +43,9 @@ class Senpai {
         if (this.#temaeRate >= temaeRateMax) {
             return;
         }
-        this.#temaeRate = Math.min(this.#temaeRate + 0.002, temaeRateMax);
+
+        let a = 0.002 + 0.002 * this.#temaeRate;
+
+        this.#temaeRate = Math.min(this.#temaeRate + a, temaeRateMax);
     }
 }

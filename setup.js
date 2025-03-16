@@ -10,5 +10,9 @@
     for (let i = 0; i <= 12; i++) {
         preloadImage(`asset/走る野獣先輩/${i}.png`);
     }
+
+    for (let i = 0; i <= 11; i++) {
+        preloadImage(`asset/くねくね先輩/${i}.png`);
+    }
 })();
 

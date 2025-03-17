@@ -53,7 +53,7 @@ class ShoutingSenpai {
     shout() {
         const height = this.#height * this.#temaeRate;
         const centerY = this.#y() + height * 0.1;
-        return new KotodamaGroup("学生です", this.#centerX, centerY, this.#temaeRate);
+        return new Kotodama("学生です", this.#centerX, centerY, this.#temaeRate);
     }
 
     #y() {

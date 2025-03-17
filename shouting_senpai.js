@@ -54,7 +54,7 @@ class ShoutingSenpai {
 
     canShout() {
         // todo 仮
-        return this.#frameCount !== 60 * 3;
+        return this.#frameCount !== 60 * 1;
     }
 
     shout() {

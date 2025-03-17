@@ -15,10 +15,10 @@ loadImage("asset/草原.png").then(backgroundImage => {
         enemyList.forEach(enemy => enemy.update());
         
         for (const enemy of enemyList) {
-            if (
-                !(enemy instanceof ShoutingSenpai) ||
-                !enemy.canShout()
-            ) {
+            if (!(enemy instanceof ShoutingSenpai)) {
+                continue;
+            }
+            if (!!enemy.canShout()) {
                 continue;
             }
             const kotodama = enemy.shout();

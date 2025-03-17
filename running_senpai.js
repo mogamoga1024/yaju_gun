@@ -20,11 +20,17 @@ class RunningSenpai {
         this.#height = this.#imageList[0].height * 2.5;
     }
 
-    draw() {
+    draw(viewAngle) {
         const width = this.#width * this.#temaeRate;
         const height = this.#height * this.#temaeRate;
 
-        const x = this.#centerX - width / 2;
+        const canvasCenterX = canvas.width / 2;
+        const offsetX = (canvasCenterX * (viewAngle / 90)) % (canvasCenterX * 4);
+        let x = (this.#centerX - width / 2 + offsetX) % (canvas.width * 2);
+        if (x + width > canvas.width * 2) {
+            x = x - canvas.width * 2;
+        }
+
         // 水平線でのbottomY
         const bottomY0 = canvas.height / 2;
         // 一番手前のbottomY

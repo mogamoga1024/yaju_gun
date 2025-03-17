@@ -10,8 +10,8 @@ let viewAngle = 0;
 
 loadImage("asset/草原.png").then(backgroundImage => {
     drawBackgroundImage(backgroundImage);
-    // enemyList.push(new RunningSenpai(canvas.width / 2));
-    enemyList.push(new ShoutingSenpai(canvas.width / 2));
+    enemyList.push(new RunningSenpai(canvas.width / 2));
+    // enemyList.push(new ShoutingSenpai(canvas.width / 2));
     enemyList.forEach(enemy => enemy.draw(viewAngle));
 
     setupControls();

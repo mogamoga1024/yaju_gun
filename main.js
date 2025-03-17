@@ -45,11 +45,16 @@ function setupControls() {
 
     if (isPC) {
         window.addEventListener("keydown", e => {
-            if (e.key === "ArrowLeft") {
-                // todo
-            }
-            else if (e.key === "ArrowRight") {
-                // todo
+            switch (e.key) {
+                case "ArrowLeft":
+                case "a": case "A":
+                    // todo
+                    break;
+
+                case "ArrowRight":
+                case "d": case "D":
+                    // todo
+                    break;
             }
         });
     }

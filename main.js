@@ -9,7 +9,7 @@ const enemyList = [];
 let viewAngle = 0;
 
 loadImage("asset/草原.png").then(backgroundImage => {
-    drawBackgroundImage(backgroundImage);
+    drawBackgroundImage(backgroundImage, viewAngle);
     enemyList.push(new RunningSenpai(canvas.width / 2));
     // enemyList.push(new ShoutingSenpai(canvas.width / 2));
     enemyList.forEach(enemy => enemy.draw(viewAngle));
@@ -32,7 +32,8 @@ loadImage("asset/草原.png").then(backgroundImage => {
         }
         
         // 描画
-        drawBackgroundImage(backgroundImage);
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        drawBackgroundImage(backgroundImage, viewAngle);
         enemyList.forEach(enemy => enemy.draw(viewAngle));
 
         requestAnimationFrame(update);

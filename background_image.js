@@ -1,7 +1,6 @@
 
-function drawBackgroundImage(backgroundImage) {
-    const sx = 0;
-    const sw = backgroundImage.width / 2;
+function drawBackgroundImage(backgroundImage, viewAngle) {
+    const sw = backgroundImage.width;
     let sy = 0;
     let sh = backgroundImage.height;
     if (backgroundImage.height >= canvas.height) {
@@ -9,10 +8,18 @@ function drawBackgroundImage(backgroundImage) {
         sh = canvas.height;
     }
 
+    const canvasCenterX = canvas.width / 2;
+    const offsetX = (canvasCenterX * (viewAngle / 90)) % (canvasCenterX * 4);
+    
+    let dx = offsetX % (canvas.width * 2);
+    if (dx >= canvas.width) {
+        dx = dx - canvas.width * 2;
+    }
+
     context.drawImage(
         backgroundImage,
-        sx, sy, sw, sh,
-        0, 0, canvas.width, canvas.height
+        0, sy, sw, sh,
+        dx, 0, canvas.width, canvas.height
     );
 }
 

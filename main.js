@@ -12,6 +12,7 @@ loadImage("asset/草原.png").then(backgroundImage => {
     drawBackgroundImage(backgroundImage, viewAngle);
     enemyList.push(new RunningSenpai(canvas.width / 2));
     // enemyList.push(new ShoutingSenpai(canvas.width / 2));
+    enemyList.push(new ShoutingSenpai(canvas.width * 3 + canvas.width / 2));
     enemyList.forEach(enemy => enemy.draw(viewAngle));
 
     setupControls();
@@ -54,13 +55,19 @@ function setupControls() {
                 case "ArrowLeft":
                 case "a": case "A":
                     // todo
-                    viewAngle = (viewAngle + 4) % 360;
+                    viewAngle = (viewAngle + 10) % 360;
                     break;
 
                 case "ArrowRight":
                 case "d": case "D":
                     // todo
-                    viewAngle = (viewAngle + (360 - 4)) % 360;
+                    viewAngle = (viewAngle + (360 - 10)) % 360;
+                    break;
+                
+                case "ArrowDown":
+                case "s": case "S":
+                    // todo
+                    viewAngle = (viewAngle + 180) % 360;
                     break;
             }
         });

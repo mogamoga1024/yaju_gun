@@ -25,17 +25,10 @@ class ShoutingSenpai {
     draw() {
         const width = this.#width * this.#temaeRate;
         const height = this.#height * this.#temaeRate;
-
         const x = this.#centerX - width / 2;
-        // 水平線でのbottomY
-        const bottomY0 = canvas.height / 2;
-        // 一番手前のbottomY
-        const bottomY1 = canvas.height + this.#height / 2;
-        const bottomY = bottomY0 * (1 - this.#temaeRate) + bottomY1 * this.#temaeRate;
-        const y = bottomY - height;
-
+        
         const image = this.#imageList[this.#imageListIndex];
-        context.drawImage(image, x, y, width, height);
+        context.drawImage(image, x, this.#y(), width, height);
     }
 
     update() {
@@ -58,6 +51,18 @@ class ShoutingSenpai {
     }
 
     shout() {
-        return new KotodamaGroup("学生です", this.#centerX, this.#temaeRate);
+        const height = this.#height * this.#temaeRate;
+        const centerY = this.#y() + height * 0.1;
+        return new KotodamaGroup("学生です", this.#centerX, centerY, this.#temaeRate);
+    }
+
+    #y() {
+        const height = this.#height * this.#temaeRate;
+        // 水平線でのbottomY
+        const bottomY0 = canvas.height / 2;
+        // 一番手前のbottomY
+        const bottomY1 = canvas.height + this.#height / 2;
+        const bottomY = bottomY0 * (1 - this.#temaeRate) + bottomY1 * this.#temaeRate;
+        return bottomY - height;
     }
 }

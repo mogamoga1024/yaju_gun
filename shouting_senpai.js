@@ -22,10 +22,13 @@ class ShoutingSenpai {
         this.#height = this.#imageList[0].height * 2.07;
     }
 
-    draw() {
+    draw(viewAngle) {
         const width = this.#width * this.#temaeRate;
         const height = this.#height * this.#temaeRate;
-        const x = this.#centerX - width / 2;
+
+        const canvasCenterX = canvas.width / 2;
+        const offsetX = (canvasCenterX * (viewAngle / 90)) % (canvasCenterX * 4);
+        const x = (this.#centerX - width / 2 + offsetX) % canvas.width;
         
         const image = this.#imageList[this.#imageListIndex];
         context.drawImage(image, x, this.#y(), width, height);

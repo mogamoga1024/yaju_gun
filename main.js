@@ -4,11 +4,15 @@ const context = canvas.getContext("2d");
 
 const enemyList = [];
 
+// 範囲：[0, 360)
+// 0で真正面 90で左 180で後ろ 270で右
+let viewAngle = 0;
+
 loadImage("asset/草原.png").then(backgroundImage => {
     drawBackgroundImage(backgroundImage);
     // enemyList.push(new RunningSenpai(canvas.width / 2));
     enemyList.push(new ShoutingSenpai(canvas.width / 2));
-    enemyList.forEach(enemy => enemy.draw());
+    enemyList.forEach(enemy => enemy.draw(viewAngle));
 
     setupControls();
 
@@ -29,7 +33,7 @@ loadImage("asset/草原.png").then(backgroundImage => {
         
         // 描画
         drawBackgroundImage(backgroundImage);
-        enemyList.forEach(enemy => enemy.draw());
+        enemyList.forEach(enemy => enemy.draw(viewAngle));
 
         requestAnimationFrame(update);
     };
@@ -49,11 +53,13 @@ function setupControls() {
                 case "ArrowLeft":
                 case "a": case "A":
                     // todo
+                    viewAngle = (viewAngle + 2) % 360;
                     break;
 
                 case "ArrowRight":
                 case "d": case "D":
                     // todo
+                    viewAngle = (viewAngle + (360 - 2)) % 360;
                     break;
             }
         });

@@ -51,4 +51,13 @@ class ShoutingSenpai {
             this.#imageListIndex += this.#imageListIndexDelta;
         }
     }
+
+    canShout() {
+        // todo 仮
+        return this.#frameCount !== 60 * 3;
+    }
+
+    shout() {
+        return new KotodamaGroup("学生です", this.#centerX, this.#temaeRate);
+    }
 }

@@ -10,6 +10,8 @@ loadImage("asset/草原.png").then(backgroundImage => {
     enemyList.push(new ShoutingSenpai(canvas.width / 2));
     enemyList.forEach(enemy => enemy.draw());
 
+    setupControls();
+
     function update() {
         // 状態の更新
         enemyList.forEach(enemy => enemy.update());
@@ -34,3 +36,26 @@ loadImage("asset/草原.png").then(backgroundImage => {
 
     update();
 });
+
+function setupControls() {
+    const mobileRegex = /iphone;|(android|nokia|blackberry|bb10;).+mobile|android.+fennec|opera.+mobi|windows phone|symbianos/i;
+    const isMobileByUa = mobileRegex.test(navigator.userAgent);
+    const isMobileByClientHint = navigator.userAgentData && navigator.userAgentData.mobile;
+    const isPC = !(isMobileByUa || isMobileByClientHint);
+
+    if (isPC) {
+        window.addEventListener("keydown", e => {
+            if (e.key === "ArrowLeft") {
+                // todo
+            }
+            else if (e.key === "ArrowRight") {
+                // todo
+            }
+        });
+    }
+    else {
+        // todo
+    }
+}
+
+

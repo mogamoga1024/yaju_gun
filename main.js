@@ -53,13 +53,13 @@ function setupControls() {
                 case "ArrowLeft":
                 case "a": case "A":
                     // todo
-                    viewAngle = (viewAngle + 2) % 360;
+                    viewAngle = (viewAngle + 4) % 360;
                     break;
 
                 case "ArrowRight":
                 case "d": case "D":
                     // todo
-                    viewAngle = (viewAngle + (360 - 2)) % 360;
+                    viewAngle = (viewAngle + (360 - 4)) % 360;
                     break;
             }
         });

@@ -28,7 +28,10 @@ class ShoutingSenpai {
 
         const canvasCenterX = canvas.width / 2;
         const offsetX = (canvasCenterX * (viewAngle / 90)) % (canvasCenterX * 4);
-        const x = (this.#centerX - width / 2 + offsetX) % canvas.width;
+        let x = (this.#centerX - width / 2 + offsetX) % (canvas.width * 2);
+        if (x + width > canvas.width * 2) {
+            x = x - canvas.width * 2;
+        }
         
         const image = this.#imageList[this.#imageListIndex];
         context.drawImage(image, x, this.#y(), width, height);

@@ -12,12 +12,12 @@ class Kotodama {
         this.#centerX = centerX;
         this.#centerY = centerY;
         this.#temaeRate = temaeRate;
-        this.#fontSize = 200;
+        this.#fontSize = 180;
     }
 
-    draw() {
-        // todo 仮
+    draw(viewAngle) {
         const fontSize = this.#fontSize * this.#temaeRate;
+
         // 水平線でのcenterY
         const centerY0 = this.#centerY;
         // 一番手前のcenterY
@@ -28,12 +28,20 @@ class Kotodama {
         context.textAlign = "center";
         context.textBaseline = "middle";
 
+        const width = context.measureText(this.#text).width;
+        const canvasCenterX = canvas.width / 2;
+        const offsetX = (canvasCenterX * (viewAngle / 90)) % (canvasCenterX * 4);
+        let centerX = (this.#centerX + offsetX) % (canvas.width * 2);
+        if (centerX + width / 2 > canvas.width * 2) {
+            centerX = centerX - canvas.width * 2;
+        }
+
         context.lineWidth = 10;
         context.strokeStyle = "#B00000";
-        context.strokeText(this.#text, this.#centerX, centerY);
+        context.strokeText(this.#text, centerX, centerY);
         
         context.fillStyle = "pink";
-        context.fillText(this.#text, this.#centerX, centerY);
+        context.fillText(this.#text, centerX, centerY);
     }
 
     update() {
@@ -44,7 +52,7 @@ class Kotodama {
             return;
         }
 
-        let a = 0.002 + 0.002 * this.#temaeRate;
+        let a = 0.002 + 0.001 * this.#temaeRate;
 
         this.#temaeRate = Math.min(this.#temaeRate + a, temaeRateMax);
     }

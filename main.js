@@ -25,7 +25,7 @@ loadImage("asset/草原.png").then(backgroundImage => {
             if (!(enemy instanceof ShoutingSenpai)) {
                 continue;
             }
-            if (!!enemy.canShout()) {
+            if (!enemy.canShout()) {
                 continue;
             }
             const kotodama = enemy.shout();

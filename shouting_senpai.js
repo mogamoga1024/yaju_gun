@@ -53,13 +53,13 @@ class ShoutingSenpai {
 
     canShout() {
         // todo 仮
-        return this.#frameCount !== 60 * 1;
+        return this.#frameCount === 60 * 1;
     }
 
     shout() {
         const height = this.#height * this.#temaeRate;
         const centerY = this.#y() + height * 0.1;
-        return new Kotodama("学生です", this.#centerX, centerY, this.#temaeRate);
+        return new Kotodama("アイスティー", this.#centerX, centerY, this.#temaeRate);
     }
 
     #y() {

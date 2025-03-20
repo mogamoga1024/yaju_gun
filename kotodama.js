@@ -7,12 +7,14 @@ class Kotodama {
     #temaeRate = 1;
     #frameCount = 0;
     #radian = 0;
+    #type = "uneune"; // "uneune" or "kurukuru"
 
-    constructor(text, centerX, centerY, temaeRate) {
+    constructor(text, centerX, centerY, temaeRate, type = "uneune") {
         this.#text = text;
         this.#centerX = centerX;
         this.#centerY = centerY;
         this.#temaeRate = temaeRate;
+        this.#type = type;
         this.#fontSize = 250;
     }
 
@@ -34,9 +36,13 @@ class Kotodama {
         const offsetX = (canvasCenterX * (viewAngle / 90)) % (canvasCenterX * 4);
         let centerX = (this.#centerX + offsetX) % (canvas.width * 2);
 
-        // うねうね
-        centerX += Math.sin(this.#radian) * 200 * this.#temaeRate;
-        centerY += Math.cos(this.#radian) * 200 * this.#temaeRate;
+        if (this.#type === "uneune") {
+            centerX += Math.sin(this.#radian) * 200 * this.#temaeRate;
+        }
+        else if (this.#type === "kurukuru") {
+            centerX += Math.sin(this.#radian) * 200 * this.#temaeRate;
+            centerY += Math.cos(this.#radian) * 200 * this.#temaeRate;
+        }
 
         if (centerX + width / 2 > canvas.width * 2) {
             centerX = centerX - canvas.width * 2;

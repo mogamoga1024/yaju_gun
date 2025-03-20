@@ -3,6 +3,7 @@ const canvas = document.querySelector("#game-canvas");
 const context = canvas.getContext("2d");
 
 const enemyList = [];
+const kotodamaList = [];
 
 // 範囲：[0, 360)
 // 0で真正面 90で左 180で後ろ 270で右
@@ -51,6 +52,7 @@ loadImage("asset/草原.png").then(backgroundImage => {
 
         // 状態の更新
         enemyList.forEach(enemy => enemy.update());
+        kotodamaList.forEach(kotodama => kotodama.update());
         
         for (const enemy of enemyList) {
             if (!(enemy instanceof ShoutingSenpai)) {
@@ -60,13 +62,14 @@ loadImage("asset/草原.png").then(backgroundImage => {
                 continue;
             }
             const kotodama = enemy.shout();
-            enemyList.push(kotodama);
+            kotodamaList.unshift(kotodama);
         }
         
         // 描画
         context.clearRect(0, 0, canvas.width, canvas.height);
         drawBackgroundImage(backgroundImage, viewAngle);
         enemyList.forEach(enemy => enemy.draw(viewAngle));
+        kotodamaList.forEach(kotodama => kotodama.draw(viewAngle));
 
         requestAnimationFrame(update);
     };

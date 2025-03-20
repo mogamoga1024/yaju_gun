@@ -6,6 +6,7 @@ class Kotodama {
     #centerY = 0;
     #temaeRate = 1;
     #frameCount = 0;
+    #radian = 0;
 
     constructor(text, centerX, centerY, temaeRate) {
         this.#text = text;
@@ -36,6 +37,9 @@ class Kotodama {
             centerX = centerX - canvas.width * 2;
         }
 
+        // うねうね
+        centerX += Math.sin(this.#radian) * 200 * this.#temaeRate;
+
         context.lineWidth = 10 * this.#temaeRate;
         context.strokeStyle = "#B00000";
         context.strokeText(this.#text, centerX, centerY);
@@ -46,13 +50,14 @@ class Kotodama {
 
     update() {
         this.#frameCount++;
+        this.#radian += 0.05;
 
         const temaeRateMax = 1;
         if (this.#temaeRate >= temaeRateMax) {
             return;
         }
 
-        let a = 0.002 + 0.001 * this.#temaeRate;
+        let a = 0.001 + 0.001 * this.#temaeRate;
 
         this.#temaeRate = Math.min(this.#temaeRate + a, temaeRateMax);
     }

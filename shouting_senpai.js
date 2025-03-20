@@ -10,6 +10,7 @@ class ShoutingSenpai {
     #imageListIndex = 0;
     #imageListIndexDelta = 1;
     #text = "アイスティー";
+    #textIndex = 0;
 
     constructor(centerX, temaeRate = 0.15) {
         this.#centerX = centerX;
@@ -53,14 +54,21 @@ class ShoutingSenpai {
     }
 
     canShout() {
-        // todo 仮
-        return this.#frameCount === 60 * 1;
+        if (this.#textIndex > this.#text.length - 1) {
+            return false;
+        }
+        if (this.#frameCount < 60) {
+            return false;
+        }
+        return this.#frameCount % 20 === 0;
     }
 
     shout() {
         const height = this.#height * this.#temaeRate;
         const centerY = this.#y() + height * 0.1; // 顔当たりの座標
-        return new Kotodama(this.#text, this.#centerX, centerY, this.#temaeRate);
+        const char = this.#text[this.#textIndex];
+        this.#textIndex++;
+        return new Kotodama(char, this.#centerX, centerY, this.#temaeRate);
     }
 
     #y() {

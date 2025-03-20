@@ -60,7 +60,7 @@ class ShoutingSenpai {
         if (this.#frameCount < 60) {
             return false;
         }
-        return this.#frameCount % 20 === 0;
+        return this.#frameCount % 60 === 0;
     }
 
     shout() {

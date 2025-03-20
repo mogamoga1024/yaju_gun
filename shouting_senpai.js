@@ -9,6 +9,7 @@ class ShoutingSenpai {
     #animeFrameMax = 5;
     #imageListIndex = 0;
     #imageListIndexDelta = 1;
+    #text = "アイスティー";
 
     constructor(centerX, temaeRate = 0.15) {
         this.#centerX = centerX;
@@ -58,8 +59,8 @@ class ShoutingSenpai {
 
     shout() {
         const height = this.#height * this.#temaeRate;
-        const centerY = this.#y() + height * 0.1;
-        return new Kotodama("アイスティー", this.#centerX, centerY, this.#temaeRate);
+        const centerY = this.#y() + height * 0.1; // 顔当たりの座標
+        return new Kotodama(this.#text, this.#centerX, centerY, this.#temaeRate);
     }
 
     #y() {

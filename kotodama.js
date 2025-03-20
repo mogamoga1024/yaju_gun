@@ -36,7 +36,7 @@ class Kotodama {
             centerX = centerX - canvas.width * 2;
         }
 
-        context.lineWidth = 10;
+        context.lineWidth = 10 * this.#temaeRate;
         context.strokeStyle = "#B00000";
         context.strokeText(this.#text, centerX, centerY);
         

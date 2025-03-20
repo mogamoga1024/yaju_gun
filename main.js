@@ -26,9 +26,9 @@ const pc = {
 
 loadImage("asset/草原.png").then(backgroundImage => {
     drawBackgroundImage(backgroundImage, viewAngle);
-    enemyList.push(new RunningSenpai(canvas.width / 2));
-    // enemyList.push(new ShoutingSenpai(canvas.width / 2));
-    enemyList.push(new ShoutingSenpai(canvas.width * 3 + canvas.width / 2));
+    // enemyList.push(new RunningSenpai(canvas.width / 2));
+    enemyList.push(new ShoutingSenpai(canvas.width / 2));
+    // enemyList.push(new ShoutingSenpai(canvas.width * 3 + canvas.width / 2));
     enemyList.forEach(enemy => enemy.draw(viewAngle));
 
     setupControls();

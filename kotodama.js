@@ -23,7 +23,7 @@ class Kotodama {
         const centerY0 = this.#centerY;
         // 一番手前のcenterY
         const centerY1 = canvas.height / 2;
-        const centerY = centerY0 * (1 - this.#temaeRate) + centerY1 * this.#temaeRate;
+        let centerY = centerY0 * (1 - this.#temaeRate) + centerY1 * this.#temaeRate;
 
         context.font = `700 ${fontSize}px Meiryo`;
         context.textAlign = "center";
@@ -36,6 +36,7 @@ class Kotodama {
 
         // うねうね
         centerX += Math.sin(this.#radian) * 200 * this.#temaeRate;
+        centerY += Math.cos(this.#radian) * 200 * this.#temaeRate;
 
         if (centerX + width / 2 > canvas.width * 2) {
             centerX = centerX - canvas.width * 2;

@@ -48,8 +48,10 @@ let backgroundImage = null;
     }
     await Promise.all(promiseList);
 
-    const sound = await loadSound("asset/ドンッ.mp3");
-    SoundStorage.set("ドンッ", sound);
+    for (const name of ["ドンッ", "アイスティー"]) {
+        const sound = await loadSound(`asset/${name}.mp3`);
+        SoundStorage.set(name, sound);
+    }
 
     main();
 })();

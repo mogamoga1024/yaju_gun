@@ -66,6 +66,9 @@ class ShoutingSenpai {
     }
 
     shout() {
+        if (this.#textIndex === 0) {
+            playSound(SoundStorage.get(this.#text));
+        }
         const height = this.#height * this.#temaeRate;
         const centerY = this.#y() + height * 0.1; // 顔当たりの座標
         const char = this.#text[this.#textIndex];

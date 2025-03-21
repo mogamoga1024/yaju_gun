@@ -5,6 +5,8 @@ const context = canvas.getContext("2d");
 const enemyList = [];
 const kotodamaList = [];
 
+const player = new Player();
+
 // 範囲：[0, 360)
 // 0で真正面 90で左 180で後ろ 270で右
 let viewAngle = 0;
@@ -97,6 +99,14 @@ function main() {
         drawBackgroundImage(backgroundImage, viewAngle);
         enemyList.forEach(enemy => enemy.draw(viewAngle));
         kotodamaList.forEach(kotodama => kotodama.draw(viewAngle));
+
+        for (let i = kotodamaList.length - 1; i >= 0; i--) {
+            const kotodama = kotodamaList[i];
+            if (kotodama.isColliding()) {
+                kotodamaList.splice(i, 1);
+                player.takeDamage();
+            }
+        }
 
         requestAnimationFrame(update);
     };

@@ -65,8 +65,12 @@ class Kotodama {
             return;
         }
 
-        let a = 0.001 + 0.001 * this.#temaeRate;
+        const a = 0.001 + 0.001 * this.#temaeRate;
 
         this.#temaeRate = Math.min(this.#temaeRate + a, temaeRateMax);
+    }
+
+    isColliding() {
+        return this.#temaeRate >= 1;
     }
 }

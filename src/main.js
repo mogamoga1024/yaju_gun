@@ -28,6 +28,10 @@ const pc = {
 };
 
 let backgroundImage = null;
+let bgm = {
+    isFirst: true,
+    sound: null
+};
 (async function() {
     backgroundImage = await loadImage("asset/草原.png");
     
@@ -52,6 +56,15 @@ let backgroundImage = null;
         const sound = await loadSound(`asset/${name}.mp3`);
         SoundStorage.set(name, sound);
     }
+
+    window.addEventListener("click", async () => {
+        if (!bgm.isFirst) {
+            return;
+        }
+        bgm.isFirst = false;
+        bgm.sound = await loadSound(`asset/PLUMBER.m4a`, {volume: 0.3, loop: true});
+        playSound(bgm.sound);
+    });
 
     main();
 })();

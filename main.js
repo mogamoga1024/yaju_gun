@@ -25,7 +25,30 @@ const pc = {
     canTurn: true,
 };
 
-loadImage("asset/草原.png").then(backgroundImage => {
+let backgroundImage = null;
+let hidanSound = null;
+(async function() {
+    backgroundImage = await loadImage("asset/草原.png");
+    
+    const promiseList = [];
+    for (let i = 0; i <= 12; i++) {
+        promiseList.push(
+            loadImage(`asset/走る野獣先輩/${i}.png`)
+        );
+    }
+    for (let i = 0; i <= 5; i++) {
+        promiseList.push(
+            loadImage(`asset/くねくね先輩/${i}.png`)
+        );
+    }
+    await Promise.all(promiseList);
+
+    hidanSound = await loadSound("asset/ドンッ.mp3");
+
+    main();
+})();
+
+function main() {
     drawBackgroundImage(backgroundImage, viewAngle);
     // enemyList.push(new RunningSenpai(canvas.width / 2));
     enemyList.push(new ShoutingSenpai(canvas.width / 2));
@@ -75,7 +98,7 @@ loadImage("asset/草原.png").then(backgroundImage => {
     };
 
     update();
-});
+}
 
 function setupControls() {
     if (isPC) {

@@ -5,6 +5,7 @@ class ShoutingSenpai {
     #centerX = 0;
     #temaeRate = 1;
     #frameCount = 0;
+    #canShoutFrameCount = -60 * 2;
     #imageList = [];
     #animeFrameMax = 5;
     #imageListIndex = 0;
@@ -50,23 +51,25 @@ class ShoutingSenpai {
             }
             this.#imageListIndex += this.#imageListIndexDelta;
         }
+
+        if (this.#textIndex === 0 && this.#canShoutFrameCount > 0) {
+            this.#canShoutFrameCount = -60 * 10;
+        }
+        this.#canShoutFrameCount++;
     }
 
     canShout() {
-        if (this.#textIndex > this.#text.length - 1) {
+        if (this.#canShoutFrameCount < 0) {
             return false;
         }
-        if (this.#frameCount < 60) {
-            return false;
-        }
-        return this.#frameCount % 60 === 0;
+        return this.#canShoutFrameCount % 60 === 0;
     }
 
     shout() {
         const height = this.#height * this.#temaeRate;
         const centerY = this.#y() + height * 0.1; // 顔当たりの座標
         const char = this.#text[this.#textIndex];
-        this.#textIndex++;
+        this.#textIndex = (this.#textIndex + 1) % this.#text.length;
         return new Kotodama(char, this.#centerX, centerY, this.#temaeRate);
     }
 

@@ -32,14 +32,18 @@ let hidanSound = null;
     
     const promiseList = [];
     for (let i = 0; i <= 12; i++) {
-        promiseList.push(
-            loadImage(`asset/走る野獣先輩/${i}.png`)
-        );
+        promiseList.push((async () => {
+            const name = `asset/走る野獣先輩/${i}.png`;
+            const image = await loadImage(name)
+            ImageStorage.set(name, image);
+        })());
     }
     for (let i = 0; i <= 5; i++) {
-        promiseList.push(
-            loadImage(`asset/くねくね先輩/${i}.png`)
-        );
+        promiseList.push((async () => {
+            const name = `asset/くねくね先輩/${i}.png`;
+            const image = await loadImage(name)
+            ImageStorage.set(name, image);
+        })());
     }
     await Promise.all(promiseList);
 

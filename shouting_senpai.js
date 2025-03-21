@@ -16,8 +16,7 @@ class ShoutingSenpai {
         this.#centerX = centerX;
         this.#temaeRate = temaeRate;
         for (let i = 0; i <= this.#animeFrameMax; i++) {
-            const image = new Image();
-            image.src = `asset/くねくね先輩/${i}.png`;
+            const image = ImageStorage.get(`asset/くねくね先輩/${i}.png`);
             this.#imageList.push(image);
         }
         this.#width = this.#imageList[0].width * 2.07;

@@ -12,7 +12,7 @@ class RunningSenpai {
         this.#centerX = centerX;
         this.#temaeRate = temaeRate;
         for (let i = 0; i <= this.#animeFrameMax; i++) {
-            const image = ImageStorage.get(`asset/走る野獣先輩/${i}.png`);
+            const image = ImageStorage.get(`走る野獣先輩/${i}`);
             this.#imageList.push(image);
         }
         this.#width = this.#imageList[0].width * 2.5;

@@ -26,28 +26,28 @@ const pc = {
 };
 
 let backgroundImage = null;
-let hidanSound = null;
 (async function() {
     backgroundImage = await loadImage("asset/草原.png");
     
     const promiseList = [];
     for (let i = 0; i <= 12; i++) {
         promiseList.push((async () => {
-            const name = `asset/走る野獣先輩/${i}.png`;
-            const image = await loadImage(name)
+            const name = `走る野獣先輩/${i}`;
+            const image = await loadImage(`asset/${name}.png`);
             ImageStorage.set(name, image);
         })());
     }
     for (let i = 0; i <= 5; i++) {
         promiseList.push((async () => {
-            const name = `asset/くねくね先輩/${i}.png`;
-            const image = await loadImage(name)
+            const name = `くねくね先輩/${i}`;
+            const image = await loadImage(`asset/${name}.png`);
             ImageStorage.set(name, image);
         })());
     }
     await Promise.all(promiseList);
 
-    hidanSound = await loadSound("asset/ドンッ.mp3");
+    const sound = await loadSound("asset/ドンッ.mp3");
+    SoundStorage.set("ドンッ", sound);
 
     main();
 })();

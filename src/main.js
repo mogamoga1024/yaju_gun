@@ -40,7 +40,7 @@ let bgm = {
         promiseList.push((async () => ImageStorage.set(name, await loadImage(`asset/${name}.png`)))());
     };
     const plpsss = (name) => {
-        promiseList.push((async () => SoundStorage.set(name, await loadImage(`asset/${name}.mp3`)))());
+        promiseList.push((async () => SoundStorage.set(name, await loadSound(`asset/${name}.mp3`)))());
     };
 
     for (let i = 0; i <= 12; i++) {
@@ -64,6 +64,10 @@ let bgm = {
         bgm.isFirst = false;
         bgm.sound = await loadSound(`asset/PLUMBER.m4a`, {volume: 0.3, loop: true});
         playSound(bgm.sound);
+    });
+
+    canvas.addEventListener("mousemove", e => {
+        console.log("aaa")
     });
 
     main();

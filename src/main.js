@@ -131,7 +131,7 @@ function main() {
 
         for (let i = kotodamaList.length - 1; i >= 0; i--) {
             const kotodama = kotodamaList[i];
-            if (kotodama.isColliding()) {
+            if (kotodama.isHittingPlayer()) {
                 kotodamaList.splice(i, 1);
                 player.takeDamage();
             }

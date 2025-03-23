@@ -58,6 +58,10 @@ class ShoutingSenpai {
         this.#canShoutFrameCount++;
     }
 
+    isTargeted(crosshairX, crosshairY) {
+        // todo
+    }
+
     canShout() {
         if (this.#canShoutFrameCount < 0) {
             return false;

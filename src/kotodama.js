@@ -70,7 +70,11 @@ class Kotodama {
         this.#temaeRate = Math.min(this.#temaeRate + a, temaeRateMax);
     }
 
-    isColliding() {
+    isTargeted(crosshairX, crosshairY) {
+        // todo
+    }
+
+    isHittingPlayer() {
         return this.#temaeRate >= 1;
     }
 }

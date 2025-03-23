@@ -53,4 +53,8 @@ class RunningSenpai {
 
         this.#temaeRate = Math.min(this.#temaeRate + a, temaeRateMax);
     }
+
+    isTargeted(crosshairX, crosshairY) {
+        // todo
+    }
 }

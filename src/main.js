@@ -67,7 +67,11 @@ let bgm = {
     });
 
     canvas.addEventListener("mousemove", e => {
-        console.log("aaa")
+        const image = ImageStorage.get("照準");
+        const x = e.offsetX;
+        const y = e.offsetY;
+        const size = 80;
+        context.drawImage(image, x - size / 2, y - size / 2, size, size);
     });
 
     main();
@@ -130,7 +134,7 @@ function main() {
         requestAnimationFrame(update);
     };
 
-    update();
+    // update();
 }
 
 function setupControls() {

@@ -25,6 +25,8 @@ const pc = {
         "turn": false,
     },
     canTurn: true,
+    mouseX: canvas.width / 2,
+    mouseY: canvas.height / 2,
 };
 
 let backgroundImage = null;
@@ -66,12 +68,13 @@ let bgm = {
         playSound(bgm.sound);
     });
 
+    canvas.addEventListener("click", e => {
+        pc.mouseX = e.offsetX;
+        pc.mouseY = e.offsetY;
+    });
     canvas.addEventListener("mousemove", e => {
-        const image = ImageStorage.get("照準");
-        const x = e.offsetX;
-        const y = e.offsetY;
-        const size = 80;
-        context.drawImage(image, x - size / 2, y - size / 2, size, size);
+        pc.mouseX = e.offsetX;
+        pc.mouseY = e.offsetY;
     });
 
     main();
@@ -122,6 +125,9 @@ function main() {
         drawBackgroundImage(backgroundImage, viewAngle);
         enemyList.forEach(enemy => enemy.draw(viewAngle));
         kotodamaList.forEach(kotodama => kotodama.draw(viewAngle));
+        if (isPC) {
+            player.drawCrosshair(pc.mouseX, pc.mouseY);
+        }
 
         for (let i = kotodamaList.length - 1; i >= 0; i--) {
             const kotodama = kotodamaList[i];
@@ -134,7 +140,7 @@ function main() {
         requestAnimationFrame(update);
     };
 
-    // update();
+    update();
 }
 
 function setupControls() {

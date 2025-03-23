@@ -34,28 +34,28 @@ let bgm = {
 };
 (async function() {
     backgroundImage = await loadImage("asset/草原.png");
-    
+
     const promiseList = [];
+    const plpiss = (name) => {
+        promiseList.push((async () => ImageStorage.set(name, await loadImage(`asset/${name}.png`)))());
+    };
+    const plpsss = (name) => {
+        promiseList.push((async () => SoundStorage.set(name, await loadImage(`asset/${name}.mp3`)))());
+    };
+
     for (let i = 0; i <= 12; i++) {
-        promiseList.push((async () => {
-            const name = `走る野獣先輩/${i}`;
-            const image = await loadImage(`asset/${name}.png`);
-            ImageStorage.set(name, image);
-        })());
+        plpiss(`走る野獣先輩/${i}`);
     }
     for (let i = 0; i <= 5; i++) {
-        promiseList.push((async () => {
-            const name = `くねくね先輩/${i}`;
-            const image = await loadImage(`asset/${name}.png`);
-            ImageStorage.set(name, image);
-        })());
+        plpiss(`くねくね先輩/${i}`);
     }
-    await Promise.all(promiseList);
-
+    plpiss("照準");
+    
     for (const name of ["ドンッ", "アイスティー"]) {
-        const sound = await loadSound(`asset/${name}.mp3`);
-        SoundStorage.set(name, sound);
+        plpsss(name);
     }
+
+    await Promise.all(promiseList);
 
     window.addEventListener("click", async () => {
         if (!bgm.isFirst) {

@@ -43,8 +43,8 @@ let bgm = {
     const plpiss = (name) => {
         promiseList.push((async () => ImageStorage.set(name, await loadImage(`asset/${name}.png`)))());
     };
-    const plpsss = (name) => {
-        promiseList.push((async () => SoundStorage.set(name, await loadSound(`asset/${name}.mp3`)))());
+    const plpsss = (name, option = null) => {
+        promiseList.push((async () => SoundStorage.set(name, await loadSound(`asset/${name}.mp3`, option)))());
     };
 
     for (let i = 0; i <= 12; i++) {
@@ -59,6 +59,7 @@ let bgm = {
     for (const name of ["ドンッ", "アイスティー"]) {
         plpsss(name);
     }
+    plpsss("銃声", {volume: 0.4});
 
     await Promise.all(promiseList);
 
@@ -110,6 +111,15 @@ function main() {
             }
         }
 
+        // プレイヤーの攻撃
+        if (hasShot) {
+            playSound(SoundStorage.get("銃声"));
+            hasShot = false;
+            if (isPC) {
+                addSparks(pc.mouseX, pc.mouseY);
+            }
+        }
+
         // 状態の更新
         enemyList.forEach(enemy => enemy.update(viewAngle));
         kotodamaList.forEach(kotodama => kotodama.update(viewAngle));
@@ -146,12 +156,6 @@ function main() {
             player.drawCrosshair(pc.mouseX, pc.mouseY, willHit);
         }
 
-        if (hasShot) {
-            hasShot = false;
-            if (isPC) {
-                addSparks(pc.mouseX, pc.mouseY);
-            }
-        }
         drawSparks(context);
 
         for (let i = kotodamaList.length - 1; i >= 0; i--) {

@@ -56,8 +56,19 @@ class ShoutingSenpai {
     }
 
     isTargeted(crosshairX, crosshairY) {
-        // todo
-        return false;
+        if (crosshairX < this.#x) {
+            return false;
+        }
+        if (crosshairX > this.#x + this.#width) {
+            return false;
+        }
+        if (crosshairY < this.#y) {
+            return false;
+        }
+        if (crosshairY > this.#y + this.#height) {
+            return false;
+        }
+        return true;
     }
 
     canShout() {

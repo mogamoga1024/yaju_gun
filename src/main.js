@@ -126,10 +126,21 @@ function main() {
         // 描画
         context.clearRect(0, 0, canvas.width, canvas.height);
         drawBackgroundImage(backgroundImage, viewAngle);
-        enemyList.forEach(enemy => enemy.draw(viewAngle));
-        kotodamaList.forEach(kotodama => kotodama.draw(viewAngle));
+        let willHit = false;
+        enemyList.forEach(enemy => {
+            if (isPC && !willHit && enemy.isTargeted(pc.mouseX, pc.mouseY)) {
+                willHit = true;
+            }
+            enemy.draw(viewAngle);
+        });
+        kotodamaList.forEach(kotodama => {
+            if (isPC && !willHit && kotodama.isTargeted(pc.mouseX, pc.mouseY)) {
+                willHit = true;
+            }
+            kotodama.draw(viewAngle);
+        });
         if (isPC) {
-            player.drawCrosshair(pc.mouseX, pc.mouseY);
+            player.drawCrosshair(pc.mouseX, pc.mouseY, willHit);
         }
 
         for (let i = kotodamaList.length - 1; i >= 0; i--) {

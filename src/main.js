@@ -11,6 +11,8 @@ const player = new Player();
 // 0で真正面 90で左 180で後ろ 270で右
 let viewAngle = 0;
 
+let hasShot = false;
+
 const isPC = (function() {
     const mobileRegex = /iphone;|(android|nokia|blackberry|bb10;).+mobile|android.+fennec|opera.+mobi|windows phone|symbianos/i;
     const isMobileByUa = mobileRegex.test(navigator.userAgent);
@@ -71,6 +73,7 @@ let bgm = {
     });
 
     canvas.addEventListener("click", e => {
+        hasShot = true;
         pc.mouseX = e.offsetX;
         pc.mouseY = e.offsetY;
     });
@@ -142,6 +145,14 @@ function main() {
         if (isPC) {
             player.drawCrosshair(pc.mouseX, pc.mouseY, willHit);
         }
+
+        if (hasShot) {
+            hasShot = false;
+            if (isPC) {
+                addSparks(pc.mouseX, pc.mouseY);
+            }
+        }
+        drawSparks(context);
 
         for (let i = kotodamaList.length - 1; i >= 0; i--) {
             const kotodama = kotodamaList[i];

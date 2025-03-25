@@ -43,8 +43,8 @@ let bgm = {
     const plpiss = (name) => {
         promiseList.push((async () => ImageStorage.set(name, await loadImage(`asset/${name}.png`)))());
     };
-    const plpsss = (name, option = null) => {
-        promiseList.push((async () => SoundStorage.set(name, await loadSound(`asset/${name}.mp3`, option)))());
+    const plpsss = (name, ext = "mp3", option = null) => {
+        promiseList.push((async () => SoundStorage.set(name, await loadSound(`asset/${name}.${ext}`, option)))());
     };
 
     for (let i = 0; i <= 12; i++) {
@@ -59,12 +59,13 @@ let bgm = {
     for (const name of ["ドンッ", "アイスティー"]) {
         plpsss(name);
     }
-    plpsss("銃声", {volume: 0.4});
+    plpsss("銃声", "mp3", {volume: 0.4});
+    plpsss("息継ぎ", "m4a", {volume: 1, loop: true});
 
     await Promise.all(promiseList);
 
     window.addEventListener("click", async () => {
-        return; // todo
+        // return; // todo
         if (!bgm.isFirst) {
             return;
         }
@@ -90,7 +91,7 @@ function main() {
     drawBackgroundImage(backgroundImage, viewAngle);
     enemyList.push(new RunningSenpai(canvas.width / 2, viewAngle));
     // enemyList.push(new ShoutingSenpai(canvas.width / 2, viewAngle));
-    // enemyList.push(new ShoutingSenpai(canvas.width * 3 + canvas.width / 2, viewAngle));
+    enemyList.push(new ShoutingSenpai(canvas.width * 3 + canvas.width / 2, viewAngle));
     enemyList.forEach(enemy => enemy.draw());
 
     setupControls();

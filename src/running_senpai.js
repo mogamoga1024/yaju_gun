@@ -11,6 +11,7 @@ class RunningSenpai {
     #frameCount = 0;
     #imageList = [];
     #animeFrameMax = 12;
+    #ikitugiSound = null;
 
     constructor(centerX, viewAngle, temaeRate = 0) {
         this.#centerX = centerX;
@@ -21,10 +22,16 @@ class RunningSenpai {
         }
         this.#oriWidth = this.#imageList[0].width * 2.5;
         this.#oriHeight = this.#imageList[0].height * 2.5;
+        this.#ikitugiSound = SoundStorage.get("息継ぎ");
+        this.#ikitugiSound.hasPlayedSound = false;
         this.#updateBounds(viewAngle);
     }
 
     draw() {
+        if (!this.#ikitugiSound.hasPlayedSound) {
+            this.#ikitugiSound.hasPlayedSound = true;
+            playSound(this.#ikitugiSound);
+        }
         const image = this.#imageList[this.#frameCount % this.#animeFrameMax];
         context.drawImage(image, this.#x, this.#y, this.#width, this.#height);
     }

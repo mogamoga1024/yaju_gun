@@ -84,8 +84,8 @@ let bgm = {
 
 function main() {
     drawBackgroundImage(backgroundImage, viewAngle);
-    // enemyList.push(new RunningSenpai(canvas.width / 2, viewAngle));
-    enemyList.push(new ShoutingSenpai(canvas.width / 2, viewAngle));
+    enemyList.push(new RunningSenpai(canvas.width / 2, viewAngle));
+    // enemyList.push(new ShoutingSenpai(canvas.width / 2, viewAngle));
     // enemyList.push(new ShoutingSenpai(canvas.width * 3 + canvas.width / 2, viewAngle));
     enemyList.forEach(enemy => enemy.draw());
 

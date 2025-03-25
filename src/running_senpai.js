@@ -56,5 +56,6 @@ class RunningSenpai {
 
     isTargeted(crosshairX, crosshairY) {
         // todo
+        return false;
     }
 }

@@ -60,6 +60,7 @@ class ShoutingSenpai {
 
     isTargeted(crosshairX, crosshairY) {
         // todo
+        return false;
     }
 
     canShout() {

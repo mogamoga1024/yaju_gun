@@ -72,6 +72,7 @@ class Kotodama {
 
     isTargeted(crosshairX, crosshairY) {
         // todo
+        return false;
     }
 
     isHittingPlayer() {

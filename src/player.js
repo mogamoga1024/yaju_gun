@@ -1,7 +1,7 @@
 
 class Player {
-    drawCrosshair(x, y) {
-        const image = ImageStorage.get("照準");
+    drawCrosshair(x, y, willHit = false) {
+        const image = ImageStorage.get(willHit ? "照準2" : "照準1");
         const size = 80;
         context.drawImage(image, x - size / 2, y - size / 2, size, size);
     }

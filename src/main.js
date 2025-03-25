@@ -51,7 +51,8 @@ let bgm = {
     for (let i = 0; i <= 5; i++) {
         plpiss(`くねくね先輩/${i}`);
     }
-    plpiss("照準");
+    plpiss("照準1");
+    plpiss("照準2");
     
     for (const name of ["ドンッ", "アイスティー"]) {
         plpsss(name);
@@ -60,6 +61,7 @@ let bgm = {
     await Promise.all(promiseList);
 
     window.addEventListener("click", async () => {
+        return; // todo
         if (!bgm.isFirst) {
             return;
         }

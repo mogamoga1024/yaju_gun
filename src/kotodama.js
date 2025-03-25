@@ -9,13 +9,14 @@ class Kotodama {
     #radian = 0;
     #type = "uneune"; // "uneune" or "kurukuru"
 
-    constructor(text, centerX, centerY, temaeRate, type = "uneune") {
+    constructor(text, centerX, centerY, viewAngle, temaeRate, type = "uneune") {
         this.#text = text;
         this.#centerX = centerX;
         this.#centerY = centerY;
         this.#temaeRate = temaeRate;
         this.#type = type;
         this.#fontSize = 250;
+        this.#updateBounds(viewAngle);
     }
 
     draw(viewAngle) {
@@ -56,18 +57,20 @@ class Kotodama {
         context.fillText(this.#text, centerX, centerY);
     }
 
-    update() {
+    update(viewAngle) {
         this.#frameCount++;
         this.#radian += 0.02;
 
         const temaeRateMax = 1;
         if (this.#temaeRate >= temaeRateMax) {
-            return;
+            this.#temaeRate = temaeRateMax;
+        }
+        else {
+            const a = 0.001 + 0.001 * this.#temaeRate;
+            this.#temaeRate = Math.min(this.#temaeRate + a, temaeRateMax);
         }
 
-        const a = 0.001 + 0.001 * this.#temaeRate;
-
-        this.#temaeRate = Math.min(this.#temaeRate + a, temaeRateMax);
+        this.#updateBounds(viewAngle);
     }
 
     isTargeted(crosshairX, crosshairY) {
@@ -77,5 +80,9 @@ class Kotodama {
 
     isHittingPlayer() {
         return this.#temaeRate >= 1;
+    }
+
+    #updateBounds(viewAngle) {
+        // todo
     }
 }

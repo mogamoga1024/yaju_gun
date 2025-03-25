@@ -8,7 +8,7 @@ class RunningSenpai {
     #imageList = [];
     #animeFrameMax = 12;
 
-    constructor(centerX, temaeRate = 0) {
+    constructor(centerX, viewAngle, temaeRate = 0) {
         this.#centerX = centerX;
         this.#temaeRate = temaeRate;
         for (let i = 0; i <= this.#animeFrameMax; i++) {
@@ -17,6 +17,7 @@ class RunningSenpai {
         }
         this.#width = this.#imageList[0].width * 2.5;
         this.#height = this.#imageList[0].height * 2.5;
+        this.#updateBounds(viewAngle);
     }
 
     draw(viewAngle) {
@@ -41,21 +42,27 @@ class RunningSenpai {
         context.drawImage(image, x, y, width, height);
     }
 
-    update() {
+    update(viewAngle) {
         this.#frameCount++;
 
         const temaeRateMax = 1;
         if (this.#temaeRate >= temaeRateMax) {
-            return;
+            this.#temaeRate = temaeRateMax;
+        }
+        else {
+            const a = 0.002 + 0.002 * this.#temaeRate;
+            this.#temaeRate = Math.min(this.#temaeRate + a, temaeRateMax);
         }
 
-        let a = 0.002 + 0.002 * this.#temaeRate;
-
-        this.#temaeRate = Math.min(this.#temaeRate + a, temaeRateMax);
+        this.#updateBounds(viewAngle);
     }
 
     isTargeted(crosshairX, crosshairY) {
         // todo
         return false;
+    }
+
+    #updateBounds(viewAngle) {
+        // todo
     }
 }

@@ -1,7 +1,11 @@
 
 class ShoutingSenpai {
+    #x = 0;
+    #y = 0;
     #width = 0;
     #height = 0;
+    #oriWidth = 0;
+    #oriHeight = 0;
     #centerX = 0;
     #temaeRate = 1;
     #frameCount = 0;
@@ -13,33 +17,24 @@ class ShoutingSenpai {
     #text = "アイスティー";
     #textIndex = 0;
 
-    constructor(centerX, temaeRate = 0.15) {
+    constructor(centerX, viewAngle, temaeRate = 0.15) {
         this.#centerX = centerX;
         this.#temaeRate = temaeRate;
         for (let i = 0; i <= this.#animeFrameMax; i++) {
             const image = ImageStorage.get(`くねくね先輩/${i}`);
             this.#imageList.push(image);
         }
-        this.#width = this.#imageList[0].width * 2.07;
-        this.#height = this.#imageList[0].height * 2.07;
+        this.#oriWidth = this.#imageList[0].width * 2.07;
+        this.#oriHeight = this.#imageList[0].height * 2.07;
+        this.#updateBounds(viewAngle);
     }
 
-    draw(viewAngle) {
-        const width = this.#width * this.#temaeRate;
-        const height = this.#height * this.#temaeRate;
-
-        const canvasCenterX = canvas.width / 2;
-        const offsetX = (canvasCenterX * (viewAngle / 90)) % (canvasCenterX * 4);
-        let x = (this.#centerX - width / 2 + offsetX) % (canvas.width * 2);
-        if (x + width > canvas.width * 2) {
-            x = x - canvas.width * 2;
-        }
-        
+    draw() {
         const image = this.#imageList[this.#imageListIndex];
-        context.drawImage(image, x, this.#y(), width, height);
+        context.drawImage(image, this.#x, this.#y, this.#width, this.#height);
     }
 
-    update() {
+    update(viewAngle) {
         this.#frameCount++;
 
         if (this.#frameCount % 3 === 0) {
@@ -56,6 +51,8 @@ class ShoutingSenpai {
             this.#canShoutFrameCount = -60 * 10;
         }
         this.#canShoutFrameCount++;
+
+        this.#updateBounds(viewAngle);
     }
 
     isTargeted(crosshairX, crosshairY) {
@@ -70,24 +67,33 @@ class ShoutingSenpai {
         return this.#canShoutFrameCount % 60 === 0;
     }
 
-    shout() {
+    shout(viewAngle) {
         if (this.#textIndex === 0) {
             playSound(SoundStorage.get(this.#text));
         }
-        const height = this.#height * this.#temaeRate;
-        const centerY = this.#y() + height * 0.1; // 顔当たりの座標
+        const height = this.#oriHeight * this.#temaeRate;
+        const centerY = this.#y + height * 0.1; // 顔当たりの座標
         const char = this.#text[this.#textIndex];
         this.#textIndex = (this.#textIndex + 1) % this.#text.length;
-        return new Kotodama(char, this.#centerX, centerY, this.#temaeRate);
+        return new Kotodama(char, this.#centerX, centerY, viewAngle, this.#temaeRate);
     }
 
-    #y() {
-        const height = this.#height * this.#temaeRate;
+    #updateBounds(viewAngle) {
+        this.#width = this.#oriWidth * this.#temaeRate;
+        this.#height = this.#oriHeight * this.#temaeRate;
+
+        const canvasCenterX = canvas.width / 2;
+        const offsetX = (canvasCenterX * (viewAngle / 90)) % (canvasCenterX * 4);
+        this.#x = (this.#centerX - this.#width / 2 + offsetX) % (canvas.width * 2);
+        if (this.#x + this.#width > canvas.width * 2) {
+            this.#x = this.#x - canvas.width * 2;
+        }
+
         // 水平線でのbottomY
         const bottomY0 = canvas.height / 2;
         // 一番手前のbottomY
-        const bottomY1 = canvas.height + this.#height / 2;
+        const bottomY1 = canvas.height + this.#oriHeight / 2;
         const bottomY = bottomY0 * (1 - this.#temaeRate) + bottomY1 * this.#temaeRate;
-        return bottomY - height;
+        this.#y = bottomY - this.#height;
     }
 }

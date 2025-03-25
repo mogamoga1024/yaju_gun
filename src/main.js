@@ -84,9 +84,9 @@ let bgm = {
 
 function main() {
     drawBackgroundImage(backgroundImage, viewAngle);
-    // enemyList.push(new RunningSenpai(canvas.width / 2));
-    enemyList.push(new ShoutingSenpai(canvas.width / 2));
-    // enemyList.push(new ShoutingSenpai(canvas.width * 3 + canvas.width / 2));
+    // enemyList.push(new RunningSenpai(canvas.width / 2, viewAngle));
+    enemyList.push(new ShoutingSenpai(canvas.width / 2, viewAngle));
+    // enemyList.push(new ShoutingSenpai(canvas.width * 3 + canvas.width / 2, viewAngle));
     enemyList.forEach(enemy => enemy.draw(viewAngle));
 
     setupControls();
@@ -108,9 +108,10 @@ function main() {
         }
 
         // 状態の更新
-        enemyList.forEach(enemy => enemy.update());
-        kotodamaList.forEach(kotodama => kotodama.update());
+        enemyList.forEach(enemy => enemy.update(viewAngle));
+        kotodamaList.forEach(kotodama => kotodama.update(viewAngle));
         
+        // 敵の攻撃
         for (const enemy of enemyList) {
             if (!(enemy instanceof ShoutingSenpai)) {
                 continue;
@@ -118,7 +119,7 @@ function main() {
             if (!enemy.canShout()) {
                 continue;
             }
-            const kotodama = enemy.shout();
+            const kotodama = enemy.shout(viewAngle);
             kotodamaList.unshift(kotodama);
         }
         

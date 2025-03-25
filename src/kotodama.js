@@ -81,7 +81,7 @@ class Kotodama {
         context.textBaseline = "middle";
         const measure = context.measureText(this.#text);
         this.#width = measure.width;
-        this.#height = measure.fontBoundingBoxAscent + measure.fontBoundingBoxDescent;
+        this.#height = this.#fontSize;
 
         const canvasCenterX = canvas.width / 2;
         const offsetX = (canvasCenterX * (viewAngle / 90)) % (canvasCenterX * 4);

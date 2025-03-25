@@ -87,7 +87,7 @@ function main() {
     // enemyList.push(new RunningSenpai(canvas.width / 2, viewAngle));
     enemyList.push(new ShoutingSenpai(canvas.width / 2, viewAngle));
     // enemyList.push(new ShoutingSenpai(canvas.width * 3 + canvas.width / 2, viewAngle));
-    enemyList.forEach(enemy => enemy.draw(viewAngle));
+    enemyList.forEach(enemy => enemy.draw());
 
     setupControls();
 
@@ -131,13 +131,13 @@ function main() {
             if (isPC && !willHit && enemy.isTargeted(pc.mouseX, pc.mouseY)) {
                 willHit = true;
             }
-            enemy.draw(viewAngle);
+            enemy.draw();
         });
         kotodamaList.forEach(kotodama => {
             if (isPC && !willHit && kotodama.isTargeted(pc.mouseX, pc.mouseY)) {
                 willHit = true;
             }
-            kotodama.draw(viewAngle);
+            kotodama.draw();
         });
         if (isPC) {
             player.drawCrosshair(pc.mouseX, pc.mouseY, willHit);

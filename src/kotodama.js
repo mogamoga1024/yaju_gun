@@ -1,9 +1,14 @@
 
 class Kotodama {
-    #text = "";
-    #fontSize = 0;
     #centerX = 0;
     #centerY = 0;
+    #width = 0;
+    #height = 0;
+    #fontSize = 0;
+    #text = "";
+    #oriFontSize = 0;
+    #oriCenterX = 0;
+    #oriCenterY = 0;
     #temaeRate = 1;
     #frameCount = 0;
     #radian = 0;
@@ -11,50 +16,24 @@ class Kotodama {
 
     constructor(text, centerX, centerY, viewAngle, temaeRate, type = "uneune") {
         this.#text = text;
-        this.#centerX = centerX;
-        this.#centerY = centerY;
+        this.#oriCenterX = centerX;
+        this.#oriCenterY = centerY;
         this.#temaeRate = temaeRate;
         this.#type = type;
-        this.#fontSize = 250;
+        this.#oriFontSize = 250;
         this.#updateBounds(viewAngle);
     }
 
-    draw(viewAngle) {
-        const fontSize = this.#fontSize * this.#temaeRate;
-
-        // 水平線でのcenterY
-        const centerY0 = this.#centerY;
-        // 一番手前のcenterY
-        const centerY1 = canvas.height / 2;
-        let centerY = centerY0 * (1 - this.#temaeRate) + centerY1 * this.#temaeRate;
-
-        context.font = `700 ${fontSize}px Meiryo`;
+    draw() {
+        context.font = `700 ${this.#fontSize}px Meiryo`;
         context.textAlign = "center";
         context.textBaseline = "middle";
-
-        const width = context.measureText(this.#text).width;
-        const canvasCenterX = canvas.width / 2;
-        const offsetX = (canvasCenterX * (viewAngle / 90)) % (canvasCenterX * 4);
-        let centerX = (this.#centerX + offsetX) % (canvas.width * 2);
-
-        if (this.#type === "uneune") {
-            centerX += Math.sin(this.#radian) * 200 * this.#temaeRate;
-        }
-        else if (this.#type === "kurukuru") {
-            centerX += Math.sin(this.#radian) * 200 * this.#temaeRate;
-            centerY += Math.cos(this.#radian) * 200 * this.#temaeRate;
-        }
-
-        if (centerX + width / 2 > canvas.width * 2) {
-            centerX = centerX - canvas.width * 2;
-        }
-
         context.lineWidth = 10 * this.#temaeRate;
         context.strokeStyle = "#B00000";
-        context.strokeText(this.#text, centerX, centerY);
+        context.strokeText(this.#text, this.#centerX, this.#centerY);
         
         context.fillStyle = `rgba(255, 192, 203, ${0.5 + this.#temaeRate / 2})`;
-        context.fillText(this.#text, centerX, centerY);
+        context.fillText(this.#text, this.#centerX, this.#centerY);
     }
 
     update(viewAngle) {
@@ -74,8 +53,21 @@ class Kotodama {
     }
 
     isTargeted(crosshairX, crosshairY) {
-        // todo
-        return false;
+        const x = this.#centerX - this.#width / 2;
+        const y = this.#centerY - this.#height / 2;
+        if (crosshairX < x) {
+            return false;
+        }
+        if (crosshairX > x + this.#width) {
+            return false;
+        }
+        if (crosshairY < y) {
+            return false;
+        }
+        if (crosshairY > y + this.#height) {
+            return false;
+        }
+        return true;
     }
 
     isHittingPlayer() {
@@ -83,6 +75,34 @@ class Kotodama {
     }
 
     #updateBounds(viewAngle) {
-        // todo
+        this.#fontSize = this.#oriFontSize * this.#temaeRate;
+        context.font = `700 ${this.#fontSize}px Meiryo`;
+        context.textAlign = "center";
+        context.textBaseline = "middle";
+        const measure = context.measureText(this.#text);
+        this.#width = measure.width;
+        this.#height = measure.fontBoundingBoxAscent + measure.fontBoundingBoxDescent;
+
+        const canvasCenterX = canvas.width / 2;
+        const offsetX = (canvasCenterX * (viewAngle / 90)) % (canvasCenterX * 4);
+        this.#centerX = (this.#oriCenterX + offsetX) % (canvas.width * 2);
+
+        // 水平線でのcenterY
+        const centerY0 = this.#oriCenterY;
+        // 一番手前のcenterY
+        const centerY1 = canvas.height / 2;
+        this.#centerY = centerY0 * (1 - this.#temaeRate) + centerY1 * this.#temaeRate;
+
+        if (this.#type === "uneune") {
+            this.#centerX += Math.sin(this.#radian) * 200 * this.#temaeRate;
+        }
+        else if (this.#type === "kurukuru") {
+            this.#centerX += Math.sin(this.#radian) * 200 * this.#temaeRate;
+            this.#centerY += Math.cos(this.#radian) * 200 * this.#temaeRate;
+        }
+
+        if (this.#centerX + this.#width / 2 > canvas.width * 2) {
+            this.#centerX = this.#centerX - canvas.width * 2;
+        }
     }
 }

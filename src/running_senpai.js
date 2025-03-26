@@ -46,7 +46,7 @@ class RunningSenpai {
         this.#frameCount++;
 
         if (this.state !== "alive") {
-            this.#opacity -= 0.2;
+            this.#opacity -= 0.01;
             if (this.#opacity <= 0) {
                 this.state = "dead";
             }
@@ -89,6 +89,7 @@ class RunningSenpai {
     }
 
     takeDamage() {
+        // todo sound
         this.state = "dying";
     }
 

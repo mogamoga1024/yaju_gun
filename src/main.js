@@ -99,7 +99,7 @@ function main() {
     setupControls();
 
     function update() {
-        // PCでのキーイベント
+        // PCでのキーイベントの捕捉
         if (isPC) {
             const speed = 4;
             if (pc.isPressed.left) {
@@ -114,24 +114,14 @@ function main() {
             }
         }
 
-        // プレイヤーの攻撃
-        if (hasShot) {
-            playSound(SoundStorage.get("銃声"));
-            hasShot = false;
-            if (isPC) {
-                addSparks(pc.mouseX, pc.mouseY);
-            }
-
-            // todo
-            explosionList.push(new Explosion());
-
-            // todo
-            // takeDamage
-        }
-
-        // 状態の更新と削除処理
+        // 敵の状態の更新と被弾
         for (let i = enemyList.length - 1; i >= 0; i--) {
             const enemy = enemyList[i];
+
+            if (hasShot && isPC && enemy.isTargeted(pc.mouseX, pc.mouseY)) {
+                enemy.takeDamage();
+            }
+
             enemy.update(viewAngle);
             if (enemy.state === "dead") {
                 enemyList.splice(i, 1);
@@ -145,8 +135,18 @@ function main() {
                 explosionList.splice(i, 1);
             }
         }
-
         
+        // プレイヤーの攻撃
+        if (hasShot) {
+            playSound(SoundStorage.get("銃声"));
+            if (isPC) {
+                addSparks(pc.mouseX, pc.mouseY);
+            }
+
+            // todo
+            explosionList.push(new Explosion());
+        }
+
         // 敵の攻撃
         for (const enemy of enemyList) {
             if (!(enemy instanceof ShoutingSenpai)) {
@@ -157,6 +157,15 @@ function main() {
             }
             const kotodama = enemy.shout(viewAngle);
             kotodamaList.unshift(kotodama);
+        }
+
+        // プレイヤーの被弾
+        for (let i = kotodamaList.length - 1; i >= 0; i--) {
+            const kotodama = kotodamaList[i];
+            if (kotodama.isHittingPlayer()) {
+                kotodamaList.splice(i, 1);
+                player.takeDamage();
+            }
         }
         
         // 描画
@@ -183,13 +192,8 @@ function main() {
 
         drawSparks(context);
 
-        for (let i = kotodamaList.length - 1; i >= 0; i--) {
-            const kotodama = kotodamaList[i];
-            if (kotodama.isHittingPlayer()) {
-                kotodamaList.splice(i, 1);
-                player.takeDamage();
-            }
-        }
+        // 後処理
+        hasShot = false;
 
         requestAnimationFrame(update);
     };

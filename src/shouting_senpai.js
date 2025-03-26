@@ -93,6 +93,11 @@ class ShoutingSenpai {
         return new Kotodama(char, this.#centerX, centerY, viewAngle, this.#temaeRate);
     }
 
+    takeDamage() {
+        // todo sound
+        this.state = "dying";
+    }
+
     #updateBounds(viewAngle) {
         this.#width = this.#oriWidth * this.#temaeRate;
         this.#height = this.#oriHeight * this.#temaeRate;

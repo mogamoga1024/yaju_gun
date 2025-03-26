@@ -10,8 +10,11 @@ class RunningSenpai {
     #temaeRate = 1;
     #frameCount = 0;
     #imageList = [];
+    #imageListIndex = 0;
     #animeFrameMax = 12;
     #ikitugiSound = null;
+    state = "alive"; // alive or dying or dead
+    #opacity = 1;
 
     constructor(centerX, viewAngle, temaeRate = 0) {
         this.#centerX = centerX;
@@ -32,12 +35,27 @@ class RunningSenpai {
             this.#ikitugiSound.hasPlayedSound = true;
             playSound(this.#ikitugiSound);
         }
-        const image = this.#imageList[this.#frameCount % this.#animeFrameMax];
+
+        context.globalAlpha = this.#opacity;
+        const image = this.#imageList[this.#imageListIndex];
         context.drawImage(image, this.#x, this.#y, this.#width, this.#height);
+        context.globalAlpha = 1;
     }
 
     update(viewAngle) {
         this.#frameCount++;
+
+        if (this.state !== "alive") {
+            this.#opacity -= 0.2;
+            if (this.#opacity <= 0) {
+                this.state = "dead";
+            }
+            return;
+        }
+
+        if (this.#frameCount % 2 == 0) {
+            this.#imageListIndex = (this.#imageListIndex + 1) % this.#animeFrameMax;
+        }
 
         const temaeRateMax = 1;
         if (this.#temaeRate >= temaeRateMax) {
@@ -52,6 +70,9 @@ class RunningSenpai {
     }
 
     isTargeted(crosshairX, crosshairY) {
+        if (this.state !== "alive") {
+            return false;
+        }
         if (crosshairX < this.#x) {
             return false;
         }
@@ -65,6 +86,10 @@ class RunningSenpai {
             return false;
         }
         return true;
+    }
+
+    takeDamage() {
+        this.state = "dying";
     }
 
     #updateBounds(viewAngle) {

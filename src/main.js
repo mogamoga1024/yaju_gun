@@ -124,12 +124,28 @@ function main() {
 
             // todo
             explosionList.push(new Explosion());
+
+            // todo
+            // takeDamage
         }
 
-        // 状態の更新
-        enemyList.forEach(enemy => enemy.update(viewAngle));
+        // 状態の更新と削除処理
+        for (let i = enemyList.length - 1; i >= 0; i--) {
+            const enemy = enemyList[i];
+            enemy.update(viewAngle);
+            if (enemy.state === "dead") {
+                enemyList.splice(i, 1);
+            }
+        }
         kotodamaList.forEach(kotodama => kotodama.update(viewAngle));
-        explosionList.forEach(explosion => explosion.update(viewAngle));
+        for (let i = explosionList.length - 1; i >= 0; i--) {
+            const explosion = explosionList[i];
+            explosion.update(viewAngle);
+            if (explosion.shouldDisappear) {
+                explosionList.splice(i, 1);
+            }
+        }
+
         
         // 敵の攻撃
         for (const enemy of enemyList) {
@@ -159,13 +175,7 @@ function main() {
             }
             kotodama.draw();
         });
-        for (let i = explosionList.length - 1; i >= 0; i--) {
-            const explosion = explosionList[i];
-            explosion.draw();
-            if (explosion.shouldDisappear) {
-                explosionList.splice(i, 1);
-            }
-        }
+        explosionList.forEach(explosion => explosion.draw());
 
         if (isPC) {
             player.drawCrosshair(pc.mouseX, pc.mouseY, willHit);

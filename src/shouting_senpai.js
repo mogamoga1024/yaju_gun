@@ -16,6 +16,7 @@ class ShoutingSenpai {
     #imageListIndexDelta = 1;
     #text = "アイスティー";
     #textIndex = 0;
+    state = "alive"; // alive or dying or dead // todo
 
     constructor(centerX, viewAngle, temaeRate = 0.15) {
         this.#centerX = centerX;
@@ -56,6 +57,9 @@ class ShoutingSenpai {
     }
 
     isTargeted(crosshairX, crosshairY) {
+        if (this.state !== "alive") {
+            return false;
+        }
         if (crosshairX < this.#x) {
             return false;
         }

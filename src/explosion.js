@@ -18,7 +18,9 @@ class Explosion {
         const sy = sSize * Math.floor((this.#imageIndex + 1) / 10);
         const dSize = 100;
 
+        context.globalAlpha = 1 - Math.pow(this.#imageIndex / this.#imageIndexMax, 4);
         context.drawImage(this.#image, sx, sy, sSize, sSize, 0, 0, dSize, dSize);
+        context.globalAlpha = 1;
 
         if (this.#imageIndex >= this.#imageIndexMax) {
             this.shouldDisappear = true;

@@ -4,6 +4,7 @@ const context = canvas.getContext("2d");
 
 const enemyList = [];
 const kotodamaList = [];
+const explosionList = [];
 
 const player = new Player();
 
@@ -55,6 +56,7 @@ let bgm = {
     }
     plpiss("照準1");
     plpiss("照準2");
+    plpiss("爆発スプライト_170");
     
     for (const name of ["ドンッ", "アイスティー"]) {
         plpsss(name);
@@ -65,7 +67,7 @@ let bgm = {
     await Promise.all(promiseList);
 
     window.addEventListener("click", async () => {
-        // return; // todo
+        return; // todo
         if (!bgm.isFirst) {
             return;
         }
@@ -91,7 +93,7 @@ function main() {
     drawBackgroundImage(backgroundImage, viewAngle);
     enemyList.push(new RunningSenpai(canvas.width / 2, viewAngle));
     // enemyList.push(new ShoutingSenpai(canvas.width / 2, viewAngle));
-    enemyList.push(new ShoutingSenpai(canvas.width * 3 + canvas.width / 2, viewAngle));
+    // enemyList.push(new ShoutingSenpai(canvas.width * 3 + canvas.width / 2, viewAngle));
     enemyList.forEach(enemy => enemy.draw());
 
     setupControls();
@@ -119,11 +121,15 @@ function main() {
             if (isPC) {
                 addSparks(pc.mouseX, pc.mouseY);
             }
+
+            // todo
+            explosionList.push(new Explosion());
         }
 
         // 状態の更新
         enemyList.forEach(enemy => enemy.update(viewAngle));
         kotodamaList.forEach(kotodama => kotodama.update(viewAngle));
+        explosionList.forEach(explosion => explosion.update(viewAngle));
         
         // 敵の攻撃
         for (const enemy of enemyList) {
@@ -153,6 +159,14 @@ function main() {
             }
             kotodama.draw();
         });
+        for (let i = explosionList.length - 1; i >= 0; i--) {
+            const explosion = explosionList[i];
+            explosion.draw();
+            if (explosion.shouldDisappear) {
+                explosionList.splice(i, 1);
+            }
+        }
+
         if (isPC) {
             player.drawCrosshair(pc.mouseX, pc.mouseY, willHit);
         }

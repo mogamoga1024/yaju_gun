@@ -4,7 +4,6 @@ const context = canvas.getContext("2d");
 
 const enemyList = [];
 const kotodamaList = [];
-const explosionList = [];
 
 const player = new Player();
 
@@ -128,13 +127,6 @@ function main() {
             }
         }
         kotodamaList.forEach(kotodama => kotodama.update(viewAngle));
-        for (let i = explosionList.length - 1; i >= 0; i--) {
-            const explosion = explosionList[i];
-            explosion.update(viewAngle);
-            if (explosion.shouldDisappear) {
-                explosionList.splice(i, 1);
-            }
-        }
         
         // プレイヤーの攻撃
         if (hasShot) {
@@ -142,9 +134,6 @@ function main() {
             if (isPC) {
                 addSparks(pc.mouseX, pc.mouseY);
             }
-
-            // todo
-            explosionList.push(new Explosion());
         }
 
         // 敵の攻撃
@@ -184,7 +173,6 @@ function main() {
             }
             kotodama.draw();
         });
-        explosionList.forEach(explosion => explosion.draw());
 
         if (isPC) {
             player.drawCrosshair(pc.mouseX, pc.mouseY, willHit);

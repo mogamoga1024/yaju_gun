@@ -15,6 +15,7 @@ class RunningSenpai {
     #ikitugiSound = null;
     state = "alive"; // alive or dying or dead
     #opacity = 1;
+    #explosion = null;
 
     constructor(centerX, viewAngle, temaeRate = 0) {
         this.#centerX = centerX;
@@ -40,14 +41,17 @@ class RunningSenpai {
         const image = this.#imageList[this.#imageListIndex];
         context.drawImage(image, this.#x, this.#y, this.#width, this.#height);
         context.globalAlpha = 1;
+
+        this.#explosion?.draw(this.#x + this.#width / 2, this.#y + this.#height / 2, Math.max(this.#width, this.#height));
     }
 
     update(viewAngle) {
         this.#frameCount++;
+        this.#explosion?.update();
 
         if (this.state !== "alive") {
             this.#opacity -= 0.01;
-            if (this.#opacity <= 0) {
+            if (this.#opacity <= 0 || this.#explosion.shouldDisappear) {
                 this.state = "dead";
             }
             return;
@@ -91,6 +95,7 @@ class RunningSenpai {
     takeDamage() {
         // todo sound
         this.state = "dying";
+        this.#explosion = new Explosion();
     }
 
     #updateBounds(viewAngle) {

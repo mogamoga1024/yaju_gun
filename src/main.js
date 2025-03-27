@@ -2,49 +2,13 @@
 const canvas = document.querySelector("#game-canvas");
 const context = canvas.getContext("2d");
 
-const enemyList = [];
-const kotodamaList = [];
-
-const player = new Player();
-
-// 範囲：[0, 360)
-// 0で真正面 90で左 180で後ろ 270で右
-let viewAngle = 0;
-
-let hasShot = false;
-
-const isPC = (function() {
-    const mobileRegex = /iphone;|(android|nokia|blackberry|bb10;).+mobile|android.+fennec|opera.+mobi|windows phone|symbianos/i;
-    const isMobileByUa = mobileRegex.test(navigator.userAgent);
-    const isMobileByClientHint = navigator.userAgentData && navigator.userAgentData.mobile;
-    return !(isMobileByUa || isMobileByClientHint);
-})();
-
-const pc = {
-    isPressed: {
-        "left": false,
-        "right": false,
-        "turn": false,
-    },
-    canTurn: true,
-    mouseX: canvas.width / 2,
-    mouseY: canvas.height / 2,
-};
-
-let backgroundImage = null;
-let bgm = {
-    isFirst: true,
-    sound: null
-};
 (async function() {
-    backgroundImage = await loadImage("asset/草原.png");
-
     const promiseList = [];
     const plpiss = (name) => {
         promiseList.push((async () => ImageStorage.set(name, await loadImage(`asset/${name}.png`)))());
     };
-    const plpsss = (name, ext = "mp3", option = null) => {
-        promiseList.push((async () => SoundStorage.set(name, await loadSound(`asset/${name}.${ext}`, option)))());
+    const plls = (name) => {
+        promiseList.push((async () => await loadSound(name))());
     };
 
     // 画像
@@ -59,23 +23,57 @@ let bgm = {
     plpiss("爆発スプライト_170");
     
     // 音声 プリロード
-    for (const name of ["ドンッ", "アイスティー"]) {
-        plpsss(name);
+    // ※ Howler.jsにキャッシュさせておきたい
+    for (const name of ["ドンッ", "大破", "爆発", "息継ぎ", "アイスティー"]) {
+        plls(name);
     }
-    plpsss("銃声", "mp3", {volume: 0.3});
-    plpsss("息継ぎ", "m4a", {volume: 1, loop: true});
-    plpsss("大破", "mp3", {volume: 0.7});
-    plpsss("爆発", "m4a", {volume: 0.7});
 
     await Promise.all(promiseList);
 
+    main();
+})();
+
+async function main() {
+    const enemyList = [];
+    const kotodamaList = [];
+
+    const player = new Player();
+
+    // 範囲：[0, 360)
+    // 0で真正面 90で左 180で後ろ 270で右
+    let viewAngle = 0;
+
+    let hasShot = false;
+
+    const isPC = (function() {
+        const mobileRegex = /iphone;|(android|nokia|blackberry|bb10;).+mobile|android.+fennec|opera.+mobi|windows phone|symbianos/i;
+        const isMobileByUa = mobileRegex.test(navigator.userAgent);
+        const isMobileByClientHint = navigator.userAgentData && navigator.userAgentData.mobile;
+        return !(isMobileByUa || isMobileByClientHint);
+    })();
+
+    const pc = {
+        isPressed: {
+            "left": false,
+            "right": false,
+            "turn": false,
+        },
+        canTurn: true,
+        mouseX: canvas.width / 2,
+        mouseY: canvas.height / 2,
+    };
+
+    const bgm = {
+        isFirst: true,
+        sound: null
+    };
     window.addEventListener("click", async () => {
         return; // todo
         if (!bgm.isFirst) {
             return;
         }
         bgm.isFirst = false;
-        bgm.sound = await loadSound(`asset/PLUMBER.m4a`, {volume: 0.25, loop: true});
+        bgm.sound = await loadSound("PLUMBER");
         playSound(bgm.sound);
     });
 
@@ -89,10 +87,9 @@ let bgm = {
         pc.mouseY = e.offsetY;
     });
 
-    main();
-})();
+    const backgroundImage = await loadImage("asset/草原.png");
+    const gunshotSound = await loadSound("銃声");
 
-function main() {
     drawBackgroundImage(backgroundImage, viewAngle);
     enemyList.push(new RunningSenpai(0, viewAngle));
     enemyList.push(new RunningSenpai(canvas.width / 2, viewAngle));
@@ -122,7 +119,7 @@ function main() {
 
         // プレイヤーの攻撃
         if (hasShot) {
-            playSound(SoundStorage.get("銃声"));
+            playSound(gunshotSound);
             if (isPC) {
                 addSparks(pc.mouseX, pc.mouseY);
             }

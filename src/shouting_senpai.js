@@ -16,7 +16,9 @@ class ShoutingSenpai {
     #imageListIndexDelta = 1;
     #text = "アイスティー";
     #textIndex = 0;
-    state = "alive"; // alive or dying or dead // todo
+    state = "alive"; // alive or dying or dead
+    #opacity = 1;
+    #explosion = null;
 
     constructor(centerX, viewAngle, temaeRate = 0.15) {
         this.#centerX = centerX;
@@ -31,12 +33,25 @@ class ShoutingSenpai {
     }
 
     draw() {
+        context.globalAlpha = this.#opacity;
         const image = this.#imageList[this.#imageListIndex];
         context.drawImage(image, this.#x, this.#y, this.#width, this.#height);
+        context.globalAlpha = 1;
+
+        this.#explosion?.draw(this.#x + this.#width / 2, this.#y + this.#height / 2, Math.max(this.#width, this.#height));
     }
 
     update(viewAngle) {
         this.#frameCount++;
+        this.#explosion?.update();
+
+        if (this.state !== "alive") {
+            this.#opacity -= 0.01;
+            if (this.#opacity <= 0 || this.#explosion.shouldDisappear) {
+                this.state = "dead";
+            }
+            return;
+        }
 
         if (this.#frameCount % 3 === 0) {
             if (this.#imageListIndex <= 0) {
@@ -75,6 +90,12 @@ class ShoutingSenpai {
         return true;
     }
 
+    takeDamage() {
+        // todo sound
+        this.state = "dying";
+        this.#explosion = new Explosion();
+    }
+
     canShout() {
         if (this.#canShoutFrameCount < 0) {
             return false;
@@ -91,11 +112,6 @@ class ShoutingSenpai {
         const char = this.#text[this.#textIndex];
         this.#textIndex = (this.#textIndex + 1) % this.#text.length;
         return new Kotodama(char, this.#centerX, centerY, viewAngle, this.temaeRate);
-    }
-
-    takeDamage() {
-        // todo sound
-        this.state = "dying";
     }
 
     #updateBounds(viewAngle) {

@@ -152,7 +152,7 @@ function main() {
                 continue;
             }
             const kotodama = enemy.shout(viewAngle);
-            kotodamaList.unshift(kotodama);
+            kotodamaList.push(kotodama);
         }
 
         // プレイヤーの被弾

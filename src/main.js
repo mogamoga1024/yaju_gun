@@ -168,7 +168,7 @@ function main() {
             }
         }
         
-        // 描画
+        // 奥側から描画
         context.clearRect(0, 0, canvas.width, canvas.height);
         drawBackgroundImage(backgroundImage, viewAngle);
         let willHit = false;

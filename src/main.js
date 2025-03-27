@@ -60,18 +60,20 @@ let bgm = {
     for (const name of ["ドンッ", "アイスティー"]) {
         plpsss(name);
     }
-    plpsss("銃声", "mp3", {volume: 0.4});
+    plpsss("銃声", "mp3", {volume: 0.3});
     plpsss("息継ぎ", "m4a", {volume: 1, loop: true});
+    plpsss("大破", "mp3", {volume: 0.7});
+    plpsss("爆発", "m4a", {volume: 0.7});
 
     await Promise.all(promiseList);
 
     window.addEventListener("click", async () => {
-        return; // todo
+        // return; // todo
         if (!bgm.isFirst) {
             return;
         }
         bgm.isFirst = false;
-        bgm.sound = await loadSound(`asset/PLUMBER.m4a`, {volume: 0.3, loop: true});
+        bgm.sound = await loadSound(`asset/PLUMBER.m4a`, {volume: 0.25, loop: true});
         playSound(bgm.sound);
     });
 

@@ -93,7 +93,7 @@ class RunningSenpai {
     }
 
     takeDamage() {
-        // todo sound
+        playSound(SoundStorage.get("爆発"));
         this.state = "dying";
         this.#explosion = new Explosion();
     }

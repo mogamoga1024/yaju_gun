@@ -74,6 +74,7 @@ class Kotodama {
     }
 
     takeDamage() {
+        playSound(SoundStorage.get("大破"));
         this.state = "dead";
     }
 

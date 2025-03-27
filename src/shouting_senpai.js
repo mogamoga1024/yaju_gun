@@ -94,9 +94,14 @@ class ShoutingSenpai {
         // todo sound
         this.state = "dying";
         this.#explosion = new Explosion();
+
+        // todo 自身が出した全ての言霊にダメージ
     }
 
     canShout() {
+        if (this.state !== "alive") {
+            return false;
+        }
         if (this.#canShoutFrameCount < 0) {
             return false;
         }

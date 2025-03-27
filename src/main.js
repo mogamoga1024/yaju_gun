@@ -92,9 +92,12 @@ let bgm = {
 
 function main() {
     drawBackgroundImage(backgroundImage, viewAngle);
-    // enemyList.push(new RunningSenpai(canvas.width / 2, viewAngle));
-    enemyList.push(new ShoutingSenpai(canvas.width / 2, viewAngle));
-    // enemyList.push(new ShoutingSenpai(canvas.width * 3 + canvas.width / 2, viewAngle));
+    enemyList.push(new RunningSenpai(0, viewAngle));
+    enemyList.push(new RunningSenpai(canvas.width / 2, viewAngle));
+    enemyList.push(new RunningSenpai(canvas.width, viewAngle));
+    // enemyList.push(new RunningSenpai(canvas.width * 3 / 2, viewAngle));
+    // enemyList.push(new ShoutingSenpai(canvas.width / 2, viewAngle));
+    // enemyList.push(new ShoutingSenpai(canvas.width * 3 / 2, viewAngle));
     enemyList.forEach(enemy => enemy.draw());
 
     setupControls();

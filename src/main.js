@@ -90,8 +90,8 @@ let bgm = {
 
 function main() {
     drawBackgroundImage(backgroundImage, viewAngle);
-    enemyList.push(new RunningSenpai(canvas.width / 2, viewAngle));
-    // enemyList.push(new ShoutingSenpai(canvas.width / 2, viewAngle));
+    // enemyList.push(new RunningSenpai(canvas.width / 2, viewAngle));
+    enemyList.push(new ShoutingSenpai(canvas.width / 2, viewAngle));
     // enemyList.push(new ShoutingSenpai(canvas.width * 3 + canvas.width / 2, viewAngle));
     enemyList.forEach(enemy => enemy.draw());
 
@@ -126,7 +126,18 @@ function main() {
                 enemyList.splice(i, 1);
             }
         }
-        kotodamaList.forEach(kotodama => kotodama.update(viewAngle));
+        for (let i = kotodamaList.length - 1; i >= 0; i--) {
+            const kotodama = kotodamaList[i];
+
+            if (hasShot && isPC && kotodama.isTargeted(pc.mouseX, pc.mouseY)) {
+                kotodama.takeDamage();
+            }
+
+            kotodama.update(viewAngle);
+            if (kotodama.state === "dead") {
+                kotodamaList.splice(i, 1);
+            }
+        }
         
         // プレイヤーの攻撃
         if (hasShot) {

@@ -71,6 +71,10 @@ class Kotodama {
         return true;
     }
 
+    takeDamage() {
+        this.state = "dead";
+    }
+
     isHittingPlayer() {
         return this.#temaeRate >= 1;
     }

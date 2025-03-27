@@ -68,7 +68,7 @@ let bgm = {
     await Promise.all(promiseList);
 
     window.addEventListener("click", async () => {
-        // return; // todo
+        return; // todo
         if (!bgm.isFirst) {
             return;
         }

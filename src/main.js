@@ -122,26 +122,22 @@ function main() {
         }
 
         // 敵の状態の更新と被弾
+        let canDealDamage = true;
+        sortedEntityList("desc").forEach(entity => {
+            if (hasShot && canDealDamage && isPC && entity.isTargeted(pc.mouseX, pc.mouseY)) {
+                canDealDamage = false;
+                entity.takeDamage();
+            }
+            entity.update(viewAngle);
+        });
         for (let i = enemyList.length - 1; i >= 0; i--) {
             const enemy = enemyList[i];
-
-            if (hasShot && isPC && enemy.isTargeted(pc.mouseX, pc.mouseY)) {
-                enemy.takeDamage();
-            }
-
-            enemy.update(viewAngle);
             if (enemy.state === "dead") {
                 enemyList.splice(i, 1);
             }
         }
         for (let i = kotodamaList.length - 1; i >= 0; i--) {
             const kotodama = kotodamaList[i];
-
-            if (hasShot && isPC && kotodama.isTargeted(pc.mouseX, pc.mouseY)) {
-                kotodama.takeDamage();
-            }
-
-            kotodama.update(viewAngle);
             if (kotodama.state === "dead") {
                 kotodamaList.splice(i, 1);
             }
@@ -172,17 +168,11 @@ function main() {
         context.clearRect(0, 0, canvas.width, canvas.height);
         drawBackgroundImage(backgroundImage, viewAngle);
         let willHit = false;
-        enemyList.forEach(enemy => {
-            if (isPC && !willHit && enemy.isTargeted(pc.mouseX, pc.mouseY)) {
+        sortedEntityList().forEach(entity => {
+            if (isPC && !willHit && entity.isTargeted(pc.mouseX, pc.mouseY)) {
                 willHit = true;
             }
-            enemy.draw();
-        });
-        kotodamaList.forEach(kotodama => {
-            if (isPC && !willHit && kotodama.isTargeted(pc.mouseX, pc.mouseY)) {
-                willHit = true;
-            }
-            kotodama.draw();
+            entity.draw();
         });
 
         if (isPC) {
@@ -245,4 +235,7 @@ function setupControls() {
     }
 }
 
+function sortedEntityList(sortOrder = "asc") {
+    return enemyList.concat(kotodamaList).sort((a, b) => (a.temaeRate - b.temaeRate) * (sortOrder === "asc" ? 1 : -1));
+}
 

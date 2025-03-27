@@ -7,7 +7,7 @@ class RunningSenpai {
     #oriWidth = 0;
     #oriHeight = 0;
     #centerX = 0;
-    #temaeRate = 1;
+    temaeRate = 1;
     #frameCount = 0;
     #imageList = [];
     #imageListIndex = 0;
@@ -19,7 +19,7 @@ class RunningSenpai {
 
     constructor(centerX, viewAngle, temaeRate = 0) {
         this.#centerX = centerX;
-        this.#temaeRate = temaeRate;
+        this.temaeRate = temaeRate;
         for (let i = 0; i <= this.#animeFrameMax; i++) {
             const image = ImageStorage.get(`走る野獣先輩/${i}`);
             this.#imageList.push(image);
@@ -62,12 +62,12 @@ class RunningSenpai {
         }
 
         const temaeRateMax = 1;
-        if (this.#temaeRate >= temaeRateMax) {
-            this.#temaeRate = temaeRateMax;
+        if (this.temaeRate >= temaeRateMax) {
+            this.temaeRate = temaeRateMax;
         }
         else {
-            const a = 0.002 + 0.002 * this.#temaeRate;
-            this.#temaeRate = Math.min(this.#temaeRate + a, temaeRateMax);
+            const a = 0.002 + 0.002 * this.temaeRate;
+            this.temaeRate = Math.min(this.temaeRate + a, temaeRateMax);
         }
 
         this.#updateBounds(viewAngle);
@@ -99,8 +99,8 @@ class RunningSenpai {
     }
 
     #updateBounds(viewAngle) {
-        this.#width = this.#oriWidth * this.#temaeRate;
-        this.#height = this.#oriHeight * this.#temaeRate;
+        this.#width = this.#oriWidth * this.temaeRate;
+        this.#height = this.#oriHeight * this.temaeRate;
 
         const canvasCenterX = canvas.width / 2;
         const offsetX = (canvasCenterX * (viewAngle / 90)) % (canvasCenterX * 4);
@@ -113,7 +113,7 @@ class RunningSenpai {
         const bottomY0 = canvas.height / 2;
         // 一番手前のbottomY
         const bottomY1 = canvas.height + this.#oriHeight / 2;
-        const bottomY = bottomY0 * (1 - this.#temaeRate) + bottomY1 * this.#temaeRate;
+        const bottomY = bottomY0 * (1 - this.temaeRate) + bottomY1 * this.temaeRate;
         this.#y = bottomY - this.#height;
     }
 }

@@ -9,7 +9,7 @@ class Kotodama {
     #oriFontSize = 0;
     #oriCenterX = 0;
     #oriCenterY = 0;
-    #temaeRate = 1;
+    temaeRate = 1;
     #frameCount = 0;
     #radian = 0;
     #type = "uneune"; // "uneune" or "kurukuru"
@@ -18,7 +18,7 @@ class Kotodama {
         this.#text = text;
         this.#oriCenterX = centerX;
         this.#oriCenterY = centerY;
-        this.#temaeRate = temaeRate;
+        this.temaeRate = temaeRate;
         this.#type = type;
         this.#oriFontSize = 250;
         this.#updateBounds(viewAngle);
@@ -28,11 +28,11 @@ class Kotodama {
         context.font = `700 ${this.#fontSize}px Meiryo`;
         context.textAlign = "center";
         context.textBaseline = "middle";
-        context.lineWidth = 10 * this.#temaeRate;
+        context.lineWidth = 10 * this.temaeRate;
         context.strokeStyle = "#B00000";
         context.strokeText(this.#text, this.#centerX, this.#centerY);
         
-        context.fillStyle = `rgba(255, 192, 203, ${0.5 + this.#temaeRate / 2})`;
+        context.fillStyle = `rgba(255, 192, 203, ${0.5 + this.temaeRate / 2})`;
         context.fillText(this.#text, this.#centerX, this.#centerY);
     }
 
@@ -41,12 +41,12 @@ class Kotodama {
         this.#radian += 0.02;
 
         const temaeRateMax = 1;
-        if (this.#temaeRate >= temaeRateMax) {
-            this.#temaeRate = temaeRateMax;
+        if (this.temaeRate >= temaeRateMax) {
+            this.temaeRate = temaeRateMax;
         }
         else {
-            const a = 0.001 + 0.001 * this.#temaeRate;
-            this.#temaeRate = Math.min(this.#temaeRate + a, temaeRateMax);
+            const a = 0.001 + 0.001 * this.temaeRate;
+            this.temaeRate = Math.min(this.temaeRate + a, temaeRateMax);
         }
 
         this.#updateBounds(viewAngle);
@@ -76,11 +76,11 @@ class Kotodama {
     }
 
     isHittingPlayer() {
-        return this.#temaeRate >= 1;
+        return this.temaeRate >= 1;
     }
 
     #updateBounds(viewAngle) {
-        this.#fontSize = this.#oriFontSize * this.#temaeRate;
+        this.#fontSize = this.#oriFontSize * this.temaeRate;
         context.font = `700 ${this.#fontSize}px Meiryo`;
         context.textAlign = "center";
         context.textBaseline = "middle";
@@ -96,14 +96,14 @@ class Kotodama {
         const centerY0 = this.#oriCenterY;
         // 一番手前のcenterY
         const centerY1 = canvas.height / 2;
-        this.#centerY = centerY0 * (1 - this.#temaeRate) + centerY1 * this.#temaeRate;
+        this.#centerY = centerY0 * (1 - this.temaeRate) + centerY1 * this.temaeRate;
 
         if (this.#type === "uneune") {
-            this.#centerX += Math.sin(this.#radian) * 200 * this.#temaeRate;
+            this.#centerX += Math.sin(this.#radian) * 200 * this.temaeRate;
         }
         else if (this.#type === "kurukuru") {
-            this.#centerX += Math.sin(this.#radian) * 200 * this.#temaeRate;
-            this.#centerY += Math.cos(this.#radian) * 200 * this.#temaeRate;
+            this.#centerX += Math.sin(this.#radian) * 200 * this.temaeRate;
+            this.#centerY += Math.cos(this.#radian) * 200 * this.temaeRate;
         }
 
         if (this.#centerX + this.#width / 2 > canvas.width * 2) {

@@ -7,7 +7,7 @@ class ShoutingSenpai {
     #oriWidth = 0;
     #oriHeight = 0;
     #centerX = 0;
-    #temaeRate = 1;
+    temaeRate = 1;
     #frameCount = 0;
     #canShoutFrameCount = -60 * 2;
     #imageList = [];
@@ -20,7 +20,7 @@ class ShoutingSenpai {
 
     constructor(centerX, viewAngle, temaeRate = 0.15) {
         this.#centerX = centerX;
-        this.#temaeRate = temaeRate;
+        this.temaeRate = temaeRate;
         for (let i = 0; i <= this.#animeFrameMax; i++) {
             const image = ImageStorage.get(`くねくね先輩/${i}`);
             this.#imageList.push(image);
@@ -86,11 +86,11 @@ class ShoutingSenpai {
         if (this.#textIndex === 0) {
             playSound(SoundStorage.get(this.#text));
         }
-        const height = this.#oriHeight * this.#temaeRate;
+        const height = this.#oriHeight * this.temaeRate;
         const centerY = this.#y + height * 0.1; // 顔当たりの座標
         const char = this.#text[this.#textIndex];
         this.#textIndex = (this.#textIndex + 1) % this.#text.length;
-        return new Kotodama(char, this.#centerX, centerY, viewAngle, this.#temaeRate);
+        return new Kotodama(char, this.#centerX, centerY, viewAngle, this.temaeRate);
     }
 
     takeDamage() {
@@ -99,8 +99,8 @@ class ShoutingSenpai {
     }
 
     #updateBounds(viewAngle) {
-        this.#width = this.#oriWidth * this.#temaeRate;
-        this.#height = this.#oriHeight * this.#temaeRate;
+        this.#width = this.#oriWidth * this.temaeRate;
+        this.#height = this.#oriHeight * this.temaeRate;
 
         const canvasCenterX = canvas.width / 2;
         const offsetX = (canvasCenterX * (viewAngle / 90)) % (canvasCenterX * 4);
@@ -113,7 +113,7 @@ class ShoutingSenpai {
         const bottomY0 = canvas.height / 2;
         // 一番手前のbottomY
         const bottomY1 = canvas.height + this.#oriHeight / 2;
-        const bottomY = bottomY0 * (1 - this.#temaeRate) + bottomY1 * this.#temaeRate;
+        const bottomY = bottomY0 * (1 - this.temaeRate) + bottomY1 * this.temaeRate;
         this.#y = bottomY - this.#height;
     }
 }

@@ -94,8 +94,6 @@ class ShoutingSenpai {
         // todo sound
         this.state = "dying";
         this.#explosion = new Explosion();
-
-        // todo 自身が出した全ての言霊にダメージ
     }
 
     canShout() {
@@ -116,7 +114,7 @@ class ShoutingSenpai {
         const centerY = this.#y + height * 0.1; // 顔当たりの座標
         const char = this.#text[this.#textIndex];
         this.#textIndex = (this.#textIndex + 1) % this.#text.length;
-        return new Kotodama(char, this.#centerX, centerY, viewAngle, this.temaeRate);
+        return new Kotodama(this, char, this.#centerX, centerY, viewAngle, this.temaeRate);
     }
 
     #updateBounds(viewAngle) {

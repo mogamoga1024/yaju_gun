@@ -1,5 +1,6 @@
 
 class Kotodama {
+    shooter = null;
     #centerX = 0;
     #centerY = 0;
     #width = 0;
@@ -14,7 +15,8 @@ class Kotodama {
     #radian = 0;
     #type = "uneune"; // "uneune" or "kurukuru"
 
-    constructor(text, centerX, centerY, viewAngle, temaeRate, type = "uneune") {
+    constructor(shooter, text, centerX, centerY, viewAngle, temaeRate, type = "uneune") {
+        this.shooter = shooter;
         this.#text = text;
         this.#oriCenterX = centerX;
         this.#oriCenterY = centerY;

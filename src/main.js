@@ -138,7 +138,7 @@ function main() {
         }
         for (let i = kotodamaList.length - 1; i >= 0; i--) {
             const kotodama = kotodamaList[i];
-            if (kotodama.state === "dead") {
+            if (kotodama.state === "dead" || kotodama.shooter.state === "dying") {
                 kotodamaList.splice(i, 1);
             }
         }

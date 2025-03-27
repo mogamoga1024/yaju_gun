@@ -35,8 +35,10 @@ class RunningSenpai {
         if (!this.#hasPlayedIkitugiSound) {
             this.#hasPlayedIkitugiSound = true;
             loadSound("息継ぎ").then(sound => {
-                this.#ikitugiSound = sound;
-                playSound(sound);
+                if (this.state === "alive") {
+                    this.#ikitugiSound = sound;
+                    playSound(sound);
+                }
             });
         }
 
@@ -101,6 +103,14 @@ class RunningSenpai {
         this.state = "dying";
         this.#explosion = new Explosion();
         this.#ikitugiSound?.stop();
+        const timer = setInterval(() => {
+            if (this.#ikitugiSound?.playing()) {
+                this.#ikitugiSound?.stop();
+            }
+            else {
+                clearInterval(timer);
+            }
+        }, 100);
     }
 
     #updateBounds(viewAngle) {

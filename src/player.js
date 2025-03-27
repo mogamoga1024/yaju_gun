@@ -7,7 +7,7 @@ class Player {
     }
 
     takeDamage() {
-        playSound(SoundStorage.get("ドンッ"));
+        loadSound("ドンッ").then(sound => playSound(sound));
     }
 
     #canHitTarget(target) {

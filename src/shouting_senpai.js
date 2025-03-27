@@ -50,6 +50,7 @@ class ShoutingSenpai {
             if (this.#opacity <= 0 || this.#explosion.shouldDisappear) {
                 this.state = "dead";
             }
+            this.#updateBounds(viewAngle);
             return;
         }
 
@@ -91,7 +92,7 @@ class ShoutingSenpai {
     }
 
     takeDamage() {
-        playSound(SoundStorage.get("爆発"));
+        loadSound("爆発").then(sound => playSound(sound));
         this.state = "dying";
         this.#explosion = new Explosion();
     }
@@ -108,7 +109,7 @@ class ShoutingSenpai {
 
     shout(viewAngle) {
         if (this.#textIndex === 0) {
-            playSound(SoundStorage.get(this.#text));
+            loadSound(this.#text).then(sound => playSound(sound));
         }
         const height = this.#oriHeight * this.temaeRate;
         const centerY = this.#y + height * 0.1; // 顔当たりの座標

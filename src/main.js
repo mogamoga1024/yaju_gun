@@ -68,7 +68,7 @@ async function main() {
         sound: null
     };
     window.addEventListener("click", async () => {
-        return; // todo
+        // return; // todo
         if (!bgm.isFirst) {
             return;
         }
@@ -93,10 +93,10 @@ async function main() {
     drawBackgroundImage(backgroundImage, viewAngle);
     enemyList.push(new RunningSenpai(0, viewAngle));
     enemyList.push(new RunningSenpai(canvas.width / 2, viewAngle));
-    enemyList.push(new RunningSenpai(canvas.width, viewAngle));
+    // enemyList.push(new RunningSenpai(canvas.width, viewAngle));
     // enemyList.push(new RunningSenpai(canvas.width * 3 / 2, viewAngle));
     // enemyList.push(new ShoutingSenpai(canvas.width / 2, viewAngle));
-    // enemyList.push(new ShoutingSenpai(canvas.width * 3 / 2, viewAngle));
+    enemyList.push(new ShoutingSenpai(canvas.width * 3 / 2, viewAngle));
     enemyList.forEach(enemy => enemy.draw());
 
     setupControls();
@@ -191,55 +191,54 @@ async function main() {
         requestAnimationFrame(update);
     };
 
+    function setupControls() {
+        if (isPC) {
+            window.addEventListener("keydown", e => {
+                switch (e.key) {
+                    case "ArrowLeft":
+                    case "a": case "A":
+                        pc.isPressed.left = true;
+                        break;
+    
+                    case "ArrowRight":
+                    case "d": case "D":
+                        pc.isPressed.right = true;
+                        break;
+                    
+                    case "ArrowDown":
+                    case "s": case "S":
+                        pc.isPressed.turn = true;
+                        break;
+                }
+            });
+            window.addEventListener("keyup", e => {
+                switch (e.key) {
+                    case "ArrowLeft":
+                    case "a": case "A":
+                        pc.isPressed.left = false;
+                        break;
+    
+                    case "ArrowRight":
+                    case "d": case "D":
+                        pc.isPressed.right = false;
+                        break;
+                    
+                    case "ArrowDown":
+                    case "s": case "S":
+                        pc.isPressed.turn = false;
+                        pc.canTurn = true;
+                        break;
+                }
+            });
+        }
+        else {
+            // todo
+        }
+    }
+    
+    function sortedEntityList(sortOrder = "asc") {
+        return enemyList.concat(kotodamaList).sort((a, b) => (a.temaeRate - b.temaeRate) * (sortOrder === "asc" ? 1 : -1));
+    }
+
     update();
 }
-
-function setupControls() {
-    if (isPC) {
-        window.addEventListener("keydown", e => {
-            switch (e.key) {
-                case "ArrowLeft":
-                case "a": case "A":
-                    pc.isPressed.left = true;
-                    break;
-
-                case "ArrowRight":
-                case "d": case "D":
-                    pc.isPressed.right = true;
-                    break;
-                
-                case "ArrowDown":
-                case "s": case "S":
-                    pc.isPressed.turn = true;
-                    break;
-            }
-        });
-        window.addEventListener("keyup", e => {
-            switch (e.key) {
-                case "ArrowLeft":
-                case "a": case "A":
-                    pc.isPressed.left = false;
-                    break;
-
-                case "ArrowRight":
-                case "d": case "D":
-                    pc.isPressed.right = false;
-                    break;
-                
-                case "ArrowDown":
-                case "s": case "S":
-                    pc.isPressed.turn = false;
-                    pc.canTurn = true;
-                    break;
-            }
-        });
-    }
-    else {
-        // todo
-    }
-}
-
-function sortedEntityList(sortOrder = "asc") {
-    return enemyList.concat(kotodamaList).sort((a, b) => (a.temaeRate - b.temaeRate) * (sortOrder === "asc" ? 1 : -1));
-}
-

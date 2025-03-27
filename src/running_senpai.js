@@ -13,6 +13,7 @@ class RunningSenpai {
     #imageListIndex = 0;
     #animeFrameMax = 12;
     #ikitugiSound = null;
+    #hasPlayedIkitugiSound = false;
     state = "alive"; // alive or dying or dead
     #opacity = 1;
     #explosion = null;
@@ -26,15 +27,17 @@ class RunningSenpai {
         }
         this.#oriWidth = this.#imageList[0].width * 2.5;
         this.#oriHeight = this.#imageList[0].height * 2.5;
-        this.#ikitugiSound = SoundStorage.get("息継ぎ");
-        this.#ikitugiSound.hasPlayedSound = false;
+        this.#hasPlayedIkitugiSound = false;
         this.#updateBounds(viewAngle);
     }
 
     draw() {
-        if (!this.#ikitugiSound.hasPlayedSound) {
-            this.#ikitugiSound.hasPlayedSound = true;
-            playSound(this.#ikitugiSound);
+        if (!this.#hasPlayedIkitugiSound) {
+            this.#hasPlayedIkitugiSound = true;
+            loadSound("息継ぎ").then(sound => {
+                this.#ikitugiSound = sound;
+                playSound(sound);
+            });
         }
 
         context.globalAlpha = this.#opacity;
@@ -54,6 +57,7 @@ class RunningSenpai {
             if (this.#opacity <= 0 || this.#explosion.shouldDisappear) {
                 this.state = "dead";
             }
+            this.#updateBounds(viewAngle);
             return;
         }
 
@@ -93,9 +97,10 @@ class RunningSenpai {
     }
 
     takeDamage() {
-        playSound(SoundStorage.get("爆発"));
+        loadSound("爆発").then(sound => playSound(sound));
         this.state = "dying";
         this.#explosion = new Explosion();
+        this.#ikitugiSound?.stop();
     }
 
     #updateBounds(viewAngle) {

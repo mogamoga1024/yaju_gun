@@ -113,6 +113,14 @@ function main() {
             }
         }
 
+        // プレイヤーの攻撃
+        if (hasShot) {
+            playSound(SoundStorage.get("銃声"));
+            if (isPC) {
+                addSparks(pc.mouseX, pc.mouseY);
+            }
+        }
+
         // 敵の状態の更新と被弾
         for (let i = enemyList.length - 1; i >= 0; i--) {
             const enemy = enemyList[i];
@@ -139,14 +147,6 @@ function main() {
             }
         }
         
-        // プレイヤーの攻撃
-        if (hasShot) {
-            playSound(SoundStorage.get("銃声"));
-            if (isPC) {
-                addSparks(pc.mouseX, pc.mouseY);
-            }
-        }
-
         // 敵の攻撃
         for (const enemy of enemyList) {
             if (!(enemy instanceof ShoutingSenpai)) {

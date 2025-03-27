@@ -47,6 +47,7 @@ let bgm = {
         promiseList.push((async () => SoundStorage.set(name, await loadSound(`asset/${name}.${ext}`, option)))());
     };
 
+    // 画像
     for (let i = 0; i <= 12; i++) {
         plpiss(`走る野獣先輩/${i}`);
     }
@@ -57,6 +58,7 @@ let bgm = {
     plpiss("照準2");
     plpiss("爆発スプライト_170");
     
+    // 音声 プリロード
     for (const name of ["ドンッ", "アイスティー"]) {
         plpsss(name);
     }

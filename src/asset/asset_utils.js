@@ -55,3 +55,15 @@ function playSound(sound) {
         }
     });
 }
+
+function stopSound(sound) {
+    sound.stop();
+    const timer = setInterval(() => {
+        if (sound.playing()) {
+            sound.stop();
+        }
+        else {
+            clearInterval(timer);
+        }
+    }, 100);
+}

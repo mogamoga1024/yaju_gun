@@ -102,15 +102,9 @@ class RunningSenpai {
         loadSound("爆発").then(sound => playSound(sound));
         this.state = "dying";
         this.#explosion = new Explosion();
-        this.#ikitugiSound?.stop();
-        const timer = setInterval(() => {
-            if (this.#ikitugiSound?.playing()) {
-                this.#ikitugiSound?.stop();
-            }
-            else {
-                clearInterval(timer);
-            }
-        }, 100);
+        if (this.#ikitugiSound !== null) {
+            stopSound(this.#ikitugiSound);
+        }
     }
 
     #updateBounds(viewAngle) {

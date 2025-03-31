@@ -246,6 +246,10 @@ class GameScene extends Scene {
         }
     }
     
+    onDeviceOrientation(e) {
+        // todo
+    }
+
     onClick(e) {
         this.#hasShot = true;
         this.#pc.mouseX = e.offsetX;

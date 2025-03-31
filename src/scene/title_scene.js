@@ -39,6 +39,30 @@ class TitleScene extends Scene {
     }
     
     onClick(e) {
-        SceneManager.start(new GameScene());
+        if (!isPC) {
+            if (typeof DeviceOrientationEvent.requestPermission === "function") {
+                DeviceOrientationEvent.requestPermission()
+                    .then(permissionState => {
+                        if (permissionState === "granted") {
+                            // OK
+                        }
+                        else {
+                            alert("ジャイロ操作の許可を拒否されました");
+                        }
+                        // todo ジャイロで操作するかどうかの引数
+                        SceneManager.start(new GameScene());
+                    })
+                    .catch(error => {
+                        // alert(error.message);
+                        SceneManager.start(new GameScene());
+                    });
+            } else {
+                // alert("端末がジャイロ操作に対応していません");
+                SceneManager.start(new GameScene());
+            }
+        }
+        else {
+            SceneManager.start(new GameScene());
+        }
     }
 }

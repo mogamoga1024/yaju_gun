@@ -7,4 +7,5 @@ class Scene {
     onKeyUp(e) {}
     onClick(e) {}
     onMouseMove(e) {}
+    onDeviceOrientation(e) {}
 }

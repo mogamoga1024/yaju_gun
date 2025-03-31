@@ -9,6 +9,9 @@ class SceneManager {
         window.addEventListener("keyup", e => {
             this.#scene?.onKeyUp(e);
         });
+        window.addEventListener("deviceorientation", e => {
+            this.#scene?.onDeviceOrientation(e); 
+        });
         canvas.addEventListener("click", e => {
             this.#scene?.onClick(e);
         });

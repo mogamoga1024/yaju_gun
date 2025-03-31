@@ -124,11 +124,16 @@ class GameScene extends Scene {
             // 敵の生成
             if (this.#enemyCreateFrame >= 60 * 2) {
                 const centerX = Math.random() * (canvas.width * 2);
-                if (Math.random() < 0.7) {
+                if (Math.random() < 0.6) {
                     this.#enemyList.push(new RunningSenpai(centerX, this.#viewAngle));
                 }
                 else {
-                    this.#enemyList.push(new ShoutingSenpai(centerX, this.#viewAngle));
+                    if (Math.random() < 0.5) {
+                        this.#enemyList.push(new ShoutingSenpai(centerX, this.#viewAngle, "uneune"));
+                    }
+                    else {
+                        this.#enemyList.push(new ShoutingSenpai(centerX, this.#viewAngle, "kurukuru"));
+                    }
                 }
                 this.#enemyCreateFrame = 0;
             }

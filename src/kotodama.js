@@ -105,8 +105,8 @@ class Kotodama {
             this.#centerX += Math.sin(this.#radian) * 200 * this.temaeRate;
         }
         else if (this.#type === "kurukuru") {
-            this.#centerX += Math.sin(this.#radian) * 200 * this.temaeRate;
-            this.#centerY += Math.cos(this.#radian) * 200 * this.temaeRate;
+            this.#centerX += Math.sin(this.#radian) * 100 * this.temaeRate;
+            this.#centerY += Math.cos(this.#radian) * 100 * this.temaeRate;
         }
 
         if (this.#centerX + this.#width / 2 > canvas.width * 2) {

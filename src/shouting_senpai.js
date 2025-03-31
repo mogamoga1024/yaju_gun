@@ -16,12 +16,14 @@ class ShoutingSenpai {
     #imageListIndexDelta = 1;
     #text = "アイスティー";
     #textIndex = 0;
+    #kotodamaType = "uneune"; // "uneune" or "kurukuru"
     state = "alive"; // alive or dying or dead
     #opacity = 1;
     #explosion = null;
 
-    constructor(centerX, viewAngle, temaeRate = 0.15) {
+    constructor(centerX, viewAngle, kotodamaType = "uneune", temaeRate = 0.15) {
         this.#centerX = centerX;
+        this.#kotodamaType = kotodamaType;
         this.temaeRate = temaeRate;
         for (let i = 0; i <= this.#animeFrameMax; i++) {
             const image = ImageStorage.get(`くねくね先輩/${i}`);
@@ -65,7 +67,7 @@ class ShoutingSenpai {
         }
 
         if (this.#textIndex === 0 && this.#canShoutFrameCount > 0) {
-            this.#canShoutFrameCount = -60 * 10;
+            this.#canShoutFrameCount = -60 * 4;
         }
         this.#canShoutFrameCount++;
 
@@ -115,7 +117,7 @@ class ShoutingSenpai {
         const centerY = this.#y + height * 0.1; // 顔当たりの座標
         const char = this.#text[this.#textIndex];
         this.#textIndex = (this.#textIndex + 1) % this.#text.length;
-        return new Kotodama(this, char, this.#centerX, centerY, viewAngle, this.temaeRate);
+        return new Kotodama(this, char, this.#centerX, centerY, viewAngle, this.temaeRate, this.#kotodamaType);
     }
 
     #updateBounds(viewAngle) {

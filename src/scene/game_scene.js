@@ -7,7 +7,7 @@ class GameScene extends Scene {
     #enemyList = [];
     #kotodamaList = [];
 
-    #player = null;
+    #player = new Player();
 
     // 範囲：[0, 360)
     // 0で真正面 90で左 180で後ろ 270で右
@@ -35,8 +35,6 @@ class GameScene extends Scene {
         playSound(this.#bgm);
 
         this.#gunshotSound = await loadSound("銃声");
-
-        this.#player = new Player();
 
         // debug start
         // this.#enemyList.push(new RunningSenpai(0, this.#viewAngle));

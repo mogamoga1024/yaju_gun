@@ -1,5 +1,5 @@
 
-function drawBackgroundImage(backgroundImage, viewAngle) {
+function drawBackgroundImage(backgroundImage, viewAngle = 0) {
     const sw = backgroundImage.width;
     let sy = 0;
     let sh = backgroundImage.height;

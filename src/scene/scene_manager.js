@@ -9,7 +9,7 @@ class SceneManager {
         window.addEventListener("keyup", e => {
             this.#scene?.onKeyUp(e);
         });
-        window.addEventListener("click", e => {
+        canvas.addEventListener("click", e => {
             this.#scene?.onClick(e);
         });
     }

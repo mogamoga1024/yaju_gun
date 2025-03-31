@@ -8,7 +8,14 @@ function drawLoading() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     
     context.globalAlpha = 0.8;
-    context.drawImage(drawLoading.backgroundImage, 0, 0, canvas.width, canvas.height);
+
+    const image = drawLoading.backgroundImage;
+    const sw = image.width;
+    const sh = image.width * (canvas.height / canvas.width);
+    const sx = 0;
+    const sy = (image.height - sh) / 2;
+    context.drawImage(image, sx, sy, sw, sh, 0, 0, canvas.width, canvas.height);
+    
     context.globalAlpha = 1;
     const text = "Loading...";
     context.textBaseline = "top";

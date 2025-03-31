@@ -2,9 +2,13 @@
 const canvas = document.querySelector("#game-canvas");
 const context = canvas.getContext("2d");
 
+loadImage("asset/こちらを見つめる先輩.png").then(image => {
+    drawLoading.backgroundImage = image;
 
+    // todo
 
-SceneManager.start(new TitleScene());
+    SceneManager.start(new TitleScene());
+});
 
 // todo scene移植対応中…
 

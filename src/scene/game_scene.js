@@ -14,6 +14,8 @@ class GameScene extends Scene {
     #viewAngle = 0;
 
     #hasShot = false;
+    #shotX = 0;
+    #shotY = 0;
 
     #pc = {
         isPressed: {
@@ -94,15 +96,13 @@ class GameScene extends Scene {
             // プレイヤーの攻撃
             if (this.#hasShot) {
                 playSound(this.#gunshotSound);
-                if (isPC) {
-                    addSparks(this.#pc.mouseX, this.#pc.mouseY);
-                }
+                addSparks(this.#shotX, this.#shotY);
             }
 
             // 敵の状態の更新と被弾
             let canDealDamage = true;
             this.#sortedEntityList("desc").forEach(entity => {
-                if (this.#hasShot && canDealDamage && isPC && entity.isTargeted(this.#pc.mouseX, this.#pc.mouseY)) {
+                if (this.#hasShot && canDealDamage && entity.isTargeted(this.#shotX, this.#shotY)) {
                     canDealDamage = false;
                     entity.takeDamage();
                 }
@@ -247,13 +247,13 @@ class GameScene extends Scene {
     }
     
     onDeviceOrientation(e) {
-        // todo
+        this.#viewAngle = e.alpha;
     }
 
     onClick(e) {
         this.#hasShot = true;
-        this.#pc.mouseX = e.offsetX;
-        this.#pc.mouseY = e.offsetY;
+        this.#shotX = e.offsetX;
+        this.#shotY = e.offsetY;
     }
 
     onMouseMove(e) {

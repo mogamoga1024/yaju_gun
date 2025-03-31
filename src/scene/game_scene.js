@@ -26,6 +26,8 @@ class GameScene extends Scene {
         mouseY: canvas.height / 2,
     };
 
+    #enemyCreateFrame = 0;
+
     async onStart() {
         console.log("GameScene:onStart");
         this.#backgroundImage = await loadImage("asset/草原.png");
@@ -37,12 +39,13 @@ class GameScene extends Scene {
         this.#gunshotSound = await loadSound("銃声");
 
         // debug start
+        // 0 <= centerX < canvas.width * 2
         // this.#enemyList.push(new RunningSenpai(0, this.#viewAngle));
-        this.#enemyList.push(new RunningSenpai(canvas.width / 2, this.#viewAngle));
-        this.#enemyList.push(new RunningSenpai(canvas.width, this.#viewAngle));
+        // this.#enemyList.push(new RunningSenpai(canvas.width / 2, this.#viewAngle));
+        // this.#enemyList.push(new RunningSenpai(canvas.width, this.#viewAngle));
         // this.#enemyList.push(new RunningSenpai(canvas.width * 3 / 2, this.#viewAngle));
         // this.#enemyList.push(new ShoutingSenpai(canvas.width / 2, this.#viewAngle));
-        this.#enemyList.push(new ShoutingSenpai(canvas.width * 3 / 2, this.#viewAngle));
+        // this.#enemyList.push(new ShoutingSenpai(canvas.width * 3 / 2, this.#viewAngle));
         // debug end
 
         this.#update();
@@ -50,6 +53,10 @@ class GameScene extends Scene {
 
     #update() {
         const update = () => {
+            if (this.#enemyList.length < 5) {
+                this.#enemyCreateFrame++;
+            }
+
             context.clearRect(0, 0, canvas.width, canvas.height);
 
             // PCでのキーイベントの捕捉
@@ -112,6 +119,18 @@ class GameScene extends Scene {
                 if (kotodama.state === "dead" || kotodama.shooter.state === "dying") {
                     this.#kotodamaList.splice(i, 1);
                 }
+            }
+
+            // 敵の生成
+            if (this.#enemyCreateFrame >= 60 * 2) {
+                const centerX = Math.random() * (canvas.width * 2);
+                if (Math.random() < 0.7) {
+                    this.#enemyList.push(new RunningSenpai(centerX, this.#viewAngle));
+                }
+                else {
+                    this.#enemyList.push(new ShoutingSenpai(centerX, this.#viewAngle));
+                }
+                this.#enemyCreateFrame = 0;
             }
             
             // 敵の攻撃

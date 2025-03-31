@@ -47,7 +47,7 @@ class Kotodama {
             this.temaeRate = temaeRateMax;
         }
         else {
-            const a = 0.001 + 0.001 * this.temaeRate;
+            const a = 0.002 + 0.001 * this.temaeRate;
             this.temaeRate = Math.min(this.temaeRate + a, temaeRateMax);
         }
 

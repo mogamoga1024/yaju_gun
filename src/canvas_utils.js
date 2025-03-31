@@ -23,5 +23,5 @@ function drawLoading() {
     context.fillStyle = "#000000";
     context.strokeStyle = "#FFFFFF";
     context.lineWidth = 5;
-    drawStrokeText(context, text, 530, 400);
+    drawStrokeText(context, text, 510, 370);
 }

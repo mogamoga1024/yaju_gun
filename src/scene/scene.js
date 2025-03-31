@@ -6,4 +6,5 @@ class Scene {
     onKeyDown(e) {}
     onKeyUp(e) {}
     onClick(e) {}
+    onMouseMove(e) {}
 }

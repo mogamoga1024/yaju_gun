@@ -2,6 +2,29 @@
 class GameScene extends Scene {
     #backgroundImage = null;
     #bgm = null;
+    #gunshotSound = null;
+
+    #enemyList = [];
+    #kotodamaList = [];
+
+    #player = null;
+
+    // 範囲：[0, 360)
+    // 0で真正面 90で左 180で後ろ 270で右
+    #viewAngle = 0;
+
+    #hasShot = false;
+
+    #pc = {
+        isPressed: {
+            "left": false,
+            "right": false,
+            "turn": false,
+        },
+        canTurn: true,
+        mouseX: canvas.width / 2,
+        mouseY: canvas.height / 2,
+    };
 
     async onStart() {
         console.log("GameScene:onStart");
@@ -11,13 +34,116 @@ class GameScene extends Scene {
         this.#bgm = await loadSound("PLUMBER");
         playSound(this.#bgm);
 
+        this.#gunshotSound = await loadSound("銃声");
+
+        this.#player = new Player();
+
+        // debug start
+        // this.#enemyList.push(new RunningSenpai(0, this.#viewAngle));
+        this.#enemyList.push(new RunningSenpai(canvas.width / 2, this.#viewAngle));
+        this.#enemyList.push(new RunningSenpai(canvas.width, this.#viewAngle));
+        // this.#enemyList.push(new RunningSenpai(canvas.width * 3 / 2, this.#viewAngle));
+        // this.#enemyList.push(new ShoutingSenpai(canvas.width / 2, this.#viewAngle));
+        this.#enemyList.push(new ShoutingSenpai(canvas.width * 3 / 2, this.#viewAngle));
+        // debug end
+
         this.#update();
     }
 
     #update() {
-        context.clearRect(0, 0, canvas.width, canvas.height);
+        const update = () => {
+            context.clearRect(0, 0, canvas.width, canvas.height);
 
-        // todo
+            // PCでのキーイベントの捕捉
+            if (isPC) {
+                const speed = 4;
+                if (this.#pc.isPressed.left) {
+                    this.#viewAngle = (this.#viewAngle + speed) % 360;
+                }
+                if (this.#pc.isPressed.right) {
+                    this.#viewAngle = (this.#viewAngle + (360 - speed)) % 360;
+                }
+                if (this.#pc.isPressed.turn && this.#pc.canTurn) {
+                    this.#pc.canTurn = false;
+                    this.#viewAngle = (this.#viewAngle + 180) % 360;
+                }
+            }
+
+            // 奥側から描画
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            drawBackgroundImage(this.#backgroundImage, this.#viewAngle);
+            let willHit = false;
+            this.#sortedEntityList().forEach(entity => {
+                if (isPC && !willHit && entity.isTargeted(this.#pc.mouseX, this.#pc.mouseY)) {
+                    willHit = true;
+                }
+                entity.draw();
+            });
+
+            if (isPC) {
+                this.#player.drawCrosshair(this.#pc.mouseX, this.#pc.mouseY, willHit);
+            }
+
+            drawSparks(context);
+
+            // プレイヤーの攻撃
+            if (this.#hasShot) {
+                playSound(this.#gunshotSound);
+                if (isPC) {
+                    addSparks(this.#pc.mouseX, this.#pc.mouseY);
+                }
+            }
+
+            // 敵の状態の更新と被弾
+            let canDealDamage = true;
+            this.#sortedEntityList("desc").forEach(entity => {
+                if (this.#hasShot && canDealDamage && isPC && entity.isTargeted(this.#pc.mouseX, this.#pc.mouseY)) {
+                    canDealDamage = false;
+                    entity.takeDamage();
+                }
+                entity.update(this.#viewAngle);
+            });
+            for (let i = this.#enemyList.length - 1; i >= 0; i--) {
+                const enemy = this.#enemyList[i];
+                if (enemy.state === "dead") {
+                    this.#enemyList.splice(i, 1);
+                }
+            }
+            for (let i = this.#kotodamaList.length - 1; i >= 0; i--) {
+                const kotodama = this.#kotodamaList[i];
+                if (kotodama.state === "dead" || kotodama.shooter.state === "dying") {
+                    this.#kotodamaList.splice(i, 1);
+                }
+            }
+            
+            // 敵の攻撃
+            for (const enemy of this.#enemyList) {
+                if (!(enemy instanceof ShoutingSenpai)) {
+                    continue;
+                }
+                if (!enemy.canShout()) {
+                    continue;
+                }
+                const kotodama = enemy.shout(this.#viewAngle);
+                this.#kotodamaList.push(kotodama);
+            }
+
+            // プレイヤーの被弾
+            for (let i = this.#kotodamaList.length - 1; i >= 0; i--) {
+                const kotodama = this.#kotodamaList[i];
+                if (kotodama.isHittingPlayer()) {
+                    this.#kotodamaList.splice(i, 1);
+                    this.#player.takeDamage();
+                }
+            }
+            
+            // 後処理
+            this.#hasShot = false;
+
+            requestAnimationFrame(update);
+        }
+
+        update();
     }
 
     async #preload() {
@@ -49,15 +175,63 @@ class GameScene extends Scene {
         await Promise.all(promiseList);
     }
 
+    #sortedEntityList(sortOrder = "asc") {
+        return this.#enemyList.concat(this.#kotodamaList).sort((a, b) => (a.temaeRate - b.temaeRate) * (sortOrder === "asc" ? 1 : -1));
+    }
+
     onKeyDown(e) {
-        // todo
+        if (!isPC) {
+            return;
+        }
+        switch (e.key) {
+            case "ArrowLeft":
+            case "a": case "A":
+                this.#pc.isPressed.left = true;
+                break;
+
+            case "ArrowRight":
+            case "d": case "D":
+                this.#pc.isPressed.right = true;
+                break;
+            
+            case "ArrowDown":
+            case "s": case "S":
+                this.#pc.isPressed.turn = true;
+                break;
+        }
     }
 
     onKeyUp(e) {
-        // todo
+        if (!isPC) {
+            return;
+        }
+        switch (e.key) {
+            case "ArrowLeft":
+            case "a": case "A":
+                this.#pc.isPressed.left = false;
+                break;
+
+            case "ArrowRight":
+            case "d": case "D":
+                this.#pc.isPressed.right = false;
+                break;
+            
+            case "ArrowDown":
+            case "s": case "S":
+                this.#pc.isPressed.turn = false;
+                this.#pc.canTurn = true;
+                break;
+        }
     }
     
     onClick(e) {
-        // todo
+        this.#hasShot = true;
+        this.#pc.mouseX = e.offsetX;
+        this.#pc.mouseY = e.offsetY;
+    }
+
+    onMouseMove(e) {
+        this.#pc.mouseX = e.offsetX;
+        this.#pc.mouseY = e.offsetY;
     }
 }

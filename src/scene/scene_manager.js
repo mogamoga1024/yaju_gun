@@ -12,6 +12,9 @@ class SceneManager {
         canvas.addEventListener("click", e => {
             this.#scene?.onClick(e);
         });
+        canvas.addEventListener("mousemove", e => {
+            this.#scene?.onMouseMove(e);
+        });
     }
 
     static start(scene, needDrawLoading = true) {

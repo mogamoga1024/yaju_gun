@@ -2,6 +2,12 @@
 const canvas = document.querySelector("#game-canvas");
 const context = canvas.getContext("2d");
 
+
+
+SceneManager.start(new TitleScene());
+
+// todo scene移植対応中…
+
 (async function() {
     const promiseList = [];
     const plpiss = (name) => {
@@ -30,7 +36,7 @@ const context = canvas.getContext("2d");
 
     await Promise.all(promiseList);
 
-    main();
+    // main(); // todo game_sceneで実行させたい
 })();
 
 async function main() {

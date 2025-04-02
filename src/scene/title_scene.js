@@ -32,7 +32,7 @@ class TitleScene extends Scene {
         context.lineWidth = 5;
 
         {
-            const text = `${isPC ? "click" : "tap"} to Start`;
+            const text = `${isPC ? "Click" : "Tap"} To Start`;
             const width = context.measureText(text).width;
             drawStrokeText(context, text, (canvas.width - width)  / 2, 300);
         }

@@ -13,9 +13,7 @@ class GameScene extends Scene {
     // 0で真正面 90で左 180で後ろ 270で右
     #viewAngle = 0;
 
-    #hasShot = false;
-    #shotX = 0;
-    #shotY = 0;
+    #shotPosList = [];
 
     #pc = {
         isPressed: {
@@ -94,17 +92,24 @@ class GameScene extends Scene {
             drawSparks(context);
 
             // プレイヤーの攻撃
-            if (this.#hasShot) {
+            if (this.#shotPosList.length > 0) {
                 playSound(this.#gunshotSound);
-                addSparks(this.#shotX, this.#shotY);
+                for (const {x, y} of this.#shotPosList) {
+                    addSparks(x, y);
+                }
             }
 
             // 敵の状態の更新と被弾
-            let canDealDamage = true;
+            // let canDealDamage = true;
             this.#sortedEntityList("desc").forEach(entity => {
-                if (this.#hasShot && canDealDamage && entity.isTargeted(this.#shotX, this.#shotY)) {
-                    canDealDamage = false;
-                    entity.takeDamage();
+                if (this.#shotPosList.length > 0) {
+                    for (let i = this.#shotPosList.length - 1; i >= 0; i--) {
+                        const {x, y} = this.#shotPosList[i];
+                        if (entity.isTargeted(x, y)) {
+                            entity.takeDamage();
+                            this.#shotPosList.splice(i, 1);
+                        }
+                    }
                 }
                 entity.update(this.#viewAngle);
             });
@@ -160,7 +165,7 @@ class GameScene extends Scene {
             }
             
             // 後処理
-            this.#hasShot = false;
+            this.#shotPosList = [];
 
             requestAnimationFrame(update);
         }
@@ -251,9 +256,21 @@ class GameScene extends Scene {
     }
 
     onClick(e) {
-        this.#hasShot = true;
-        this.#shotX = e.offsetX;
-        this.#shotY = e.offsetY;
+        if (this.#shotPosList.length === 0) {
+            this.#shotPosList.push({
+                x: e.offsetX,
+                y: e.offsetY
+            });
+        }
+    }
+
+    onTouchEnd(e) {
+        const rect = e.target.getBoundingClientRect();
+        for (const touch of e.targetTouches) {
+            const x = touch.clientX - rect.left;
+            const y = touch.clientY - rect.top;
+            this.#shotPosList.push({x, y});
+        }
     }
 
     onMouseMove(e) {

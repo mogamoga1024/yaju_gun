@@ -15,6 +15,9 @@ class SceneManager {
         canvas.addEventListener("click", e => {
             this.#scene?.onClick(e);
         });
+        canvas.addEventListener("touchend", e => {
+            this.#scene?.onTouchEnd(e);
+        });
         canvas.addEventListener("mousemove", e => {
             this.#scene?.onMouseMove(e);
         });

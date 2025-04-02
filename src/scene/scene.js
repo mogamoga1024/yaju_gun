@@ -8,4 +8,5 @@ class Scene {
     onClick(e) {}
     onMouseMove(e) {}
     onDeviceOrientation(e) {}
+    onTouchEnd(e) {}
 }

@@ -8,6 +8,8 @@ class MeteorSenpai extends Entity {
     #oriHeight = 0;
     #pivotX = 0;
     #angle = 0;
+    #virtualCenterX = 0;
+    #virtualCenterY = 0;
     #frameCount = 0;
     #imageList = [];
     #imageListIndex = 0;
@@ -42,8 +44,7 @@ class MeteorSenpai extends Entity {
         context.drawImage(image, -this.#width, -this.#height, this.#width, this.#height);
         context.restore();
 
-        // todo
-        this.#explosion?.draw(this.#x + this.#width / 2, this.#y + this.#height / 2, Math.max(this.#width, this.#height));
+        this.#explosion?.draw(this.#virtualCenterX, this.#virtualCenterY, Math.max(this.#width, this.#height));
     }
 
     update(viewAngle) {
@@ -83,9 +84,15 @@ class MeteorSenpai extends Entity {
         this.#updateBounds(viewAngle);
     }
 
-    isTargeted(crosshairX, crosshairY) { 
-        // todo
-        return false;
+    isTargeted(crosshairX, crosshairY) {
+        if (this.state !== "alive") {
+            return false;
+        }
+
+        const radius = Math.max(this.#width, this.#height) / 2;
+        const d = Math.sqrt(Math.pow(crosshairX - this.#virtualCenterX, 2) + Math.pow(crosshairY - this.#virtualCenterY, 2));
+
+        return d <= radius;
     }
 
     takeDamage() {
@@ -114,5 +121,14 @@ class MeteorSenpai extends Entity {
         const bottomY1 = canvas.height / 2;
         const bottomY = bottomY0 * (1 - this.temaeRate) + bottomY1 * this.temaeRate;
         this.#y = bottomY - this.#height;
+
+        const pivotX = this.#x + this.#width;
+        const pivotY = this.#y + this.#height;
+        const centerX = this.#x + this.#width / 2;
+        const centerY = this.#y + this.#height / 2;
+        const dx = centerX - pivotX;
+        const dy = centerY - pivotY;
+        this.#virtualCenterX = pivotX + dx * Math.cos(this.#angle) - dy * Math.sin(this.#angle);
+        this.#virtualCenterY = pivotY + dx * Math.sin(this.#angle) + dy * Math.cos(this.#angle);
     }
 }

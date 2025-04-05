@@ -34,7 +34,15 @@ class MeteorSenpai extends Entity {
     }
 
     draw() {
-        // todo sound
+        if (!this.#hasPlayedMeteorSound) {
+            this.#hasPlayedMeteorSound = true;
+            loadSound("ンアッー！（ねっとり）").then(sound => {
+                if (this.state === "alive") {
+                    this.#meteorSound = sound;
+                    playSound(sound);
+                }
+            });
+        }
 
         context.save();
         context.globalAlpha = this.#opacity;

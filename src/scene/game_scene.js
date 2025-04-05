@@ -40,7 +40,7 @@ class GameScene extends Scene {
 
         // debug start
         // 0 <= centerX < canvas.width * 2
-        this.#enemyList.push(new MeteorSenpai(canvas.width / 2, this.#viewAngle));
+        // this.#enemyList.push(new MeteorSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new RunningSenpai(0, this.#viewAngle));
         // this.#enemyList.push(new RunningSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new RunningSenpai(canvas.width, this.#viewAngle));
@@ -54,8 +54,8 @@ class GameScene extends Scene {
 
     #update() {
         const update = () => {
-            if (this.#enemyList.length < 5) {
-                // this.#enemyCreateFrame++; // debug
+            if (this.#enemyList.length < 6) {
+                this.#enemyCreateFrame++; // debug
             }
 
             context.clearRect(0, 0, canvas.width, canvas.height);
@@ -129,8 +129,12 @@ class GameScene extends Scene {
             // 敵の生成
             if (this.#enemyCreateFrame >= 60 * 2) {
                 const centerX = Math.random() * (canvas.width * 2);
-                if (Math.random() < 0.6) {
+                const random = Math.random();
+                if (random < 0.4) {
                     this.#enemyList.push(new RunningSenpai(centerX, this.#viewAngle));
+                }
+                else if (random < 0.6) {
+                    this.#enemyList.push(new MeteorSenpai(centerX, this.#viewAngle));
                 }
                 else {
                     if (Math.random() < 0.5) {
@@ -198,7 +202,7 @@ class GameScene extends Scene {
         
         // 音声 プリロード
         // ※ Howler.jsにキャッシュさせておきたい
-        for (const name of ["ドンッ", "大破", "爆発", "息継ぎ", "アイスティー"]) {
+        for (const name of ["ドンッ", "大破", "爆発", "息継ぎ", "ンアッー！（ねっとり）", "アイスティー"]) {
             plls(name);
         }
 

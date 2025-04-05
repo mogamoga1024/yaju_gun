@@ -18,5 +18,6 @@ const soundConfig = {};
 
     // 野獣先輩
     add("息継ぎ", "m4a", {volume: 1, loop: true});
+    add("ンアッー！（ねっとり）", "mp3", {volume: 0.3});
     add("アイスティー");
 })();

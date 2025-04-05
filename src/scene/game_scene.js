@@ -54,7 +54,7 @@ class GameScene extends Scene {
     #update() {
         const update = () => {
             if (this.#enemyList.length < 5) {
-                this.#enemyCreateFrame++;
+                // this.#enemyCreateFrame++; // debug
             }
 
             context.clearRect(0, 0, canvas.width, canvas.height);
@@ -184,6 +184,9 @@ class GameScene extends Scene {
         // 画像
         for (let i = 0; i <= 12; i++) {
             plpiss(`走る野獣先輩/${i}`);
+        }
+        for (let i = 0; i <= 11; i++) {
+            plpiss(`タオル先輩/${i}`);
         }
         for (let i = 0; i <= 5; i++) {
             plpiss(`くねくね先輩/${i}`);

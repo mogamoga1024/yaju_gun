@@ -55,7 +55,6 @@ class Kotodama {
     }
 
     isTargeted(crosshairX, crosshairY) {
-        // todo alive
         const x = this.#centerX - this.#width / 2;
         const y = this.#centerY - this.#height / 2;
         if (crosshairX < x) {

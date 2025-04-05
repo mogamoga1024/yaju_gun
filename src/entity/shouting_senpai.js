@@ -1,5 +1,5 @@
 
-class ShoutingSenpai {
+class ShoutingSenpai extends Entity {
     #x = 0;
     #y = 0;
     #width = 0;
@@ -7,7 +7,6 @@ class ShoutingSenpai {
     #oriWidth = 0;
     #oriHeight = 0;
     #centerX = 0;
-    temaeRate = 1;
     #frameCount = 0;
     #canShoutFrameCount = -60 * 2;
     #imageList = [];
@@ -17,14 +16,13 @@ class ShoutingSenpai {
     #text = "アイスティー";
     #textIndex = 0;
     #kotodamaType = "uneune"; // "uneune" or "kurukuru"
-    state = "alive"; // alive or dying or dead
     #opacity = 1;
     #explosion = null;
 
     constructor(centerX, viewAngle, kotodamaType = "uneune", temaeRate = 0.15) {
+        super(temaeRate);
         this.#centerX = centerX;
         this.#kotodamaType = kotodamaType;
-        this.temaeRate = temaeRate;
         for (let i = 0; i <= this.#animeFrameMax; i++) {
             const image = ImageStorage.get(`くねくね先輩/${i}`);
             this.#imageList.push(image);

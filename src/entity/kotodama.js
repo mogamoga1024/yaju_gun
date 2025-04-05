@@ -1,5 +1,5 @@
 
-class Kotodama {
+class Kotodama extends Entity {
     shooter = null;
     #centerX = 0;
     #centerY = 0;
@@ -10,18 +10,16 @@ class Kotodama {
     #oriFontSize = 0;
     #oriCenterX = 0;
     #oriCenterY = 0;
-    temaeRate = 1;
     #frameCount = 0;
     #radian = 0;
     #type = "uneune"; // "uneune" or "kurukuru"
-    state = "alive"; // alive or dying or dead
 
     constructor(shooter, text, centerX, centerY, viewAngle, temaeRate, type = "uneune") {
+        super(temaeRate);
         this.shooter = shooter;
         this.#text = text;
         this.#oriCenterX = centerX;
         this.#oriCenterY = centerY;
-        this.temaeRate = temaeRate;
         this.#type = type;
         this.#oriFontSize = 250;
         this.#updateBounds(viewAngle);

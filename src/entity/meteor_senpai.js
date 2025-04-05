@@ -1,4 +1,4 @@
 
-class MeteorSenpai {
+class MeteorSenpai extends Entity {
 
 }

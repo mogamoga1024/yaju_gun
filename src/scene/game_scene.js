@@ -100,7 +100,6 @@ class GameScene extends Scene {
             }
 
             // 敵の状態の更新と被弾
-            // let canDealDamage = true;
             this.#sortedEntityList("desc").forEach(entity => {
                 if (this.#shotPosList.length > 0) {
                     for (let i = this.#shotPosList.length - 1; i >= 0; i--) {

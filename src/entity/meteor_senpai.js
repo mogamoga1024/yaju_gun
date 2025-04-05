@@ -35,14 +35,15 @@ class MeteorSenpai extends Entity {
 
         context.save();
         context.globalAlpha = this.#opacity;
-        context.translate(this.#x + this.#width / 2, this.#y + this.#height / 2);
+        context.translate(this.#x + this.#width, this.#y + this.#height);
         context.rotate(this.#angle);
         const image = this.#imageList[this.#imageListIndex];
         // context.drawImage(image, this.#x, this.#y, this.#width, this.#height);
-        context.drawImage(image, -this.#width / 2, -this.#height / 2, this.#width, this.#height);
+        context.drawImage(image, -this.#width, -this.#height, this.#width, this.#height);
         // context.globalAlpha = 1;
         context.restore();
 
+        // todo
         this.#explosion?.draw(this.#x + this.#width / 2, this.#y + this.#height / 2, Math.max(this.#width, this.#height));
     }
 

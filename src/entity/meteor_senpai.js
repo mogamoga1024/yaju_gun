@@ -25,8 +25,8 @@ class MeteorSenpai extends Entity {
             const image = ImageStorage.get(`タオル先輩/${i}`);
             this.#imageList.push(image);
         }
-        this.#oriWidth = this.#imageList[0].width * 1.8;
-        this.#oriHeight = this.#imageList[0].height * 1.8;
+        this.#oriWidth = this.#imageList[0].width * 1.5;
+        this.#oriHeight = this.#imageList[0].height * 1.5;
         this.#hasPlayedMeteorSound = false;
         this.#updateBounds(viewAngle);
     }
@@ -64,6 +64,15 @@ class MeteorSenpai extends Entity {
             this.#imageListIndex += this.#imageListIndexDelta;
         }
 
+        const temaeRateMax = 1;
+        if (this.temaeRate >= temaeRateMax) {
+            this.temaeRate = temaeRateMax;
+        }
+        else {
+            const a = 0.001 + 0.002 * this.temaeRate;
+            this.temaeRate = Math.min(this.temaeRate + a, temaeRateMax);
+        }
+
         this.#angle += 0.05;
 
         this.#updateBounds(viewAngle);
@@ -89,8 +98,11 @@ class MeteorSenpai extends Entity {
             this.#x = this.#x - canvas.width * 2;
         }
 
-        // todo 仮
-        // this.#x = 0;
-        this.#y = 0;
+        // 水平線でのcenterY
+        const bottomY0 = canvas.height / 8;
+        // 一番手前のcenterY
+        const bottomY1 = canvas.height / 2;
+        const bottomY = bottomY0 * (1 - this.temaeRate) + bottomY1 * this.temaeRate;
+        this.#y = bottomY - this.#height;
     }
 }

@@ -39,9 +39,7 @@ class MeteorSenpai extends Entity {
         context.translate(this.#x + this.#width, this.#y + this.#height);
         context.rotate(this.#angle);
         const image = this.#imageList[this.#imageListIndex];
-        // context.drawImage(image, this.#x, this.#y, this.#width, this.#height);
         context.drawImage(image, -this.#width, -this.#height, this.#width, this.#height);
-        // context.globalAlpha = 1;
         context.restore();
 
         // todo
@@ -52,7 +50,14 @@ class MeteorSenpai extends Entity {
         this.#frameCount++;
         this.#explosion?.update();
 
-        // todo
+        if (this.state !== "alive") {
+            this.#opacity -= 0.01;
+            if (this.#opacity <= 0 || this.#explosion.shouldDisappear) {
+                this.state = "dead";
+            }
+            this.#updateBounds(viewAngle);
+            return;
+        }
 
         if (this.#frameCount % 4 == 0) {
             if (this.#imageListIndex <= 0) {
@@ -84,7 +89,12 @@ class MeteorSenpai extends Entity {
     }
 
     takeDamage() {
-        // todo
+        loadSound("爆発").then(sound => playSound(sound));
+        this.state = "dying";
+        this.#explosion = new Explosion();
+        if (this.#meteorSound !== null) {
+            stopSound(this.#meteorSound);
+        }
     }
 
     #updateBounds(viewAngle) {

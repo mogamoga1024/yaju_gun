@@ -69,7 +69,7 @@ class MeteorSenpai extends Entity {
             this.temaeRate = temaeRateMax;
         }
         else {
-            const a = 0.001 + 0.002 * this.temaeRate;
+            const a = 0.0008 + 0.002 * this.temaeRate;
             this.temaeRate = Math.min(this.temaeRate + a, temaeRateMax);
         }
 

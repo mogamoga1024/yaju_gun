@@ -11,6 +11,7 @@ class MeteorSenpai extends Entity {
     #frameCount = 0;
     #imageList = [];
     #imageListIndex = 0;
+    #imageListIndexDelta = 1;
     #animeFrameMax = 11;
     #meteorSound = null;
     #hasPlayedMeteorSound = false;
@@ -48,9 +49,22 @@ class MeteorSenpai extends Entity {
     }
 
     update(viewAngle) {
+        this.#frameCount++;
+        this.#explosion?.update();
+
         // todo
 
-        this.#angle += 1 / 60;
+        if (this.#frameCount % 4 == 0) {
+            if (this.#imageListIndex <= 0) {
+                this.#imageListIndexDelta = 1;
+            }
+            else if (this.#imageListIndex >= this.#animeFrameMax) {
+                this.#imageListIndexDelta = -1;
+            }
+            this.#imageListIndex += this.#imageListIndexDelta;
+        }
+
+        this.#angle += 0.05;
     }
 
     isTargeted(crosshairX, crosshairY) { 

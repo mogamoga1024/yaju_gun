@@ -14,6 +14,7 @@ class Kotodama {
     #frameCount = 0;
     #radian = 0;
     #type = "uneune"; // "uneune" or "kurukuru"
+    state = "alive"; // alive or dying or dead
 
     constructor(shooter, text, centerX, centerY, viewAngle, temaeRate, type = "uneune") {
         this.shooter = shooter;
@@ -55,6 +56,9 @@ class Kotodama {
     }
 
     isTargeted(crosshairX, crosshairY) {
+        if (this.state !== "alive") {
+            return false;
+        }
         const x = this.#centerX - this.#width / 2;
         const y = this.#centerY - this.#height / 2;
         if (crosshairX < x) {

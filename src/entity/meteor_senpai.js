@@ -6,7 +6,7 @@ class MeteorSenpai extends Entity {
     #height = 0;
     #oriWidth = 0;
     #oriHeight = 0;
-    #centerX = 0;
+    #pivotX = 0;
     #angle = 0;
     #frameCount = 0;
     #imageList = [];
@@ -18,9 +18,9 @@ class MeteorSenpai extends Entity {
     #opacity = 1;
     #explosion = null;
 
-    constructor(centerX, viewAngle, temaeRate = 0) {
+    constructor(pivotX, viewAngle, temaeRate = 0) {
         super(temaeRate);
-        this.#centerX = centerX;
+        this.#pivotX = pivotX;
         for (let i = 0; i <= this.#animeFrameMax; i++) {
             const image = ImageStorage.get(`タオル先輩/${i}`);
             this.#imageList.push(image);
@@ -65,6 +65,8 @@ class MeteorSenpai extends Entity {
         }
 
         this.#angle += 0.05;
+
+        this.#updateBounds(viewAngle);
     }
 
     isTargeted(crosshairX, crosshairY) { 
@@ -82,7 +84,7 @@ class MeteorSenpai extends Entity {
 
         const canvasCenterX = canvas.width / 2;
         const offsetX = (canvasCenterX * (viewAngle / 90)) % (canvasCenterX * 4);
-        this.#x = (this.#centerX - this.#width / 2 + offsetX) % (canvas.width * 2);
+        this.#x = (this.#pivotX - this.#width + offsetX) % (canvas.width * 2);
         if (this.#x + this.#width > canvas.width * 2) {
             this.#x = this.#x - canvas.width * 2;
         }

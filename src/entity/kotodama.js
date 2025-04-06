@@ -26,7 +26,7 @@ class Kotodama extends Entity {
     }
 
     draw() {
-        context.font = `700 ${this.#fontSize}px Meiryo`;
+        context.font = `700 ${this.#fontSize}px Xim-Sans`;
         context.textAlign = "center";
         context.textBaseline = "middle";
         context.lineWidth = 10 * this.temaeRate;
@@ -85,7 +85,7 @@ class Kotodama extends Entity {
 
     #updateBounds(viewAngle) {
         this.#fontSize = this.#oriFontSize * this.temaeRate;
-        context.font = `700 ${this.#fontSize}px Meiryo`;
+        context.font = `700 ${this.#fontSize}px Xim-Sans`;
         context.textAlign = "center";
         context.textBaseline = "middle";
         const measure = context.measureText(this.#text);

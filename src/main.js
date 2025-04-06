@@ -9,7 +9,29 @@ const isPC = (function() {
     return !(isMobileByUa || isMobileByClientHint);
 })();
 
-loadImage("asset/こちらを見つめる先輩.png").then(image => {
-    drawLoading.backgroundImage = image;
-    SceneManager.start(new TitleScene());
-});
+(function() {
+    const $loading = document.querySelector("#loading");
+    const $app = document.querySelector("#app");
+    let isFirst = true;
+    
+    document.fonts.onloadingdone = () => {
+        $loading.style.display = "none";
+        $app.style.display = "";
+        createTitleScene();
+    };
+    
+    document.fonts.ready.then(() => {
+        $loading.style.display = "none";
+        $app.style.display = "";
+        createTitleScene();
+    });
+
+    function createTitleScene() {
+        if (!isFirst) return;
+        isFirst = false;
+        loadImage("asset/こちらを見つめる先輩.png").then(image => {
+            drawLoading.backgroundImage = image;
+            SceneManager.start(new TitleScene());
+        });
+    }
+})();

@@ -17,7 +17,7 @@ class TitleScene extends Scene {
 
         context.textBaseline = "top";
 
-        context.font = "900 80px sans-serif";
+        context.font = "900 80px Xim-Sans";
         context.fillStyle = "#000";
         context.strokeStyle = "#eee";
         context.lineWidth = 8;
@@ -28,7 +28,7 @@ class TitleScene extends Scene {
             drawStrokeText(context, text, (canvas.width - width)  / 2, 114);
         }
 
-        context.font = "900 40px sans-serif";
+        context.font = "900 40px Xim-Sans";
         context.lineWidth = 5;
 
         {

@@ -55,7 +55,7 @@ class GameScene extends Scene {
     #update() {
         const update = () => {
             if (this.#enemyList.length < 6) {
-                this.#enemyCreateFrame++; // debug
+                this.#enemyCreateFrame++;
             }
 
             context.clearRect(0, 0, canvas.width, canvas.height);
@@ -182,8 +182,8 @@ class GameScene extends Scene {
         const plpiss = (name) => {
             promiseList.push((async () => ImageStorage.set(name, await loadImage(`asset/${name}.png`)))());
         };
-        const plls = (name) => {
-            promiseList.push((async () => await loadSound(name))());
+        const plpsss = (name) => {
+            promiseList.push((async () => SoundStorage.set(name, await loadSound(name)))());
         };
 
         // 画像
@@ -200,10 +200,9 @@ class GameScene extends Scene {
         plpiss("照準2");
         plpiss("爆発スプライト_170");
         
-        // 音声 プリロード
-        // ※ Howler.jsにキャッシュさせておきたい
+        // 音声
         for (const name of ["ドンッ", "大破", "爆発", "息継ぎ", "ンアッー！（ねっとり）", "アイスティー"]) {
-            plls(name);
+            plpsss(name);
         }
 
         await Promise.all(promiseList);

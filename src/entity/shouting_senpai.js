@@ -92,7 +92,7 @@ class ShoutingSenpai extends Entity {
     }
 
     takeDamage() {
-        loadSound("爆発").then(sound => playSound(sound));
+        playSound(SoundStorage.get("爆発"));
         this.state = "dying";
         this.#explosion = new Explosion();
     }
@@ -109,7 +109,7 @@ class ShoutingSenpai extends Entity {
 
     shout(viewAngle) {
         if (this.#textIndex === 0) {
-            loadSound(this.#text).then(sound => playSound(sound));
+            playSound(SoundStorage.get(this.#text));
         }
         const height = this.#oriHeight * this.temaeRate;
         const centerY = this.#y + height * 0.1; // 顔当たりの座標

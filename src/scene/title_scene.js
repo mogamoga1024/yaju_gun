@@ -17,10 +17,10 @@ class TitleScene extends Scene {
 
         context.textBaseline = "top";
 
-        context.font = "900 80px Xim-Sans";
-        context.fillStyle = "#000";
-        context.strokeStyle = "#eee";
-        context.lineWidth = 8;
+        context.font = "900 100px Xim-Sans";
+        context.fillStyle = "#ffb6c1";
+        context.strokeStyle = "#8b008b";
+        context.lineWidth = 12;
 
         {
             const text = "やじゅ♡がん";
@@ -29,6 +29,8 @@ class TitleScene extends Scene {
         }
 
         context.font = "900 40px Xim-Sans";
+        context.fillStyle = "#000";
+        context.strokeStyle = "#eee";
         context.lineWidth = 5;
 
         {

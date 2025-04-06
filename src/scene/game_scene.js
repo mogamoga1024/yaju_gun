@@ -41,12 +41,8 @@ class GameScene extends Scene {
         // debug start
         // 0 <= centerX < canvas.width * 2
         // this.#enemyList.push(new MeteorSenpai(canvas.width / 2, this.#viewAngle));
-        // this.#enemyList.push(new RunningSenpai(0, this.#viewAngle));
         // this.#enemyList.push(new RunningSenpai(canvas.width / 2, this.#viewAngle));
-        // this.#enemyList.push(new RunningSenpai(canvas.width, this.#viewAngle));
-        // this.#enemyList.push(new RunningSenpai(canvas.width * 3 / 2, this.#viewAngle));
         // this.#enemyList.push(new ShoutingSenpai(canvas.width / 2, this.#viewAngle));
-        // this.#enemyList.push(new ShoutingSenpai(canvas.width * 3 / 2, this.#viewAngle));
         // debug end
 
         this.#update();

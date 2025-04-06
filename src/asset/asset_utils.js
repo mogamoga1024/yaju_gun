@@ -45,22 +45,20 @@ function playSound(sound) {
         // https://github.com/goldfire/howler.js/issues/1753
         if (Howler.ctx.state === "suspended" || Howler.ctx.state === "interrupted") {
             Howler.ctx.resume().then(() => {
-                sound.play();
-                resolve();
+                resolve(sound.play());
             });
         }
         else {
-            sound.play();
-            resolve();
+            resolve(sound.play());
         }
     });
 }
 
-function stopSound(sound) {
-    sound.stop();
+function stopSound(sound, id) {
+    sound.stop(id);
     const timer = setInterval(() => {
-        if (sound.playing()) {
-            sound.stop();
+        if (sound.playing(id)) {
+            sound.stop(id);
         }
         else {
             clearInterval(timer);

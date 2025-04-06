@@ -15,8 +15,7 @@ class MeteorSenpai extends Entity {
     #imageListIndex = 0;
     #imageListIndexDelta = 1;
     #animeFrameMax = 11;
-    #meteorSound = null;
-    #hasPlayedMeteorSound = false;
+    #meteorSoundId = -1;
     #opacity = 1;
     #explosion = null;
 
@@ -29,17 +28,14 @@ class MeteorSenpai extends Entity {
         }
         this.#oriWidth = this.#imageList[0].width * 1.5;
         this.#oriHeight = this.#imageList[0].height * 1.5;
-        this.#hasPlayedMeteorSound = false;
         this.#updateBounds(viewAngle);
     }
 
     draw() {
-        if (!this.#hasPlayedMeteorSound) {
-            this.#hasPlayedMeteorSound = true;
-            loadSound("ンアッー！（ねっとり）").then(sound => {
+        if (this.#meteorSoundId === -1 && this.state === "alive") {
+            playSound(SoundStorage.get("ンアッー！（ねっとり）")).then(id => {
                 if (this.state === "alive") {
-                    this.#meteorSound = sound;
-                    playSound(sound);
+                    this.#meteorSoundId = id;
                 }
             });
         }
@@ -107,8 +103,8 @@ class MeteorSenpai extends Entity {
         playSound(SoundStorage.get("爆発"));
         this.state = "dying";
         this.#explosion = new Explosion();
-        if (this.#meteorSound !== null) {
-            stopSound(this.#meteorSound);
+        if (this.#meteorSoundId !== -1) {
+            stopSound(SoundStorage.get("ンアッー！（ねっとり）"), this.#meteorSoundId);
         }
     }
 

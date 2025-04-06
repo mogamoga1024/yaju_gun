@@ -11,8 +11,7 @@ class RunningSenpai extends Entity {
     #imageList = [];
     #imageListIndex = 0;
     #animeFrameMax = 12;
-    #ikitugiSound = null;
-    #hasPlayedIkitugiSound = false;
+    #ikitugiSoundId = -1;
     #opacity = 1;
     #explosion = null;
 
@@ -25,17 +24,14 @@ class RunningSenpai extends Entity {
         }
         this.#oriWidth = this.#imageList[0].width * 2.5;
         this.#oriHeight = this.#imageList[0].height * 2.5;
-        this.#hasPlayedIkitugiSound = false;
         this.#updateBounds(viewAngle);
     }
 
     draw() {
-        if (!this.#hasPlayedIkitugiSound) {
-            this.#hasPlayedIkitugiSound = true;
-            loadSound("息継ぎ").then(sound => {
+        if (this.#ikitugiSoundId === -1 && this.state === "alive") {
+            playSound(SoundStorage.get("息継ぎ")).then(id => {
                 if (this.state === "alive") {
-                    this.#ikitugiSound = sound;
-                    playSound(sound);
+                    this.#ikitugiSoundId = id;
                 }
             });
         }
@@ -100,8 +96,8 @@ class RunningSenpai extends Entity {
         playSound(SoundStorage.get("爆発"));
         this.state = "dying";
         this.#explosion = new Explosion();
-        if (this.#ikitugiSound !== null) {
-            stopSound(this.#ikitugiSound);
+        if (this.#ikitugiSoundId !== -1) {
+            stopSound(SoundStorage.get("息継ぎ"), this.#ikitugiSoundId);
         }
     }
 

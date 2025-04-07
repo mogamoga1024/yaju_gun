@@ -1,7 +1,6 @@
 
 class GameScene extends Scene {
     #backgroundImage = null;
-    #bgm = null;
     #gunshotSound = null;
 
     #enemyList = [];
@@ -33,8 +32,11 @@ class GameScene extends Scene {
         this.#backgroundImage = await loadImage("asset/草原.png");
         await this.#preload();
 
-        this.#bgm = await loadSound("PLUMBER");
-        playSound(this.#bgm);
+        const bgm1 = await loadSound("PLUMBER");
+        const bgm2 = await loadSound("中華淫行");
+        bgm1.on("end", () => playSound(bgm2));
+        bgm2.on("end", () => playSound(bgm1));
+        playSound(bgm1);
 
         this.#gunshotSound = await loadSound("銃声");
 

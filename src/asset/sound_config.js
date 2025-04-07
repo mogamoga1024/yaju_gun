@@ -13,7 +13,8 @@ const soundConfig = {};
     }
 
     // BGM
-    add("PLUMBER", "m4a", {volume: 0.25, loop: true});
+    add("PLUMBER", "m4a", {volume: 0.25});
+    add("中華淫行", "m4a", {volume: 0.3});
 
     // 効果音
     add("ドンッ");

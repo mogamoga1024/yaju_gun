@@ -31,7 +31,7 @@ class MukimukiSenpai extends Entity {
 
     draw() {
         if (this.#ikitugiSoundId === -1 && this.state === "alive") {
-            playSound(SoundStorage.get("息継ぎ")).then(id => {
+            playSound(SoundStorage.get("ムキムキ息継ぎ")).then(id => {
                 if (this.state === "alive") {
                     this.#ikitugiSoundId = id;
                 }
@@ -107,7 +107,7 @@ class MukimukiSenpai extends Entity {
             this.state = "dying";
             this.#explosion = new Explosion();
             if (this.#ikitugiSoundId !== -1) {
-                stopSound(SoundStorage.get("息継ぎ"), this.#ikitugiSoundId);
+                stopSound(SoundStorage.get("ムキムキ息継ぎ"), this.#ikitugiSoundId);
             }
         }
         else {

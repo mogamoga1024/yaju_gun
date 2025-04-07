@@ -205,7 +205,7 @@ class GameScene extends Scene {
         plpiss("爆発スプライト_170");
         
         // 音声
-        for (const name of ["ドンッ", "大破", "爆発", "息継ぎ", "ンアッー！（ねっとり）", "アイスティー"]) {
+        for (const name of ["ドンッ", "大破", "爆発", "息継ぎ", "ムキムキ息継ぎ", "ンアッー！（ねっとり）", "アイスティー"]) {
             plpsss(name);
         }
 

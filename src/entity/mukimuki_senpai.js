@@ -13,7 +13,7 @@ class MukimukiSenpai extends Entity {
     #imageListIndexDelta = 1;
     #animeFrameMax = 6;
     #ikitugiSoundId = -1;
-    #hp = 5;
+    #hp = 8;
     #opacity = 1;
     #explosion = null;
 
@@ -111,8 +111,7 @@ class MukimukiSenpai extends Entity {
             }
         }
         else {
-            // todo 被ダメ 効果音
-            // ヌッ！ オォン！
+            playSound(SoundStorage.get("ムキムキオォン！"));
         }
     }
 

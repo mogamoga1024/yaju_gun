@@ -42,6 +42,7 @@ class GameScene extends Scene {
         // 0 <= centerX < canvas.width * 2
         // this.#enemyList.push(new MeteorSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new RunningSenpai(canvas.width / 2, this.#viewAngle));
+        this.#enemyList.push(new MukimukiSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new ShoutingSenpai(canvas.width / 2, this.#viewAngle));
         // debug end
 
@@ -51,7 +52,7 @@ class GameScene extends Scene {
     #update() {
         const update = () => {
             if (this.#enemyList.length < 6) {
-                this.#enemyCreateFrame++;
+                // this.#enemyCreateFrame++;
             }
 
             context.clearRect(0, 0, canvas.width, canvas.height);
@@ -185,6 +186,9 @@ class GameScene extends Scene {
         // 画像
         for (let i = 0; i <= 12; i++) {
             plpiss(`走る野獣先輩/${i}`);
+        }
+        for (let i = 0; i <= 6; i++) {
+            plpiss(`ムキムキ先輩/${i}`);
         }
         for (let i = 0; i <= 11; i++) {
             plpiss(`タオル先輩/${i}`);

@@ -128,7 +128,10 @@ class GameScene extends Scene {
             if (this.#enemyCreateFrame >= 60 * 2) {
                 const centerX = Math.random() * (canvas.width * 2);
                 const random = Math.random();
-                if (random < 0.4) {
+                if (random < 0.1) {
+                    this.#enemyList.push(new MukimukiSenpai(centerX, this.#viewAngle));
+                }
+                else if (random < 0.4) {
                     this.#enemyList.push(new RunningSenpai(centerX, this.#viewAngle));
                 }
                 else if (random < 0.6) {

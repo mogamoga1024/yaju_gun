@@ -13,6 +13,7 @@ class MukimukiSenpai extends Entity {
     #imageListIndexDelta = 1;
     #animeFrameMax = 6;
     #ikitugiSoundId = -1;
+    #hp = 5;
     #opacity = 1;
     #explosion = null;
 
@@ -73,7 +74,7 @@ class MukimukiSenpai extends Entity {
             this.temaeRate = temaeRateMax;
         }
         else {
-            const a = 0.00045 + 0.002 * this.temaeRate;
+            const a = 0.0006 + 0.002 * this.temaeRate;
             this.temaeRate = Math.min(this.temaeRate + a, temaeRateMax);
         }
 
@@ -100,11 +101,18 @@ class MukimukiSenpai extends Entity {
     }
 
     takeDamage() {
-        playSound(SoundStorage.get("爆発"));
-        this.state = "dying";
-        this.#explosion = new Explosion();
-        if (this.#ikitugiSoundId !== -1) {
-            stopSound(SoundStorage.get("息継ぎ"), this.#ikitugiSoundId);
+        this.#hp -= 1;
+        if (this.#hp <= 0) {
+            playSound(SoundStorage.get("爆発"));
+            this.state = "dying";
+            this.#explosion = new Explosion();
+            if (this.#ikitugiSoundId !== -1) {
+                stopSound(SoundStorage.get("息継ぎ"), this.#ikitugiSoundId);
+            }
+        }
+        else {
+            // todo 被ダメ 効果音
+            // ヌッ！ オォン！
         }
     }
 

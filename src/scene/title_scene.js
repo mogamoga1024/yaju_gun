@@ -5,6 +5,7 @@ class TitleScene extends Scene {
     async onStart() {
         console.log("TitleScene:onStart");
         this.#backgroundImage = await loadImage("asset/草原.png");
+        this.state = "loaded";
         this.#update();
     }
 

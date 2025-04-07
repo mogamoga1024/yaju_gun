@@ -1,5 +1,6 @@
 
 class Scene {
+    state = "loading"; // loading or loaded
     prevScene = null;
     onStart() {}
     onEnd() {}

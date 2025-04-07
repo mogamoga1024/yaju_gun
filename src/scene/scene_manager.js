@@ -4,21 +4,27 @@ class SceneManager {
 
     static #init() {
         window.addEventListener("keydown", e => {
+            if (this.#scene?.state !== "loaded") return;
             this.#scene?.onKeyDown(e);
         });
         window.addEventListener("keyup", e => {
+            if (this.#scene?.state !== "loaded") return;
             this.#scene?.onKeyUp(e);
         });
         window.addEventListener("deviceorientation", e => {
+            if (this.#scene?.state !== "loaded") return;
             this.#scene?.onDeviceOrientation(e); 
         });
         canvas.addEventListener("click", e => {
+            if (this.#scene?.state !== "loaded") return;
             this.#scene?.onClick(e);
         });
         canvas.addEventListener("touchend", e => {
+            if (this.#scene?.state !== "loaded") return;
             this.#scene?.onTouchEnd(e);
         });
         canvas.addEventListener("mousemove", e => {
+            if (this.#scene?.state !== "loaded") return;
             this.#scene?.onMouseMove(e);
         });
     }

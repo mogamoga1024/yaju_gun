@@ -46,6 +46,7 @@ class GameScene extends Scene {
         // this.#enemyList.push(new ShoutingSenpai(canvas.width / 2, this.#viewAngle));
         // debug end
 
+        this.state = "loaded";
         this.#update();
     }
 

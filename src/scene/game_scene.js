@@ -268,25 +268,30 @@ class GameScene extends Scene {
     }
 
     onClick(e) {
+        const rect = e.target.getBoundingClientRect();
+        const x = e.offsetX * canvas.width / rect.width;
+        const y = e.offsetY * canvas.height / rect.height;
         if (this.#shotPosList.length === 0) {
-            this.#shotPosList.push({
-                x: e.offsetX,
-                y: e.offsetY
-            });
+            this.#shotPosList.push({x, y});
         }
     }
 
     onTouchEnd(e) {
         const rect = e.target.getBoundingClientRect();
         for (const touch of e.targetTouches) {
-            const x = touch.clientX - rect.left;
-            const y = touch.clientY - rect.top;
+            const offsetX = touch.clientX - rect.left;
+            const offsetY = touch.clientY - rect.top;
+            const x = offsetX * canvas.width / rect.width;
+            const y = offsetY * canvas.height / rect.height;
             this.#shotPosList.push({x, y});
         }
     }
 
     onMouseMove(e) {
-        this.#pc.mouseX = e.offsetX;
-        this.#pc.mouseY = e.offsetY;
+        const rect = e.target.getBoundingClientRect();
+        const x = e.offsetX * canvas.width / rect.width;
+        const y = e.offsetY * canvas.height / rect.height;
+        this.#pc.mouseX = x;
+        this.#pc.mouseY = y;
     }
 }

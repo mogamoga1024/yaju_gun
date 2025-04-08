@@ -10,9 +10,15 @@
   touch-action: manipulation;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+}
+
 #game-canvas {
   display: block;
-  height: 95svh;
+  height: 100svh;
+  max-height: 500px;
   margin: 0 auto 0;
   border: solid 1px black;
 }

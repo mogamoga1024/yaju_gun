@@ -12,6 +12,7 @@
 
 #game-canvas {
   display: block;
-  margin: 24px auto 0;
+  height: 95svh;
+  margin: 0 auto 0;
   border: solid 1px black;
 }

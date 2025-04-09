@@ -9,6 +9,10 @@ const isPC = (function() {
     return !(isMobileByUa || isMobileByClientHint);
 })();
 
+if (!isPC) {
+    canvas.style.marginTop = "0";
+}
+
 (function() {
     const $loading = document.querySelector("#loading");
     const $app = document.querySelector("#app");

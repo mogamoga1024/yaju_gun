@@ -275,6 +275,14 @@ class GameScene extends Scene {
         }
     }
 
+    onTouchStart(e) {
+        // todo
+    }
+
+    onTouchMove(e) {
+        // todo
+    }
+
     onTouchEnd(e) {
         const rect = e.target.getBoundingClientRect();
         for (const touch of e.changedTouches) {

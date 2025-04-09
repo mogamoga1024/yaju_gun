@@ -293,6 +293,10 @@ class GameScene extends Scene {
         }
     }
 
+    onTouchCancel(e) {
+        // todo
+    }
+
     onMouseMove(e) {
         const rect = e.target.getBoundingClientRect();
         const {x, y} = this.#canvasXY(e.offsetX, e.offsetY, rect);

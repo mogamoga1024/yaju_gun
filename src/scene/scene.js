@@ -12,4 +12,5 @@ class Scene {
     onTouchStart(e) {}
     onTouchMove(e) {}
     onTouchEnd(e) {}
+    onTouchCancel(e) {}
 }

@@ -19,6 +19,6 @@ body {
   display: block;
   height: 100svh;
   max-height: 500px;
-  margin: 0 auto 0;
+  margin: 16px auto 0;
   border: solid 1px black;
 }

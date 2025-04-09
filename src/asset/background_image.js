@@ -1,12 +1,8 @@
 
 function drawBackgroundImage(backgroundImage, viewAngle = 0) {
     const sw = backgroundImage.width;
-    let sy = 0;
-    let sh = backgroundImage.height;
-    if (backgroundImage.height >= canvas.height) {
-        sy = (backgroundImage.height - canvas.height) / 2;
-        sh = canvas.height;
-    }
+    const sh = canvas.height * (sw / canvas.width);
+    const sy = (backgroundImage.height - sh) / 2;
 
     const canvasCenterX = canvas.width / 2;
     const offsetX = (canvasCenterX * (viewAngle / 90)) % (canvasCenterX * 4);

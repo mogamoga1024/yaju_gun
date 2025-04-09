@@ -13,9 +13,9 @@ function drawLoading() {
 
     const text = "Loading...";
     context.textBaseline = "top";
-    context.font = "400 48px Xim-Sans";
+    context.font = "400 60px Xim-Sans";
     context.fillStyle = "#000";
     context.strokeStyle = "#fff";
     context.lineWidth = 5;
-    drawStrokeText(context, text, 510, 370);
+    drawStrokeText(context, text, canvas.width - 280, 370);
 }

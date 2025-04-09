@@ -277,7 +277,7 @@ class GameScene extends Scene {
 
     onTouchEnd(e) {
         const rect = e.target.getBoundingClientRect();
-        for (const touch of e.targetTouches) {
+        for (const touch of e.changedTouches) {
             const offsetX = touch.clientX - rect.left;
             const offsetY = touch.clientY - rect.top;
             const {x, y} = this.#canvasXY(offsetX, offsetY, rect);

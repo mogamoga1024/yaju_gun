@@ -269,8 +269,7 @@ class GameScene extends Scene {
 
     onClick(e) {
         const rect = e.target.getBoundingClientRect();
-        const x = e.offsetX * canvas.width / rect.width;
-        const y = e.offsetY * canvas.height / rect.height;
+        const {x, y} = this.#canvasXY(e.offsetX, e.offsetY, rect);
         if (this.#shotPosList.length === 0) {
             this.#shotPosList.push({x, y});
         }
@@ -281,17 +280,22 @@ class GameScene extends Scene {
         for (const touch of e.targetTouches) {
             const offsetX = touch.clientX - rect.left;
             const offsetY = touch.clientY - rect.top;
-            const x = offsetX * canvas.width / rect.width;
-            const y = offsetY * canvas.height / rect.height;
+            const {x, y} = this.#canvasXY(offsetX, offsetY, rect);
             this.#shotPosList.push({x, y});
         }
     }
 
     onMouseMove(e) {
         const rect = e.target.getBoundingClientRect();
-        const x = e.offsetX * canvas.width / rect.width;
-        const y = e.offsetY * canvas.height / rect.height;
+        const {x, y} = this.#canvasXY(e.offsetX, e.offsetY, rect);
         this.#pc.mouseX = x;
         this.#pc.mouseY = y;
+    }
+
+    #canvasXY(offsetX, offsetY, rect) {
+        return {
+            x: offsetX * canvas.width / rect.width,
+            y: offsetY * canvas.height / rect.height
+        };
     }
 }

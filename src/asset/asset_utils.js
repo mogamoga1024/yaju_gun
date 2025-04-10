@@ -68,7 +68,7 @@ function stopSound(sound, id) {
 
 function changeSoundPos(sound, id, angle) {
     const rad = angle * (Math.PI / 180);
-    const x = Math.sin(rad);
+    const x = -Math.sin(rad);
     const z = Math.cos(rad);
     sound.pos(x, 0, z, id);
 }

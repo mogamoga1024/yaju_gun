@@ -24,7 +24,7 @@ class GameScene extends Scene {
         mouseX: canvas.width / 2,
         mouseY: canvas.height / 2,
     };
-    #nipple = null;
+    // #nipple = null;
 
     #enemyCreateFrame = 0;
 
@@ -48,6 +48,12 @@ class GameScene extends Scene {
         // this.#enemyList.push(new MukimukiSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new ShoutingSenpai(canvas.width / 2, this.#viewAngle));
         // debug end
+
+        nipplejs.create({
+            zone: domGameCanvasWrapper,
+            color: "#f00",
+            lockX: true,
+        });
 
         this.state = "loaded";
         this.#update();
@@ -276,20 +282,20 @@ class GameScene extends Scene {
         }
     }
 
-    onTouchStart(e) {
-        // todo
-        const rect = e.target.getBoundingClientRect();
-        const touch = e.changedTouches[0];
-        this.#nipple?.destroy();
+    // onTouchStart(e) {
+    //     // todo
+    //     const rect = e.target.getBoundingClientRect();
+    //     const touch = e.changedTouches[0];
+    //     this.#nipple?.destroy();
         
-        this.#nipple = nipplejs.create({
-            zone: domGameCanvasWrapper,
-            color: "#f00",
-            lockX: true,
-            mode: "static",
-            position: {left: `${touch.clientX - rect.left}px`, top: `${touch.clientY - rect.top}px`},
-        });
-    }
+    //     this.#nipple = nipplejs.create({
+    //         zone: domGameCanvasWrapper,
+    //         color: "#f00",
+    //         lockX: true,
+    //         mode: "static",
+    //         position: {left: `${touch.clientX - rect.left}px`, top: `${touch.clientY - rect.top}px`},
+    //     });
+    // }
 
     onTouchEnd(e) {
         const rect = e.target.getBoundingClientRect();

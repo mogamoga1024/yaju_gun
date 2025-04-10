@@ -47,25 +47,23 @@ class TitleScene extends Scene {
                 DeviceOrientationEvent.requestPermission()
                     .then(permissionState => {
                         if (permissionState === "granted") {
-                            // OK
+                            // ジャイロ操作をする
+                            SceneManager.start(new GameScene(false));
                         }
                         else {
-                            alert("ジャイロ操作の許可を拒否されました");
+                            // ジャイロ操作をしない
+                            SceneManager.start(new GameScene(true));
                         }
-                        // todo ジャイロで操作するかどうかの引数
-                        SceneManager.start(new GameScene());
                     })
                     .catch(error => {
-                        // alert(error.message);
-                        SceneManager.start(new GameScene());
+                        SceneManager.start(new GameScene(true));
                     });
             } else {
-                // alert("端末がジャイロ操作に対応していません");
-                SceneManager.start(new GameScene());
+                SceneManager.start(new GameScene(true));
             }
         }
         else {
-            SceneManager.start(new GameScene());
+            SceneManager.start(new GameScene(false));
         }
     }
 }

@@ -24,8 +24,16 @@ class GameScene extends Scene {
         mouseX: canvas.width / 2,
         mouseY: canvas.height / 2,
     };
+    #useNipple = false;
+    #nipple = null;
+    #nippleDx = 0;
 
     #enemyCreateFrame = 0;
+
+    constructor(useNipple) {
+        super();
+        this.#useNipple = useNipple;
+    }
 
     async onStart() {
         console.log("GameScene:onStart");
@@ -48,14 +56,32 @@ class GameScene extends Scene {
         // this.#enemyList.push(new ShoutingSenpai(canvas.width / 2, this.#viewAngle));
         // debug end
 
-        nipplejs.create({
-            zone: domGameCanvasWrapper,
-            color: "#f00",
-            lockX: true,
-        });
+        if (this.#useNipple) {
+            this.#nipple = nipplejs.create({
+                zone: domGameCanvasWrapper,
+                color: "#f00",
+                lockX: true,
+                fadeTime: 0,
+                dataOnly: true,
+            });
+
+            this.#nipple.on("end", (e, data) => {
+                this.#nippleDx = 0;
+            });
+            this.#nipple.on("move", (e, data) => {
+                this.#nippleDx = data.vector.x * -6;
+                while (this.#nippleDx < 0) {
+                    this.#nippleDx += 360;
+                }
+            });
+        }
 
         this.state = "loaded";
         this.#update();
+    }
+
+    onEnd() {
+        this.#nipple?.destroy();
     }
 
     #update() {
@@ -79,6 +105,9 @@ class GameScene extends Scene {
                     this.#pc.canTurn = false;
                     this.#viewAngle = (this.#viewAngle + 180) % 360;
                 }
+            }
+            else if (this.#useNipple) {
+                this.#viewAngle = (this.#viewAngle + this.#nippleDx) % 360;
             }
 
             // 奥側から描画

@@ -27,6 +27,7 @@ class GameScene extends Scene {
     #useNipple = false;
     #nipple = null;
     #nippleDx = 0;
+    #touchPosMap = new Map();
 
     #enemyCreateFrame = 0;
 
@@ -215,6 +216,7 @@ class GameScene extends Scene {
             requestAnimationFrame(update);
         }
 
+        // todo 60FPS化 植木鉢くん参考
         update();
     }
 
@@ -313,13 +315,36 @@ class GameScene extends Scene {
         }
     }
 
+    onTouchStart(e) {
+        for (const touch of e.changedTouches) {
+            this.#touchPosMap.set(
+                touch.identifier,
+                {
+                    x: touch.clientX,
+                    y: touch.clientY
+                }
+            );
+        }
+    }
+
     onTouchEnd(e) {
         const rect = e.target.getBoundingClientRect();
         for (const touch of e.changedTouches) {
+            const startPos = this.#touchPosMap.get(touch.identifier);
+            this.#touchPosMap.delete(touch.identifier);
+            if (Math.pow(touch.clientX - startPos.x, 2) + Math.pow(touch.clientY - startPos.y, 2) > 3 * 3) {
+                continue;
+            }
             const offsetX = touch.clientX - rect.left;
             const offsetY = touch.clientY - rect.top;
             const {x, y} = this.#canvasXY(offsetX, offsetY, rect);
             this.#shotPosList.push({x, y});
+        }
+    }
+
+    onTouchCancel(e) {
+        for (const touch of e.changedTouches) {
+            this.#touchPosMap.delete(touch.identifier);
         }
     }
 

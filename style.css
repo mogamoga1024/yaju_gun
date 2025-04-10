@@ -19,6 +19,8 @@ body {
   position: relative;
   width: fit-content;
   margin: 16px auto 0;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 #game-canvas {

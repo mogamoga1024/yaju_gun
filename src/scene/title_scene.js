@@ -42,28 +42,29 @@ class TitleScene extends Scene {
     }
     
     onClick(e) {
-        if (!isPC) {
-            if (typeof DeviceOrientationEvent.requestPermission === "function") {
-                DeviceOrientationEvent.requestPermission()
-                    .then(permissionState => {
-                        if (permissionState === "granted") {
-                            // ジャイロ操作をする
-                            SceneManager.start(new GameScene(false));
-                        }
-                        else {
-                            // ジャイロ操作をしない
-                            SceneManager.start(new GameScene(true));
-                        }
-                    })
-                    .catch(error => {
-                        SceneManager.start(new GameScene(true));
-                    });
-            } else {
-                SceneManager.start(new GameScene(true));
-            }
-        }
-        else {
-            SceneManager.start(new GameScene(false));
-        }
+        SceneManager.start(new GameScene(false));
+        // if (!isPC) {
+        //     if (typeof DeviceOrientationEvent.requestPermission === "function") {
+        //         DeviceOrientationEvent.requestPermission()
+        //             .then(permissionState => {
+        //                 if (permissionState === "granted") {
+        //                     // ジャイロ操作をする
+        //                     SceneManager.start(new GameScene(false));
+        //                 }
+        //                 else {
+        //                     // ジャイロ操作をしない
+        //                     SceneManager.start(new GameScene(true));
+        //                 }
+        //             })
+        //             .catch(error => {
+        //                 SceneManager.start(new GameScene(true));
+        //             });
+        //     } else {
+        //         SceneManager.start(new GameScene(true));
+        //     }
+        // }
+        // else {
+        //     SceneManager.start(new GameScene(false));
+        // }
     }
 }

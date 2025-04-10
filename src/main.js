@@ -14,12 +14,6 @@ if (!isPC) {
     domGameCanvasWrapper.style.marginTop = "0";
 }
 
-const nipple = nipplejs.create({
-    zone: domGameCanvasWrapper,
-    color: "#f00",
-    lockX: true,
-});
-
 (function() {
     const $loading = document.querySelector("#loading");
     const $app = document.querySelector("#app");

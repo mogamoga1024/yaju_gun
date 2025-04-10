@@ -24,6 +24,7 @@ class GameScene extends Scene {
         mouseX: canvas.width / 2,
         mouseY: canvas.height / 2,
     };
+    #nipple = null;
 
     #enemyCreateFrame = 0;
 
@@ -277,10 +278,17 @@ class GameScene extends Scene {
 
     onTouchStart(e) {
         // todo
-    }
-
-    onTouchMove(e) {
-        // todo
+        const rect = e.target.getBoundingClientRect();
+        const touch = e.changedTouches[0];
+        this.#nipple?.destroy();
+        
+        this.#nipple = nipplejs.create({
+            zone: domGameCanvasWrapper,
+            color: "#f00",
+            lockX: true,
+            mode: "static",
+            position: {left: `${touch.clientX - rect.left}px`, top: `${touch.clientY - rect.top}px`},
+        });
     }
 
     onTouchEnd(e) {
@@ -291,10 +299,6 @@ class GameScene extends Scene {
             const {x, y} = this.#canvasXY(offsetX, offsetY, rect);
             this.#shotPosList.push({x, y});
         }
-    }
-
-    onTouchCancel(e) {
-        // todo
     }
 
     onMouseMove(e) {

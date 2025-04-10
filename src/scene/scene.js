@@ -10,7 +10,5 @@ class Scene {
     onMouseMove(e) {}
     onDeviceOrientation(e) {}
     onTouchStart(e) {}
-    onTouchMove(e) {}
     onTouchEnd(e) {}
-    onTouchCancel(e) {}
 }

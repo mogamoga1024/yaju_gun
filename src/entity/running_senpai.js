@@ -25,17 +25,15 @@ class RunningSenpai extends Entity {
         this.#oriWidth = this.#imageList[0].width * 2.5;
         this.#oriHeight = this.#imageList[0].height * 2.5;
         this.#updateBounds(viewAngle);
+
+        playSound(SoundStorage.get("息継ぎ")).then(id => {
+            if (this.state === "alive") {
+                this.#ikitugiSoundId = id;
+            }
+        });
     }
 
     draw() {
-        if (this.#ikitugiSoundId === -1 && this.state === "alive") {
-            playSound(SoundStorage.get("息継ぎ")).then(id => {
-                if (this.state === "alive") {
-                    this.#ikitugiSoundId = id;
-                }
-            });
-        }
-
         context.globalAlpha = this.#opacity;
         const image = this.#imageList[this.#imageListIndex];
         context.drawImage(image, this.#x, this.#y, this.#width, this.#height);

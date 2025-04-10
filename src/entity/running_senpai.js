@@ -29,6 +29,7 @@ class RunningSenpai extends Entity {
         playSound(SoundStorage.get("息継ぎ")).then(id => {
             if (this.state === "alive") {
                 this.#ikitugiSoundId = id;
+                changeSoundPos(SoundStorage.get("息継ぎ"), this.#ikitugiSoundId, viewAngle);
             }
         });
     }
@@ -90,8 +91,10 @@ class RunningSenpai extends Entity {
         return true;
     }
 
-    takeDamage() {
-        playSound(SoundStorage.get("爆発"));
+    takeDamage(viewAngle) {
+        playSound(SoundStorage.get("爆発")).then(id => {
+            changeSoundPos(SoundStorage.get("爆発"), id, viewAngle);
+        });
         this.state = "dying";
         this.#explosion = new Explosion();
         if (this.#ikitugiSoundId !== -1) {
@@ -116,5 +119,9 @@ class RunningSenpai extends Entity {
         const bottomY1 = canvas.height + this.#oriHeight / 2;
         const bottomY = bottomY0 * (1 - this.temaeRate) + bottomY1 * this.temaeRate;
         this.#y = bottomY - this.#height;
+
+        if (this.#ikitugiSoundId !== -1) {
+            changeSoundPos(SoundStorage.get("息継ぎ"), this.#ikitugiSoundId, viewAngle);
+        }
     }
 }

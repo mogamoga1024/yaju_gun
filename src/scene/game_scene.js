@@ -51,7 +51,7 @@ class GameScene extends Scene {
         // debug start
         // 0 <= centerX < canvas.width * 2
         // this.#enemyList.push(new MeteorSenpai(canvas.width / 2, this.#viewAngle));
-        // this.#enemyList.push(new RunningSenpai(canvas.width / 2, this.#viewAngle));
+        this.#enemyList.push(new RunningSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new MukimukiSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new ShoutingSenpai(canvas.width / 2, this.#viewAngle));
         // debug end
@@ -87,7 +87,7 @@ class GameScene extends Scene {
     #update() {
         const update = () => {
             if (this.#enemyList.length < 6) {
-                this.#enemyCreateFrame++;
+                // this.#enemyCreateFrame++;
             }
 
             context.clearRect(0, 0, canvas.width, canvas.height);
@@ -141,7 +141,7 @@ class GameScene extends Scene {
                     for (let i = this.#shotPosList.length - 1; i >= 0; i--) {
                         const {x, y} = this.#shotPosList[i];
                         if (entity.isTargeted(x, y)) {
-                            entity.takeDamage();
+                            entity.takeDamage(this.#viewAngle);
                             this.#shotPosList.splice(i, 1);
                         }
                     }

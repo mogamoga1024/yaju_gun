@@ -42,7 +42,8 @@ class TitleScene extends Scene {
     }
     
     onClick(e) {
-        SceneManager.start(new GameScene(false));
+        // todo
+        SceneManager.start(new GameScene(!isPC));
         // if (!isPC) {
         //     if (typeof DeviceOrientationEvent.requestPermission === "function") {
         //         DeviceOrientationEvent.requestPermission()

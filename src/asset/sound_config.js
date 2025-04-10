@@ -15,6 +15,7 @@ const soundConfig = {};
     // BGM
     add("PLUMBER", "m4a", {volume: 0.25});
     add("中華淫行", "m4a", {volume: 0.3});
+    add("snow prizm (Ketsupine mix)", "mp3", {volume: 0.2});
 
     // 効果音
     add("ドンッ");

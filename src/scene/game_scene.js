@@ -42,9 +42,12 @@ class GameScene extends Scene {
 
         const bgm1 = await loadSound("PLUMBER");
         const bgm2 = await loadSound("中華淫行");
+        const bgm3 = await loadSound("snow prizm (Ketsupine mix)");
         bgm1.on("end", () => playSound(bgm2));
-        bgm2.on("end", () => playSound(bgm1));
+        bgm2.on("end", () => playSound(bgm3));
+        bgm3.on("end", () => playSound(bgm1));
         playSound(bgm1);
+        // playSound(bgm3);
 
         this.#gunshotSound = await loadSound("銃声");
 

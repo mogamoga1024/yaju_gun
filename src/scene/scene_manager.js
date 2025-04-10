@@ -19,6 +19,10 @@ class SceneManager {
             if (this.#scene?.state !== "loaded") return;
             this.#scene?.onClick(e);
         });
+        window.addEventListener("orientationchange", e => {
+            if (this.#scene?.state !== "loaded") return;
+            this.#scene?.onOrientationChange(e);
+        });
         canvas.addEventListener("touchstart", e => {
             if (this.#scene?.state !== "loaded") return;
             this.#scene?.onTouchStart(e);

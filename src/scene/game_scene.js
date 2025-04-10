@@ -24,6 +24,7 @@ class GameScene extends Scene {
         mouseX: canvas.width / 2,
         mouseY: canvas.height / 2,
     };
+    #touchPosMap = new Map();
 
     #enemyCreateFrame = 0;
 
@@ -275,8 +276,21 @@ class GameScene extends Scene {
         }
     }
 
+    onOrientationChange(e) {
+        this.#touchPosMap = new Map();
+    }
+
     onTouchStart(e) {
-        // todo
+        const rect = e.target.getBoundingClientRect();
+        for (const touch of e.changedTouches) {
+            this.#touchPosMap.set(
+                touch.identifier,
+                {
+                    x: touch.clientX - rect.left,
+                    y: touch.clientY - rect.top
+                }
+            );
+        }
     }
 
     onTouchMove(e) {
@@ -286,15 +300,19 @@ class GameScene extends Scene {
     onTouchEnd(e) {
         const rect = e.target.getBoundingClientRect();
         for (const touch of e.changedTouches) {
-            const offsetX = touch.clientX - rect.left;
-            const offsetY = touch.clientY - rect.top;
-            const {x, y} = this.#canvasXY(offsetX, offsetY, rect);
+            const tx = touch.clientX - rect.left;
+            const ty = touch.clientY - rect.top;
+            const {x, y} = this.#canvasXY(tx, ty, rect);
             this.#shotPosList.push({x, y});
+
+            this.#touchPosMap.delete(touch.identifier);
         }
     }
 
     onTouchCancel(e) {
-        // todo
+        for (const touch of e.changedTouches) {
+            this.#touchPosMap.delete(touch.identifier);
+        }
     }
 
     onMouseMove(e) {
@@ -304,10 +322,10 @@ class GameScene extends Scene {
         this.#pc.mouseY = y;
     }
 
-    #canvasXY(offsetX, offsetY, rect) {
+    #canvasXY(x, y, rect) {
         return {
-            x: offsetX * canvas.width / rect.width,
-            y: offsetY * canvas.height / rect.height
+            x: x * canvas.width / rect.width,
+            y: y * canvas.height / rect.height
         };
     }
 }

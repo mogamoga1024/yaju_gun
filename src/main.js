@@ -1,4 +1,5 @@
 
+const domGameCanvasWrapper = document.querySelector("#game-canvas-wrapper");
 const canvas = document.querySelector("#game-canvas");
 const context = canvas.getContext("2d");
 
@@ -10,8 +11,14 @@ const isPC = (function() {
 })();
 
 if (!isPC) {
-    canvas.style.marginTop = "0";
+    domGameCanvasWrapper.style.marginTop = "0";
 }
+
+const nipple = nipplejs.create({
+    zone: domGameCanvasWrapper,
+    color: "#f00",
+    lockX: true,
+});
 
 (function() {
     const $loading = document.querySelector("#loading");

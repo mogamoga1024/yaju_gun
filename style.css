@@ -15,10 +15,15 @@ body {
   padding: 0;
 }
 
+#game-canvas-wrapper {
+  position: relative;
+  width: fit-content;
+  margin: 16px auto 0;
+}
+
 #game-canvas {
   display: block;
   height: 100svh;
   max-height: 500px;
-  margin: 16px auto 0;
   border: solid 1px black;
 }

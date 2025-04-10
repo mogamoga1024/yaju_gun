@@ -283,18 +283,25 @@ class GameScene extends Scene {
     onTouchStart(e) {
         const rect = e.target.getBoundingClientRect();
         for (const touch of e.changedTouches) {
-            this.#touchPosMap.set(
-                touch.identifier,
-                {
-                    x: touch.clientX - rect.left,
-                    y: touch.clientY - rect.top
-                }
-            );
+            const x = touch.clientX - rect.left;
+            this.#touchPosMap.set(touch.identifier, x);
         }
     }
 
     onTouchMove(e) {
-        // todo
+        const rect = e.target.getBoundingClientRect();
+        let dx = 0;
+        for (const touch of e.changedTouches) {
+            const prevX = this.#touchPosMap.get(touch.identifier);
+            const x = touch.clientX - rect.left;
+            dx += x - prevX;
+            this.#touchPosMap.set(touch.identifier, x);
+        }
+        let tmpViewAngle = this.#viewAngle + dx / 2;
+        while (tmpViewAngle < 0) {
+            tmpViewAngle += 360;
+        }
+        this.#viewAngle = tmpViewAngle % 360;
     }
 
     onTouchEnd(e) {

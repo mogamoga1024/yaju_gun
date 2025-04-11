@@ -318,6 +318,9 @@ class GameScene extends Scene {
     }
 
     onClick(e) {
+        if (!isPC) {
+            return;
+        }
         const rect = e.target.getBoundingClientRect();
         const {x, y} = this.#canvasXY(e.offsetX, e.offsetY, rect);
         if (this.#shotPosList.length === 0) {

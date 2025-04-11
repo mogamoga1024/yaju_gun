@@ -336,7 +336,7 @@ class GameScene extends Scene {
         for (const touch of e.changedTouches) {
             const startX = this.#touchXMap.get(touch.identifier);
             this.#touchXMap.delete(touch.identifier);
-            if (Math.abs(touch.clientX - startX) > 1) {
+            if (touch.clientX !== startX) {
                 continue;
             }
             const offsetX = touch.clientX - rect.left;

@@ -29,6 +29,7 @@ class GameScene extends Scene {
     #nippleDx = 0;
     #touchPosMap = new Map();
 
+    #shouldAnimation = true;
     #enemyCreateFrame = 0;
 
     constructor(useNipple) {
@@ -81,143 +82,152 @@ class GameScene extends Scene {
         }
 
         this.state = "loaded";
-        this.#update();
+        this.#startAnimation();
     }
 
     onEnd() {
+        this.#shouldAnimation = false;
         this.#nipple?.destroy();
     }
 
+    #startAnimation() {
+        let prevTime = -1;
+        const deltaTime = 1 / 60;
+        const anime = (time) => {
+            if (this.#shouldAnimation) {
+                if (prevTime === -1 || time - prevTime >= deltaTime * 1000 * 0.9) {
+                    prevTime = time;
+                    this.#update();
+                }
+                requestAnimationFrame(anime);
+            }
+        };
+        anime(performance.now());
+    }
+
     #update() {
-        const update = () => {
-            if (this.#enemyList.length < 6) {
-                this.#enemyCreateFrame++;
-            }
-
-            context.clearRect(0, 0, canvas.width, canvas.height);
-
-            // PCでのキーイベントの捕捉
-            if (isPC) {
-                const speed = 4;
-                if (this.#pc.isPressed.left) {
-                    this.#viewAngle = (this.#viewAngle + speed) % 360;
-                }
-                if (this.#pc.isPressed.right) {
-                    this.#viewAngle = (this.#viewAngle + (360 - speed)) % 360;
-                }
-                if (this.#pc.isPressed.turn && this.#pc.canTurn) {
-                    this.#pc.canTurn = false;
-                    this.#viewAngle = (this.#viewAngle + 180) % 360;
-                }
-            }
-            else if (this.#useNipple) {
-                this.#viewAngle = (this.#viewAngle + this.#nippleDx) % 360;
-            }
-
-            // 奥側から描画
-            context.clearRect(0, 0, canvas.width, canvas.height);
-            drawBackgroundImage(this.#backgroundImage, this.#viewAngle);
-            let willHit = false;
-            this.#sortedEntityList().forEach(entity => {
-                if (isPC && !willHit && entity.isTargeted(this.#pc.mouseX, this.#pc.mouseY)) {
-                    willHit = true;
-                }
-                entity.draw();
-            });
-
-            if (isPC) {
-                this.#player.drawCrosshair(this.#pc.mouseX, this.#pc.mouseY, willHit);
-            }
-
-            drawSparks(context);
-
-            // プレイヤーの攻撃
-            if (this.#shotPosList.length > 0) {
-                playSound(this.#gunshotSound);
-                for (const {x, y} of this.#shotPosList) {
-                    addSparks(x, y);
-                }
-            }
-
-            // 敵の状態の更新と被弾
-            this.#sortedEntityList("desc").forEach(entity => {
-                if (this.#shotPosList.length > 0) {
-                    for (let i = this.#shotPosList.length - 1; i >= 0; i--) {
-                        const {x, y} = this.#shotPosList[i];
-                        if (entity.isTargeted(x, y)) {
-                            entity.takeDamage();
-                            this.#shotPosList.splice(i, 1);
-                        }
-                    }
-                }
-                entity.update(this.#viewAngle);
-            });
-            for (let i = this.#enemyList.length - 1; i >= 0; i--) {
-                const enemy = this.#enemyList[i];
-                if (enemy.state === "dead") {
-                    this.#enemyList.splice(i, 1);
-                }
-            }
-            for (let i = this.#kotodamaList.length - 1; i >= 0; i--) {
-                const kotodama = this.#kotodamaList[i];
-                if (kotodama.state === "dead" || kotodama.shooter.state === "dying") {
-                    this.#kotodamaList.splice(i, 1);
-                }
-            }
-
-            // 敵の生成
-            if (this.#enemyCreateFrame >= 60 * 2) {
-                const centerX = Math.random() * (canvas.width * 2);
-                const random = Math.random();
-                if (random < 0.1) {
-                    this.#enemyList.push(new MukimukiSenpai(centerX, this.#viewAngle));
-                }
-                else if (random < 0.4) {
-                    this.#enemyList.push(new RunningSenpai(centerX, this.#viewAngle));
-                }
-                else if (random < 0.6) {
-                    this.#enemyList.push(new MeteorSenpai(centerX, this.#viewAngle));
-                }
-                else {
-                    if (Math.random() < 0.5) {
-                        this.#enemyList.push(new ShoutingSenpai(centerX, this.#viewAngle, "uneune"));
-                    }
-                    else {
-                        this.#enemyList.push(new ShoutingSenpai(centerX, this.#viewAngle, "kurukuru"));
-                    }
-                }
-                this.#enemyCreateFrame = 0;
-            }
-            
-            // 敵の攻撃
-            for (const enemy of this.#enemyList) {
-                if (!(enemy instanceof ShoutingSenpai)) {
-                    continue;
-                }
-                if (!enemy.canShout()) {
-                    continue;
-                }
-                const kotodama = enemy.shout(this.#viewAngle);
-                this.#kotodamaList.push(kotodama);
-            }
-
-            // プレイヤーの被弾
-            for (let i = this.#kotodamaList.length - 1; i >= 0; i--) {
-                const kotodama = this.#kotodamaList[i];
-                if (kotodama.isHittingPlayer()) {
-                    this.#kotodamaList.splice(i, 1);
-                    this.#player.takeDamage();
-                }
-            }
-            
-            // 後処理
-            this.#shotPosList = [];
-
-            requestAnimationFrame(update);
+        if (this.#enemyList.length < 6) {
+            this.#enemyCreateFrame++;
         }
 
-        // todo 60FPS化 植木鉢くん参考
-        update();
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        // PCでのキーイベントの捕捉
+        if (isPC) {
+            const speed = 4;
+            if (this.#pc.isPressed.left) {
+                this.#viewAngle = (this.#viewAngle + speed) % 360;
+            }
+            if (this.#pc.isPressed.right) {
+                this.#viewAngle = (this.#viewAngle + (360 - speed)) % 360;
+            }
+            if (this.#pc.isPressed.turn && this.#pc.canTurn) {
+                this.#pc.canTurn = false;
+                this.#viewAngle = (this.#viewAngle + 180) % 360;
+            }
+        }
+        else if (this.#useNipple) {
+            this.#viewAngle = (this.#viewAngle + this.#nippleDx) % 360;
+        }
+
+        // 奥側から描画
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        drawBackgroundImage(this.#backgroundImage, this.#viewAngle);
+        let willHit = false;
+        this.#sortedEntityList().forEach(entity => {
+            if (isPC && !willHit && entity.isTargeted(this.#pc.mouseX, this.#pc.mouseY)) {
+                willHit = true;
+            }
+            entity.draw();
+        });
+
+        if (isPC) {
+            this.#player.drawCrosshair(this.#pc.mouseX, this.#pc.mouseY, willHit);
+        }
+
+        drawSparks(context);
+
+        // プレイヤーの攻撃
+        if (this.#shotPosList.length > 0) {
+            playSound(this.#gunshotSound);
+            for (const {x, y} of this.#shotPosList) {
+                addSparks(x, y);
+            }
+        }
+
+        // 敵の状態の更新と被弾
+        this.#sortedEntityList("desc").forEach(entity => {
+            if (this.#shotPosList.length > 0) {
+                for (let i = this.#shotPosList.length - 1; i >= 0; i--) {
+                    const {x, y} = this.#shotPosList[i];
+                    if (entity.isTargeted(x, y)) {
+                        entity.takeDamage();
+                        this.#shotPosList.splice(i, 1);
+                    }
+                }
+            }
+            entity.update(this.#viewAngle);
+        });
+        for (let i = this.#enemyList.length - 1; i >= 0; i--) {
+            const enemy = this.#enemyList[i];
+            if (enemy.state === "dead") {
+                this.#enemyList.splice(i, 1);
+            }
+        }
+        for (let i = this.#kotodamaList.length - 1; i >= 0; i--) {
+            const kotodama = this.#kotodamaList[i];
+            if (kotodama.state === "dead" || kotodama.shooter.state === "dying") {
+                this.#kotodamaList.splice(i, 1);
+            }
+        }
+
+        // 敵の生成
+        if (this.#enemyCreateFrame >= 60 * 1.5) {
+            const centerX = Math.random() * (canvas.width * 2);
+            const random = Math.random();
+            if (random < 0.1) {
+                this.#enemyList.push(new MukimukiSenpai(centerX, this.#viewAngle));
+            }
+            else if (random < 0.4) {
+                this.#enemyList.push(new RunningSenpai(centerX, this.#viewAngle));
+            }
+            else if (random < 0.6) {
+                this.#enemyList.push(new MeteorSenpai(centerX, this.#viewAngle));
+            }
+            else {
+                if (Math.random() < 0.5) {
+                    this.#enemyList.push(new ShoutingSenpai(centerX, this.#viewAngle, "uneune"));
+                }
+                else {
+                    this.#enemyList.push(new ShoutingSenpai(centerX, this.#viewAngle, "kurukuru"));
+                }
+            }
+            this.#enemyCreateFrame = 0;
+        }
+        
+        // 敵の攻撃
+        for (const enemy of this.#enemyList) {
+            if (!(enemy instanceof ShoutingSenpai)) {
+                continue;
+            }
+            if (!enemy.canShout()) {
+                continue;
+            }
+            const kotodama = enemy.shout(this.#viewAngle);
+            this.#kotodamaList.push(kotodama);
+        }
+
+        // プレイヤーの被弾
+        for (let i = this.#kotodamaList.length - 1; i >= 0; i--) {
+            const kotodama = this.#kotodamaList[i];
+            if (kotodama.isHittingPlayer()) {
+                this.#kotodamaList.splice(i, 1);
+                this.#player.takeDamage();
+            }
+        }
+        
+        // 後処理
+        this.#shotPosList = [];
     }
 
     async #preload() {

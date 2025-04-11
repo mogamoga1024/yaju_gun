@@ -27,7 +27,7 @@ class GameScene extends Scene {
     #useNipple = false;
     #nipple = null;
     #nippleDx = 0;
-    #touchPosMap = new Map();
+    #touchXMap = new Map();
 
     #shouldAnimation = true;
     #enemyCreateFrame = 0;
@@ -327,22 +327,16 @@ class GameScene extends Scene {
 
     onTouchStart(e) {
         for (const touch of e.changedTouches) {
-            this.#touchPosMap.set(
-                touch.identifier,
-                {
-                    x: touch.clientX,
-                    y: touch.clientY
-                }
-            );
+            this.#touchXMap.set(touch.identifier, touch.clientX);
         }
     }
 
     onTouchEnd(e) {
         const rect = e.target.getBoundingClientRect();
         for (const touch of e.changedTouches) {
-            const startPos = this.#touchPosMap.get(touch.identifier);
-            this.#touchPosMap.delete(touch.identifier);
-            if (Math.pow(touch.clientX - startPos.x, 2) + Math.pow(touch.clientY - startPos.y, 2) > 3 * 3) {
+            const startX = this.#touchXMap.get(touch.identifier);
+            this.#touchXMap.delete(touch.identifier);
+            if (Math.abs(touch.clientX - startX) > 1) {
                 continue;
             }
             const offsetX = touch.clientX - rect.left;
@@ -354,7 +348,7 @@ class GameScene extends Scene {
 
     onTouchCancel(e) {
         for (const touch of e.changedTouches) {
-            this.#touchPosMap.delete(touch.identifier);
+            this.#touchXMap.delete(touch.identifier);
         }
     }
 

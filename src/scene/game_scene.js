@@ -42,14 +42,30 @@ class GameScene extends Scene {
         this.#backgroundImage = await loadImage("asset/草原.png");
         await this.#preload();
 
-        const bgm1 = await loadSound("PLUMBER");
-        const bgm2 = await loadSound("中華淫行");
-        const bgm3 = await loadSound("snow prizm (Ketsupine mix)");
-        bgm1.on("end", () => playSound(bgm2));
-        bgm2.on("end", () => playSound(bgm3));
-        bgm3.on("end", () => playSound(bgm1));
-        playSound(bgm1);
-        // playSound(bgm3);
+        const bmgNameList = [
+            "PLUMBER",
+            "中華淫行",
+            "snow prizm (Ketsupine mix)",
+        ];
+        let bgli = 0;
+
+        (function playBGM() {
+            loadSound(bmgNameList[bgli]).then(bgm => {
+                const playNextBGM = () => {
+                    bgli = (bgli + 1) % bmgNameList.length;
+                    bgm.unload();
+                    playBGM();
+                };
+                if (bgm.isOK) {
+                    playSound(bgm);
+                    bgm.on("end", playNextBGM);
+                    bmg.on("playerror", playNextBGM);
+                }
+                else {
+                    playNextBGM();
+                }
+            });
+        })();
 
         this.#gunshotSound = await loadSound("銃声");
 

@@ -45,7 +45,7 @@ class ShoutingSenpai extends Entity {
         this.#frameCount++;
         this.#explosion?.update();
 
-        if (this.state !== "alive") {
+        if (this.state === "dying") {
             this.#opacity -= 0.01;
             if (this.#opacity <= 0 || this.#explosion.shouldDisappear) {
                 this.state = "dead";

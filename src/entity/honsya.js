@@ -52,7 +52,7 @@ class Honsya extends Entity {
         this.#frameCount++;
         this.#explosion?.update();
 
-        if (this.state !== "alive") {
+        if (this.state === "dying") {
             this.#opacity -= 0.01;
             if (this.#opacity <= 0 || this.#explosion.shouldDisappear) {
                 this.state = "dead";
@@ -60,6 +60,8 @@ class Honsya extends Entity {
             this.#updateBounds(viewAngle);
             return;
         }
+
+        // todo
 
         this.#virtualCenterX = this.#oriCenterX + this.#frameCount * 2;
         this.#y = Math.sin(this.#frameCount / 20) * 50 + this.#oriY;

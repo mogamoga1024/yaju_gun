@@ -50,23 +50,23 @@ class GameScene extends Scene {
         ];
         let bgli = 0;
 
-        (function playBGM() {
-            loadSound(bgmNameList[bgli]).then(bgm => {
-                const playNextBGM = () => {
-                    bgli = (bgli + 1) % bgmNameList.length;
-                    bgm.unload();
-                    playBGM();
-                };
-                if (bgm.isOK) {
-                    playSound(bgm);
-                    bgm.on("end", playNextBGM);
-                    bgm.on("playerror", playNextBGM);
-                }
-                else {
-                    playNextBGM();
-                }
-            });
-        })();
+        // (function playBGM() {
+        //     loadSound(bgmNameList[bgli]).then(bgm => {
+        //         const playNextBGM = () => {
+        //             bgli = (bgli + 1) % bgmNameList.length;
+        //             bgm.unload();
+        //             playBGM();
+        //         };
+        //         if (bgm.isOK) {
+        //             playSound(bgm);
+        //             bgm.on("end", playNextBGM);
+        //             bgm.on("playerror", playNextBGM);
+        //         }
+        //         else {
+        //             playNextBGM();
+        //         }
+        //     });
+        // })();
 
         this.#gunshotSound = SoundStorage.get("銃声");
 

@@ -14,8 +14,8 @@ class Honsya extends Entity {
         super(0); // 一番後ろに表示させたいため
         this.#image = ImageStorage.get("本社");
         this.#oriCenterX = centerX;
-        this.#width = this.#image.width / 8;
-        this.#height = this.#image.height / 8;
+        this.#width = this.#image.width / 8 * 4;
+        this.#height = this.#image.height / 8 * 4;
 
         this.#updateBounds(viewAngle);
     }
@@ -70,10 +70,14 @@ class Honsya extends Entity {
     }
 
     #updateBounds(viewAngle) {
-        const centerX = this.#oriCenterX + this.#frameCount;
+        // const centerX = this.#oriCenterX + this.#frameCount;
+        const centerX = this.#width / 2;
         const canvasCenterX = canvas.width / 2;
         const offsetX = (canvasCenterX * (viewAngle / 90)) % (canvasCenterX * 4);
         this.#x = (centerX - this.#width / 2 + offsetX) % (canvas.width * 2);
+        if (this.#x + this.#width > canvas.width * 2) {
+            this.#x = this.#x - canvas.width * 2;
+        }
         this.#y = 0;
     }
 }

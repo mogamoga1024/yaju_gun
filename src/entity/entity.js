@@ -1,7 +1,7 @@
 
 class Entity {
     temaeRate = 1;
-    state = "alive"; // alive or dying or dead
+    state = "alive"; // alive or dying or dead or disappear
 
     constructor(temaeRate = 1) {
         this.temaeRate = temaeRate;

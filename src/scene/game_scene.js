@@ -188,7 +188,7 @@ class GameScene extends Scene {
         });
         for (let i = this.#enemyList.length - 1; i >= 0; i--) {
             const enemy = this.#enemyList[i];
-            if (enemy.state === "dead") {
+            if (enemy.state === "dead" || enemy.state === "disappear") {
                 this.#enemyList.splice(i, 1);
             }
         }

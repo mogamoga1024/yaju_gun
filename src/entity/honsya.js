@@ -41,8 +41,6 @@ class Honsya extends Entity {
             return;
         }
 
-        // todo #frameCount
-
         this.#updateBounds(viewAngle);
     }
 
@@ -72,8 +70,10 @@ class Honsya extends Entity {
     }
 
     #updateBounds(viewAngle) {
-        // todo oriCenterX
-        this.#x = 0;
+        const centerX = this.#oriCenterX + this.#frameCount;
+        const canvasCenterX = canvas.width / 2;
+        const offsetX = (canvasCenterX * (viewAngle / 90)) % (canvasCenterX * 4);
+        this.#x = (centerX - this.#width / 2 + offsetX) % (canvas.width * 2);
         this.#y = 0;
     }
 }

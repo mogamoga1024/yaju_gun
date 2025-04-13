@@ -123,7 +123,7 @@ class GameScene extends Scene {
 
     #update() {
         if (this.#enemyList.length < 6) {
-            this.#enemyCreateFrame++;
+            // this.#enemyCreateFrame++;
         }
 
         context.clearRect(0, 0, canvas.width, canvas.height);
@@ -268,6 +268,7 @@ class GameScene extends Scene {
         for (let i = 0; i <= 5; i++) {
             plpiss(`くねくね先輩/${i}`);
         }
+        plpiss("本社");
         plpiss("照準1");
         plpiss("照準2");
         plpiss("爆発スプライト_170");

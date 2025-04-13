@@ -31,7 +31,7 @@ class Honsya extends Entity {
         // canvas.width * 5 / 2 - centerX = (canvas.width / 2) * (backViewAngle / 90)
         // centerX = canvas.width * 5 / 2 - (canvas.width / 2) * (backViewAngle / 90)
         const backViewAngle = (viewAngle + 180) % 360;
-        const centerX = canvas.width * 5 / 2 - (canvas.width / 2) * (backViewAngle / 90);
+        const centerX = (canvas.width * 5 / 2 - (canvas.width / 2) * (backViewAngle / 90)) % (canvas.width * 2);
 
         this.#y = this.#oriY;
         this.#oriCenterX = centerX;

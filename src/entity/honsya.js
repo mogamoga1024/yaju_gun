@@ -5,6 +5,7 @@ class Honsya extends Entity {
     #width = 0;
     #height = 0;
     #oriCenterX = 0;
+    #oriY = 100;
     #virtualCenterX = 0;
     #image = null;
     #frameCount = 0;
@@ -14,10 +15,12 @@ class Honsya extends Entity {
     constructor(centerX, viewAngle) {
         super(0); // 一番後ろに表示させたいため
         this.#image = ImageStorage.get("本社");
-        this.#oriCenterX = centerX;
-        this.#virtualCenterX = centerX;
         this.#width = this.#image.width / 8;
         this.#height = this.#image.height / 8;
+
+        this.#y = this.#oriY;
+        this.#oriCenterX = centerX;
+        this.#virtualCenterX = centerX;
 
         this.#updateBounds(viewAngle);
     }
@@ -44,7 +47,7 @@ class Honsya extends Entity {
         }
 
         this.#virtualCenterX = this.#oriCenterX + this.#frameCount * 2;
-        this.#y = Math.sin(this.#frameCount / 20) * 50 + 100;
+        this.#y = Math.sin(this.#frameCount / 20) * 50 + this.#oriY;
 
         this.#updateBounds(viewAngle);
     }

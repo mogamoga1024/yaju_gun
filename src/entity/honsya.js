@@ -12,11 +12,26 @@ class Honsya extends Entity {
     #opacity = 1;
     #explosion = null;
 
-    constructor(centerX, viewAngle) {
+    constructor(viewAngle) {
         super(0); // 一番後ろに表示させたいため
         this.#image = ImageStorage.get("本社");
         this.#width = this.#image.width / 8;
         this.#height = this.#image.height / 8;
+
+        // viewAngle ∊ [0, 360)
+        // 視界外に出現させたい
+        // 具体例
+        // backViewAngle = 0   → centerX = canvas.width / 2
+        // backViewAngle = 90  → centerX = 0
+        // backViewAngle = 180 → centerX = canvas.width * 3 / 2
+        // backViewAngle = 270 → centerX = canvas.width
+        // 汎化
+        // canvas.width * 2 - (centerX - canvas.width / 2) = (canvas.width / 2) * (backViewAngle / 90)
+        // canvas.width * 2 - centerX + canvas.width / 2 = (canvas.width / 2) * (backViewAngle / 90)
+        // canvas.width * 5 / 2 - centerX = (canvas.width / 2) * (backViewAngle / 90)
+        // centerX = canvas.width * 5 / 2 - (canvas.width / 2) * (backViewAngle / 90)
+        const backViewAngle = (viewAngle + 180) % 360;
+        const centerX = canvas.width * 5 / 2 - (canvas.width / 2) * (backViewAngle / 90);
 
         this.#y = this.#oriY;
         this.#oriCenterX = centerX;

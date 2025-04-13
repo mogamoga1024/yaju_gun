@@ -1,5 +1,6 @@
 
 class GameScene extends Scene {
+    static #isFirst = true;
     #backgroundImage = null;
     #gunshotSound = null;
 
@@ -42,7 +43,7 @@ class GameScene extends Scene {
         this.#backgroundImage = await loadImage("asset/草原.png");
         await this.#preload();
 
-        const bmgNameList = [
+        const bgmNameList = [
             "PLUMBER",
             "中華淫行",
             "snow prizm (Ketsupine mix)",
@@ -50,16 +51,16 @@ class GameScene extends Scene {
         let bgli = 0;
 
         (function playBGM() {
-            loadSound(bmgNameList[bgli]).then(bgm => {
+            loadSound(bgmNameList[bgli]).then(bgm => {
                 const playNextBGM = () => {
-                    bgli = (bgli + 1) % bmgNameList.length;
+                    bgli = (bgli + 1) % bgmNameList.length;
                     bgm.unload();
                     playBGM();
                 };
                 if (bgm.isOK) {
                     playSound(bgm);
                     bgm.on("end", playNextBGM);
-                    bmg.on("playerror", playNextBGM);
+                    bgm.on("playerror", playNextBGM);
                 }
                 else {
                     playNextBGM();
@@ -67,7 +68,7 @@ class GameScene extends Scene {
             });
         })();
 
-        this.#gunshotSound = await loadSound("銃声");
+        this.#gunshotSound = SoundStorage.get("銃声");
 
         // debug start
         // 0 <= centerX < canvas.width * 2
@@ -247,6 +248,11 @@ class GameScene extends Scene {
     }
 
     async #preload() {
+        if (!GameScene.#isFirst) {
+            return;
+        }
+        GameScene.#isFirst = false;
+
         const promiseList = [];
         const plpiss = (name) => {
             promiseList.push((async () => ImageStorage.set(name, await loadImage(`asset/${name}.png`)))());
@@ -274,9 +280,15 @@ class GameScene extends Scene {
         plpiss("爆発スプライト_170");
         
         // 音声
-        for (const name of ["ドンッ", "大破", "爆発", "息継ぎ", "ムキムキ息継ぎ", "ンアッー！（ねっとり）", "アイスティー", "ムキムキオォン！"]) {
-            plpsss(name);
-        }
+        plpsss("銃声");
+        plpsss("ドンッ");
+        plpsss("大破");
+        plpsss("爆発");
+        plpsss("息継ぎ");
+        plpsss("ムキムキ息継ぎ");
+        plpsss("ンアッー！（ねっとり）");
+        plpsss("アイスティー");
+        plpsss("ムキムキオォン！");
 
         await Promise.all(promiseList);
     }

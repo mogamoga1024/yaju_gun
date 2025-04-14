@@ -64,7 +64,7 @@ class Honsya extends Entity {
 
         this.#virtualCenterX = this.#oriCenterX + this.#frameCount * 2;
 
-        const maxFrameCount = 565; // 600 550 570
+        const maxFrameCount = 565;
         if (!this.#isFadeOut && this.#frameCount > maxFrameCount) {
             this.#isFadeOut = true;
         }

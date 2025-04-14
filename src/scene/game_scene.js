@@ -32,6 +32,7 @@ class GameScene extends Scene {
 
     #shouldAnimation = true;
     #enemyCreateFrame = 0;
+    #honsyaCreateFrame = 0;
 
     constructor(useNipple) {
         super();
@@ -50,23 +51,23 @@ class GameScene extends Scene {
         ];
         let bgli = 0;
 
-        // (function playBGM() {
-        //     loadSound(bgmNameList[bgli]).then(bgm => {
-        //         const playNextBGM = () => {
-        //             bgli = (bgli + 1) % bgmNameList.length;
-        //             bgm.unload();
-        //             playBGM();
-        //         };
-        //         if (bgm.isOK) {
-        //             playSound(bgm);
-        //             bgm.on("end", playNextBGM);
-        //             bgm.on("playerror", playNextBGM);
-        //         }
-        //         else {
-        //             playNextBGM();
-        //         }
-        //     });
-        // })();
+        (function playBGM() {
+            loadSound(bgmNameList[bgli]).then(bgm => {
+                const playNextBGM = () => {
+                    bgli = (bgli + 1) % bgmNameList.length;
+                    bgm.unload();
+                    playBGM();
+                };
+                if (bgm.isOK) {
+                    playSound(bgm);
+                    bgm.on("end", playNextBGM);
+                    bgm.on("playerror", playNextBGM);
+                }
+                else {
+                    playNextBGM();
+                }
+            });
+        })();
 
         this.#gunshotSound = SoundStorage.get("銃声");
 
@@ -76,7 +77,7 @@ class GameScene extends Scene {
         // this.#enemyList.push(new RunningSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new MukimukiSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new ShoutingSenpai(canvas.width / 2, this.#viewAngle));
-        this.#enemyList.push(new Honsya(this.#viewAngle));
+        // this.#enemyList.push(new Honsya(this.#viewAngle));
         // debug end
 
         if (this.#useNipple) {
@@ -125,8 +126,9 @@ class GameScene extends Scene {
 
     #update() {
         if (this.#enemyList.length < 6) {
-            // this.#enemyCreateFrame++;
+            this.#enemyCreateFrame++;
         }
+        this.#honsyaCreateFrame++;
 
         context.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -221,6 +223,17 @@ class GameScene extends Scene {
                 }
             }
             this.#enemyCreateFrame = 0;
+        }
+
+        // 本社生成
+        if (this.#honsyaCreateFrame >= 60 * 60) {
+            if (Math.random() < 0.5) {
+                this.#enemyList.push(new Honsya(this.#viewAngle));
+                this.#honsyaCreateFrame = 0;
+            }
+            else {
+                this.#honsyaCreateFrame = 60 * 30;
+            }
         }
         
         // 敵の攻撃

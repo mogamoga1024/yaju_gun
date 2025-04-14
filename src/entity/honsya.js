@@ -7,6 +7,7 @@ class Honsya extends Entity {
     #oriCenterX = 0;
     #oriY = 100;
     #virtualCenterX = 0;
+    #isFadeOut = false;
     #image = null;
     #frameCount = 0;
     #opacity = 1;
@@ -61,10 +62,23 @@ class Honsya extends Entity {
             return;
         }
 
-        // todo
-
         this.#virtualCenterX = this.#oriCenterX + this.#frameCount * 2;
-        this.#y = Math.sin(this.#frameCount / 20) * 50 + this.#oriY;
+
+        const maxFrameCount = 565; // 600 550 570
+        if (!this.#isFadeOut && this.#frameCount > maxFrameCount) {
+            this.#isFadeOut = true;
+        }
+
+        if (this.#isFadeOut) {
+            this.#y -= 1.5;
+        }
+        else {
+            this.#y = Math.sin(this.#frameCount / 20) * 50 + this.#oriY;
+        }
+
+        if (this.#y + this.#height <= 0) {
+            this.state = "disappear";
+        }
 
         this.#updateBounds(viewAngle);
     }

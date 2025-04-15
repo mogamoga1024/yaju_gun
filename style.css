@@ -11,10 +11,11 @@
   font-size: 24px;
 }
 
-/* :rootで指定しても効果がなかったため、しぶしぶbodyで指定している */
 body {
   margin: 0;
   padding: 0;
+  background-color: #f8f9fa;
+  color: #202122;
 }
 
 #game-canvas-wrapper {
@@ -55,4 +56,10 @@ h1 {
   margin-top: 100rem;
   overflow-wrap: break-word;
   word-break: keep-all;
+}
+
+hr {
+  height: 1px;
+  background-color: #a2a9b1;
+  border: none;
 }

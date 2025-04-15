@@ -10,7 +10,7 @@ class Honsya extends Entity {
     #dx = 2;
     #image = null;
     #frameCount = 0;
-    #hp = 1;
+    #hp = 5;
     #opacity = 1;
     #explosion = null;
 

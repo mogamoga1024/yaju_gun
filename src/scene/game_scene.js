@@ -34,6 +34,9 @@ class GameScene extends Scene {
     #enemyCreateFrame = 0;
     #honsyaCreateFrame = 0;
 
+    #level = 1;
+    #nextExp = Number.MAX_SAFE_INTEGER;
+
     constructor(useNipple) {
         super();
         this.#useNipple = useNipple;
@@ -100,6 +103,8 @@ class GameScene extends Scene {
             });
         }
 
+        this.#nextExp = this.#calcNextExp(this.#level);
+
         this.state = "loaded";
         this.#startAnimation();
     }
@@ -153,6 +158,14 @@ class GameScene extends Scene {
         // 奥側から描画
         context.clearRect(0, 0, canvas.width, canvas.height);
         drawBackgroundImage(this.#backgroundImage, this.#viewAngle);
+
+        context.textBaseline = "top";
+        context.font = "400 40px Xim-Sans";
+        context.fillStyle = "#000";
+        context.strokeStyle = "#eee";
+        context.lineWidth = 5;
+        drawStrokeText(context, `Lv.${this.#level}`, 20, 20);
+
         let willHit = false;
         this.#sortedEntityList().forEach(entity => {
             if (isPC && !willHit && entity.isTargeted(this.#pc.mouseX, this.#pc.mouseY)) {
@@ -190,7 +203,11 @@ class GameScene extends Scene {
         });
         for (let i = this.#enemyList.length - 1; i >= 0; i--) {
             const enemy = this.#enemyList[i];
-            if (enemy.state === "dead" || enemy.state === "disappear") {
+            if (enemy.state === "dead") {
+                this.#enemyList.splice(i, 1);
+                this.#nextExp -= 1;
+            }
+            else if (enemy.state === "disappear") {
                 this.#enemyList.splice(i, 1);
             }
         }
@@ -199,6 +216,13 @@ class GameScene extends Scene {
             if (kotodama.state === "dead" || kotodama.shooter.state === "dying") {
                 this.#kotodamaList.splice(i, 1);
             }
+        }
+
+        // レベル処理
+        if (this.#nextExp <= 0) {
+            // todo 効果音 レベルアップです！
+            this.#level += 1;
+            this.#nextExp = this.#calcNextExp(this.#level);
         }
 
         // 敵の生成
@@ -420,5 +444,9 @@ class GameScene extends Scene {
             x: offsetX * canvas.width / rect.width,
             y: offsetY * canvas.height / rect.height
         };
+    }
+
+    #calcNextExp(nextLevel) {
+        return Math.floor(10 * Math.pow(nextLevel, 1/3));
     }
 }

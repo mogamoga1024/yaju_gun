@@ -14,23 +14,39 @@ const isPC = (function() {
 if (!isPC) {
     domNotice.style.display = "none";
     domGameCanvasWrapper.style.marginTop = "0";
+
+    (function() {
+        function showNoticeIfPortrait() {
+            const angle = screen.orientation.angle;
+            if (angle === 0 || angle === 180) {
+                domNotice.style.display = "";
+                domNotice.innerText = "横にして❤";
+            }
+            else {
+                domNotice.style.display = "none";
+            }
+        }
+        showNoticeIfPortrait();
+        window.addEventListener("orientationchange", showNoticeIfPortrait);
+    })();
 }
 
 if (!isPC) {
-    function adjustCanvas() {
-        const deviceWidth = window.innerWidth;
-        if (deviceWidth < canvas.width) {
-            canvas.style.width = `${deviceWidth}px`;
-            canvas.style.height = "auto";
+    (function() {
+        function adjustCanvas() {
+            const deviceWidth = window.innerWidth;
+            if (deviceWidth < canvas.width) {
+                canvas.style.width = `${deviceWidth}px`;
+                canvas.style.height = "auto";
+            }
+            else {
+                canvas.style.width = "auto";
+                canvas.style.height = "100svh";
+            }
         }
-        else {
-            canvas.style.width = "auto";
-            canvas.style.height = "100svh";
-        }
-    }
-
-    adjustCanvas();
-    window.addEventListener("resize", adjustCanvas);
+        adjustCanvas();
+        window.addEventListener("resize", adjustCanvas);
+    })();
 }
 
 (function() {

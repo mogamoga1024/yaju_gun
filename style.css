@@ -32,7 +32,7 @@ body {
 }
 
 #description-container {
-  /* noop */
+  margin-top: 24px;
 }
 
 #notice {

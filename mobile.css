@@ -1,5 +1,5 @@
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 1000px) {
   h1 {
     font-size: 1.5rem;
   }
@@ -8,7 +8,7 @@
     width: calc(100% - 20px);
     padding: 0 10px;
     font-size: 0.7rem;
-    line-height: normal;
+    line-height: 1rem;
   }
 
   .source {

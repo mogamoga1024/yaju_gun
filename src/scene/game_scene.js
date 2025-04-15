@@ -159,6 +159,7 @@ class GameScene extends Scene {
         context.clearRect(0, 0, canvas.width, canvas.height);
         drawBackgroundImage(this.#backgroundImage, this.#viewAngle);
 
+        context.textAlign = "start";
         context.textBaseline = "top";
         context.font = "400 40px Xim-Sans";
         context.fillStyle = "#000";

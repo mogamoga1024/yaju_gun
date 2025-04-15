@@ -10,7 +10,7 @@ class Honsya extends Entity {
     #dx = 2;
     #image = null;
     #frameCount = 0;
-    #hp = 5;
+    #hp = 1;
     #opacity = 1;
     #explosion = null;
 
@@ -107,6 +107,7 @@ class Honsya extends Entity {
         this.#hp -= 1;
         if (this.#hp <= 0) {
             playSound(SoundStorage.get("爆発"));
+            playSound(SoundStorage.get("FOO↑気持ちいい～"));
             this.state = "dying";
             this.#explosion = new Explosion();
         }

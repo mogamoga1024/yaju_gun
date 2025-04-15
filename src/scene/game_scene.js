@@ -249,9 +249,16 @@ class GameScene extends Scene {
         }
 
         // プレイヤーの被弾
+        for (let i = this.#enemyList.length - 1; i >= 0; i--) {
+            const enemy = this.#enemyList[i];
+            if (enemy.temaeRate >= 1) {
+                this.#enemyList.splice(i, 1);
+                this.#player.takeDamage();
+            }
+        }
         for (let i = this.#kotodamaList.length - 1; i >= 0; i--) {
             const kotodama = this.#kotodamaList[i];
-            if (kotodama.isHittingPlayer()) {
+            if (kotodama.temaeRate >= 1) {
                 this.#kotodamaList.splice(i, 1);
                 this.#player.takeDamage();
             }

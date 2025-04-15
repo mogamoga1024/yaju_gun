@@ -31,5 +31,5 @@ const soundConfig = {};
     add2("ムキムキオォン！", "オォン！", "mp3", {volume: 0.4, rate: 0.7});
     add("謎の金属音", "mp3", {volume: 0.9});
     add("FOO↑気持ちいい～", "mp3", {volume: 0.9});
-    add("アアッー！(高音)", "mp3", {volume: 1});
+    add("アアッー！(高音)", "mp3", {volume: 0.9});
 })();

@@ -79,10 +79,6 @@ class Kotodama extends Entity {
         this.state = "dead";
     }
 
-    isHittingPlayer() {
-        return this.temaeRate >= 1;
-    }
-
     #updateBounds(viewAngle) {
         this.#fontSize = this.#oriFontSize * this.temaeRate;
         context.font = `400 ${this.#fontSize}px Xim-Sans`;

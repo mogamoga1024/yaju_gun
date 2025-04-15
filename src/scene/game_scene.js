@@ -34,7 +34,6 @@ class GameScene extends Scene {
     #enemyCreateFrame = 0;
     #honsyaCreateFrame = 0;
 
-    #level = 1;
     #nextExp = Number.MAX_SAFE_INTEGER;
 
     constructor(useNipple) {
@@ -53,7 +52,7 @@ class GameScene extends Scene {
                 playSound(bgm);
                 for (const event of ["end", "playerror"]) {
                     bgm.on(event, () => {
-                        if (this.#level <= 10) {
+                        if (level <= 10) {
                             playSound(bgm);
                         }
                         else {
@@ -125,7 +124,8 @@ class GameScene extends Scene {
             });
         }
 
-        this.#nextExp = this.#calcNextExp(this.#level);
+        level = 1;
+        this.#nextExp = this.#calcNextExp(level);
 
         this.state = "loaded";
         this.#startAnimation();
@@ -187,7 +187,7 @@ class GameScene extends Scene {
         context.fillStyle = "#000";
         context.strokeStyle = "#eee";
         context.lineWidth = 5;
-        drawStrokeText(context, `Lv.${this.#level}`, 20, 20);
+        drawStrokeText(context, `Lv.${level}`, 20, 20);
 
         let willHit = false;
         this.#sortedEntityList().forEach(entity => {
@@ -244,8 +244,8 @@ class GameScene extends Scene {
         // レベル処理
         if (this.#nextExp <= 0) {
             // todo 効果音 レベルアップです！
-            this.#level += 1;
-            this.#nextExp = this.#calcNextExp(this.#level);
+            level += 1;
+            this.#nextExp = this.#calcNextExp(level);
         }
 
         // 敵の生成

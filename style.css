@@ -8,8 +8,10 @@
 :root {
   font-family: Xim-Sans;
   touch-action: manipulation;
+  font-size: 24px;
 }
 
+/* :rootで指定しても効果がなかったため、しぶしぶbodyで指定している */
 body {
   margin: 0;
   padding: 0;
@@ -28,4 +30,13 @@ body {
   height: 100svh;
   max-height: 500px;
   border: solid 1px black;
+}
+
+p {
+  width: 100%;
+  max-width: 800px;
+  margin: 32px auto;
+  line-height: 40px;
+  overflow-wrap: break-word;
+  word-break: keep-all;
 }

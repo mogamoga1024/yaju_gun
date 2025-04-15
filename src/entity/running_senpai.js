@@ -91,7 +91,6 @@ class RunningSenpai extends Entity {
     }
 
     takeDamage() {
-        playSound(SoundStorage.get("オォン！"));
         playSound(SoundStorage.get("爆発"));
         this.state = "dying";
         this.#explosion = new Explosion();

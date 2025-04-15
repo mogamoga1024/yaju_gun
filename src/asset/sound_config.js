@@ -29,7 +29,6 @@ const soundConfig = {};
     add("ンアッー！（ねっとり）", "mp3", {volume: 0.3});
     add("アイスティー");
     add2("ムキムキオォン！", "オォン！", "mp3", {volume: 0.4, rate: 0.7});
-    add("オォン！", "mp3", {volume: 0.4});
     add("謎の金属音", "mp3", {volume: 0.9});
     add("FOO↑気持ちいい～", "mp3", {volume: 0.9});
 })();

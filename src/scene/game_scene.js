@@ -302,7 +302,6 @@ class GameScene extends Scene {
         plpsss("ムキムキ息継ぎ");
         plpsss("ンアッー！（ねっとり）");
         plpsss("アイスティー");
-        plpsss("オォン！");
         plpsss("ムキムキオォン！");
         plpsss("謎の金属音");
         plpsss("FOO↑気持ちいい～");

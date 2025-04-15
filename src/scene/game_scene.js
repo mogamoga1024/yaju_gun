@@ -47,6 +47,28 @@ class GameScene extends Scene {
         this.#backgroundImage = await loadImage("asset/草原.png");
         await this.#preload();
 
+        // Lv.10まではパラオナボーイを流し続ける
+        loadSound("パラオナボーイ／feat.重音テト").then(bgm => {
+            if (bgm.isOK) {
+                playSound(bgm);
+                for (const event of ["end", "playerror"]) {
+                    bgm.on(event, () => {
+                        if (this.#level <= 10) {
+                            playSound(bgm);
+                        }
+                        else {
+                            bgm.unload();
+                            playBGM();
+                        }
+                    });
+                }
+            }
+            else {
+                bgm.unload();
+                playBGM()
+            }
+        });
+
         const bgmNameList = [
             "PLUMBER",
             "中華淫行",
@@ -54,7 +76,7 @@ class GameScene extends Scene {
         ];
         let bgli = 0;
 
-        (function playBGM() {
+        function playBGM() {
             loadSound(bgmNameList[bgli]).then(bgm => {
                 const playNextBGM = () => {
                     bgli = (bgli + 1) % bgmNameList.length;
@@ -70,7 +92,7 @@ class GameScene extends Scene {
                     playNextBGM();
                 }
             });
-        })();
+        }
 
         this.#gunshotSound = SoundStorage.get("銃声");
 

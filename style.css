@@ -32,8 +32,16 @@ body {
   border: solid 1px black;
 }
 
-h1 {
+#description {
   margin-top: 64px;
+}
+
+#notice {
+  text-align: center;
+  color: red;
+}
+
+h1 {
   text-align: center;
 }
 
@@ -42,10 +50,6 @@ p {
   max-width: 800px;
   margin: 32px auto;
   line-height: 40px;
-}
-
-p.wiki {
-  /* noop */
 }
 
 p.gal-gun {

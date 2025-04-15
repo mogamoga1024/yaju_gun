@@ -45,6 +45,15 @@ if (!isPC) {
     window.addEventListener("resize", adjustCanvas);
 }
 
+document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+        // todo 全ての音を停止させる
+    } else {
+        // todo 再度、音を取得する
+        // todo GameScene.#isFirstもtrueにしなければならない
+    }
+});
+
 (function() {
     const $loading = document.querySelector("#loading");
     const $app = document.querySelector("#app");

@@ -19,7 +19,7 @@ if (!isPC) {
         const angle = screen.orientation.angle;
         if (angle === 0 || angle === 180) {
             domNotice.style.display = "";
-            domNotice.innerText = "横にして❤";
+            domNotice.innerText = "スマホを横にして❤";
         }
         else {
             domNotice.style.display = "none";

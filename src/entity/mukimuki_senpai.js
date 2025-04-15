@@ -99,6 +99,7 @@ class MukimukiSenpai extends Entity {
     }
 
     takeDamage() {
+        playSound(SoundStorage.get("ムキムキオォン！"));
         this.#hp -= 1;
         if (this.#hp <= 0) {
             playSound(SoundStorage.get("爆発"));
@@ -107,9 +108,6 @@ class MukimukiSenpai extends Entity {
             if (this.#ikitugiSoundId !== -1) {
                 stopSound(SoundStorage.get("ムキムキ息継ぎ"), this.#ikitugiSoundId);
             }
-        }
-        else {
-            playSound(SoundStorage.get("ムキムキオォン！"));
         }
     }
 

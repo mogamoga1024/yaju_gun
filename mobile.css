@@ -1,4 +1,9 @@
 
 @media screen and (max-width: 500px) {
-  /* todo */
+  p {
+    width: calc(100% - 20px);
+    padding: 0 10px;
+    font-size: 0.8rem;
+    line-height: normal;
+  }
 }

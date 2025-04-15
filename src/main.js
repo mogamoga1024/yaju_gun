@@ -20,15 +20,10 @@ if (!isPC) {
     function adjustCanvas() {
         const deviceWidth = window.innerWidth;
         if (deviceWidth < canvas.width) {
-            console.log("aaa")
-            console.log(`deviceWidth: ${deviceWidth}`)
-            console.log(`canvas.width: ${canvas.width}`)
             canvas.style.width = `${deviceWidth}px`;
-            // canvas.style.width = "100cqw";
             canvas.style.height = "auto";
         }
         else {
-            console.log("bbb")
             canvas.style.width = "auto";
             canvas.style.height = "100svh";
         }

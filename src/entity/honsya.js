@@ -10,6 +10,7 @@ class Honsya extends Entity {
     #dx = 2;
     #image = null;
     #frameCount = 0;
+    #hp = 5;
     #opacity = 1;
     #explosion = null;
 
@@ -103,9 +104,15 @@ class Honsya extends Entity {
     }
 
     takeDamage() {
-        playSound(SoundStorage.get("爆発"));
-        this.state = "dying";
-        this.#explosion = new Explosion();
+        this.#hp -= 1;
+        if (this.#hp <= 0) {
+            playSound(SoundStorage.get("爆発"));
+            this.state = "dying";
+            this.#explosion = new Explosion();
+        }
+        else {
+            playSound(SoundStorage.get("謎の金属音"));
+        }
     }
 
     #updateBounds(viewAngle) {

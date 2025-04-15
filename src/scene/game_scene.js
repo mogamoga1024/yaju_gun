@@ -303,6 +303,7 @@ class GameScene extends Scene {
         plpsss("ンアッー！（ねっとり）");
         plpsss("アイスティー");
         plpsss("ムキムキオォン！");
+        plpsss("謎の金属音");
 
         await Promise.all(promiseList);
     }

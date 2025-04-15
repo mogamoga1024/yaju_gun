@@ -31,8 +31,8 @@ body {
   max-height: 500px;
 }
 
-#description {
-  margin-top: 64px;
+#description-container {
+  /* noop */
 }
 
 #notice {
@@ -44,14 +44,14 @@ h1 {
   text-align: center;
 }
 
-p {
+.description {
   width: 100%;
   max-width: 800px;
   margin: 32px auto;
   line-height: 40px;
 }
 
-p.gal-gun {
+.description.gal-gun {
   overflow-wrap: break-word;
   word-break: keep-all;
 }

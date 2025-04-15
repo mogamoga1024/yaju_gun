@@ -8,10 +8,7 @@ class Player {
 
     takeDamage() {
         playSound(SoundStorage.get("ドンッ"));
-    }
-
-    #canHitTarget(target) {
-        // todo
+        playSound(SoundStorage.get("アアッー！(高音)"));
     }
 }
 

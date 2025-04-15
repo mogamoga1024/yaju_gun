@@ -29,7 +29,6 @@ body {
   display: block;
   height: 100svh;
   max-height: 500px;
-  border: solid 1px black;
 }
 
 #description {

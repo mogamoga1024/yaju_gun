@@ -72,7 +72,8 @@ class MukimukiSenpai extends Entity {
             this.temaeRate = temaeRateMax;
         }
         else {
-            const a = 0.0006 + 0.002 * this.temaeRate;
+            let a = 0.0006 + 0.002 * this.temaeRate;
+            a *= 1 + level / 100;
             this.temaeRate = Math.min(this.temaeRate + a, temaeRateMax);
         }
 

@@ -77,7 +77,7 @@ class GameScene extends Scene {
         // this.#enemyList.push(new RunningSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new MukimukiSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new ShoutingSenpai(canvas.width / 2, this.#viewAngle));
-        this.#enemyList.push(new Honsya(this.#viewAngle));
+        // this.#enemyList.push(new Honsya(this.#viewAngle));
         // debug end
 
         if (this.#useNipple) {

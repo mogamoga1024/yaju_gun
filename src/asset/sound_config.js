@@ -19,6 +19,7 @@ const soundConfig = {};
     add("snow prizm (Ketsupine mix)", "mp3", {volume: 0.2});
     add("「愛のカタチ」四部合唱【山崎まさゆき】", "mp3", {volume: 0.9});
     add("星空.flv", "m4a", {volume: 0.45});
+    add("太いぜ。", "mp3", {volume: 0.6});
 
     // 効果音
     add("ドンッ");

@@ -74,6 +74,7 @@ class GameScene extends Scene {
             "snow prizm (Ketsupine mix)",
             "「愛のカタチ」四部合唱【山崎まさゆき】",
             "星空.flv",
+            "太いぜ。",
         ];
         let bgli = 0;
 

@@ -69,6 +69,7 @@ class GameScene extends Scene {
         });
 
         const bgmNameList = [
+            "「愛のカタチ」四部合唱【山崎まさゆき】",
             "PLUMBER",
             "中華淫行",
             "snow prizm (Ketsupine mix)",

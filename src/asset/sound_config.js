@@ -17,6 +17,7 @@ const soundConfig = {};
     add("PLUMBER", "m4a", {volume: 0.3});
     add("中華淫行", "m4a", {volume: 0.3});
     add("snow prizm (Ketsupine mix)", "mp3", {volume: 0.2});
+    add("「愛のカタチ」四部合唱【山崎まさゆき】", "mp3", {volume: 0.9});
 
     // 効果音
     add("ドンッ");

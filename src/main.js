@@ -89,16 +89,19 @@ const debug = {
     canCreateEnemy: true,
 };
 
-const debugBtn = document.querySelector("#create-enemy");
-
-debugBtn.addEventListener("click", () => {
+const debugBtn1 = document.querySelector("#create-enemy");
+debugBtn1.addEventListener("click", () => {
     debug.canCreateEnemy = !debug.canCreateEnemy;
     if (debug.canCreateEnemy) {
-        debugBtn.innerText = "敵生成停止";
+        debugBtn1.innerText = "敵生成停止";
     }
     else {
-        debugBtn.innerText = "敵生成再開";
+        debugBtn1.innerText = "敵生成再開";
     }
 });
 
+const debugBtn2 = document.querySelector("#sound-room");
+debugBtn2.addEventListener("click", () => {
+    window.open("../test/sound.html", "_blank");
+});
 

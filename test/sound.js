@@ -14,8 +14,21 @@ const $soundContainer = $("#sound-container");
         const sound = SoundStorage.get(name);
         const $btn = $("<button>");
         $btn.text(name)
-        $btn.on("click", () => {
-            playSound(sound);
+        let isPlaying = false;
+        let id = -1;
+        $btn.on("click", async () => {
+            if (isPlaying !== sound.playing(id)) {
+                return;
+            }
+            if (isPlaying) {
+                isPlaying = false;
+                stopSound(sound, id);
+                $btn.css("background-color", "");
+            } else {
+                isPlaying = true;
+                id = await playSound(sound);
+                $btn.css("background-color", "rgba(255, 100, 100, 0.3)");
+            }
         });
         $soundContainer.append($btn);
     }

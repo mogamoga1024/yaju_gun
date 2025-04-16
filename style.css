@@ -63,3 +63,10 @@ hr {
   background-color: #a2a9b1;
   border: none;
 }
+
+#debug {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+

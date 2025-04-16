@@ -152,10 +152,12 @@ class GameScene extends Scene {
     }
 
     #update() {
-        if (this.#enemyList.length < 6 * (1 + level / 100)) {
-            this.#enemyCreateFrame++;
+        if (debug.canCreateEnemy) {
+            if (this.#enemyList.length < 6 * (1 + level / 100)) {
+                this.#enemyCreateFrame++;
+            }
+            this.#honsyaCreateFrame++;
         }
-        this.#honsyaCreateFrame++;
 
         context.clearRect(0, 0, canvas.width, canvas.height);
 

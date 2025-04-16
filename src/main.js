@@ -82,3 +82,23 @@ document.addEventListener("visibilitychange", () => {
         });
     }
 })();
+
+// debug
+
+const debug = {
+    canCreateEnemy: true,
+};
+
+const debugBtn = document.querySelector("#create-enemy");
+
+debugBtn.addEventListener("click", () => {
+    debug.canCreateEnemy = !debug.canCreateEnemy;
+    if (debug.canCreateEnemy) {
+        debugBtn.innerText = "敵生成停止";
+    }
+    else {
+        debugBtn.innerText = "敵生成再開";
+    }
+});
+
+

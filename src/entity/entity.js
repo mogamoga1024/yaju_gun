@@ -7,6 +7,7 @@ class Entity {
         this.temaeRate = temaeRate;
     }
 
+    end() {}
     draw() {}
     update(viewAngle) {}
     isTargeted(crosshairX, crosshairY) { return false; }

@@ -35,6 +35,12 @@ class MukimukiSenpai extends Entity {
         });
     }
 
+    end() {
+        if (this.#ikitugiSoundId !== -1) {
+            stopSound(SoundStorage.get("ムキムキ息継ぎ"), this.#ikitugiSoundId);
+        }
+    }
+
     draw() {
         context.globalAlpha = this.#opacity;
         const image = this.#imageList[this.#imageListIndex];
@@ -106,9 +112,6 @@ class MukimukiSenpai extends Entity {
             playSound(SoundStorage.get("爆発"));
             this.state = "dying";
             this.#explosion = new Explosion();
-            if (this.#ikitugiSoundId !== -1) {
-                stopSound(SoundStorage.get("ムキムキ息継ぎ"), this.#ikitugiSoundId);
-            }
         }
     }
 

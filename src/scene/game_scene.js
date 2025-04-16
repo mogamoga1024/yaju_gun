@@ -230,10 +230,12 @@ class GameScene extends Scene {
             const enemy = this.#enemyList[i];
             if (enemy.state === "dead") {
                 this.#enemyList.splice(i, 1);
+                enemy.end();
                 this.#nextExp -= 1;
             }
             else if (enemy.state === "disappear") {
                 this.#enemyList.splice(i, 1);
+                enemy.end();
             }
         }
         for (let i = this.#kotodamaList.length - 1; i >= 0; i--) {
@@ -302,6 +304,7 @@ class GameScene extends Scene {
             const enemy = this.#enemyList[i];
             if (enemy.temaeRate >= 1) {
                 this.#enemyList.splice(i, 1);
+                enemy.end();
                 this.#player.takeDamage();
             }
         }

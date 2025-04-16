@@ -16,6 +16,14 @@ const $soundContainer = $("#sound-container");
         $btn.text(name)
         let isPlaying = false;
         let id = -1;
+        sound.on("end", () => {
+            isPlaying = false;
+            $btn.css("background-color", "");
+        });
+        sound.on("playerror", () => {
+            isPlaying = false;
+            $btn.css("background-color", "");
+        });
         $btn.on("click", async () => {
             if (isPlaying !== sound.playing(id)) {
                 return;

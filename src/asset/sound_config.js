@@ -14,7 +14,7 @@ const soundConfig = {};
 
     // BGM
     add("パラオナボーイ／feat.重音テト", "mp3", {volume: 0.9});
-    add("PLUMBER", "m4a", {volume: 0.28});
+    add("PLUMBER", "m4a", {volume: 0.3});
     add("中華淫行", "m4a", {volume: 0.3});
     add("snow prizm (Ketsupine mix)", "mp3", {volume: 0.2});
 

@@ -12,8 +12,12 @@ function loadImage(path) {
     });
 }
 
-function loadSound(name) {
-    const {path, option: _option} = soundConfig[name];
+function loadSound(name, parentPath = "") {
+    let {path, option: _option} = soundConfig[name];
+
+    if (parentPath !== "") {
+        path = parentPath + path;
+    }
 
     return new Promise(resolve => {
         const option = {

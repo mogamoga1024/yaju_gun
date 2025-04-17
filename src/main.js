@@ -25,6 +25,7 @@ if (!isPC) {
         }
         else {
             domNotice.style.display = "none";
+            window.scrollTo(0, 0);
         }
     };
     showNoticeIfPortrait();
@@ -50,6 +51,7 @@ if (!isPC) {
 document.addEventListener("visibilitychange", () => {
     if (document.hidden) {
         // todo 全ての音を停止させる
+        // todo ゲームを中断し、タイトル画面に遷移させる
     } else {
         // todo 再度、音を取得する
         // todo GameScene.#isFirstもtrueにしなければならない

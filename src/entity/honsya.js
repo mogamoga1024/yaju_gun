@@ -13,6 +13,7 @@ class Honsya extends Entity {
     #hp = 5;
     #opacity = 1;
     #explosion = null;
+    healAmount = 5;
 
     constructor(viewAngle) {
         super(0); // 一番後ろに表示させたいため
@@ -108,7 +109,7 @@ class Honsya extends Entity {
         this.#hp -= 1;
         if (this.#hp <= 0) {
             playSound(SoundStorage.get("爆発"));
-            playSound(SoundStorage.get("FOO↑気持ちいい～"));
+            playSound(SoundStorage.get("FOO↑気持ちいい～")); // todo ああ＾～いいっすね＾～
             this.state = "dying";
             this.#explosion = new Explosion();
         }

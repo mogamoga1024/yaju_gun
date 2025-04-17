@@ -182,10 +182,11 @@ class GameScene extends Scene {
             this.#viewAngle = (this.#viewAngle + this.#nippleDx) % 360;
         }
 
-        // 奥側から描画
+        // 背景の描画
         context.clearRect(0, 0, canvas.width, canvas.height);
         drawBackgroundImage(this.#backgroundImage, this.#viewAngle);
 
+        // レベルの描画
         context.textAlign = "start";
         context.textBaseline = "top";
         context.font = "400 40px Xim-Sans";
@@ -194,6 +195,7 @@ class GameScene extends Scene {
         context.lineWidth = 5;
         drawStrokeText(context, `Lv.${level}`, 20, 20);
 
+        // 敵と言霊の描画
         let willHit = false;
         this.#sortedEntityList().forEach(entity => {
             if (isPC && !willHit && entity.isTargeted(this.#pc.mouseX, this.#pc.mouseY)) {
@@ -202,10 +204,15 @@ class GameScene extends Scene {
             entity.draw();
         });
 
+        // ダメージ描写の描画
+        this.#drawDamageOverlay(this.#player.damageRate());
+
+        // 照準の描画
         if (isPC) {
             this.#player.drawCrosshair(this.#pc.mouseX, this.#pc.mouseY, willHit);
         }
 
+        // 火花の描画
         drawSparks(context);
 
         // プレイヤーの攻撃
@@ -223,6 +230,7 @@ class GameScene extends Scene {
                     const {x, y} = this.#shotPosList[i];
                     if (entity.isTargeted(x, y)) {
                         entity.takeDamage();
+                        this.#player.heal(entity.healAmount);
                         this.#shotPosList.splice(i, 1);
                     }
                 }
@@ -479,5 +487,21 @@ class GameScene extends Scene {
 
     #calcNextExp(nextLevel) {
         return Math.floor(5 * Math.pow(nextLevel, 1/3));
+    }
+
+    #drawDamageOverlay(damageRate) {
+        if (damageRate === 0) {
+            return;
+        }
+        context.save();
+        const gradient = context.createRadialGradient(
+            canvas.width / 2, canvas.height / 2, 50 * (1 - damageRate),
+            canvas.width / 2, canvas.height / 2, canvas.width / 2
+        );
+        gradient.addColorStop(0, "rgba(255, 0, 128, 0)");
+        gradient.addColorStop(1, `rgba(255, 0, 128, ${damageRate})`);
+        context.fillStyle = gradient;
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.restore();
     }
 }

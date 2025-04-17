@@ -186,15 +186,6 @@ class GameScene extends Scene {
         context.clearRect(0, 0, canvas.width, canvas.height);
         drawBackgroundImage(this.#backgroundImage, this.#viewAngle);
 
-        // レベルの描画
-        context.textAlign = "start";
-        context.textBaseline = "top";
-        context.font = "400 40px Xim-Sans";
-        context.fillStyle = "#000";
-        context.strokeStyle = "#eee";
-        context.lineWidth = 5;
-        drawStrokeText(context, `Lv.${level}`, 20, 20);
-
         // 敵と言霊の描画
         let willHit = false;
         this.#sortedEntityList().forEach(entity => {
@@ -211,6 +202,15 @@ class GameScene extends Scene {
         if (isPC) {
             this.#player.drawCrosshair(this.#pc.mouseX, this.#pc.mouseY, willHit);
         }
+
+        // レベルの描画
+        context.textAlign = "start";
+        context.textBaseline = "top";
+        context.font = "400 40px Xim-Sans";
+        context.fillStyle = "#000";
+        context.strokeStyle = "#eee";
+        context.lineWidth = 5;
+        drawStrokeText(context, `Lv.${level}`, 20, 20);
 
         // 火花の描画
         drawSparks(context);

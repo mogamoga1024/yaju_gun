@@ -20,6 +20,7 @@ const soundConfig = {};
     add("「愛のカタチ」四部合唱【山崎まさゆき】", "mp3", {volume: 0.9});
     add("星空.flv", "m4a", {volume: 0.45});
     add("太いぜ。", "mp3", {volume: 0.6});
+    add("Namagusa Monk", "m4a", {volume: 0.35});
 
     // 効果音
     add("ドンッ", "mp3", {volume: 0.8});

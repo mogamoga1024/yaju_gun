@@ -75,6 +75,7 @@ class GameScene extends Scene {
             "「愛のカタチ」四部合唱【山崎まさゆき】",
             "星空.flv",
             "太いぜ。",
+            "Namagusa Monk",
         ];
         let bgli = 0;
 

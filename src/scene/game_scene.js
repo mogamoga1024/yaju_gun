@@ -374,7 +374,7 @@ class GameScene extends Scene {
         plpsss("アイスティー");
         plpsss("ムキムキオォン！");
         plpsss("謎の金属音");
-        plpsss("FOO↑気持ちいい～");
+        plpsss("あーいいっすねー");
         plpsss("アアッー！(高音)");
 
         await Promise.all(promiseList);

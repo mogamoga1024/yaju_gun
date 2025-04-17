@@ -109,7 +109,7 @@ class Honsya extends Entity {
         this.#hp -= 1;
         if (this.#hp <= 0) {
             playSound(SoundStorage.get("爆発"));
-            playSound(SoundStorage.get("FOO↑気持ちいい～")); // todo ああ＾～いいっすね＾～
+            playSound(SoundStorage.get("あーいいっすねー"));
             this.state = "dying";
             this.#explosion = new Explosion();
         }

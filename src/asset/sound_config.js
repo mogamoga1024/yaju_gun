@@ -22,18 +22,18 @@ const soundConfig = {};
     add("太いぜ。", "mp3", {volume: 0.6});
 
     // 効果音
-    add("ドンッ");
+    add("ドンッ", "mp3", {volume: 0.8});
     add("銃声", "mp3", {volume: 0.3});
-    add("大破", "mp3", {volume: 0.65});
-    add("爆発", "m4a", {volume: 0.65});
+    add("大破", "mp3", {volume: 0.6});
+    add("爆発", "m4a", {volume: 0.5});
 
     // 野獣先輩
-    add("息継ぎ", "m4a", {volume: 1, loop: true});
-    add2("ムキムキ息継ぎ", "息継ぎ", "m4a", {volume: 1, rate: 0.6, loop: true});
-    add("ンアッー！（ねっとり）", "mp3", {volume: 0.3});
+    add("息継ぎ", "m4a", {volume: 0.95, loop: true});
+    add2("ムキムキ息継ぎ", "息継ぎ", "m4a", {volume: 0.95, rate: 0.6, loop: true});
+    add("ンアッー！（ねっとり）", "mp3", {volume: 0.25});
     add("アイスティー");
     add2("ムキムキオォン！", "オォン！", "mp3", {volume: 0.4, rate: 0.7});
-    add("謎の金属音", "mp3", {volume: 0.9});
-    add("FOO↑気持ちいい～", "mp3", {volume: 0.9});
-    add("アアッー！(高音)", "mp3", {volume: 0.9});
+    add("謎の金属音", "mp3", {volume: 0.7});
+    add("あーいいっすねー", "mp3", {volume: 0.8});
+    add("アアッー！(高音)", "mp3", {volume: 0.8});
 })();

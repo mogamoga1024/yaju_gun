@@ -276,8 +276,8 @@ class GameScene extends Scene {
         }
 
         // ボタンの更新
-        this.#turnLeftBtn.update();
-        this.#turnRightBtn.update();
+        this.#turnLeftBtn.update(this.#shouldWarnLeft);
+        this.#turnRightBtn.update(this.#shouldWarnRight);
 
         // レベル処理
         if (this.#nextExp <= 0) {

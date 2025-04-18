@@ -17,7 +17,7 @@ class TurnLeftButton {
 
     draw(shouldWarn) {
         context.beginPath();
-        let x = this.#startX + this.#dx();
+        let x = this.#startX + this.#dx(shouldWarn);
         let y = this.#startY;
         context.moveTo(x, y);
         x += this.#width;
@@ -42,9 +42,9 @@ class TurnLeftButton {
         context.stroke();
     }
 
-    update() {
+    update(shouldWarn) {
         this.#frameCount++;
-        this.#updateBounds();
+        this.#updateBounds(shouldWarn);
     }
 
     isTargeted(crosshairX, crosshairY) {
@@ -64,11 +64,12 @@ class TurnLeftButton {
         return true;
     }
 
-    #dx() {
-        return Math.sin(this.#frameCount / 10) * 10 + 10;
+    #dx(shouldWarn) {
+        const a = shouldWarn ? 5 : 10;
+        return Math.sin(this.#frameCount / a) * 10 + 10;
     }
 
-    #updateBounds() {
-        this.#x = this.#startX + this.#dx();
+    #updateBounds(shouldWarn) {
+        this.#x = this.#startX + this.#dx(shouldWarn);
     }
 }

@@ -2,21 +2,30 @@
 class TurnLeftButton {
     #x = 0;
     #y = 0;
-    #width = 0;
-    #height = 0;
-    #image = null;
 
     constructor(left) {
-        this.#image = ImageStorage.get("左向くんだよ");
-        this.#width = this.#image.width * 0.2;
-        this.#height = this.#image.height * 0.2;
         this.#x = left;
-        this.#y = (canvas.height - this.#height) / 2;
+        this.#y = canvas.height / 2;
     }
 
     draw() {
-        context.globalAlpha = 0.7;
-        context.drawImage(this.#image, this.#x, this.#y, this.#width, this.#height);
-        context.globalAlpha = 1;
+        context.beginPath();
+        let x = this.#x;
+        let y = this.#y;
+        context.moveTo(x, y);
+        x += 50;
+        y += 30;
+        context.lineTo(x, y);
+        x += 0;
+        y += -30 * 2;
+        context.lineTo(x, y);
+        context.closePath();
+
+        context.fillStyle = "rgba(255, 255, 0, 0.6)";
+        context.fill();
+
+        context.strokeStyle = "black";
+        context.lineWidth = 5;
+        context.stroke();
     }
 }

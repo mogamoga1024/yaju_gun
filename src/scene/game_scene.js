@@ -363,8 +363,6 @@ class GameScene extends Scene {
         plpiss("照準1");
         plpiss("照準2");
         plpiss("爆発スプライト_170");
-        plpiss("左向くんだよ");
-        plpiss("右向くんだよ");
         
         // 音声
         for (const name of seNameList) {

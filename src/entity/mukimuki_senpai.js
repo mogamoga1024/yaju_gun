@@ -13,9 +13,10 @@ class MukimukiSenpai extends Entity {
     #imageListIndexDelta = 1;
     #animeFrameMax = 6;
     #ikitugiSoundId = -1;
-    #hp = 5;
+    #hp = 4;
     #opacity = 1;
     #explosion = null;
+    power = 2;
 
     constructor(centerX, viewAngle, temaeRate = 0) {
         super(temaeRate);

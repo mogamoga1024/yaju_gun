@@ -307,14 +307,14 @@ class GameScene extends Scene {
             if (enemy.temaeRate >= 1) {
                 this.#enemyList.splice(i, 1);
                 enemy.end();
-                this.#player.takeDamage();
+                this.#player.takeDamage(enemy.power);
             }
         }
         for (let i = this.#kotodamaList.length - 1; i >= 0; i--) {
             const kotodama = this.#kotodamaList[i];
             if (kotodama.temaeRate >= 1) {
                 this.#kotodamaList.splice(i, 1);
-                this.#player.takeDamage();
+                this.#player.takeDamage(kotodama.power);
             }
         }
         

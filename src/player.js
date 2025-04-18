@@ -9,8 +9,8 @@ class Player {
         context.drawImage(image, x - size / 2, y - size / 2, size, size);
     }
 
-    takeDamage() {
-        this.#hp -= 1; // todo GameOver
+    takeDamage(power) {
+        this.#hp -= power; // todo GameOver
         playSound(SoundStorage.get("ドンッ"));
         playSound(SoundStorage.get("アアッー！(高音)"));
     }

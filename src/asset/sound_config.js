@@ -32,9 +32,12 @@ const soundConfig = {};
     add("息継ぎ", "m4a", {volume: 0.95, loop: true});
     add2("ムキムキ息継ぎ", "息継ぎ", "m4a", {volume: 0.95, rate: 0.6, loop: true});
     add("ンアッー！（ねっとり）", "mp3", {volume: 0.25});
-    add("アイスティー");
     add2("ムキムキオォン！", "オォン！", "mp3", {volume: 0.4, rate: 0.7});
     add("謎の金属音", "mp3", {volume: 0.7});
     add("あーいいっすねー", "mp3", {volume: 0.8});
     add("アアッー！(高音)", "mp3", {volume: 0.8});
+
+    // 言霊
+    add("アイスティー");
+    add("FOO↑気持ちいい", "mp3", {volume: 0.9});
 })();

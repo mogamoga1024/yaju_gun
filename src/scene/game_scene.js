@@ -104,7 +104,7 @@ class GameScene extends Scene {
         // this.#enemyList.push(new MeteorSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new RunningSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new MukimukiSenpai(canvas.width / 2, this.#viewAngle));
-        // this.#enemyList.push(new ShoutingSenpai(canvas.width / 2, this.#viewAngle));
+        this.#enemyList.push(new ShoutingSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new Honsya(this.#viewAngle));
         // debug end
 
@@ -372,11 +372,12 @@ class GameScene extends Scene {
         plpsss("息継ぎ");
         plpsss("ムキムキ息継ぎ");
         plpsss("ンアッー！（ねっとり）");
-        plpsss("アイスティー");
         plpsss("ムキムキオォン！");
         plpsss("謎の金属音");
         plpsss("あーいいっすねー");
         plpsss("アアッー！(高音)");
+        plpsss("アイスティー");
+        plpsss("FOO↑気持ちいい");
 
         await Promise.all(promiseList);
     }

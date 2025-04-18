@@ -342,6 +342,19 @@ class GameScene extends Scene {
                 this.#player.takeDamage(kotodama.power);
             }
         }
+
+        // ボタンをワーニングにするかチェック
+        for (const entity of this.#sortedEntityList()) {
+            const {leftX, rightX} = entity.getXRange();
+            if (leftX >= canvas.width * 3 / 2) {
+                // todo 左がヤバい
+                console.log("左がヤバい");
+            }
+            else if (leftX >= canvas.width) {
+                // todo 右がヤバい
+                console.log("右がヤバい");
+            }
+        }
         
         // 後処理
         this.#shotPosList = [];

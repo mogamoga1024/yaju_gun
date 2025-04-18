@@ -87,6 +87,10 @@ class KunekuneSenpai extends Entity {
         this.#explosion = new Explosion();
     }
 
+    getXRange() {
+        return {leftX: this.#x, rightX: this.#x + this.#width};
+    }
+
     #updateBounds(viewAngle) {
         this.#width = this.#oriWidth * this.temaeRate;
         this.#height = this.#oriHeight * this.temaeRate;

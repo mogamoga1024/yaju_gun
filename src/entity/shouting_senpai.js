@@ -17,6 +17,7 @@ class ShoutingSenpai extends Entity {
     #textIndex = 0;
     #kotodamaType = "uneune"; // "uneune" or "kurukuru"
     #kotodamaColor = null;
+    #shoutSoundId = -1;
     #opacity = 1;
     #explosion = null;
 
@@ -57,6 +58,12 @@ class ShoutingSenpai extends Entity {
                     fill: "173, 216, 230"
                 };
                 break;
+        }
+    }
+
+    end() {
+        if (this.#shoutSoundId !== -1) {
+            stopSound(SoundStorage.get(this.#text), this.#shoutSoundId);
         }
     }
 
@@ -137,7 +144,11 @@ class ShoutingSenpai extends Entity {
 
     shout(viewAngle) {
         if (this.#textIndex === 0) {
-            playSound(SoundStorage.get(this.#text));
+            playSound(SoundStorage.get(this.#text)).then(id => {
+                if (this.state === "alive") {
+                    this.#shoutSoundId = id;
+                }
+            });
         }
         const height = this.#oriHeight * this.temaeRate;
         const centerY = this.#y + height * 0.1; // 顔当たりの座標

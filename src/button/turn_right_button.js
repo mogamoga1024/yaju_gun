@@ -43,16 +43,17 @@ class TurnRightButton {
     }
 
     isTargeted(crosshairX, crosshairY) {
-        if (crosshairX < this.#x) {
+        const a = 10;
+        if (crosshairX < this.#x - a) {
             return false;
         }
-        if (crosshairX > this.#x + this.#width) {
+        if (crosshairX > this.#x + this.#width + a) {
             return false;
         }
-        if (crosshairY < this.#y) {
+        if (crosshairY < this.#y - a) {
             return false;
         }
-        if (crosshairY > this.#y + this.#height) {
+        if (crosshairY > this.#y + this.#height + a) {
             return false;
         }
         return true;

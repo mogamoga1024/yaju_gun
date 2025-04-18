@@ -132,6 +132,10 @@ class ShoutingSenpai extends Entity {
         this.#explosion = new Explosion();
     }
 
+    leftX() {
+        return this.#x;
+    }
+
     canShout() {
         if (this.state !== "alive") {
             return false;

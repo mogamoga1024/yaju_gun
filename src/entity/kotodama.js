@@ -83,6 +83,10 @@ class Kotodama extends Entity {
         this.state = "dead";
     }
 
+    leftX() {
+        return this.#centerX - this.#width / 2;
+    }
+
     #updateBounds(viewAngle) {
         this.#fontSize = this.#oriFontSize * this.temaeRate;
         context.font = `400 ${this.#fontSize}px Xim-Sans`;

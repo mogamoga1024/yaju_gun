@@ -103,6 +103,10 @@ class RunningSenpai extends Entity {
         this.#explosion = new Explosion();
     }
 
+    leftX() {
+        return this.#x;
+    }
+
     #updateBounds(viewAngle) {
         this.#width = this.#oriWidth * this.temaeRate;
         this.#height = this.#oriHeight * this.temaeRate;

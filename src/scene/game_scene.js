@@ -100,7 +100,7 @@ class GameScene extends Scene {
         // this.#enemyList.push(new RunningSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new MukimukiSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new ShoutingSenpai(canvas.width / 2, this.#viewAngle));
-        this.#enemyList.push(new KunekuneSenpai(canvas.width / 2, this.#viewAngle));
+        // this.#enemyList.push(new KunekuneSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new Honsya(this.#viewAngle));
         // debug end
 
@@ -155,12 +155,12 @@ class GameScene extends Scene {
     }
 
     #update() {
-        // if (debug.canCreateEnemy) {
-        //     if (this.#enemyList.length < 6 * (1 + level / 100)) {
-        //         this.#enemyCreateFrame++;
-        //     }
-        //     this.#honsyaCreateFrame++;
-        // }
+        if (debug.canCreateEnemy) {
+            if (this.#enemyList.length < 6 * (1 + level / 100)) {
+                this.#enemyCreateFrame++;
+            }
+            this.#honsyaCreateFrame++;
+        }
 
         context.clearRect(0, 0, canvas.width, canvas.height);
 

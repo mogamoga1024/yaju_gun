@@ -116,6 +116,10 @@ class MukimukiSenpai extends Entity {
         }
     }
 
+    leftX() {
+        return this.#x;
+    }
+
     #updateBounds(viewAngle) {
         this.#width = this.#oriWidth * this.temaeRate;
         this.#height = this.#oriHeight * this.temaeRate;

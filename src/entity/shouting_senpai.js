@@ -13,7 +13,7 @@ class ShoutingSenpai extends Entity {
     #animeFrameMax = 5;
     #imageListIndex = 0;
     #imageListIndexDelta = 1;
-    #text = "アイスティー";
+    #text = kotodamaNameList[Math.floor(Math.random() * kotodamaNameList.length)];
     #textIndex = 0;
     #kotodamaType = "uneune"; // "uneune" or "kurukuru"
     #opacity = 1;

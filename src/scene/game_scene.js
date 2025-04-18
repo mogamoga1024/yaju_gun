@@ -47,7 +47,7 @@ class GameScene extends Scene {
         await this.#preload();
 
         // Lv.10まではパラオナボーイを流し続ける
-        loadSound("パラオナボーイ／feat.重音テト").then(bgm => {
+        loadSound(bgmNameList[0]).then(bgm => {
             if (bgm.isOK) {
                 playSound(bgm);
                 for (const event of ["end", "playerror"]) {
@@ -68,17 +68,7 @@ class GameScene extends Scene {
             }
         });
 
-        const bgmNameList = [
-            "PLUMBER",
-            "中華淫行",
-            "snow prizm (Ketsupine mix)",
-            "「愛のカタチ」四部合唱【山崎まさゆき】",
-            "星空.flv",
-            "太いぜ。",
-            "Namagusa Monk",
-        ];
-        let bgli = 0;
-
+        let bgli = 1;
         function playBGM() {
             loadSound(bgmNameList[bgli]).then(bgm => {
                 const playNextBGM = () => {
@@ -365,19 +355,12 @@ class GameScene extends Scene {
         plpiss("爆発スプライト_170");
         
         // 音声
-        plpsss("銃声");
-        plpsss("ドンッ");
-        plpsss("大破");
-        plpsss("爆発");
-        plpsss("息継ぎ");
-        plpsss("ムキムキ息継ぎ");
-        plpsss("ンアッー！（ねっとり）");
-        plpsss("ムキムキオォン！");
-        plpsss("謎の金属音");
-        plpsss("あーいいっすねー");
-        plpsss("アアッー！(高音)");
-        plpsss("アイスティー");
-        plpsss("FOO↑気持ちいい");
+        for (const name of seNameList) {
+            plpsss(name);
+        }
+        for (const name of kotodamaNameList) {
+            plpsss(name);
+        }
 
         await Promise.all(promiseList);
     }

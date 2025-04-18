@@ -1,7 +1,7 @@
 
 class Player {
-    #hp = 5;
-    #maxHp = 5;
+    #hp = 4;
+    #maxHp = 4;
 
     drawCrosshair(x, y, willHit = false) {
         const image = ImageStorage.get(willHit ? "照準2" : "照準1");

@@ -297,12 +297,7 @@ class GameScene extends Scene {
                 this.#enemyList.push(new MeteorSenpai(centerX, this.#viewAngle));
             }
             else {
-                if (Math.random() < 0.5) {
-                    this.#enemyList.push(new ShoutingSenpai(centerX, this.#viewAngle, "uneune"));
-                }
-                else {
-                    this.#enemyList.push(new ShoutingSenpai(centerX, this.#viewAngle, "kurukuru"));
-                }
+                this.#enemyList.push(new ShoutingSenpai(centerX, this.#viewAngle));
             }
             this.#enemyCreateFrame = 0;
         }

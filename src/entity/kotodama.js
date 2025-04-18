@@ -13,14 +13,16 @@ class Kotodama extends Entity {
     #frameCount = 0;
     #radian = 0;
     #type = "uneune"; // "uneune" or "kurukuru"
+    #color = null;
 
-    constructor(shooter, text, centerX, centerY, viewAngle, temaeRate, type = "uneune") {
+    constructor(shooter, text, centerX, centerY, viewAngle, temaeRate, type, color) {
         super(temaeRate);
         this.shooter = shooter;
         this.#text = text;
         this.#oriCenterX = centerX;
         this.#oriCenterY = centerY;
         this.#type = type;
+        this.#color = color;
         this.#oriFontSize = 250;
         this.#updateBounds(viewAngle);
     }
@@ -30,11 +32,11 @@ class Kotodama extends Entity {
         context.textAlign = "center";
         context.textBaseline = "middle";
         context.lineWidth = 10 * this.temaeRate;
-        context.strokeStyle = "#B00000";
+        context.strokeStyle = this.#color.stroke;
         context.lineJoin = "round";
         context.strokeText(this.#text, this.#centerX, this.#centerY);
         
-        context.fillStyle = `rgba(255, 192, 203, ${0.5 + this.temaeRate / 2})`;
+        context.fillStyle = `rgba(${this.#color.fill}, ${0.5 + this.temaeRate / 2})`;
         context.fillText(this.#text, this.#centerX, this.#centerY);
     }
 

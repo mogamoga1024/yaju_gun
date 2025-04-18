@@ -16,13 +16,13 @@ class ShoutingSenpai extends Entity {
     #text = kotodamaNameList[Math.floor(Math.random() * kotodamaNameList.length)];
     #textIndex = 0;
     #kotodamaType = "uneune"; // "uneune" or "kurukuru"
+    #kotodamaColor = null;
     #opacity = 1;
     #explosion = null;
 
-    constructor(centerX, viewAngle, kotodamaType = "uneune", temaeRate = 0.15) {
+    constructor(centerX, viewAngle, temaeRate = 0.15) {
         super(temaeRate);
         this.#centerX = centerX;
-        this.#kotodamaType = kotodamaType;
         for (let i = 0; i <= this.#animeFrameMax; i++) {
             const image = ImageStorage.get(`くねくね先輩/${i}`);
             this.#imageList.push(image);
@@ -30,6 +30,34 @@ class ShoutingSenpai extends Entity {
         this.#oriWidth = this.#imageList[0].width * 2.07;
         this.#oriHeight = this.#imageList[0].height * 2.07;
         this.#updateBounds(viewAngle);
+
+        if (Math.random() < 0.5) {
+            this.#kotodamaType = "uneune";
+        }
+        else {
+            this.#kotodamaType = "kurukuru"
+        }
+
+        switch (Math.floor(Math.random() * 3)) {
+            case 0:
+                this.#kotodamaColor = {
+                    stroke: "#B00000",
+                    fill: "255, 192, 203"
+                };
+                break;
+            case 1:
+                this.#kotodamaColor = {
+                    stroke: "#007000",
+                    fill: "144, 238, 144"
+                };
+                break;
+            case 2:
+                this.#kotodamaColor = {
+                    stroke: "#0030B0",
+                    fill: "173, 216, 230"
+                };
+                break;
+        }
     }
 
     draw() {
@@ -115,7 +143,7 @@ class ShoutingSenpai extends Entity {
         const centerY = this.#y + height * 0.1; // 顔当たりの座標
         const char = this.#text[this.#textIndex];
         this.#textIndex = (this.#textIndex + 1) % this.#text.length;
-        return new Kotodama(this, char, this.#centerX, centerY, viewAngle, this.temaeRate, this.#kotodamaType);
+        return new Kotodama(this, char, this.#centerX, centerY, viewAngle, this.temaeRate, this.#kotodamaType, this.#kotodamaColor);
     }
 
     #updateBounds(viewAngle) {

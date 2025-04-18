@@ -125,7 +125,7 @@ class GameScene extends Scene {
         this.#nextExp = this.#calcNextExp(level);
 
         this.#turnLeftBtn = new TurnLeftButton(10);
-        // this.#turnRightBtn = new TurnRightButton(0, 0); // todo
+        this.#turnRightBtn = new TurnRightButton(10);
 
         this.state = "loaded";
         this.#startAnimation();
@@ -207,7 +207,7 @@ class GameScene extends Scene {
 
         // ボタンの描画
         this.#turnLeftBtn.draw();
-        // this.#turnRightBtn.draw(); // todo
+        this.#turnRightBtn.draw();
 
         // 照準の描画
         if (isPC) {

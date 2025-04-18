@@ -1,17 +1,17 @@
 
 class TurnLeftButton {
-    #x = 0;
-    #y = 0;
+    #startX = 0;
+    #startY = 0;
 
     constructor(left) {
-        this.#x = left;
-        this.#y = canvas.height / 2;
+        this.#startX = left;
+        this.#startY = canvas.height / 2;
     }
 
     draw() {
         context.beginPath();
-        let x = this.#x;
-        let y = this.#y;
+        let x = this.#startX;
+        let y = this.#startY;
         context.moveTo(x, y);
         x += 50;
         y += 30;

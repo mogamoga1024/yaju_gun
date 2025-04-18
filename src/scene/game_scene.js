@@ -40,6 +40,7 @@ class GameScene extends Scene {
     #turnRightBtn = null;
     #shouldWarnLeft = false;
     #shouldWarnRight = false;
+    #canPlayYokomukunSound = true;
 
     constructor(useNipple) {
         super();
@@ -185,12 +186,12 @@ class GameScene extends Scene {
         // ボタンが押されたときの処理
         for (const {x, y} of this.#shotPosList) {
             if (this.#turnLeftBtn.isTargeted(x, y)) {
-                playSound(SoundStorage.get("横向くんだよ90度！"));
+                this.#playYokomukunSound();
                 this.#viewAngle = (this.#viewAngle + 90) % 360;
                 break;
             }
             if (this.#turnRightBtn.isTargeted(x, y)) {
-                playSound(SoundStorage.get("横向くんだよ90度！"));
+                this.#playYokomukunSound();
                 this.#viewAngle = (this.#viewAngle + 270) % 360;
                 break;
             }
@@ -413,6 +414,16 @@ class GameScene extends Scene {
 
     #sortedEntityList(sortOrder = "asc") {
         return this.#enemyList.concat(this.#kotodamaList).sort((a, b) => (a.temaeRate - b.temaeRate) * (sortOrder === "asc" ? 1 : -1));
+    }
+
+    #playYokomukunSound() {
+        if (this.#canPlayYokomukunSound) {
+            this.#canPlayYokomukunSound = false;
+            playSound(SoundStorage.get("横向くんだよ90度！"));
+            setTimeout(() => {
+                this.#canPlayYokomukunSound = true;
+            }, 1000 * 10);
+        }
     }
 
     onKeyDown(e) {

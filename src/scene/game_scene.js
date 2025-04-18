@@ -153,10 +153,10 @@ class GameScene extends Scene {
 
     #update() {
         if (debug.canCreateEnemy) {
-            // if (this.#enemyList.length < 6 * (1 + level / 100)) {
-            //     this.#enemyCreateFrame++;
-            // }
-            // this.#honsyaCreateFrame++;
+            if (this.#enemyList.length < 6 * (1 + level / 100)) {
+                this.#enemyCreateFrame++;
+            }
+            this.#honsyaCreateFrame++;
         }
 
         context.clearRect(0, 0, canvas.width, canvas.height);
@@ -177,6 +177,20 @@ class GameScene extends Scene {
         }
         else if (this.#useNipple) {
             this.#viewAngle = (this.#viewAngle + this.#nippleDx) % 360;
+        }
+
+        // ボタンが押されたときの処理
+        for (const {x, y} of this.#shotPosList) {
+            if (this.#turnLeftBtn.isTargeted(x, y)) {
+                playSound(SoundStorage.get("横向くんだよ90度！"));
+                this.#viewAngle = (this.#viewAngle + 90) % 360;
+                break;
+            }
+            if (this.#turnRightBtn.isTargeted(x, y)) {
+                playSound(SoundStorage.get("横向くんだよ90度！"));
+                this.#viewAngle = (this.#viewAngle + 270) % 360;
+                break;
+            }
         }
 
         // 背景の描画
@@ -257,6 +271,10 @@ class GameScene extends Scene {
                 this.#kotodamaList.splice(i, 1);
             }
         }
+
+        // ボタンの更新
+        this.#turnLeftBtn.update();
+        this.#turnRightBtn.update();
 
         // レベル処理
         if (this.#nextExp <= 0) {

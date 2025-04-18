@@ -2,6 +2,7 @@
 class TurnRightButton {
     #startX = 0;
     #startY = 0;
+    #frameCount = 0;
 
     constructor(right) {
         this.#startX = canvas.width - right;
@@ -9,8 +10,10 @@ class TurnRightButton {
     }
 
     draw() {
+        const dx = Math.sin(this.#frameCount++ / 10) * 10 + 10;
+
         context.beginPath();
-        let x = this.#startX;
+        let x = this.#startX - dx;
         let y = this.#startY;
         context.moveTo(x, y);
         x += -50;

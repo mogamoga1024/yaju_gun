@@ -14,6 +14,7 @@ class Kotodama extends Entity {
     #radian = 0;
     #type = "uneune"; // "uneune" or "kurukuru"
     #color = null;
+    healAmount = 0;
 
     constructor(shooter, text, centerX, centerY, viewAngle, temaeRate, type, color) {
         super(temaeRate);

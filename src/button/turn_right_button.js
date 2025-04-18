@@ -2,6 +2,10 @@
 class TurnRightButton {
     #startX = 0;
     #startY = 0;
+    #x = 0;
+    #y = 0;
+    #width = 50;
+    #height = 60;
     #frameCount = 0;
 
     constructor(right) {
@@ -16,11 +20,11 @@ class TurnRightButton {
         let x = this.#startX - dx;
         let y = this.#startY;
         context.moveTo(x, y);
-        x += -50;
-        y += 30;
+        x += -this.#width;
+        y += this.#height / 2;
         context.lineTo(x, y);
         x += 0;
-        y += -30 * 2;
+        y += -this.#height;
         context.lineTo(x, y);
         context.closePath();
 

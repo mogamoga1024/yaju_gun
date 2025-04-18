@@ -6,13 +6,17 @@ class TurnLeftButton {
     #height = 0;
     #image = null;
 
-    constructor(x, y) {
-        this.#x = x;
-        this.#y = y;
+    constructor(left) {
         this.#image = ImageStorage.get("左向くんだよ");
+        this.#width = this.#image.width * 0.2;
+        this.#height = this.#image.height * 0.2;
+        this.#x = left;
+        this.#y = (canvas.height - this.#height) / 2;
     }
 
     draw() {
-        // todo
+        context.globalAlpha = 0.7;
+        context.drawImage(this.#image, this.#x, this.#y, this.#width, this.#height);
+        context.globalAlpha = 1;
     }
 }

@@ -36,6 +36,9 @@ class GameScene extends Scene {
 
     #nextExp = Number.MAX_SAFE_INTEGER;
 
+    #turnLeftBtn = null;
+    #turnRightBtn = null;
+
     constructor(useNipple) {
         super();
         this.#useNipple = useNipple;
@@ -94,7 +97,7 @@ class GameScene extends Scene {
         // this.#enemyList.push(new MeteorSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new RunningSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new MukimukiSenpai(canvas.width / 2, this.#viewAngle));
-        this.#enemyList.push(new ShoutingSenpai(canvas.width / 2, this.#viewAngle));
+        // this.#enemyList.push(new ShoutingSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new Honsya(this.#viewAngle));
         // debug end
 
@@ -120,6 +123,9 @@ class GameScene extends Scene {
 
         level = 1;
         this.#nextExp = this.#calcNextExp(level);
+
+        this.#turnLeftBtn = new TurnLeftButton(10);
+        // this.#turnRightBtn = new TurnRightButton(0, 0); // todo
 
         this.state = "loaded";
         this.#startAnimation();
@@ -147,10 +153,10 @@ class GameScene extends Scene {
 
     #update() {
         if (debug.canCreateEnemy) {
-            if (this.#enemyList.length < 6 * (1 + level / 100)) {
-                this.#enemyCreateFrame++;
-            }
-            this.#honsyaCreateFrame++;
+            // if (this.#enemyList.length < 6 * (1 + level / 100)) {
+            //     this.#enemyCreateFrame++;
+            // }
+            // this.#honsyaCreateFrame++;
         }
 
         context.clearRect(0, 0, canvas.width, canvas.height);
@@ -189,11 +195,6 @@ class GameScene extends Scene {
         // ダメージ描写の描画
         this.#drawDamageOverlay(this.#player.damageRate());
 
-        // 照準の描画
-        if (isPC) {
-            this.#player.drawCrosshair(this.#pc.mouseX, this.#pc.mouseY, willHit);
-        }
-
         // レベルの描画
         context.textAlign = "start";
         context.textBaseline = "top";
@@ -202,6 +203,15 @@ class GameScene extends Scene {
         context.strokeStyle = "#eee";
         context.lineWidth = 5;
         drawStrokeText(context, `Lv.${level}`, 20, 20);
+
+        // ボタンの描画
+        this.#turnLeftBtn.draw();
+        // this.#turnRightBtn.draw(); // todo
+
+        // 照準の描画
+        if (isPC) {
+            this.#player.drawCrosshair(this.#pc.mouseX, this.#pc.mouseY, willHit);
+        }
 
         // 火花の描画
         drawSparks(context);

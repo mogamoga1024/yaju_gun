@@ -349,6 +349,9 @@ class GameScene extends Scene {
         this.#shouldWarnLeft = false;
         this.#shouldWarnRight = false;
         for (const entity of this.#sortedEntityList()) {
+            if (entity.temaeRate < 0.45) {
+                continue;
+            }
             const leftX = entity.leftX();
             if (leftX >= canvas.width * 3 / 2) {
                 this.#shouldWarnLeft = true;

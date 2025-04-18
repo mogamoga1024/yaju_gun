@@ -17,6 +17,7 @@ class TitleScene extends Scene {
         context.globalAlpha = 1;
 
         context.textBaseline = "top";
+        context.lineJoin = "round";
 
         context.font = "400 120px Xim-Sans";
         context.fillStyle = "#ffb6c1";

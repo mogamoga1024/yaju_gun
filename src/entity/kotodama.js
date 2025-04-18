@@ -31,6 +31,7 @@ class Kotodama extends Entity {
         context.textBaseline = "middle";
         context.lineWidth = 10 * this.temaeRate;
         context.strokeStyle = "#B00000";
+        context.lineJoin = "round";
         context.strokeText(this.#text, this.#centerX, this.#centerY);
         
         context.fillStyle = `rgba(255, 192, 203, ${0.5 + this.temaeRate / 2})`;

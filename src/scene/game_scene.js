@@ -202,6 +202,7 @@ class GameScene extends Scene {
         context.fillStyle = "#000";
         context.strokeStyle = "#eee";
         context.lineWidth = 5;
+        context.lineJoin = "round";
         drawStrokeText(context, `Lv.${level}`, 20, 20);
 
         // ボタンの描画

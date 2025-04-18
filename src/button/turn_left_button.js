@@ -26,6 +26,7 @@ class TurnLeftButton {
 
         context.strokeStyle = "black";
         context.lineWidth = 5;
+        context.lineJoin = "round";
         context.stroke();
     }
 }

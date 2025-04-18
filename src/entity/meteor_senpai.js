@@ -29,6 +29,12 @@ class MeteorSenpai extends Entity {
         this.#oriWidth = this.#imageList[0].width * 1.5;
         this.#oriHeight = this.#imageList[0].height * 1.5;
         this.#updateBounds(viewAngle);
+
+        playSound(SoundStorage.get("ンアッー！（ねっとり）")).then(id => {
+            if (this.state === "alive") {
+                this.#meteorSoundId = id;
+            }
+        });
     }
 
     end() {
@@ -38,14 +44,6 @@ class MeteorSenpai extends Entity {
     }
 
     draw() {
-        if (this.#meteorSoundId === -1 && this.state === "alive") {
-            playSound(SoundStorage.get("ンアッー！（ねっとり）")).then(id => {
-                if (this.state === "alive") {
-                    this.#meteorSoundId = id;
-                }
-            });
-        }
-
         context.save();
         context.globalAlpha = this.#opacity;
         context.translate(this.#x + this.#width, this.#y + this.#height);

@@ -38,6 +38,8 @@ class GameScene extends Scene {
 
     #turnLeftBtn = null;
     #turnRightBtn = null;
+    #shouldWarnLeft = false;
+    #shouldWarnRight = false;
 
     constructor(useNipple) {
         super();
@@ -221,8 +223,8 @@ class GameScene extends Scene {
         drawStrokeText(context, `Lv.${level}`, 20, 20);
 
         // ボタンの描画
-        this.#turnLeftBtn.draw();
-        this.#turnRightBtn.draw();
+        this.#turnLeftBtn.draw(this.#shouldWarnLeft);
+        this.#turnRightBtn.draw(this.#shouldWarnRight);
 
         // 照準の描画
         if (isPC) {
@@ -344,15 +346,18 @@ class GameScene extends Scene {
         }
 
         // ボタンをワーニングにするかチェック
+        this.#shouldWarnLeft = false;
+        this.#shouldWarnRight = false;
         for (const entity of this.#sortedEntityList()) {
             const leftX = entity.leftX();
             if (leftX >= canvas.width * 3 / 2) {
-                // todo 左がヤバい
-                console.log("左がヤバい");
+                this.#shouldWarnLeft = true;
             }
             else if (leftX >= canvas.width) {
-                // todo 右がヤバい
-                console.log("右がヤバい");
+                this.#shouldWarnRight = true;
+            }
+            if (this.#shouldWarnLeft && this.#shouldWarnRight) {
+                break;
             }
         }
         

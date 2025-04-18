@@ -15,7 +15,7 @@ class TurnLeftButton {
         this.#updateBounds();
     }
 
-    draw() {
+    draw(shouldWarn) {
         context.beginPath();
         let x = this.#startX + this.#dx();
         let y = this.#startY;
@@ -28,7 +28,12 @@ class TurnLeftButton {
         context.lineTo(x, y);
         context.closePath();
 
-        context.fillStyle = "rgba(255, 255, 0, 0.6)";
+        if (shouldWarn) {
+            context.fillStyle = "rgba(255, 0, 0, 0.6)";
+        }
+        else {
+            context.fillStyle = "rgba(255, 255, 0, 0.6)";
+        }
         context.fill();
 
         context.strokeStyle = "black";

@@ -49,16 +49,17 @@ class TurnLeftButton {
 
     isTargeted(crosshairX, crosshairY) {
         const a = 10;
+        const b = 20;
         if (crosshairX < this.#x - a) {
             return false;
         }
         if (crosshairX > this.#x + this.#width + a) {
             return false;
         }
-        if (crosshairY < this.#y - a) {
+        if (crosshairY < this.#y - b) {
             return false;
         }
-        if (crosshairY > this.#y + this.#height + a) {
+        if (crosshairY > this.#y + this.#height + b) {
             return false;
         }
         return true;

@@ -14,5 +14,5 @@ class Entity {
     update(viewAngle) {}
     isTargeted(crosshairX, crosshairY) { return false; }
     takeDamage() {}
-    getXRange() { return {leftX: 0, rightX: 0}; }
+    leftX() { return 0; }
 }

@@ -345,7 +345,7 @@ class GameScene extends Scene {
 
         // ボタンをワーニングにするかチェック
         for (const entity of this.#sortedEntityList()) {
-            const {leftX, rightX} = entity.getXRange();
+            const leftX = entity.leftX();
             if (leftX >= canvas.width * 3 / 2) {
                 // todo 左がヤバい
                 console.log("左がヤバい");

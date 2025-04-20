@@ -42,7 +42,7 @@ class GameScene extends Scene {
     #shouldWarnRight = false;
     #canPlayYokomukunSound = true;
 
-    #paraona = null;
+    #bgm = null;
 
     #message = {
         text: "",
@@ -62,7 +62,7 @@ class GameScene extends Scene {
         // Lv.10まではパラオナボーイを流し続ける
         loadSound(bgmNameList[0]).then(bgm => {
             if (bgm.isOK) {
-                this.#paraona = bgm;
+                this.#bgm = bgm;
                 playSound(bgm);
                 for (const event of ["end", "playerror"]) {
                     bgm.on(event, () => {
@@ -71,7 +71,7 @@ class GameScene extends Scene {
                         }
                         else {
                             bgm.unload();
-                            this.#paraona = null;
+                            this.#bgm = null;
                             playBGM();
                         }
                     });
@@ -89,13 +89,11 @@ class GameScene extends Scene {
                 const playNextBGM = () => {
                     bgli = (bgli + 1) % bgmNameList.length;
                     bgm.unload();
-                    this.#paraona = null;
+                    this.#bgm = null;
                     playBGM();
                 };
                 if (bgm.isOK) {
-                    if (bgli === 0) {
-                        this.#paraona = bgm;
-                    }
+                    this.#bgm = bgm;
                     playSound(bgm);
                     bgm.on("end", playNextBGM);
                     bgm.on("playerror", playNextBGM);
@@ -213,7 +211,7 @@ class GameScene extends Scene {
         }
 
         // パラオナ
-        this.#paranoLyrics();
+        this.#lyricsIfNeed();
 
         // 背景の描画
         context.clearRect(0, 0, canvas.width, canvas.height);
@@ -445,9 +443,9 @@ class GameScene extends Scene {
         }
     }
 
-    #paranoLyrics() {
-        if (this.#paraona !== null) {
-            const seek = this.#paraona.seek();
+    #lyricsIfNeed() {
+        if (this.#bgm?.name === "パラオナボーイ／feat.重音テト") {
+            const seek = this.#bgm.seek();
             this.#message.isTransient = false;
 
             if (seek < 1.5) {

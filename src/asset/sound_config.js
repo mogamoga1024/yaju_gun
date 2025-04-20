@@ -30,6 +30,7 @@ const kotodamaNameList = [];
     add1(b, "星空.flv", "m4a", {volume: 0.45});
     add1(b, "太いぜ。", "mp3", {volume: 0.6});
     add1(b, "Namagusa Monk", "m4a", {volume: 0.35});
+    add1(b, "PLUMBER(qwerty Remix)", "m4a", {volume: 0.5});
 
     // 効果音
     add1(s, "ドンッ", "mp3", {volume: 0.8});

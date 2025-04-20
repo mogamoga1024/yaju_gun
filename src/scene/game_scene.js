@@ -266,10 +266,13 @@ class GameScene extends Scene {
         });
         for (let i = this.#enemyList.length - 1; i >= 0; i--) {
             const enemy = this.#enemyList[i];
-            if (enemy.state === "dead") {
+            if (enemy.state === "dying" && !enemy.hasGivenExp) {
+                enemy.hasGivenExp = true;
+                this.#nextExp -= 1;
+            }
+            else if (enemy.state === "dead") {
                 this.#enemyList.splice(i, 1);
                 enemy.end();
-                this.#nextExp -= 1;
             }
             else if (enemy.state === "disappear") {
                 this.#enemyList.splice(i, 1);

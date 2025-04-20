@@ -4,6 +4,7 @@ class Entity {
     state = "alive"; // alive or dying or dead or disappear
     healAmount = 0.05;
     power = 1;
+    hasGivenExp = false;
 
     constructor(temaeRate = 1) {
         this.temaeRate = temaeRate;

@@ -136,7 +136,7 @@ class GameScene extends Scene {
             });
         }
 
-        level = 1;
+        level = 100;
         this.#nextExp = this.#calcNextExp(level);
 
         this.#turnLeftBtn = new TurnLeftButton(10);

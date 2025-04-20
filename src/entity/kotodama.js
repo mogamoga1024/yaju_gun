@@ -44,7 +44,7 @@ class Kotodama extends Entity {
 
     update(viewAngle) {
         this.#frameCount++;
-        this.#radian += 0.02;
+        this.#radian += 0.02 * (1 + level / 200);
 
         const temaeRateMax = 1;
         if (this.temaeRate >= temaeRateMax) {

@@ -88,7 +88,7 @@ class MeteorSenpai extends Entity {
             this.temaeRate = Math.min(this.temaeRate + a, temaeRateMax);
         }
 
-        this.#angle += 0.05;
+        this.#angle += 0.05 * (1 + level / 200);
 
         this.#updateBounds(viewAngle);
     }

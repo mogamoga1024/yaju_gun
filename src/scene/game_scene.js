@@ -271,7 +271,6 @@ class GameScene extends Scene {
                     const {x, y} = this.#shotPosList[i];
                     if (entity.isTargeted(x, y)) {
                         entity.takeDamage();
-                        this.#player.heal(entity.healAmount);
                         this.#shotPosList.splice(i, 1);
                     }
                 }
@@ -281,6 +280,7 @@ class GameScene extends Scene {
         for (let i = this.#enemyList.length - 1; i >= 0; i--) {
             const enemy = this.#enemyList[i];
             if (enemy.state === "dying" && !enemy.hasGivenExp) {
+                this.#player.heal(entity.healAmount);
                 enemy.hasGivenExp = true;
                 this.#nextExp -= 1;
             }
@@ -332,13 +332,8 @@ class GameScene extends Scene {
 
         // 本社生成
         if (this.#honsyaCreateFrame >= 60 * 60) {
-            if (Math.random() < 0.5) {
-                this.#enemyList.push(new Honsya(this.#viewAngle));
-                this.#honsyaCreateFrame = 0;
-            }
-            else {
-                this.#honsyaCreateFrame = 60 * 30;
-            }
+            this.#enemyList.push(new Honsya(this.#viewAngle));
+            this.#honsyaCreateFrame = 0;
         }
         
         // 敵の攻撃

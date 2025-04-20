@@ -23,23 +23,17 @@ class MessageWindow {
         context.fill();
     }
 
-    static drawTransientText(text) {
-        if (text === "") {
-            return;
+    // drawText("", true)でウィンドウを閉じる
+    static drawText(text, isTransient = false) {
+        if (isTransient) {
+            this.#drawTransientText(text);
         }
-        if (this.#currentText !== text) {
-            clearTimeout(this.#timerId);
-            this.#currentText = text;
-            this.#canDraw = true;
+        else {
+            this.#drawText(text);
         }
-        else if (!this.#canDraw) {
-            return;
-        }
+    }
 
-        this.#timerId = setTimeout(() => {
-            this.#canDraw = false;
-        }, 2000);
-
+    static #drawText(text) {
         this.#drawWindow();
 
         const fontSize = 32;
@@ -57,5 +51,25 @@ class MessageWindow {
             context.fillText(lineText, canvas.width / 2, y);
             y += lineHeight;
         }
+    }
+
+    static #drawTransientText(text) {
+        if (text === "") {
+            return;
+        }
+        if (this.#currentText !== text) {
+            clearTimeout(this.#timerId);
+            this.#currentText = text;
+            this.#canDraw = true;
+        }
+        else if (!this.#canDraw) {
+            return;
+        }
+
+        this.#timerId = setTimeout(() => {
+            this.#canDraw = false;
+        }, 2000);
+
+        this.#drawText(text);
     }
 }

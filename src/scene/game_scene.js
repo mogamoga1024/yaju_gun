@@ -232,7 +232,7 @@ class GameScene extends Scene {
         this.#turnRightBtn.draw(this.#shouldWarnRight);
 
         // メッセージウィンドウの描画
-        MessageWindow.drawTransientText(this.#message);
+        MessageWindow.drawText(this.#message, true);
 
         // 照準の描画
         if (isPC) {

@@ -42,7 +42,10 @@ class GameScene extends Scene {
     #shouldWarnRight = false;
     #canPlayYokomukunSound = true;
 
-    #message = ""; // todo
+    #message = {
+        text: "",
+        isTransient: true,
+    };
 
     constructor(useNipple) {
         super();
@@ -232,7 +235,7 @@ class GameScene extends Scene {
         this.#turnRightBtn.draw(this.#shouldWarnRight);
 
         // メッセージウィンドウの描画
-        MessageWindow.drawText(this.#message, true);
+        MessageWindow.drawText(this.#message.text, this.#message.isTransient);
 
         // 照準の描画
         if (isPC) {

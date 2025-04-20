@@ -42,7 +42,7 @@ class GameScene extends Scene {
     #shouldWarnRight = false;
     #canPlayYokomukunSound = true;
 
-    #message = "";
+    #message = ""; // todo
 
     constructor(useNipple) {
         super();
@@ -292,14 +292,6 @@ class GameScene extends Scene {
             // todo 効果音 レベルアップです！
             level += 1;
             this.#nextExp = this.#calcNextExp(level);
-
-            const messageList = [
-                "LevelUpです！",
-                "はえ～すっごい…",
-                "やりますねえ！",
-                "圧倒的成長を実感するんでしたよね？",
-            ];
-            this.#message = messageList[Math.floor(Math.random() * messageList.length)];
         }
 
         // 敵の生成

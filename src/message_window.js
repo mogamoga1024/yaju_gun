@@ -4,6 +4,9 @@ class MessageWindow {
     static #y = 0;
     static #width = 0;
     static #height = 0;
+    static #canDraw = true;
+    static #currentText = "";
+    static #timerId = 0;
 
     static init(marginX, marginY) {
         const height = canvas.height / 3;
@@ -13,14 +16,32 @@ class MessageWindow {
         this.#height = height;
     }
 
-    static drawWindow() {
+    static #drawWindow() {
         context.beginPath();
         context.fillStyle = "rgba(0, 128, 255, 0.5)";
         context.roundRect(this.#x, this.#y, this.#width, this.#height, 20);
         context.fill();
     }
 
-    static drawText(text) {
+    static drawTransientText(text) {
+        if (text === "") {
+            return;
+        }
+        if (this.#currentText !== text) {
+            clearTimeout(this.#timerId);
+            this.#currentText = text;
+            this.#canDraw = true;
+        }
+        else if (!this.#canDraw) {
+            return;
+        }
+
+        this.#timerId = setTimeout(() => {
+            this.#canDraw = false;
+        }, 2000);
+
+        this.#drawWindow();
+
         const fontSize = 32;
         const lineHeight = fontSize * 1.1;
         const lineTextList = text.split("\n");

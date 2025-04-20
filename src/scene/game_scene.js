@@ -42,6 +42,8 @@ class GameScene extends Scene {
     #shouldWarnRight = false;
     #canPlayYokomukunSound = true;
 
+    #message = "";
+
     constructor(useNipple) {
         super();
         this.#useNipple = useNipple;
@@ -230,8 +232,7 @@ class GameScene extends Scene {
         this.#turnRightBtn.draw(this.#shouldWarnRight);
 
         // メッセージウィンドウの描画
-        MessageWindow.drawWindow();
-        MessageWindow.drawText("お前のことが…\n好きだったんだよ！");
+        MessageWindow.drawTransientText(this.#message);
 
         // 照準の描画
         if (isPC) {
@@ -291,6 +292,14 @@ class GameScene extends Scene {
             // todo 効果音 レベルアップです！
             level += 1;
             this.#nextExp = this.#calcNextExp(level);
+
+            const messageList = [
+                "LevelUpです！",
+                "はえ～すっごい…",
+                "やりますねえ！",
+                "圧倒的成長を実感するんでしたよね？",
+            ];
+            this.#message = messageList[Math.floor(Math.random() * messageList.length)];
         }
 
         // 敵の生成

@@ -29,7 +29,7 @@ const kotodamaNameList = [];
     add1(b, "「愛のカタチ」四部合唱【山崎まさゆき】", "mp3", {volume: 0.9});
     add1(b, "星空.flv", "m4a", {volume: 0.45});
     add1(b, "太いぜ。", "mp3", {volume: 0.6});
-    add1(b, "シン・怪文書アレンジ／さとうささら", "m4a", {volume: 0.5});
+    add1(b, "シン・怪文書アレンジ／さとうささら", "m4a", {volume: 0.6});
     add1(b, "Namagusa Monk", "m4a", {volume: 0.35});
     add1(b, "PLUMBER(qwerty Remix)", "m4a", {volume: 0.5});
 
@@ -47,7 +47,7 @@ const kotodamaNameList = [];
     add1(s, "ンアッー！（ねっとり）", "mp3", {volume: 0.25});
     add2(s, "ムキムキオォン！", "オォン！", "mp3", {volume: 0.4, rate: 0.7});
     add1(s, "謎の金属音", "mp3", {volume: 0.7});
-    add1(s, "あーいいっすねー", "mp3", {volume: 0.8});
+    add1(s, "あーいいっすねー", "mp3", {volume: 1});
     add1(s, "アアッー！(高音)", "mp3", {volume: 0.8});
 
     // 言霊

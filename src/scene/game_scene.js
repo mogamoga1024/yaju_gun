@@ -580,7 +580,12 @@ class GameScene extends Scene {
     }
 
     #calcNextExp(nextLevel) {
-        return Math.floor(5 * Math.pow(nextLevel, 1/6));
+        if (nextLevel <= 100) {
+            return Math.floor(5 * Math.pow(nextLevel, 1/6));
+        }
+        else {
+            return Math.floor(5 * Math.pow(nextLevel, 1/3));
+        }
     }
 
     #drawDamageOverlay(damageRate) {

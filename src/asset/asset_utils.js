@@ -41,6 +41,7 @@ function loadSound(name, parentPath = "") {
             Object.assign(option, _option);
         }
         const sound = new Howl(option);
+        sound.name = name;
     });
 }
 

@@ -289,7 +289,7 @@ class GameScene extends Scene {
 
         // レベル処理
         if (this.#nextExp <= 0) {
-            // todo 効果音 レベルアップです！
+            playSound(SoundStorage.get("レベルアップ"));
             level += 1;
             this.#nextExp = this.#calcNextExp(level);
         }

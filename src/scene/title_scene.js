@@ -16,6 +16,7 @@ class TitleScene extends Scene {
         drawBackgroundImage(this.#backgroundImage);
         context.globalAlpha = 1;
 
+        context.textAlign = "start";
         context.textBaseline = "top";
         context.lineJoin = "round";
 

@@ -20,7 +20,21 @@ class MessageWindow {
         context.fill();
     }
 
-    static drawText() {
-        // todo
+    static drawText(text) {
+        const fontSize = 32;
+        const lineHeight = fontSize * 1.1;
+        const lineTextList = text.split("\n");
+        let y = this.#y + (this.#height - lineHeight * lineTextList.length) / 2 + (lineHeight - fontSize) / 2;
+
+        context.textAlign = "center";
+        context.textBaseline = "top";
+        context.font = `400 ${fontSize}px Xim-Sans`;
+        context.fillStyle = "#fff";
+
+        for (let i = 0; i < lineTextList.length; i++) {
+            const lineText = lineTextList[i];
+            context.fillText(lineText, canvas.width / 2, y);
+            y += lineHeight;
+        }
     }
 }

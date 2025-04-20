@@ -231,6 +231,7 @@ class GameScene extends Scene {
 
         // メッセージウィンドウの描画
         MessageWindow.drawWindow();
+        MessageWindow.drawText("お前のことが…\n好きだったんだよ！");
 
         // 照準の描画
         if (isPC) {
@@ -355,7 +356,7 @@ class GameScene extends Scene {
         this.#shouldWarnLeft = false;
         this.#shouldWarnRight = false;
         for (const entity of this.#sortedEntityList()) {
-            if (entity.temaeRate < 0.45) {
+            if (entity.temaeRate < 0.3) {
                 continue;
             }
             const leftX = entity.leftX();

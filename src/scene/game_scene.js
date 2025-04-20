@@ -583,7 +583,7 @@ class GameScene extends Scene {
             return Math.floor(5 * Math.pow(nextLevel, 1/6));
         }
         else {
-            return Math.floor(5 * Math.pow(nextLevel, 1/3));
+            return Math.MAX_SAFE_INTEGER;
         }
     }
 

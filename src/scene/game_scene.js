@@ -79,7 +79,7 @@ class GameScene extends Scene {
             }
             else {
                 bgm.unload();
-                playBGM()
+                playBGM();
             }
         });
 
@@ -97,8 +97,8 @@ class GameScene extends Scene {
                         this.#paraona = bgm;
                     }
                     playSound(bgm);
-                    bgm.on("end", playNextBGM);
-                    bgm.on("playerror", playNextBGM);
+                    bgm.on("end", () => playNextBGM());
+                    bgm.on("playerror", () => playNextBGM());
                 }
                 else {
                     playNextBGM();
@@ -313,20 +313,21 @@ class GameScene extends Scene {
 
         // 敵の生成
         if (this.#enemyCreateFrame >= (60 * 1.5) / (1 + level / 100)) {
-            const centerX = Math.random() * (canvas.width * 2);
-            const random = Math.random();
-            if (random < 0.1) {
-                this.#enemyList.push(new MukimukiSenpai(centerX, this.#viewAngle));
-            }
-            else if (random < 0.4) {
-                this.#enemyList.push(new RunningSenpai(centerX, this.#viewAngle));
-            }
-            else if (random < 0.6) {
-                this.#enemyList.push(new MeteorSenpai(centerX, this.#viewAngle));
-            }
-            else {
-                this.#enemyList.push(new ShoutingSenpai(centerX, this.#viewAngle));
-            }
+            // const centerX = Math.random() * (canvas.width * 2);
+            // const random = Math.random();
+            // if (random < 0.1) {
+            //     this.#enemyList.push(new MukimukiSenpai(centerX, this.#viewAngle));
+            // }
+            // else if (random < 0.4) {
+            //     this.#enemyList.push(new RunningSenpai(centerX, this.#viewAngle));
+            // }
+            // else if (random < 0.6) {
+            //     this.#enemyList.push(new MeteorSenpai(centerX, this.#viewAngle));
+            // }
+            // else {
+            //     this.#enemyList.push(new ShoutingSenpai(centerX, this.#viewAngle));
+            // }
+            this.#enemyList.push(new KunekuneSenpai(canvas.width / 2, this.#viewAngle));
             this.#enemyCreateFrame = 0;
         }
 

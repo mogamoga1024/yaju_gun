@@ -131,6 +131,8 @@ class GameScene extends Scene {
         this.#turnLeftBtn = new TurnLeftButton(10);
         this.#turnRightBtn = new TurnRightButton(10);
 
+        MessageWindow.init(10, 10);
+
         this.state = "loaded";
         this.#startAnimation();
     }
@@ -226,6 +228,9 @@ class GameScene extends Scene {
         // ボタンの描画
         this.#turnLeftBtn.draw(this.#shouldWarnLeft);
         this.#turnRightBtn.draw(this.#shouldWarnRight);
+
+        // メッセージウィンドウの描画
+        MessageWindow.drawWindow();
 
         // 照準の描画
         if (isPC) {

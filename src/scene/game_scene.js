@@ -262,7 +262,7 @@ class GameScene extends Scene {
             }
         }
 
-        // 敵の状態の更新と被弾
+        // 敵の被弾と状態の更新
         this.#sortedEntityList("desc").forEach(entity => {
             if (this.#shotPosList.length > 0) {
                 for (let i = this.#shotPosList.length - 1; i >= 0; i--) {
@@ -346,7 +346,7 @@ class GameScene extends Scene {
             this.#kotodamaList.push(kotodama);
         }
 
-        // プレイヤーの被弾
+        // プレイヤーの被弾と状態の更新
         for (let i = this.#enemyList.length - 1; i >= 0; i--) {
             const enemy = this.#enemyList[i];
             if (enemy.temaeRate >= 1) {
@@ -362,6 +362,7 @@ class GameScene extends Scene {
                 this.#player.takeDamage(kotodama.power);
             }
         }
+        this.#player.update();
 
         // ボタンをワーニングにするかチェック
         this.#shouldWarnLeft = false;

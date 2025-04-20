@@ -280,7 +280,7 @@ class GameScene extends Scene {
         for (let i = this.#enemyList.length - 1; i >= 0; i--) {
             const enemy = this.#enemyList[i];
             if (enemy.state === "dying" && !enemy.hasGivenExp) {
-                this.#player.heal(entity.healAmount);
+                this.#player.heal(enemy.healAmount);
                 enemy.hasGivenExp = true;
                 this.#nextExp -= 1;
             }

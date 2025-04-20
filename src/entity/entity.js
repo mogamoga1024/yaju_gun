@@ -2,7 +2,7 @@
 class Entity {
     temaeRate = 1;
     state = "alive"; // alive or dying or dead or disappear
-    healAmount = 0.1;
+    healAmount = 0.05;
     power = 1;
 
     constructor(temaeRate = 1) {

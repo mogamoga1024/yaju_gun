@@ -24,6 +24,7 @@ class MessageWindow {
     }
 
     // drawText("", true)でウィンドウを閉じる
+    // drawText("", false)でウィンドウを表示しっぱなし
     static drawText(text, isTransient = false) {
         if (isTransient) {
             this.#drawTransientText(text);

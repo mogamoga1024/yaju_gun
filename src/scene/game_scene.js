@@ -42,6 +42,8 @@ class GameScene extends Scene {
     #shouldWarnRight = false;
     #canPlayYokomukunSound = true;
 
+    #paraona = null;
+
     #message = {
         text: "",
         isTransient: true,
@@ -60,6 +62,7 @@ class GameScene extends Scene {
         // Lv.10まではパラオナボーイを流し続ける
         loadSound(bgmNameList[0]).then(bgm => {
             if (bgm.isOK) {
+                this.#paraona = bgm;
                 playSound(bgm);
                 for (const event of ["end", "playerror"]) {
                     bgm.on(event, () => {
@@ -68,6 +71,7 @@ class GameScene extends Scene {
                         }
                         else {
                             bgm.unload();
+                            this.#paraona = null;
                             playBGM();
                         }
                     });
@@ -85,9 +89,13 @@ class GameScene extends Scene {
                 const playNextBGM = () => {
                     bgli = (bgli + 1) % bgmNameList.length;
                     bgm.unload();
+                    this.#paraona = null;
                     playBGM();
                 };
                 if (bgm.isOK) {
+                    if (bgli === 0) {
+                        this.#paraona = bgm;
+                    }
                     playSound(bgm);
                     bgm.on("end", playNextBGM);
                     bgm.on("playerror", playNextBGM);
@@ -203,6 +211,9 @@ class GameScene extends Scene {
                 break;
             }
         }
+
+        // パラオナ
+        this.#paranoLyrics();
 
         // 背景の描画
         context.clearRect(0, 0, canvas.width, canvas.height);
@@ -436,6 +447,39 @@ class GameScene extends Scene {
             setTimeout(() => {
                 this.#canPlayYokomukunSound = true;
             }, 1000 * 10);
+        }
+    }
+
+    #paranoLyrics() {
+        if (this.#paraona !== null) {
+            const seek = this.#paraona.seek();
+            this.#message.isTransient = false;
+
+            if (seek < 1.5) {
+                this.#message.text = "";
+            }
+            else if (seek < 17) {
+                this.#message.text = "オチ〇ポ・パラダイス\nパラダイス・ラブ・ユー・ベイビー";
+            }
+            else if (seek < 25) {
+                this.#message.text = "パラダイス・オ〇ニー・ボーイ\n（略してパラオナボーイ）";
+            }
+            else if (seek < 31) {
+                this.#message.text = "泊まりのウリで　マジ狂いの天国さ";
+            }
+            else if (seek < 37) {
+                this.#message.text = "ホテル代も　バカにならないけどね";
+            }
+            else if (seek < 43) {
+                this.#message.text = "小遣い稼ぎなら　これが一番！";
+            }
+            else {
+                this.#message.text = "俺のケツ〇ンパラダイス";
+            }
+        }
+        else {
+            this.#message.isTransient = true;
+            this.#message.text = "";
         }
     }
 

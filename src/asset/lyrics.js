@@ -199,7 +199,111 @@ function lyrics(sound) {
         const seek = sound.seek();
         message.isTransient = false;
 
-        message.text = "おいおい、気安く呼ぶなよ！！\n一応同盟国だから来てやったんだぜ！\n尖閣守ってやらねーぞ！！"
+        if (seek < 999) {
+            message.text = "";
+        }
+        else if (seek < 999) {
+            message.text = "ウルトラマンが拉致されて";
+        }
+        else if (seek < 999) {
+            message.text = "腹筋ボコボコにパンチ食らって";
+        }
+        else if (seek < 999) {
+            message.text = "胸のランプが点滅すると あと3分で力尽き果てる";
+        }
+        else if (seek < 999) {
+            message.text = "その時のウルトラマンの苦しむ姿にドキドキするって";
+        }
+        else if (seek < 999) {
+            message.text = "ヒーロー〇〇だぜ！";
+        }
+        else if (seek < 999) {
+            message.text = "";
+        }
+        else if (seek < 999) {
+            message.text = "仮面かぶった拓也ゎ前見えねぇし\n息ゎ苦しいし";
+        }
+        else if (seek < 999) {
+            message.text = "ウルトラマン最後の3分間ゎ30分以上にわたり";
+        }
+        else if (seek < 999) {
+            message.text = "絶対負けるはずのないウルトラマンが倒れる";
+        }
+        else if (seek < 999) {
+            message.text = "そんなのあり得ない！";
+        }
+        else if (seek < 999) {
+            message.text = "力尽きたウルトラマンが〇される";
+        }
+        else if (seek < 999) {
+            message.text = "マヂ苦しい";
+        }
+        else if (seek < 999) {
+            message.text = "酸欠で死にそう";
+        }
+        else if (seek < 999) {
+            message.text = "力が入らなくなったウルトラマンの股が大きく開かれて";
+        }
+        else if (seek < 999) {
+            message.text = "ウルトラマ〇コにデカ〇ラが容赦なく突き刺さる";
+        }
+        else if (seek < 999) {
+            message.text = "脳天まで突き上げるファ〇クに苦しみ喘ぐ\n息もマスクで塞がれて";
+        }
+        else if (seek < 999) {
+            message.text = "最初ゎキュウキュウ締め付けていたウルトラマ〇コも";
+        }
+        else if (seek < 999) {
+            message.text = "酸欠で意識が薄れてくると";
+        }
+        else if (seek < 999) {
+            message.text = "最後ゎあの痙攣がやってくる";
+        }
+        else if (seek < 999) {
+            message.text = "ウルトラマンだって死ぬときゎ射〇するんだよ";
+        }
+        else if (seek < 999) {
+            message.text = "あー！！イク！！ ";
+        }
+        else if (seek < 999) {
+            message.text = "ウルトラマ〇コにビクビクと\n弾丸が撃ち込まれると同時に";
+        }
+        else if (seek < 999) {
+            message.text = "ウルトラマンも意識がぶっ飛び射〇";
+        }
+        else if (seek < 999) {
+            message.text = "そのあとピクピクと痙攣したまま動かなくなった";
+        }
+        else if (seek < 999) {
+            message.text = "";
+        }
+        else if (seek < 999) {
+            message.text = "ウルトラマンの夢枕に現れたのゎ\nあの、ターミネーター";
+        }
+        else if (seek < 999) {
+            message.text = "日本のウルトラマンは弱いな！！\nオレを見ろ！！絶対死なないぞ";
+        }
+        else if (seek < 999) {
+            message.text = "あっ…あっ シュワちゃんだ";
+        }
+        else if (seek < 999) {
+            message.text = "シュワッチ…シュワッチ！！";
+        }
+        else if (seek < 999) {
+            message.text = "おいおい、気安く呼ぶなよ！！\n一応同盟国だから来てやったんだぜ！\n尖閣守ってやらねーぞ！！";
+        }
+        else if (seek < 999) {
+            message.text = "シュワちゃんから強力なバワーをもらって帰ると\nウルトラマンの星で家族会議が始まった";
+        }
+        else if (seek < 999) {
+            message.text = "やっぱり シュワッチゎ変えた方が";
+        }
+        else if (seek < 999) {
+            message.text = "よくね？";
+        }
+        else {
+            message.text = "";
+        }        
     }
 
     return message;

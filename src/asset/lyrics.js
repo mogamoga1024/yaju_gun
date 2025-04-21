@@ -36,22 +36,25 @@ function lyrics(sound) {
         }
     }
     else if (sound.name === "「愛のカタチ」四部合唱【山崎まさゆき】") {
+        const seek = sound.seek();
+        message.isTransient = false;
+
         if (seek < 16.5) {
             message.text = "";
         }
-        else if (seek < 20) {
+        else if (seek < 20.5) {
             message.text = "人を好きになることいいこと";
         }
-        else if (seek < 24) {
+        else if (seek < 24.5) {
             message.text = "愛の表現はいろいろあるけど";
         }
-        else if (seek < 28) {
+        else if (seek < 28.5) {
             message.text = "愛のカタチはいろいろあるけど";
         }
-        else if (seek < 32) {
+        else if (seek < 32.5) {
             message.text = "決められたものじゃない";
         }
-        else if (seek < 40) {
+        else if (seek < 40.5) {
             message.text = "誰を愛そうがそれはいいこと";
         }
         else if (seek < 48.5) {
@@ -69,7 +72,7 @@ function lyrics(sound) {
         else if (seek < 68.5) {
             message.text = "人目 気にするな";
         }
-        else if (seek < 76) {
+        else if (seek < 75) {
             message.text = "自由に恋しよう";
         }
         else if (seek < 80.5) {
@@ -152,9 +155,15 @@ function lyrics(sound) {
         }
     }
     else if (sound.name === "星空.flv") {
+        const seek = sound.seek();
+        message.isTransient = false;
+
         // todo
     }
     else if (sound.name === "シン・怪文書アレンジ／さとうささら") {
+        const seek = sound.seek();
+        message.isTransient = false;
+
         // todo
     }
 

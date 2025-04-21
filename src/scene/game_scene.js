@@ -540,7 +540,7 @@ class GameScene extends Scene {
 
     #calcNextExp(nextLevel) {
         if (nextLevel <= 100) {
-            return Math.floor(5 * Math.pow(nextLevel, 1/6));
+            return Math.floor(5 * Math.pow(nextLevel, 1/7));
         }
         else {
             return Number.POSITIVE_INFINITY;

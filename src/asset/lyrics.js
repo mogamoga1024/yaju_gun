@@ -35,7 +35,13 @@ function lyrics(sound) {
             message.text = "俺のケツ〇ンパラダイス";
         }
     }
-    else {
+    else if (sound.name === "「愛のカタチ」四部合唱【山崎まさゆき】") {
+        // todo
+    }
+    else if (sound.name === "星空.flv") {
+        // todo
+    }
+    else if (sound.name === "シン・怪文書アレンジ／さとうささら") {
         // todo
     }
 

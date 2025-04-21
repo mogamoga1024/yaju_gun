@@ -34,7 +34,7 @@ class GameScene extends Scene {
     #enemyCreateFrame = 0;
     #honsyaCreateFrame = 0;
 
-    #nextExp = Number.MAX_SAFE_INTEGER;
+    #nextExp = Number.POSITIVE_INFINITY;
 
     #turnLeftBtn = null;
     #turnRightBtn = null;
@@ -136,7 +136,7 @@ class GameScene extends Scene {
             });
         }
 
-        level = 100;
+        level = 1;
         this.#nextExp = this.#calcNextExp(level);
 
         this.#turnLeftBtn = new TurnLeftButton(10);
@@ -230,14 +230,7 @@ class GameScene extends Scene {
         this.#drawDamageOverlay(this.#player.damageRate());
 
         // レベルの描画
-        context.textAlign = "start";
-        context.textBaseline = "top";
-        context.font = "400 40px Xim-Sans";
-        context.fillStyle = "#000";
-        context.strokeStyle = "#eee";
-        context.lineWidth = 5;
-        context.lineJoin = "round";
-        drawStrokeText(context, `Lv.${level}`, 20, 20);
+        this.#drawLevel();
 
         // ボタンの描画
         this.#turnLeftBtn.draw(this.#shouldWarnLeft);
@@ -550,7 +543,7 @@ class GameScene extends Scene {
             return Math.floor(5 * Math.pow(nextLevel, 1/6));
         }
         else {
-            return Math.MAX_SAFE_INTEGER;
+            return Number.POSITIVE_INFINITY;
         }
     }
 
@@ -568,5 +561,17 @@ class GameScene extends Scene {
         context.fillStyle = gradient;
         context.fillRect(0, 0, canvas.width, canvas.height);
         context.restore();
+    }
+
+    #drawLevel() {
+        context.textAlign = "start";
+        context.textBaseline = "top";
+        context.font = "400 40px Xim-Sans";
+        context.fillStyle = "#000";
+        context.strokeStyle = "#eee";
+        context.lineWidth = 5;
+        context.lineJoin = "round";
+        const text = level < 100 ? `Lv.${level}` : "Lv.MAX";
+        drawStrokeText(context, text, 20, 20);
     }
 }

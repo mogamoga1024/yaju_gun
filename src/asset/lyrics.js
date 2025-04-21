@@ -199,111 +199,114 @@ function lyrics(sound) {
         const seek = sound.seek();
         message.isTransient = false;
 
-        if (seek < 999) {
+        if (seek < 1.5) {
             message.text = "";
         }
-        else if (seek < 999) {
+        else if (seek < 4) {
             message.text = "ウルトラマンが拉致されて";
         }
-        else if (seek < 999) {
+        else if (seek < 7) {
             message.text = "腹筋ボコボコにパンチ食らって";
         }
-        else if (seek < 999) {
+        else if (seek < 13.5) {
             message.text = "胸のランプが点滅すると あと3分で力尽き果てる";
         }
-        else if (seek < 999) {
+        else if (seek < 22) {
             message.text = "その時のウルトラマンの苦しむ姿にドキドキするって";
         }
-        else if (seek < 999) {
+        else if (seek < 25.5) {
             message.text = "ヒーロー〇〇だぜ！";
         }
-        else if (seek < 999) {
+        else if (seek < 36) {
             message.text = "";
         }
-        else if (seek < 999) {
+        else if (seek < 41.5) {
             message.text = "仮面かぶった拓也ゎ前見えねぇし\n息ゎ苦しいし";
         }
-        else if (seek < 999) {
+        else if (seek < 47) {
             message.text = "ウルトラマン最後の3分間ゎ30分以上にわたり";
         }
-        else if (seek < 999) {
+        else if (seek < 56.5) {
             message.text = "絶対負けるはずのないウルトラマンが倒れる";
         }
-        else if (seek < 999) {
+        else if (seek < 59) {
             message.text = "そんなのあり得ない！";
         }
-        else if (seek < 999) {
+        else if (seek < 65) {
             message.text = "力尽きたウルトラマンが〇される";
         }
-        else if (seek < 999) {
+        else if (seek < 67) {
             message.text = "マヂ苦しい";
         }
-        else if (seek < 999) {
+        else if (seek < 70) {
             message.text = "酸欠で死にそう";
         }
-        else if (seek < 999) {
+        else if (seek < 79) {
             message.text = "力が入らなくなったウルトラマンの股が大きく開かれて";
         }
-        else if (seek < 999) {
+        else if (seek < 85) {
             message.text = "ウルトラマ〇コにデカ〇ラが容赦なく突き刺さる";
         }
-        else if (seek < 999) {
+        else if (seek < 93) {
             message.text = "脳天まで突き上げるファ〇クに苦しみ喘ぐ\n息もマスクで塞がれて";
         }
-        else if (seek < 999) {
+        else if (seek < 98) {
             message.text = "最初ゎキュウキュウ締め付けていたウルトラマ〇コも";
         }
-        else if (seek < 999) {
+        else if (seek < 110) {
             message.text = "酸欠で意識が薄れてくると";
         }
-        else if (seek < 999) {
+        else if (seek < 115.5) {
             message.text = "最後ゎあの痙攣がやってくる";
         }
-        else if (seek < 999) {
+        else if (seek < 122.5) {
             message.text = "ウルトラマンだって死ぬときゎ射〇するんだよ";
         }
-        else if (seek < 999) {
+        else if (seek < 130.5) {
             message.text = "あー！！イク！！ ";
         }
-        else if (seek < 999) {
+        else if (seek < 136) {
             message.text = "ウルトラマ〇コにビクビクと\n弾丸が撃ち込まれると同時に";
         }
-        else if (seek < 999) {
+        else if (seek < 141) {
             message.text = "ウルトラマンも意識がぶっ飛び射〇";
         }
-        else if (seek < 999) {
+        else if (seek < 155) {
             message.text = "そのあとピクピクと痙攣したまま動かなくなった";
         }
-        else if (seek < 999) {
+        else if (seek < 162) {
             message.text = "";
         }
-        else if (seek < 999) {
+        else if (seek < 169) {
             message.text = "ウルトラマンの夢枕に現れたのゎ\nあの、ターミネーター";
         }
-        else if (seek < 999) {
+        else if (seek < 176.5) {
             message.text = "日本のウルトラマンは弱いな！！\nオレを見ろ！！絶対死なないぞ";
         }
-        else if (seek < 999) {
+        else if (seek < 181) {
             message.text = "あっ…あっ シュワちゃんだ";
         }
-        else if (seek < 999) {
+        else if (seek < 184) {
             message.text = "シュワッチ…シュワッチ！！";
         }
-        else if (seek < 999) {
+        else if (seek < 196) {
             message.text = "おいおい、気安く呼ぶなよ！！\n一応同盟国だから来てやったんだぜ！\n尖閣守ってやらねーぞ！！";
         }
-        else if (seek < 999) {
+        else if (seek < 209.5) {
             message.text = "シュワちゃんから強力なバワーをもらって帰ると\nウルトラマンの星で家族会議が始まった";
         }
-        else if (seek < 999) {
+        else if (seek < 211.5) {
+            message.text = "";
+        }
+        else if (seek < 216.5) {
             message.text = "やっぱり シュワッチゎ変えた方が";
         }
-        else if (seek < 999) {
+        else if (seek < 217.5) {
             message.text = "よくね？";
         }
         else {
             message.text = "";
-        }        
+        }
     }
 
     return message;

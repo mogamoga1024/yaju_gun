@@ -22,16 +22,18 @@ const kotodamaNameList = [];
     const k = kotodamaNameList;
 
     // BGM
-    add1(b, "パラオナボーイ／feat.重音テト", "mp3", {volume: 0.9});
-    // add1(b, "PLUMBER", "m4a", {volume: 0.3});
-    // add1(b, "中華淫行", "m4a", {volume: 0.45});
-    add1(b, "snow prizm (Ketsupine mix)", "mp3", {volume: 0.2});
+    // add1(b, "パラオナボーイ／feat.重音テト", "mp3", {volume: 0.9});
+    // // add1(b, "PLUMBER", "m4a", {volume: 0.3});
+    // // add1(b, "中華淫行", "m4a", {volume: 0.45});
+    // add1(b, "snow prizm (Ketsupine mix)", "mp3", {volume: 0.2});
+    // add1(b, "「愛のカタチ」四部合唱【山崎まさゆき】", "mp3", {volume: 0.9});
+    // add1(b, "星空.flv", "m4a", {volume: 0.45});
+    // add1(b, "太いぜ。", "mp3", {volume: 0.6});
+    // add1(b, "シン・怪文書アレンジ／さとうささら", "m4a", {volume: 0.6});
+    // add1(b, "Namagusa Monk", "m4a", {volume: 0.35});
+    // add1(b, "PLUMBER(qwerty Remix)", "m4a", {volume: 0.5});
+
     add1(b, "「愛のカタチ」四部合唱【山崎まさゆき】", "mp3", {volume: 0.9});
-    add1(b, "星空.flv", "m4a", {volume: 0.45});
-    add1(b, "太いぜ。", "mp3", {volume: 0.6});
-    add1(b, "シン・怪文書アレンジ／さとうささら", "m4a", {volume: 0.6});
-    add1(b, "Namagusa Monk", "m4a", {volume: 0.35});
-    add1(b, "PLUMBER(qwerty Remix)", "m4a", {volume: 0.5});
 
     // 効果音
     add1(s, "ドンッ", "mp3", {volume: 0.8});

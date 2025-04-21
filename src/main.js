@@ -5,6 +5,9 @@ const canvas = document.querySelector("#game-canvas");
 const context = canvas.getContext("2d");
 
 let level = 1;
+function balanceFactor() {
+    return level * 1.1;
+}
 
 const isPC = (function() {
     const mobileRegex = /iphone;|(android|nokia|blackberry|bb10;).+mobile|android.+fennec|opera.+mobi|windows phone|symbianos/i;

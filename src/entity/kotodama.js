@@ -44,7 +44,7 @@ class Kotodama extends Entity {
 
     update(viewAngle) {
         this.#frameCount++;
-        this.#radian += 0.02 * (1 + level / 200);
+        this.#radian += 0.02 * (1 + balanceFactor() / 200);
 
         const temaeRateMax = 1;
         if (this.temaeRate >= temaeRateMax) {
@@ -52,7 +52,7 @@ class Kotodama extends Entity {
         }
         else {
             let a = 0.002 + 0.001 * this.temaeRate;
-            a *= 1 + level / 100;
+            a *= 1 + balanceFactor() / 100;
             this.temaeRate = Math.min(this.temaeRate + a, temaeRateMax);
         }
 

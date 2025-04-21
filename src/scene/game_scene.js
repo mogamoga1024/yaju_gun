@@ -170,7 +170,7 @@ class GameScene extends Scene {
 
     #update() {
         if (debug.canCreateEnemy) {
-            if (this.#enemyList.length < 6 * (1 + level / 100)) {
+            if (this.#enemyList.length < 6 * (1 + balanceFactor() / 100)) {
                 this.#enemyCreateFrame++;
             }
             this.#honsyaCreateFrame++;
@@ -303,7 +303,7 @@ class GameScene extends Scene {
         }
 
         // 敵の生成
-        if (this.#enemyCreateFrame >= (60 * 1.5) / (1 + level / 100)) {
+        if (this.#enemyCreateFrame >= (60 * 1.5) / (1 + balanceFactor() / 100)) {
             const centerX = Math.random() * (canvas.width * 2);
             const random = Math.random();
             if (random < 0.1) {

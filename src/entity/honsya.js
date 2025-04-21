@@ -18,8 +18,8 @@ class Honsya extends Entity {
     constructor(viewAngle) {
         super(0); // 一番後ろに表示させたいため
         this.#image = ImageStorage.get("本社");
-        this.#width = this.#image.width / 8;
-        this.#height = this.#image.height / 8;
+        this.#width = this.#image.width / 6;
+        this.#height = this.#image.height / 6;
 
         // viewAngle ∊ [0, 360)
         // 視界外に出現させたい

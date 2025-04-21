@@ -253,8 +253,11 @@ function lyrics(sound) {
         else if (seek < 98) {
             message.text = "最初ゎキュウキュウ締め付けていたウルトラマ〇コも";
         }
-        else if (seek < 110) {
+        else if (seek < 107) {
             message.text = "酸欠で意識が薄れてくると";
+        }
+        else if (seek < 110) {
+            message.text = "";
         }
         else if (seek < 115.5) {
             message.text = "最後ゎあの痙攣がやってくる";
@@ -265,7 +268,7 @@ function lyrics(sound) {
         else if (seek < 130.5) {
             message.text = "あー！！イク！！ ";
         }
-        else if (seek < 136) {
+        else if (seek < 135.5) {
             message.text = "ウルトラマ〇コにビクビクと\n弾丸が撃ち込まれると同時に";
         }
         else if (seek < 141) {
@@ -274,7 +277,7 @@ function lyrics(sound) {
         else if (seek < 155) {
             message.text = "そのあとピクピクと痙攣したまま動かなくなった";
         }
-        else if (seek < 162) {
+        else if (seek < 161.5) {
             message.text = "";
         }
         else if (seek < 169) {

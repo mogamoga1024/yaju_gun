@@ -253,7 +253,7 @@ function lyrics(sound) {
         else if (seek < 98) {
             message.text = "最初ゎキュウキュウ締め付けていたウルトラマ〇コも";
         }
-        else if (seek < 107) {
+        else if (seek < 106.5) {
             message.text = "酸欠で意識が薄れてくると";
         }
         else if (seek < 110) {

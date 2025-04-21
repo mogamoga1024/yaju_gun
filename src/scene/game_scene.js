@@ -59,14 +59,14 @@ class GameScene extends Scene {
         this.#backgroundImage = await loadImage("asset/草原.png");
         await this.#preload();
 
-        // Lv.10まではパラオナボーイを流し続ける
+        // 一定レベルまでパラオナボーイを流し続ける
         loadSound(bgmNameList[0]).then(bgm => {
             if (bgm.isOK) {
                 this.#bgm = bgm;
                 playSound(bgm);
                 for (const event of ["end", "playerror"]) {
                     bgm.on(event, () => {
-                        if (level <= 10) {
+                        if (level < 10) {
                             playSound(bgm);
                         }
                         else {

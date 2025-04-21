@@ -199,7 +199,7 @@ function lyrics(sound) {
         const seek = sound.seek();
         message.isTransient = false;
 
-        // todo
+        message.text = "おいおい、気安く呼ぶなよ！！\n一応同盟国だから来てやったんだぜ！\n尖閣守ってやらねーぞ！！"
     }
 
     return message;

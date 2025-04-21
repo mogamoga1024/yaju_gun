@@ -210,8 +210,8 @@ class GameScene extends Scene {
             }
         }
 
-        // パラオナ
-        this.#lyricsIfNeed();
+        // 歌詞
+        this.#message = lyrics(this.#bgm);
 
         // 背景の描画
         context.clearRect(0, 0, canvas.width, canvas.height);
@@ -441,39 +441,6 @@ class GameScene extends Scene {
             setTimeout(() => {
                 this.#canPlayYokomukunSound = true;
             }, 1000 * 10);
-        }
-    }
-
-    #lyricsIfNeed() {
-        if (this.#bgm?.name === "パラオナボーイ／feat.重音テト") {
-            const seek = this.#bgm.seek();
-            this.#message.isTransient = false;
-
-            if (seek < 1.5) {
-                this.#message.text = "";
-            }
-            else if (seek < 17) {
-                this.#message.text = "オチ〇ポ・パラダイス\nパラダイス・ラブ・ユー・ベイビー";
-            }
-            else if (seek < 25) {
-                this.#message.text = "パラダイス・オ〇ニー・ボーイ\n（略してパラオナボーイ）";
-            }
-            else if (seek < 31) {
-                this.#message.text = "泊まりのウリで　マジ狂いの天国さ";
-            }
-            else if (seek < 37) {
-                this.#message.text = "ホテル代も　バカにならないけどね";
-            }
-            else if (seek < 43) {
-                this.#message.text = "小遣い稼ぎなら　これが一番！";
-            }
-            else {
-                this.#message.text = "俺のケツ〇ンパラダイス";
-            }
-        }
-        else {
-            this.#message.isTransient = true;
-            this.#message.text = "";
         }
     }
 

@@ -78,76 +78,79 @@ function lyrics(sound) {
         else if (seek < 80.5) {
             message.text = "";
         }
-        else if (seek < 100) {
+        else if (seek < 84.5) {
             message.text = "男と女 誰が決めたの";
         }
-        else if (seek < 100) {
+        else if (seek < 88.5) {
             message.text = "誰を好きになるか分からない";
         }
-        else if (seek < 100) {
+        else if (seek < 92.5) {
             message.text = "性別や年 イヌやネコ";
         }
-        else if (seek < 100) {
+        else if (seek < 96.5) {
             message.text = "なんでもいいんじゃないか";
         }
-        else if (seek < 100) {
+        else if (seek < 104.5) {
             message.text = "この夜空を見ようよ";
         }
-        else if (seek < 100) {
+        else if (seek < 112.5) {
             message.text = "小さなことに思えてくるよ";
         }
-        else if (seek < 100) {
+        else if (seek < 120.5) {
             message.text = "なにが大切か もう一度 振り返って";
         }
-        else if (seek < 100) {
+        else if (seek < 124.5) {
             message.text = "恋をしよう幅ひろく";
         }
-        else if (seek < 100) {
+        else if (seek < 128.5) {
             message.text = "恋をしよう自由に";
         }
-        else if (seek < 100) {
+        else if (seek < 132) {
             message.text = "下を向かなくていい";
         }
-        else if (seek < 100) {
+        else if (seek < 136.5) {
             message.text = "間違いじゃないから";
         }
-        else if (seek < 100) {
+        else if (seek < 140.5) {
             message.text = "カタチにとらわれるな";
         }
-        else if (seek < 100) {
+        else if (seek < 144.5) {
             message.text = "常識に縛られるな";
         }
-        else if (seek < 100) {
+        else if (seek < 148.5) {
             message.text = "人目 気にするな";
         }
-        else if (seek < 100) {
+        else if (seek < 154.5) {
             message.text = "自由に恋しよう";
         }
-        else if (seek < 100) {
+        else if (seek < 160.5) {
+            message.text = "";
+        }
+        else if (seek < 168.5) {
             message.text = "カタチにとらわれるな";
         }
-        else if (seek < 100) {
+        else if (seek < 172.5) {
             message.text = "恋をしよう幅ひろく";
         }
-        else if (seek < 100) {
+        else if (seek < 176.5) {
             message.text = "恋をしよう自由に";
         }
-        else if (seek < 100) {
+        else if (seek < 180.5) {
             message.text = "下を向かなくていい";
         }
-        else if (seek < 100) {
+        else if (seek < 184.5) {
             message.text = "間違いじゃないから";
         }
-        else if (seek < 100) {
+        else if (seek < 188.5) {
             message.text = "カタチにとらわれるな";
         }
-        else if (seek < 100) {
+        else if (seek < 192.5) {
             message.text = "常識に縛られるな";
         }
-        else if (seek < 100) {
+        else if (seek < 196.5) {
             message.text = "人目 気にするな";
         }
-        else if (seek < 100) {
+        else if (seek < 203.5) {
             message.text = "自由に恋しよう";
         }
         else {

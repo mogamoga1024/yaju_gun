@@ -161,7 +161,39 @@ function lyrics(sound) {
         const seek = sound.seek();
         message.isTransient = false;
 
-        // todo
+        if (seek < 13.5) {
+            message.text = "いつものように　本を読み終わり\n私は窓を開け　夜の星空を見上げる";
+        }
+        else if (seek < 22.4) {
+            message.text = "";
+        }
+        else if (seek < 45) {
+            message.text = "星たちが輝く夜空を見ながら　思い浮かぶのは\nあなたの星のように輝いた笑顔";
+        }
+        else if (seek < 55.5) {
+            message.text = "まるで星のようなあなたに\n私はどうして届かないのだろう？";
+        }
+        else if (seek < 66.5) {
+            message.text = "どうして振り向いてもらえないのだろう？";
+        }
+        else if (seek < 76.5) {
+            message.text = "あなたは私のことをどう思っているの？";
+        }
+        else if (seek < 87.5) {
+            message.text = "あなたのことを考えただけで　胸が苦しくなる";
+        }
+        else if (seek < 98.5) {
+            message.text = "明日もまた　こうして夜の星空を見るだろう";
+        }
+        else if (seek < 105) {
+            message.text = "そのたび　私はあなたを思い浮かべる";
+        }
+        else if (seek < 113.5) {
+            message.text = "この夜空に輝く星のようなあなたを";
+        }
+        else {
+            message.text = "";
+        }
     }
     else if (sound.name === "シン・怪文書アレンジ／さとうささら") {
         const seek = sound.seek();

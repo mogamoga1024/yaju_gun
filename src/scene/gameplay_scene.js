@@ -566,11 +566,11 @@ class GameplayScene extends Scene {
     }
 
     #calcNextExp(nextLevel) {
-        if (nextLevel <= 100) {
+        if (nextLevel < 100) {
             return Math.floor(5 * Math.pow(nextLevel, 1/7));
         }
         else {
-            return Number.POSITIVE_INFINITY;
+            return 100;
         }
     }
 
@@ -582,7 +582,16 @@ class GameplayScene extends Scene {
         context.strokeStyle = "#eee";
         context.lineWidth = 5;
         context.lineJoin = "round";
-        const text = level < 100 ? `Lv.${level}` : "Lv.MAX";
+        let text = "Lv.";
+        if (level < 100) {
+            text += String(level);
+        }
+        else if (level === 100) {
+            text += "MAX";
+        }
+        else {
+            text += `MAX+${level - 100}`;
+        }
         drawStrokeText(context, text, 20, 20);
     }
 }

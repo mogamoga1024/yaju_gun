@@ -40,7 +40,6 @@ class GameplayScene extends Scene {
     #turnRightBtn = null;
     #shouldWarnLeft = false;
     #shouldWarnRight = false;
-    #canPlayYokomukunSound = true;
 
     #bgm = null;
 
@@ -50,6 +49,7 @@ class GameplayScene extends Scene {
     };
 
     #fadeOutAlpha = 0;
+    #fadeOutDuration = 5000;
 
     constructor(useNipple) {
         super();
@@ -165,21 +165,9 @@ class GameplayScene extends Scene {
                     this.#update();
                 }
                 if (this.#player.state === "dead") {
-                    const duration = 5000;
-                    Howler._howls.forEach(howl => {
-                        const playingIds = howl._getSoundIds().filter(id => howl.playing(id));
-        
-                        playingIds.forEach(id => {
-                            howl.fade(howl.volume(id), 0, duration, id);
-                        });
-                    });
                     setTimeout(() => {
-                        this.#enemyList.forEach(enemy => enemy.end());
-                        this.#bgm?.stop();
-                        setTimeout(() => {
-                            SceneManager.start(new TitleScene());
-                        }, 3000);
-                    }, duration);
+                        SceneManager.start(new TitleScene());
+                    }, 3000);
                 }
                 else {
                     requestAnimationFrame(anime);
@@ -237,7 +225,19 @@ class GameplayScene extends Scene {
         drawSparks(context);
 
         if (this.#player.state === "dying") {
-            this.#fadeOutAlpha += 0.005;
+            if (this.#fadeOutAlpha === 0) {
+                Howler._howls.forEach(howl => {
+                    const playingIds = howl._getSoundIds().filter(id => howl.playing(id));
+                    playingIds.forEach(id => {
+                        howl.fade(howl.volume(id), 0, this.#fadeOutDuration, id);
+                    });
+                });
+                setTimeout(() => {
+                    this.#enemyList.forEach(enemy => enemy.end());
+                    this.#bgm?.stop();
+                }, this.#fadeOutDuration);
+            }
+            this.#fadeOutAlpha += 0.004;
             if (this.#fadeOutAlpha > 1) {
                 this.#fadeOutAlpha = 1;
                 this.#player.state = "dead";
@@ -460,13 +460,8 @@ class GameplayScene extends Scene {
     }
 
     #playYokomukunSound() {
-        if (this.#canPlayYokomukunSound) {
-            this.#canPlayYokomukunSound = false;
-            playSound(SoundStorage.get("横向くんだよ90度！"));
-            setTimeout(() => {
-                this.#canPlayYokomukunSound = true;
-            }, 1000 * 10);
-        }
+        SoundStorage.get("横向くんだよ90度！").stop();
+        playSound(SoundStorage.get("横向くんだよ90度！"));
     }
 
     onKeyDown(e) {

@@ -116,7 +116,8 @@ class MeteorSenpai extends Entity {
     }
 
     leftX() {
-        return this.#x;
+        // todo これでもおかしい
+        return this.#virtualCenterX;
     }
 
     #updateBounds(viewAngle) {

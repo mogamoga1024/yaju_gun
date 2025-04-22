@@ -49,6 +49,8 @@ class GameplayScene extends Scene {
         isTransient: true,
     };
 
+    #fadeOutAlpha = 0;
+
     constructor(useNipple) {
         super();
         this.#useNipple = useNipple;
@@ -171,6 +173,7 @@ class GameplayScene extends Scene {
     #update() {
         if (this.#player.state === "dead") {
             // todo
+            return;
         }
 
         if (debug.canCreateEnemy) {
@@ -252,6 +255,13 @@ class GameplayScene extends Scene {
         drawSparks(context);
 
         if (this.#player.state === "dying") {
+            this.#fadeOutAlpha += 0.005;
+            if (this.#fadeOutAlpha > 1) {
+                this.#fadeOutAlpha = 1;
+                this.#player.state = "dead"; // todo GameOverScene
+            }
+            context.fillStyle = `rgba(255, 0, 128, ${this.#fadeOutAlpha})`;
+            context.fillRect(0, 0, canvas.width, canvas.height);
             return;
         }
 

@@ -164,32 +164,32 @@ class GameplayScene extends Scene {
                     prevTime = time;
                     this.#update();
                 }
-                requestAnimationFrame(anime);
+                if (this.#player.state === "dead") {
+                    const duration = 3000;
+                    Howler._howls.forEach(howl => {
+                        const playingIds = howl._getSoundIds().filter(id => howl.playing(id));
+        
+                        playingIds.forEach(id => {
+                            howl.fade(howl.volume(id), 0, duration, id);
+                        });
+                    });
+                    setTimeout(() => {
+                        this.#enemyList.forEach(enemy => enemy.end());
+                        this.#bgm?.stop();
+                        setTimeout(() => {
+                            SceneManager.start(new TitleScene());
+                        }, 1000);
+                    }, duration);
+                }
+                else {
+                    requestAnimationFrame(anime);
+                }
             }
         };
         anime(performance.now());
     }
 
     #update() {
-        if (this.#player.state === "dead") {
-            
-            Howler._howls.forEach(howl => {
-                const playingIds = howl._getSoundIds().filter(id => howl.playing(id));
-                const duration = 3000;
-
-                playingIds.forEach(id => {
-                    howl.fade(howl.volume(id), 0, duration, id);
-                });
-            });
-
-            setTimeout(() => {
-                this.#enemyList.forEach(enemy => enemy.end());
-                this.#bgm?.stop();
-            }, duration);
-
-            return;
-        }
-
         if (debug.canCreateEnemy) {
             if (this.#enemyList.length < 6 * (1 + balanceFactor() / 100)) {
                 this.#enemyCreateFrame++;
@@ -198,38 +198,6 @@ class GameplayScene extends Scene {
         }
 
         context.clearRect(0, 0, canvas.width, canvas.height);
-
-        // PCでのキーイベントの捕捉
-        if (isPC) {
-            const speed = 4;
-            if (this.#pc.isPressed.left) {
-                this.#viewAngle = (this.#viewAngle + speed) % 360;
-            }
-            if (this.#pc.isPressed.right) {
-                this.#viewAngle = (this.#viewAngle + (360 - speed)) % 360;
-            }
-            if (this.#pc.isPressed.turn && this.#pc.canTurn) {
-                this.#pc.canTurn = false;
-                this.#viewAngle = (this.#viewAngle + 180) % 360;
-            }
-        }
-        else if (this.#useNipple) {
-            this.#viewAngle = (this.#viewAngle + this.#nippleDx) % 360;
-        }
-
-        // ボタンが押されたときの処理
-        for (const {x, y} of this.#shotPosList) {
-            if (this.#turnLeftBtn.isTargeted(x, y)) {
-                this.#playYokomukunSound();
-                this.#viewAngle = (this.#viewAngle + 90) % 360;
-                break;
-            }
-            if (this.#turnRightBtn.isTargeted(x, y)) {
-                this.#playYokomukunSound();
-                this.#viewAngle = (this.#viewAngle + 270) % 360;
-                break;
-            }
-        }
 
         // 歌詞
         this.#message = lyrics(this.#bgm);
@@ -277,6 +245,38 @@ class GameplayScene extends Scene {
             context.fillStyle = `rgba(255, 0, 128, ${this.#fadeOutAlpha})`;
             context.fillRect(0, 0, canvas.width, canvas.height);
             return;
+        }
+
+        // PCでのキーイベントの捕捉
+        if (isPC) {
+            const speed = 4;
+            if (this.#pc.isPressed.left) {
+                this.#viewAngle = (this.#viewAngle + speed) % 360;
+            }
+            if (this.#pc.isPressed.right) {
+                this.#viewAngle = (this.#viewAngle + (360 - speed)) % 360;
+            }
+            if (this.#pc.isPressed.turn && this.#pc.canTurn) {
+                this.#pc.canTurn = false;
+                this.#viewAngle = (this.#viewAngle + 180) % 360;
+            }
+        }
+        else if (this.#useNipple) {
+            this.#viewAngle = (this.#viewAngle + this.#nippleDx) % 360;
+        }
+
+        // ボタンが押されたときの処理
+        for (const {x, y} of this.#shotPosList) {
+            if (this.#turnLeftBtn.isTargeted(x, y)) {
+                this.#playYokomukunSound();
+                this.#viewAngle = (this.#viewAngle + 90) % 360;
+                break;
+            }
+            if (this.#turnRightBtn.isTargeted(x, y)) {
+                this.#playYokomukunSound();
+                this.#viewAngle = (this.#viewAngle + 270) % 360;
+                break;
+            }
         }
 
         // プレイヤーの攻撃

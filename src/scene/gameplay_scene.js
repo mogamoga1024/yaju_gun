@@ -165,7 +165,7 @@ class GameplayScene extends Scene {
                     this.#update();
                 }
                 if (this.#player.state === "dead") {
-                    const duration = 3000;
+                    const duration = 5000;
                     Howler._howls.forEach(howl => {
                         const playingIds = howl._getSoundIds().filter(id => howl.playing(id));
         
@@ -178,7 +178,7 @@ class GameplayScene extends Scene {
                         this.#bgm?.stop();
                         setTimeout(() => {
                             SceneManager.start(new TitleScene());
-                        }, 1000);
+                        }, 3000);
                     }, duration);
                 }
                 else {

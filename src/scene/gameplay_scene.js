@@ -240,7 +240,7 @@ class GameplayScene extends Scene {
             this.#fadeOutAlpha += 0.005;
             if (this.#fadeOutAlpha > 1) {
                 this.#fadeOutAlpha = 1;
-                this.#player.state = "dead"; // todo GameOverScene
+                this.#player.state = "dead";
             }
             context.fillStyle = `rgba(255, 0, 128, ${this.#fadeOutAlpha})`;
             context.fillRect(0, 0, canvas.width, canvas.height);

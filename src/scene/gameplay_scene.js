@@ -1,5 +1,5 @@
 
-class GameScene extends Scene {
+class GameplayScene extends Scene {
     static #isFirst = true;
     #backgroundImage = null;
     #gunshotSound = null;
@@ -55,7 +55,7 @@ class GameScene extends Scene {
     }
 
     async onStart() {
-        console.log("GameScene:onStart");
+        console.log("GameplayScene:onStart");
         this.#backgroundImage = await loadImage("asset/草原.png");
         await this.#preload();
 
@@ -381,10 +381,10 @@ class GameScene extends Scene {
     }
 
     async #preload() {
-        if (!GameScene.#isFirst) {
+        if (!GameplayScene.#isFirst) {
             return;
         }
-        GameScene.#isFirst = false;
+        GameplayScene.#isFirst = false;
 
         const promiseList = [];
         const plpiss = (name) => {

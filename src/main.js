@@ -57,7 +57,7 @@ document.addEventListener("visibilitychange", () => {
         // todo ゲームを中断し、タイトル画面に遷移させる
     } else {
         // todo 再度、音を取得する
-        // todo GameScene.#isFirstもtrueにしなければならない
+        // todo GameplayScene.#isFirstもtrueにしなければならない
     }
 });
 

@@ -84,8 +84,10 @@ class Kotodama extends Entity {
         this.state = "dead";
     }
 
-    leftX() {
-        return this.#centerX - this.#width / 2;
+    getXRange() {
+        const leftX = this.#centerX - this.#width / 2;
+        const rightX = leftX + this.#width;
+        return {leftX, rightX};
     }
 
     #updateBounds(viewAngle) {

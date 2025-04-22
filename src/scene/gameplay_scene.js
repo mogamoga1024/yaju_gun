@@ -400,7 +400,7 @@ class GameplayScene extends Scene {
             if (entity.temaeRate < 0.3) {
                 continue;
             }
-            const leftX = entity.leftX();
+            const {leftX, rightX} = entity.getXRange();
             if (leftX >= canvas.width * 3 / 2) {
                 this.#shouldWarnLeft = true;
             }

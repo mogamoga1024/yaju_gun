@@ -11,10 +11,6 @@ class SceneManager {
             if (this.#scene?.state !== "loaded") return;
             this.#scene?.onKeyUp(e);
         });
-        window.addEventListener("deviceorientation", e => {
-            if (this.#scene?.state !== "loaded") return;
-            this.#scene?.onDeviceOrientation(e); 
-        });
         canvas.addEventListener("click", e => {
             if (this.#scene?.state !== "loaded") return;
             this.#scene?.onClick(e);

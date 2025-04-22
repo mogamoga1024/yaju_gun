@@ -508,10 +508,6 @@ class GameplayScene extends Scene {
                 break;
         }
     }
-    
-    onDeviceOrientation(e) {
-        this.#viewAngle = e.alpha;
-    }
 
     onClick(e) {
         if (!isPC) {

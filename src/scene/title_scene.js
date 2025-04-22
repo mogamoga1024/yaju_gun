@@ -44,30 +44,6 @@ class TitleScene extends Scene {
     }
     
     onClick(e) {
-        // todo
         SceneManager.start(new GameplayScene(!isPC));
-        // if (!isPC) {
-        //     if (typeof DeviceOrientationEvent.requestPermission === "function") {
-        //         DeviceOrientationEvent.requestPermission()
-        //             .then(permissionState => {
-        //                 if (permissionState === "granted") {
-        //                     // ジャイロ操作をする
-        //                     SceneManager.start(new GameplayScene(false));
-        //                 }
-        //                 else {
-        //                     // ジャイロ操作をしない
-        //                     SceneManager.start(new GameplayScene(true));
-        //                 }
-        //             })
-        //             .catch(error => {
-        //                 SceneManager.start(new GameplayScene(true));
-        //             });
-        //     } else {
-        //         SceneManager.start(new GameplayScene(true));
-        //     }
-        // }
-        // else {
-        //     SceneManager.start(new GameplayScene(false));
-        // }
     }
 }

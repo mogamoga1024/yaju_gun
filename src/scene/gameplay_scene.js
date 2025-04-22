@@ -110,7 +110,7 @@ class GameplayScene extends Scene {
 
         // debug start
         // 0 <= centerX < canvas.width * 2
-        // this.#enemyList.push(new MeteorSenpai(canvas.width / 2, this.#viewAngle));
+        this.#enemyList.push(new MeteorSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new RunningSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new MukimukiSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new ShoutingSenpai(canvas.width / 2, this.#viewAngle));
@@ -178,12 +178,12 @@ class GameplayScene extends Scene {
     }
 
     #update() {
-        if (debug.canCreateEnemy) {
-            if (this.#enemyList.length < 6 * (1 + balanceFactor() / 100)) {
-                this.#enemyCreateFrame++;
-            }
-            this.#honsyaCreateFrame++;
-        }
+        // if (debug.canCreateEnemy) {
+        //     if (this.#enemyList.length < 6 * (1 + balanceFactor() / 100)) {
+        //         this.#enemyCreateFrame++;
+        //     }
+        //     this.#honsyaCreateFrame++;
+        // }
 
         context.clearRect(0, 0, canvas.width, canvas.height);
 

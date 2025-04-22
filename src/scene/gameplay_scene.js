@@ -562,13 +562,14 @@ class GameplayScene extends Scene {
         }
     }
 
-    #drawDamageOverlay(damageRate) {
-        if (damageRate === 0) {
+    #drawDamageOverlay(_damageRate) {
+        if (_damageRate === 0) {
             return;
         }
         context.save();
+        const damageRate = Math.min(_damageRate * 1.5, 1);
         const gradient = context.createRadialGradient(
-            canvas.width / 2, canvas.height / 2, 50 * (1 - damageRate),
+            canvas.width / 2, canvas.height / 2, 0,
             canvas.width / 2, canvas.height / 2, canvas.width / 2
         );
         gradient.addColorStop(0, "rgba(255, 0, 128, 0)");

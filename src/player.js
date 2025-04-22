@@ -1,5 +1,6 @@
 
 class Player {
+    state = "alive"; // alive or dead
     #hp = 4;
     #maxHp = 4;
     #mutekiFrameCount = 0;
@@ -16,7 +17,10 @@ class Player {
             return;
         }
 
-        this.#hp -= power; // todo GameOver
+        this.#hp -= power;
+        if (this.#hp <= 0) {
+            this.state = "dead";
+        }
         playSound(SoundStorage.get("ドンッ"));
         playSound(SoundStorage.get("アアッー！(高音)"));
         

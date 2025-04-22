@@ -172,7 +172,21 @@ class GameplayScene extends Scene {
 
     #update() {
         if (this.#player.state === "dead") {
-            // todo
+            
+            Howler._howls.forEach(howl => {
+                const playingIds = howl._getSoundIds().filter(id => howl.playing(id));
+                const duration = 3000;
+
+                playingIds.forEach(id => {
+                    howl.fade(howl.volume(id), 0, duration, id);
+                });
+            });
+
+            setTimeout(() => {
+                this.#enemyList.forEach(enemy => enemy.end());
+                this.#bgm?.stop();
+            }, duration);
+
             return;
         }
 

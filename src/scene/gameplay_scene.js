@@ -110,12 +110,16 @@ class GameplayScene extends Scene {
 
         // debug start
         // 0 <= centerX < canvas.width * 2
-        this.#enemyList.push(new MeteorSenpai(canvas.width / 2, this.#viewAngle));
+        // this.#enemyList.push(new MeteorSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new RunningSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new MukimukiSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new ShoutingSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new KunekuneSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new Honsya(this.#viewAngle));
+        // debug end
+
+        // debug start
+        this.#enemyList.push(new MeteorSenpai(canvas.width / 2, this.#viewAngle, 0.5));
         // debug end
 
         if (this.#useNipple) {

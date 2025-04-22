@@ -170,14 +170,9 @@ class GameplayScene extends Scene {
 
     #update() {
         if (this.#player.state === "dead") {
-            this.#updateGameOver();
+            // todo
         }
-        else {
-            this.#updateGameplay();
-        }
-    }
 
-    #updateGameplay() {
         if (debug.canCreateEnemy) {
             if (this.#enemyList.length < 6 * (1 + balanceFactor() / 100)) {
                 this.#enemyCreateFrame++;
@@ -387,12 +382,6 @@ class GameplayScene extends Scene {
         
         // 後処理
         this.#shotPosList = [];
-    }
-
-    #updateGameOver() {
-        context.clearRect(0, 0, canvas.width, canvas.height);
-
-        // todo
     }
 
     async #preload() {

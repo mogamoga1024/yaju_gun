@@ -119,6 +119,7 @@ class GameplayScene extends Scene {
         // debug end
 
         // debug start
+        // this.#enemyList.push(new KunekuneSenpai(canvas.width / 2, this.#viewAngle, 0.5));
         this.#enemyList.push(new MeteorSenpai(canvas.width / 2, this.#viewAngle, 0.5));
         // debug end
 
@@ -401,11 +402,15 @@ class GameplayScene extends Scene {
                 continue;
             }
             const {leftX, rightX} = entity.getXRange();
-            if (leftX >= canvas.width * 3 / 2) {
-                this.#shouldWarnLeft = true;
-            }
-            else if (leftX >= canvas.width) {
-                this.#shouldWarnRight = true;
+            if (leftX >= canvas.width) {
+                const overflowRight = leftX - canvas.width;
+                const overflowLeft = canvas.width * 2 - rightX;
+                if (overflowRight <= overflowLeft) {
+                    this.#shouldWarnRight = true;
+                }
+                else {
+                    this.#shouldWarnLeft = true;
+                }
             }
             if (this.#shouldWarnLeft && this.#shouldWarnRight) {
                 break;

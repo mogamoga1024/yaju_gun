@@ -251,6 +251,10 @@ class GameplayScene extends Scene {
         // 火花の描画
         drawSparks(context);
 
+        if (this.#player.state === "dying") {
+            return;
+        }
+
         // プレイヤーの攻撃
         if (this.#shotPosList.length > 0) {
             playSound(this.#gunshotSound);

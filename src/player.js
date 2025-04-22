@@ -1,6 +1,6 @@
 
 class Player {
-    state = "alive"; // alive or dead
+    state = "alive"; // alive or or dying or dead
     #hp = 4;
     #maxHp = 4;
     #mutekiFrameCount = 0;
@@ -35,7 +35,7 @@ class Player {
         this.#hp -= power;
         if (this.#hp <= 0) {
             this.#hp = 0;
-            this.state = "dead";
+            this.state = "dying";
         }
         playSound(SoundStorage.get("ドンッ"));
         playSound(SoundStorage.get("アアッー！(高音)"));

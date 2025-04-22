@@ -11,6 +11,21 @@ class Player {
         context.drawImage(image, x - size / 2, y - size / 2, size, size);
     }
 
+    drawDamageOverlay() {
+        const damageRate = 1 - (this.#hp / this.#maxHp);
+
+        context.save();
+        const gradient = context.createRadialGradient(
+            canvas.width / 2, canvas.height / 2, 0,
+            canvas.width / 2, canvas.height / 2, canvas.width / 2 - 100 * damageRate
+        );
+        gradient.addColorStop(0, "rgba(255, 0, 128, 0)");
+        gradient.addColorStop(1, `rgba(255, 0, 128, ${damageRate})`);
+        context.fillStyle = gradient;
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.restore();
+    }
+
     takeDamage(power) {
         if (this.#mutekiFrameCount > 0) {
             playSound(SoundStorage.get("謎の金属音"));
@@ -19,6 +34,7 @@ class Player {
 
         this.#hp -= power;
         if (this.#hp <= 0) {
+            this.#hp = 0;
             this.state = "dead";
         }
         playSound(SoundStorage.get("ドンッ"));
@@ -32,11 +48,6 @@ class Player {
         if (this.#hp > this.#maxHp) {
             this.#hp = this.#maxHp;
         }
-    }
-
-    damageRate() {
-        if (this.#hp <= 0) return 1;
-        return 1 - (this.#hp / this.#maxHp);
     }
 
     update() {

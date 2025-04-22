@@ -231,7 +231,7 @@ class GameplayScene extends Scene {
         });
 
         // ダメージ描写の描画
-        this.#drawDamageOverlay(this.#player.damageRate());
+        this.#player.drawDamageOverlay();
 
         // レベルの描画
         this.#drawLevel();
@@ -549,23 +549,6 @@ class GameplayScene extends Scene {
         else {
             return Number.POSITIVE_INFINITY;
         }
-    }
-
-    #drawDamageOverlay(_damageRate) {
-        if (_damageRate === 0) {
-            return;
-        }
-        context.save();
-        const damageRate = Math.min(_damageRate * 1.5, 1);
-        const gradient = context.createRadialGradient(
-            canvas.width / 2, canvas.height / 2, 0,
-            canvas.width / 2, canvas.height / 2, canvas.width / 2
-        );
-        gradient.addColorStop(0, "rgba(255, 0, 128, 0)");
-        gradient.addColorStop(1, `rgba(255, 0, 128, ${damageRate})`);
-        context.fillStyle = gradient;
-        context.fillRect(0, 0, canvas.width, canvas.height);
-        context.restore();
     }
 
     #drawLevel() {

@@ -48,7 +48,12 @@ class MeteorSenpai extends Entity {
 
     draw() {
         // いんゆめくんの描画
-        // todo this.#inymImage
+        context.save();
+        context.globalAlpha = this.#opacity * 0.5;
+        const inymX = this.#virtualCenterX - this.#diagonal / 2;
+        const inymY = this.#virtualCenterY - this.#diagonal / 2;
+        context.drawImage(this.#inymImage, inymX, inymY, this.#diagonal, this.#diagonal);
+        context.restore();
 
         // 野獣先輩の描画
         context.save();
@@ -62,11 +67,12 @@ class MeteorSenpai extends Entity {
         // 爆発の描画
         this.#explosion?.draw(this.#virtualCenterX, this.#virtualCenterY, Math.max(this.#width, this.#height));
 
-        context.beginPath();
-        context.arc(this.#virtualCenterX, this.#virtualCenterY, this.#diagonal / 2, 0, Math.PI * 2);
-        context.fillStyle = `rgba(0, 0, 255, 0.5)`;
-        context.fill();
-        context.closePath();
+        // 当たり判定のデバッグ用
+        // context.beginPath();
+        // context.arc(this.#virtualCenterX, this.#virtualCenterY, this.#diagonal / 2, 0, Math.PI * 2);
+        // context.fillStyle = `rgba(0, 0, 255, 0.5)`;
+        // context.fill();
+        // context.closePath();
     }
 
     update(viewAngle) {

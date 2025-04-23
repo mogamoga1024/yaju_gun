@@ -558,7 +558,7 @@ class GameplayScene extends Scene {
 
     #calcNextExp(nextLevel) {
         if (nextLevel < this.#maxLevel) {
-            return Math.floor(5 * Math.pow(nextLevel, 1/8));
+            return Math.floor(5 * Math.pow(nextLevel + this.#maxLevel, 1/8));
         }
         else {
             return 100;

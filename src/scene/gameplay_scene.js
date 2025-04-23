@@ -254,7 +254,8 @@ class GameplayScene extends Scene {
 
         // PCでのキーイベントの捕捉
         if (isPC) {
-            const speed = 4;
+            // const speed = 4;
+            const speed = 1; // todo debugのため
             if (this.#pc.isPressed.left) {
                 this.#viewAngle = (this.#viewAngle + speed) % 360;
             }

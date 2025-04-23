@@ -35,6 +35,7 @@ class GameplayScene extends Scene {
     #honsyaCreateFrame = 0;
 
     #nextExp = Number.POSITIVE_INFINITY;
+    #score = 0;
 
     #turnLeftBtn = null;
     #turnRightBtn = null;
@@ -60,30 +61,6 @@ class GameplayScene extends Scene {
         console.log("GameplayScene:onStart");
         this.#backgroundImage = await loadImage("asset/草原.png");
         await this.#preload();
-
-        // 一定レベルまでパラオナボーイを流し続ける
-        // loadSound(bgmNameList[0]).then(bgm => {
-        //     if (bgm.isOK) {
-        //         this.#bgm = bgm;
-        //         playSound(bgm);
-        //         for (const event of ["end", "playerror"]) {
-        //             bgm.on(event, () => {
-        //                 if (level < 10) {
-        //                     playSound(bgm);
-        //                 }
-        //                 else {
-        //                     bgm.unload();
-        //                     this.#bgm = null;
-        //                     playBGM();
-        //                 }
-        //             });
-        //         }
-        //     }
-        //     else {
-        //         bgm.unload();
-        //         playBGM();
-        //     }
-        // });
 
         let bgli = 0;
         const playBGM = () => {
@@ -216,6 +193,9 @@ class GameplayScene extends Scene {
         // レベルの描画
         this.#drawLevel();
 
+        // スコアの描画
+        this.#drawScore();
+
         // ボタンの描画
         this.#turnLeftBtn.draw(this.#shouldWarnLeft);
         this.#turnRightBtn.draw(this.#shouldWarnRight);
@@ -313,6 +293,7 @@ class GameplayScene extends Scene {
                 this.#player.heal(enemy.healAmount);
                 enemy.hasGivenExp = true;
                 this.#nextExp -= 1;
+                this.#score += enemy.score;
             }
             else if (enemy.state === "dead") {
                 this.#enemyList.splice(i, 1);
@@ -326,6 +307,7 @@ class GameplayScene extends Scene {
         for (let i = this.#kotodamaList.length - 1; i >= 0; i--) {
             const kotodama = this.#kotodamaList[i];
             if (kotodama.state === "dead" || kotodama.shooter.state === "dying") {
+                this.#score += kotodama.score;
                 this.#kotodamaList.splice(i, 1);
             }
         }
@@ -601,5 +583,19 @@ class GameplayScene extends Scene {
             text += `MAX+${level - 100}`;
         }
         drawStrokeText(context, text, 20, 20);
+    }
+
+    #drawScore() {
+        context.textAlign = "start";
+        context.textBaseline = "top";
+        context.font = "400 40px Xim-Sans";
+        context.fillStyle = "#000";
+        context.strokeStyle = "#eee";
+        context.lineWidth = 5;
+        context.lineJoin = "round";
+
+        const text = String(`SCORE ${this.#score}`);
+        const measure = context.measureText(text);
+        drawStrokeText(context, text, canvas.width - measure.width - 20, 20);
     }
 }

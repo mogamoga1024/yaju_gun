@@ -5,6 +5,7 @@ class Entity {
     healAmount = 0.05;
     power = 1;
     hasGivenExp = false;
+    score = 100;
 
     constructor(temaeRate = 1) {
         this.temaeRate = temaeRate;

@@ -14,6 +14,7 @@ class Honsya extends Entity {
     #opacity = 1;
     #explosion = null;
     healAmount = 9999;
+    score = 3000;
 
     constructor(viewAngle) {
         super(0); // 一番後ろに表示させたいため

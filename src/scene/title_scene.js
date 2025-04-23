@@ -1,12 +1,22 @@
 
 class TitleScene extends Scene {
     #backgroundImage = null;
+    #canClick = false;
+
+    constructor(canClick = false) {
+        super();
+        this.#canClick = canClick;
+    }
 
     async onStart() {
         console.log("TitleScene:onStart");
         this.#backgroundImage = await loadImage("asset/やじゅがん.png");
         this.state = "loaded";
         this.#update();
+        if (!this.#canClick) setTimeout(() => {
+            // ゲームオーバー画面から戻ってきたときに連打しているとすぐ開始してしまうため
+            this.#canClick = true;
+        }, 1000);
     }
 
     #update() {
@@ -34,6 +44,9 @@ class TitleScene extends Scene {
     }
     
     onClick(e) {
+        if (!this.#canClick) {
+            return;
+        }
         SceneManager.start(new GameplayScene(!isPC));
     }
 

@@ -6,7 +6,7 @@ const context = canvas.getContext("2d");
 
 let level = 1;
 function balanceFactor() {
-    return (level + 55) * 1.1;
+    return (level + 50 + 10) * 1.1;
 }
 
 const isPC = (function() {
@@ -83,7 +83,7 @@ document.addEventListener("visibilitychange", () => {
         isFirst = false;
         loadImage("asset/こちらを見つめる先輩.png").then(image => {
             drawLoading.backgroundImage = image;
-            SceneManager.start(new TitleScene());
+            SceneManager.start(new TitleScene(true));
         });
     }
 })();

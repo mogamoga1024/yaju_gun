@@ -44,8 +44,6 @@ class MeteorSenpai extends Entity {
     }
 
     draw() {
-        console.log(this.#x);
-
         context.save();
         context.globalAlpha = this.#opacity;
         context.translate(this.#x + this.#width, this.#y + this.#height);

@@ -106,6 +106,8 @@ class GameplayScene extends Scene {
             });
         };
 
+        playBGM();
+
         this.#gunshotSound = SoundStorage.get("銃声");
 
         // debug start

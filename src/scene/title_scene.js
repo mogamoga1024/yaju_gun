@@ -16,12 +16,11 @@ class TitleScene extends Scene {
         drawBackgroundImage(this.#backgroundImage);
         context.globalAlpha = 1;
 
+        this.#drawTitle();
+
         context.textAlign = "start";
         context.textBaseline = "top";
         context.lineJoin = "round";
-
-        this.#drawTitle();
-
         context.font = "400 40px Xim-Sans";
         context.fillStyle = "#000";
         context.strokeStyle = "#eee";
@@ -41,7 +40,9 @@ class TitleScene extends Scene {
     #drawTitle() {
         context.save();
     
+        context.textAlign = "start";
         context.textBaseline = "middle";
+        context.lineJoin = "round";
         context.lineWidth = 12;
         const baseY = 180;
     

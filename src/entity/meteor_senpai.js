@@ -45,8 +45,6 @@ class MeteorSenpai extends Entity {
     }
 
     draw() {
-        console.log(this.#x);
-
         context.save();
         context.globalAlpha = this.#opacity;
         context.translate(this.#x + this.#width, this.#y + this.#height);
@@ -123,9 +121,13 @@ class MeteorSenpai extends Entity {
     }
 
     getXRange() {
-        const diagonal = this.#diagonal;
-        const leftX = this.#virtualCenterX - diagonal;
-        const rightX = this.#virtualCenterX + diagonal;
+        const radius = this.#diagonal / 2;
+        let leftX = this.#virtualCenterX - radius;
+        if (leftX + radius * 2 < 0) {
+            leftX = leftX + canvas.width * 2;
+        }
+        const rightX = leftX + radius * 2;
+        
         return {leftX, rightX};
     }
 

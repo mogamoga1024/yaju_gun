@@ -44,6 +44,8 @@ class MeteorSenpai extends Entity {
     }
 
     draw() {
+        console.log(this.#x);
+
         context.save();
         context.globalAlpha = this.#opacity;
         context.translate(this.#x + this.#width, this.#y + this.#height);
@@ -134,7 +136,7 @@ class MeteorSenpai extends Entity {
         const offsetX = (canvasCenterX * (viewAngle / 90)) % (canvasCenterX * 4);
         this.#x = (this.#pivotX - this.#width + offsetX) % (canvas.width * 2);
 
-        if (this.#x + this.#diagonal() > canvas.width * 2) {
+        if (this.#x + this.#width + this.#diagonal() > canvas.width * 2) {
             this.#x = this.#x - canvas.width * 2;
         }
 

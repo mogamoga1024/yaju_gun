@@ -50,6 +50,8 @@ class GameplayScene extends Scene {
         isTransient: true,
     };
 
+    #isTutorial = true;
+
     #fadeOutAlpha = 0;
     #fadeOutDuration = 5000;
 
@@ -125,6 +127,10 @@ class GameplayScene extends Scene {
         // this.#enemyList.push(new MeteorSenpai(canvas.width / 2, this.#viewAngle, 0.5));
         // debug end
 
+        // チュートリアル用
+        this.#enemyList.push(new KunekuneSenpai(canvas.width / 2, this.#viewAngle));
+        this.#enemyList.push(new KunekuneSenpai(canvas.width / 2 * 3, this.#viewAngle));
+
         if (this.#useNipple) {
             this.#nipple = nipplejs.create({
                 zone: domGameCanvasWrapper,
@@ -185,7 +191,7 @@ class GameplayScene extends Scene {
     }
 
     #update() {
-        if (debug.canCreateEnemy) {
+        if (debug.canCreateEnemy && !this.#isTutorial) {
             if (this.#enemyList.length < 8 * (1 + balanceFactor() / 100)) {
                 this.#enemyCreateFrame++;
             }
@@ -194,8 +200,19 @@ class GameplayScene extends Scene {
 
         context.clearRect(0, 0, canvas.width, canvas.height);
 
-        // 歌詞
-        this.#message = lyrics(this.#bgm);
+        // メッセージ
+        if (this.#isTutorial) {
+            this.#message.isTransient = false;
+            if (isPC) {
+                this.#message.text = "クリックで攻撃\nAキーとDキーで移動";
+            }
+            else {
+                this.#message.text = "タップで攻撃\n指を押したまま動かすと移動";
+            }
+        }
+        else {
+            this.#message = lyrics(this.#bgm);
+        }
 
         // 背景の描画
         context.clearRect(0, 0, canvas.width, canvas.height);
@@ -419,6 +436,11 @@ class GameplayScene extends Scene {
             if (this.#shouldWarnLeft && this.#shouldWarnRight) {
                 break;
             }
+        }
+
+        // スコアの値によって、チュートリアルを終わる
+        if (this.#isTutorial && this.#score >= 200) {
+            this.#isTutorial = false;
         }
         
         // 後処理

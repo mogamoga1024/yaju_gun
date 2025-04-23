@@ -50,9 +50,9 @@ class MeteorSenpai extends Entity {
         // いんゆめくんの描画
         context.save();
         context.globalAlpha = this.#opacity * 0.5;
-        const inymX = this.#virtualCenterX - this.#diagonal / 2;
-        const inymY = this.#virtualCenterY - this.#diagonal / 2;
-        context.drawImage(this.#inymImage, inymX, inymY, this.#diagonal, this.#diagonal);
+        context.translate(this.#virtualCenterX, this.#virtualCenterY);
+        context.rotate(-this.#frameCount * 0.06);
+        context.drawImage(this.#inymImage, -this.#diagonal / 2, -this.#diagonal / 2, this.#diagonal, this.#diagonal);
         context.restore();
 
         // 野獣先輩の描画

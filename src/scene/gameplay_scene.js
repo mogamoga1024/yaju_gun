@@ -405,9 +405,6 @@ class GameplayScene extends Scene {
         this.#shouldWarnLeft = false;
         this.#shouldWarnRight = false;
         for (const entity of this.#sortedEntityList()) {
-            // if (entity.temaeRate < 0.3) {
-            //     continue;
-            // }
             const {leftX, rightX} = entity.getXRange();
             if (leftX >= canvas.width) {
                 const overflowRight = leftX - canvas.width;

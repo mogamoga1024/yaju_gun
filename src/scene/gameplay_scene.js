@@ -35,6 +35,7 @@ class GameplayScene extends Scene {
     #honsyaCreateFrame = 0;
 
     #nextExp = Number.POSITIVE_INFINITY;
+    #maxLevel = 50;
     #score = 0;
 
     #turnLeftBtn = null;
@@ -556,8 +557,8 @@ class GameplayScene extends Scene {
     }
 
     #calcNextExp(nextLevel) {
-        if (nextLevel < 100) {
-            return Math.floor(5 * Math.pow(nextLevel, 1/7));
+        if (nextLevel < this.#maxLevel) {
+            return Math.floor(5 * Math.pow(nextLevel, 1/8));
         }
         else {
             return 100;
@@ -573,14 +574,14 @@ class GameplayScene extends Scene {
         context.lineWidth = 5;
         context.lineJoin = "round";
         let text = "Lv.";
-        if (level < 100) {
+        if (level < this.#maxLevel) {
             text += String(level);
         }
-        else if (level === 100) {
+        else if (level === this.#maxLevel) {
             text += "MAX";
         }
         else {
-            text += `MAX+${level - 100}`;
+            text += `MAX+${level - this.#maxLevel}`;
         }
         drawStrokeText(context, text, 20, 20);
     }

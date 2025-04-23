@@ -11,6 +11,7 @@ class MeteorSenpai extends Entity {
     #angle = 0;
     #virtualCenterX = 0;
     #virtualCenterY = 0;
+    #inymRadian = 0;
     #frameCount = 0;
     #yajuImageList = [];
     #yajuImageListIndex = 0;
@@ -49,9 +50,9 @@ class MeteorSenpai extends Entity {
     draw() {
         // いんゆめくんの描画
         context.save();
-        context.globalAlpha = this.#opacity * 0.5;
+        context.globalAlpha = this.#opacity * 0.15;
         context.translate(this.#virtualCenterX, this.#virtualCenterY);
-        context.rotate(-this.#frameCount * 0.06);
+        context.rotate(this.#inymRadian);
         context.drawImage(this.#inymImage, -this.#diagonal / 2, -this.#diagonal / 2, this.#diagonal, this.#diagonal);
         context.restore();
 
@@ -105,10 +106,11 @@ class MeteorSenpai extends Entity {
         else {
             let a = 0.0008 + 0.002 * this.temaeRate;
             a *= 1 + balanceFactor() / 100;
-            // this.temaeRate = Math.min(this.temaeRate + a, temaeRateMax);
+            this.temaeRate = Math.min(this.temaeRate + a, temaeRateMax);
         }
 
         this.#angle += 0.05 * (1 + balanceFactor() / 200);
+        this.#inymRadian -= 0.06;
 
         this.#updateBounds(viewAngle);
     }

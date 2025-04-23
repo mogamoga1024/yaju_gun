@@ -6,7 +6,7 @@ const context = canvas.getContext("2d");
 
 let level = 1;
 function balanceFactor() {
-    return level * 1.1;
+    return level * 1.2;
 }
 
 const isPC = (function() {

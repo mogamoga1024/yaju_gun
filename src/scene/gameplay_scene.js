@@ -120,7 +120,7 @@ class GameplayScene extends Scene {
 
         // debug start
         // this.#enemyList.push(new KunekuneSenpai(canvas.width / 2, this.#viewAngle, 0.5));
-        this.#enemyList.push(new MeteorSenpai(canvas.width / 2, this.#viewAngle, 0.5));
+        // this.#enemyList.push(new MeteorSenpai(canvas.width / 2, this.#viewAngle, 0.5));
         // debug end
 
         if (this.#useNipple) {
@@ -183,12 +183,12 @@ class GameplayScene extends Scene {
     }
 
     #update() {
-        // if (debug.canCreateEnemy) {
-        //     if (this.#enemyList.length < 6 * (1 + balanceFactor() / 100)) {
-        //         this.#enemyCreateFrame++;
-        //     }
-        //     this.#honsyaCreateFrame++;
-        // }
+        if (debug.canCreateEnemy) {
+            if (this.#enemyList.length < 6 * (1 + balanceFactor() / 100)) {
+                this.#enemyCreateFrame++;
+            }
+            this.#honsyaCreateFrame++;
+        }
 
         context.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -254,8 +254,7 @@ class GameplayScene extends Scene {
 
         // PCでのキーイベントの捕捉
         if (isPC) {
-            // const speed = 4;
-            const speed = 1; // todo debugのため
+            const speed = 4;
             if (this.#pc.isPressed.left) {
                 this.#viewAngle = (this.#viewAngle + speed) % 360;
             }

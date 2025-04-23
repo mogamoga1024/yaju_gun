@@ -63,7 +63,31 @@ class GameplayScene extends Scene {
         this.#backgroundImage = await loadImage("asset/草原.png");
         await this.#preload();
 
-        let bgli = 0;
+        // 最大レベルまでSmart Boy(Daily Unchi Special Mix)を流し続ける
+        loadSound(bgmNameList[0]).then(bgm => {
+            if (bgm.isOK) {
+                this.#bgm = bgm;
+                playSound(bgm);
+                for (const event of ["end", "playerror"]) {
+                    bgm.on(event, () => {
+                        if (level < this.#maxLevel) {
+                            playSound(bgm);
+                        }
+                        else {
+                            bgm.unload();
+                            this.#bgm = null;
+                            playBGM();
+                        }
+                    });
+                }
+            }
+            else {
+                bgm.unload();
+                playBGM();
+            }
+        });
+
+        let bgli = 1;
         const playBGM = () => {
             loadSound(bgmNameList[bgli]).then(bgm => {
                 const playNextBGM = () => {
@@ -83,8 +107,6 @@ class GameplayScene extends Scene {
                 }
             });
         };
-
-        playBGM();
 
         this.#gunshotSound = SoundStorage.get("銃声");
 
@@ -164,7 +186,7 @@ class GameplayScene extends Scene {
 
     #update() {
         if (debug.canCreateEnemy) {
-            if (this.#enemyList.length < 6 * (1 + balanceFactor() / 100)) {
+            if (this.#enemyList.length < 8 * (1 + balanceFactor() / 100)) {
                 this.#enemyCreateFrame++;
             }
             this.#honsyaCreateFrame++;
@@ -325,7 +347,7 @@ class GameplayScene extends Scene {
         }
 
         // 敵の生成
-        if (this.#enemyCreateFrame >= (60 * 1.5) / (1 + balanceFactor() / 100)) {
+        if (this.#enemyCreateFrame >= (60 * 1.25) / (1 + balanceFactor() / 100)) {
             const centerX = Math.random() * (canvas.width * 2);
             const random = Math.random();
             if (random < 0.1) {

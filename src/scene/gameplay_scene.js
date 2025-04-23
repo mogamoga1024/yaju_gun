@@ -450,6 +450,7 @@ class GameplayScene extends Scene {
             plpiss(`くねくね先輩/${i}`);
         }
         plpiss("本社");
+        plpiss("いんゆめくん");
         plpiss("照準1");
         plpiss("照準2");
         plpiss("爆発スプライト_170");

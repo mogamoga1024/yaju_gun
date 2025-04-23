@@ -12,9 +12,10 @@ class MeteorSenpai extends Entity {
     #virtualCenterX = 0;
     #virtualCenterY = 0;
     #frameCount = 0;
-    #imageList = [];
-    #imageListIndex = 0;
-    #imageListIndexDelta = 1;
+    #yajuImageList = [];
+    #yajuImageListIndex = 0;
+    #yajuImageListIndexDelta = 1;
+    #inymImage = null;
     #animeFrameMax = 11;
     #meteorSoundId = -1;
     #opacity = 1;
@@ -25,10 +26,11 @@ class MeteorSenpai extends Entity {
         this.#pivotX = pivotX;
         for (let i = 0; i <= this.#animeFrameMax; i++) {
             const image = ImageStorage.get(`タオル先輩/${i}`);
-            this.#imageList.push(image);
+            this.#yajuImageList.push(image);
         }
-        this.#oriWidth = this.#imageList[0].width * 1.5;
-        this.#oriHeight = this.#imageList[0].height * 1.5;
+        this.#inymImage = ImageStorage.get("いんゆめくん");
+        this.#oriWidth = this.#yajuImageList[0].width * 1.5;
+        this.#oriHeight = this.#yajuImageList[0].height * 1.5;
         this.#updateBounds(viewAngle);
 
         playSound(SoundStorage.get("ンアッー！（ねっとり）")).then(id => {
@@ -45,14 +47,19 @@ class MeteorSenpai extends Entity {
     }
 
     draw() {
+        // いんゆめくんの描画
+        // todo this.#inymImage
+
+        // 野獣先輩の描画
         context.save();
         context.globalAlpha = this.#opacity;
         context.translate(this.#x + this.#width, this.#y + this.#height);
         context.rotate(this.#angle);
-        const image = this.#imageList[this.#imageListIndex];
+        const image = this.#yajuImageList[this.#yajuImageListIndex];
         context.drawImage(image, -this.#width, -this.#height, this.#width, this.#height);
         context.restore();
 
+        // 爆発の描画
         this.#explosion?.draw(this.#virtualCenterX, this.#virtualCenterY, Math.max(this.#width, this.#height));
 
         context.beginPath();
@@ -76,13 +83,13 @@ class MeteorSenpai extends Entity {
         }
 
         if (this.#frameCount % 4 == 0) {
-            if (this.#imageListIndex <= 0) {
-                this.#imageListIndexDelta = 1;
+            if (this.#yajuImageListIndex <= 0) {
+                this.#yajuImageListIndexDelta = 1;
             }
-            else if (this.#imageListIndex >= this.#animeFrameMax) {
-                this.#imageListIndexDelta = -1;
+            else if (this.#yajuImageListIndex >= this.#animeFrameMax) {
+                this.#yajuImageListIndexDelta = -1;
             }
-            this.#imageListIndex += this.#imageListIndexDelta;
+            this.#yajuImageListIndex += this.#yajuImageListIndexDelta;
         }
 
         const temaeRateMax = 1;
@@ -127,7 +134,7 @@ class MeteorSenpai extends Entity {
             leftX = leftX + canvas.width * 2;
         }
         const rightX = leftX + radius * 2;
-        
+
         return {leftX, rightX};
     }
 

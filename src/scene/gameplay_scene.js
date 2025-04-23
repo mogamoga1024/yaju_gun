@@ -62,30 +62,30 @@ class GameplayScene extends Scene {
         await this.#preload();
 
         // 一定レベルまでパラオナボーイを流し続ける
-        loadSound(bgmNameList[0]).then(bgm => {
-            if (bgm.isOK) {
-                this.#bgm = bgm;
-                playSound(bgm);
-                for (const event of ["end", "playerror"]) {
-                    bgm.on(event, () => {
-                        if (level < 10) {
-                            playSound(bgm);
-                        }
-                        else {
-                            bgm.unload();
-                            this.#bgm = null;
-                            playBGM();
-                        }
-                    });
-                }
-            }
-            else {
-                bgm.unload();
-                playBGM();
-            }
-        });
+        // loadSound(bgmNameList[0]).then(bgm => {
+        //     if (bgm.isOK) {
+        //         this.#bgm = bgm;
+        //         playSound(bgm);
+        //         for (const event of ["end", "playerror"]) {
+        //             bgm.on(event, () => {
+        //                 if (level < 10) {
+        //                     playSound(bgm);
+        //                 }
+        //                 else {
+        //                     bgm.unload();
+        //                     this.#bgm = null;
+        //                     playBGM();
+        //                 }
+        //             });
+        //         }
+        //     }
+        //     else {
+        //         bgm.unload();
+        //         playBGM();
+        //     }
+        // });
 
-        let bgli = 1;
+        let bgli = 0;
         const playBGM = () => {
             loadSound(bgmNameList[bgli]).then(bgm => {
                 const playNextBGM = () => {

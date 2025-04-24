@@ -456,59 +456,6 @@ class GameplayScene extends Scene {
         this.#shotPosList = [];
     }
 
-    async #preload() {
-        if (!GameplayScene.#isFirst) {
-            return;
-        }
-        GameplayScene.#isFirst = false;
-
-        const promiseList = [];
-        const plpiss = (name) => {
-            promiseList.push((async () => ImageStorage.set(name, await loadImage(`asset/${name}.png`)))());
-        };
-        const plpsss = (name) => {
-            promiseList.push((async () => SoundStorage.set(name, await loadSound(name)))());
-        };
-
-        // 画像
-        for (let i = 0; i <= 12; i++) {
-            plpiss(`走る野獣先輩/${i}`);
-        }
-        for (let i = 0; i <= 6; i++) {
-            plpiss(`ムキムキ先輩/${i}`);
-        }
-        for (let i = 0; i <= 11; i++) {
-            plpiss(`タオル先輩/${i}`);
-        }
-        for (let i = 0; i <= 5; i++) {
-            plpiss(`くねくね先輩/${i}`);
-        }
-        plpiss("本社");
-        plpiss("いんゆめくん");
-        plpiss("照準1");
-        plpiss("照準2");
-        plpiss("爆発スプライト_170");
-        
-        // 音声
-        for (const name of seNameList) {
-            plpsss(name);
-        }
-        for (const name of kotodamaNameList) {
-            plpsss(name);
-        }
-
-        await Promise.all(promiseList);
-    }
-
-    #sortedEntityList(sortOrder = "asc") {
-        return this.#enemyList.concat(this.#kotodamaList).sort((a, b) => (a.temaeRate - b.temaeRate) * (sortOrder === "asc" ? 1 : -1));
-    }
-
-    #playYokomukunSound() {
-        SoundStorage.get("横向くんだよ90度！").stop();
-        playSound(SoundStorage.get("横向くんだよ90度！"));
-    }
-
     onKeyDown(e) {
         if (!isPC) {
             return;
@@ -597,6 +544,59 @@ class GameplayScene extends Scene {
         const {x, y} = this.#canvasXY(e.offsetX, e.offsetY, rect);
         this.#pc.mouseX = x;
         this.#pc.mouseY = y;
+    }
+
+    async #preload() {
+        if (!GameplayScene.#isFirst) {
+            return;
+        }
+        GameplayScene.#isFirst = false;
+
+        const promiseList = [];
+        const plpiss = (name) => {
+            promiseList.push((async () => ImageStorage.set(name, await loadImage(`asset/${name}.png`)))());
+        };
+        const plpsss = (name) => {
+            promiseList.push((async () => SoundStorage.set(name, await loadSound(name)))());
+        };
+
+        // 画像
+        for (let i = 0; i <= 12; i++) {
+            plpiss(`走る野獣先輩/${i}`);
+        }
+        for (let i = 0; i <= 6; i++) {
+            plpiss(`ムキムキ先輩/${i}`);
+        }
+        for (let i = 0; i <= 11; i++) {
+            plpiss(`タオル先輩/${i}`);
+        }
+        for (let i = 0; i <= 5; i++) {
+            plpiss(`くねくね先輩/${i}`);
+        }
+        plpiss("本社");
+        plpiss("いんゆめくん");
+        plpiss("照準1");
+        plpiss("照準2");
+        plpiss("爆発スプライト_170");
+        
+        // 音声
+        for (const name of seNameList) {
+            plpsss(name);
+        }
+        for (const name of kotodamaNameList) {
+            plpsss(name);
+        }
+
+        await Promise.all(promiseList);
+    }
+
+    #sortedEntityList(sortOrder = "asc") {
+        return this.#enemyList.concat(this.#kotodamaList).sort((a, b) => (a.temaeRate - b.temaeRate) * (sortOrder === "asc" ? 1 : -1));
+    }
+
+    #playYokomukunSound() {
+        SoundStorage.get("横向くんだよ90度！").stop();
+        playSound(SoundStorage.get("横向くんだよ90度！"));
     }
 
     #canvasXY(offsetX, offsetY, rect) {

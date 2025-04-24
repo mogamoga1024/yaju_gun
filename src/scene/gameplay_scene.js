@@ -587,20 +587,21 @@ class GameplayScene extends Scene {
     }
 
     #createRandomEnemy() {
+        const enemyClassList = [RunningSenpai, MeteorSenpai, ShoutingSenpai, MukimukiSenpai];
+        const totalWeight = enemyClassList.reduce((sum, enemyClass) => sum + enemyClass.spawnWeight, 0);
         const centerX = Math.random() * (canvas.width * 2);
-        const random = Math.random();
-        if (random < 0.1) {
-            return new MukimukiSenpai(centerX, this.#viewAngle);
+
+        let rand = Math.random() * totalWeight;
+        for (const enemyClass of enemyClassList) {
+            rand -= enemyClass.spawnWeight;
+            if (rand <= 0) {
+                return new enemyClass(centerX, this.#viewAngle);
+            }
         }
-        else if (random < 0.4) {
-            return new RunningSenpai(centerX, this.#viewAngle)
-        }
-        else if (random < 0.6) {
-            return new MeteorSenpai(centerX, this.#viewAngle);
-        }
-        else {
-            return new ShoutingSenpai(centerX, this.#viewAngle);
-        }
+
+        // 万が一何も選ばれなかった場合、最初の敵を返す
+        // 浮動小数点による丸め誤差対策
+        return new enemyClassList[0](centerX, this.#viewAngle);
     }
 
     #canvasXY(offsetX, offsetY, rect) {

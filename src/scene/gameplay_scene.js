@@ -374,20 +374,7 @@ class GameplayScene extends Scene {
 
         // 敵の生成
         if (this.#enemyCreateFrame >= (60 * 1.25) / (1 + balanceFactor() / 100)) {
-            const centerX = Math.random() * (canvas.width * 2);
-            const random = Math.random();
-            if (random < 0.1) {
-                this.#enemyList.push(new MukimukiSenpai(centerX, this.#viewAngle));
-            }
-            else if (random < 0.4) {
-                this.#enemyList.push(new RunningSenpai(centerX, this.#viewAngle));
-            }
-            else if (random < 0.6) {
-                this.#enemyList.push(new MeteorSenpai(centerX, this.#viewAngle));
-            }
-            else {
-                this.#enemyList.push(new ShoutingSenpai(centerX, this.#viewAngle));
-            }
+            this.#enemyList.push(this.#createRandomEnemy());
             this.#enemyCreateFrame = 0;
         }
 
@@ -597,6 +584,23 @@ class GameplayScene extends Scene {
     #playYokomukunSound() {
         SoundStorage.get("横向くんだよ90度！").stop();
         playSound(SoundStorage.get("横向くんだよ90度！"));
+    }
+
+    #createRandomEnemy() {
+        const centerX = Math.random() * (canvas.width * 2);
+        const random = Math.random();
+        if (random < 0.1) {
+            return new MukimukiSenpai(centerX, this.#viewAngle);
+        }
+        else if (random < 0.4) {
+            return new RunningSenpai(centerX, this.#viewAngle)
+        }
+        else if (random < 0.6) {
+            return new MeteorSenpai(centerX, this.#viewAngle);
+        }
+        else {
+            return new ShoutingSenpai(centerX, this.#viewAngle);
+        }
     }
 
     #canvasXY(offsetX, offsetY, rect) {

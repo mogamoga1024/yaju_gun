@@ -65,60 +65,10 @@ class GameplayScene extends Scene {
         this.#backgroundImage = await loadImage("asset/草原.png");
         await this.#preload();
 
-        // 最大レベルまでSmart Boy(Daily Unchi Special Mix)を流し続ける
-        loadSound(bgmNameList[0]).then(bgm => {
-            if (this.#player.state !== "alive") {
-                bgm.unload();
-                return;
-            }
-            if (bgm.isOK) {
-                this.#bgm = bgm;
-                playSound(bgm);
-                for (const event of ["end", "playerror"]) {
-                    bgm.on(event, () => {
-                        if (level < this.#maxLevel) {
-                            playSound(bgm);
-                        }
-                        else {
-                            bgm.unload();
-                            this.#bgm = null;
-                            playBGM();
-                        }
-                    });
-                }
-            }
-            else {
-                bgm.unload();
-                playBGM();
-            }
-        });
-
-        let bgli = 1;
-        const playBGM = () => {
-            loadSound(bgmNameList[bgli]).then(bgm => {
-                if (this.#player.state !== "alive") {
-                    bgm.unload();
-                    return;
-                }
-                const playNextBGM = () => {
-                    bgli = (bgli + 1) % bgmNameList.length;
-                    bgm.unload();
-                    this.#bgm = null;
-                    playBGM();
-                };
-                if (bgm.isOK) {
-                    this.#bgm = bgm;
-                    playSound(bgm);
-                    bgm.on("end", playNextBGM);
-                    bgm.on("playerror", playNextBGM);
-                }
-                else {
-                    playNextBGM();
-                }
-            });
-        };
-
+        this.#bgm = SoundStorage.get("Smart Boy(Daily Unchi Special Mix)");
         this.#gunshotSound = SoundStorage.get("銃声");
+
+        playSound(this.#bgm);
 
         // debug start
         // 0 <= centerX < canvas.width * 2
@@ -219,7 +169,8 @@ class GameplayScene extends Scene {
             }
         }
         else {
-            this.#message = lyrics(this.#bgm);
+            this.#message.isTransient = true;
+            this.#message.text = "";
         }
 
         // 背景の描画
@@ -269,8 +220,8 @@ class GameplayScene extends Scene {
                 });
                 setTimeout(() => {
                     this.#enemyList.forEach(enemy => enemy.end());
-                    this.#bgm?.stop();
-                    this.#bgm?.unload();
+                    stopSound(this.#bgm);
+                    this.#bgm.unload();
                 }, this.#fadeOutDuration);
             }
             this.#fadeOutAlpha += 0.004;
@@ -567,6 +518,9 @@ class GameplayScene extends Scene {
         plpiss("爆発スプライト_170");
         
         // 音声
+        for (const name of bgmNameList) {
+            plpsss(name);
+        }
         for (const name of seNameList) {
             plpsss(name);
         }

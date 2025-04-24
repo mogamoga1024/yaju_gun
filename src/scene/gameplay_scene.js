@@ -67,6 +67,10 @@ class GameplayScene extends Scene {
 
         // 最大レベルまでSmart Boy(Daily Unchi Special Mix)を流し続ける
         loadSound(bgmNameList[0]).then(bgm => {
+            if (this.#player.state !== "alive") {
+                bgm.unload();
+                return;
+            }
             if (bgm.isOK) {
                 this.#bgm = bgm;
                 playSound(bgm);
@@ -92,6 +96,10 @@ class GameplayScene extends Scene {
         let bgli = 1;
         const playBGM = () => {
             loadSound(bgmNameList[bgli]).then(bgm => {
+                if (this.#player.state !== "alive") {
+                    bgm.unload();
+                    return;
+                }
                 const playNextBGM = () => {
                     bgli = (bgli + 1) % bgmNameList.length;
                     bgm.unload();
@@ -262,6 +270,7 @@ class GameplayScene extends Scene {
                 setTimeout(() => {
                     this.#enemyList.forEach(enemy => enemy.end());
                     this.#bgm?.stop();
+                    this.#bgm?.unload();
                 }, this.#fadeOutDuration);
             }
             this.#fadeOutAlpha += 0.004;

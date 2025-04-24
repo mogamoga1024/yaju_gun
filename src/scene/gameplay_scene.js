@@ -65,7 +65,7 @@ class GameplayScene extends Scene {
         this.#backgroundImage = await loadImage("asset/草原.png");
         await this.#preload();
 
-        this.#bgm = SoundStorage.get("Smart Boy(Daily Unchi Special Mix)");
+        this.#bgm = SoundStorage.get("ほのぼの神社");
         this.#gunshotSound = SoundStorage.get("銃声");
 
         playSound(this.#bgm);
@@ -221,7 +221,6 @@ class GameplayScene extends Scene {
                 setTimeout(() => {
                     this.#enemyList.forEach(enemy => enemy.end());
                     stopSound(this.#bgm);
-                    this.#bgm.unload();
                 }, this.#fadeOutDuration);
             }
             this.#fadeOutAlpha += 0.004;
@@ -388,6 +387,9 @@ class GameplayScene extends Scene {
         // スコアの値によって、チュートリアルを終わる
         if (this.#isTutorial && this.#score >= 200) {
             this.#isTutorial = false;
+            stopSound(this.#bgm);
+            this.#bgm = SoundStorage.get("Smart Boy(Daily Unchi Special Mix)");
+            playSound(this.#bgm);
         }
         
         // 後処理

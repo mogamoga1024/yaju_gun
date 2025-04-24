@@ -587,7 +587,16 @@ class GameplayScene extends Scene {
     }
 
     #createRandomEnemy() {
-        const enemyClassList = [RunningSenpai, MeteorSenpai, ShoutingSenpai, MukimukiSenpai];
+        const enemyClassList = [RunningSenpai];
+        if (level >= 10) {
+            enemyClassList.push(MeteorSenpai);
+        }
+        if (level >= 20) {
+            enemyClassList.push(ShoutingSenpai);
+        }
+        if (level >= 30) {
+            enemyClassList.push(MukimukiSenpai);
+        }
         const totalWeight = enemyClassList.reduce((sum, enemyClass) => sum + enemyClass.spawnWeight, 0);
         const centerX = Math.random() * (canvas.width * 2);
 

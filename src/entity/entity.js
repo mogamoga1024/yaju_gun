@@ -6,6 +6,7 @@ class Entity {
     power = 1;
     hasGivenExp = false;
     score = 100;
+    static spawnWeight = 1;
 
     constructor(temaeRate = 1) {
         this.temaeRate = temaeRate;

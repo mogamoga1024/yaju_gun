@@ -17,6 +17,7 @@ class MukimukiSenpai extends Entity {
     #opacity = 1;
     #explosion = null;
     power = 2;
+    static spawnWeight = 0.5;
 
     constructor(centerX, viewAngle, temaeRate = 0) {
         super(temaeRate);

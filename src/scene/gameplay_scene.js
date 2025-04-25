@@ -212,6 +212,15 @@ class GameplayScene extends Scene {
 
         if (this.#player.state === "dying") {
             if (this.#fadeOutAlpha === 0) {
+                let highScore = 0;
+                const strHighScore = Cookies.get("high_score");
+                if (strHighScore !== undefined) {
+                    highScore = Number(strHighScore);
+                }
+                if (this.#score > highScore) {
+                    Cookies.set("high_score", String(this.#score), {expires: 365, path: cookiePath});
+                }
+
                 Howler._howls.forEach(howl => {
                     const playingIds = howl._getSoundIds().filter(id => howl.playing(id));
                     playingIds.forEach(id => {

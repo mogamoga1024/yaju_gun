@@ -3,6 +3,7 @@ const domGameCanvasWrapper = document.querySelector("#game-canvas-wrapper");
 const domNotice = document.querySelector("#notice");
 const canvas = document.querySelector("#game-canvas");
 const context = canvas.getContext("2d");
+const cookiePath = "/yaju_gun";
 
 let level = 1;
 function balanceFactor() {

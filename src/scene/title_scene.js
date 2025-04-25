@@ -41,6 +41,8 @@ class TitleScene extends Scene {
             const width = context.measureText(text).width;
             drawStrokeText(context, text, (canvas.width - width)  / 2, 300);
         }
+
+        this.#drawHighScore();
     }
     
     onClick(e) {
@@ -115,5 +117,25 @@ class TitleScene extends Scene {
         }
     
         context.restore();
+    }
+
+    #drawHighScore() {
+        let highScore = 0;
+        const strHighScore = Cookies.get("high_score");
+        if (strHighScore !== undefined) {
+            highScore = Number(strHighScore);
+        }
+
+        context.textAlign = "start";
+        context.textBaseline = "top";
+        context.lineJoin = "round";
+        context.font = "400 40px Xim-Sans";
+        context.fillStyle = "#000";
+        context.strokeStyle = "#eee";
+        context.lineWidth = 5;
+
+        const text = String(`HIGT SCORE ${highScore}`);
+        const measure = context.measureText(text);
+        drawStrokeText(context, text, canvas.width - measure.width - 20, 20);
     }
 }

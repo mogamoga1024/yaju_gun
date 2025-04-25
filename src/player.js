@@ -1,8 +1,7 @@
 
 class Player {
     state = "alive"; // alive or or dying or dead
-    // #hp = 4;
-    #hp = 1;
+    #hp = 4;
     #maxHp = 4;
     #mutekiFrameCount = 0;
 

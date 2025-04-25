@@ -28,7 +28,7 @@ class GameOverScene extends Scene {
         }
 
         if (level <= 5) {
-            this.#comment = "はぁ～つっかえ";
+            this.#comment = "は？";
         }
         else if (level <= 10) {
             this.#comment = "へなちょこ";
@@ -43,7 +43,7 @@ class GameOverScene extends Scene {
             this.#comment = "36…普通だな！";
         }
         else if (level <= 40) {
-            this.#comment = "なんか足んねえよなぁ？";
+            this.#comment = "なんか足んねぇよなぁ？";
         }
         else if (level <= 49) {
             this.#comment = "いいゾ～これ";

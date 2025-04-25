@@ -46,7 +46,7 @@ class GameOverScene extends Scene {
             this.#comment = "なんか足んねえよなぁ？";
         }
         else if (level <= 49) {
-            this.#comment = "お～ええやん";
+            this.#comment = "いいゾ～これ";
         }
         else /*if (level >= 50)*/ {
             this.#comment = "やりますねえ！";

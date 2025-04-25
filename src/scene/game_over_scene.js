@@ -93,24 +93,24 @@ class GameOverScene extends Scene {
 
     #drawLevel() {
         context.lineWidth = 5;
-        context.font = "400 40px Xim-Sans";
+        context.font = "400 50px Xim-Sans";
         const width = context.measureText(this.#levelText).width;
-        drawStrokeText(context, this.#levelText, (canvas.width - width) / 2, 150);
+        drawStrokeText(context, this.#levelText, (canvas.width - width) / 2, 140);
     }
 
     #drawScore() {
         context.lineWidth = 5;
-        context.font = "400 40px Xim-Sans";
+        context.font = "400 50px Xim-Sans";
         const text = `SCORE ${this.#score}`;
         const width = context.measureText(text).width;
-        drawStrokeText(context, text, (canvas.width - width) / 2, 200);
+        drawStrokeText(context, text, (canvas.width - width) / 2, 195);
     }
 
     #drawComment() {
         context.lineWidth = 5;
-        context.font = "400 50px Xim-Sans";
+        context.font = "400 60px Xim-Sans";
         const width = context.measureText(this.#comment).width;
-        drawStrokeText(context, this.#comment, (canvas.width - width) / 2, 275);
+        drawStrokeText(context, this.#comment, (canvas.width - width) / 2, 270);
     }
 
     onClick(e) {

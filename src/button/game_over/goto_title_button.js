@@ -9,9 +9,9 @@ class GotoTitleButton extends Button {
     constructor() {
         super();
         this.#text = "終わる";
-        this.#x = 300;
-        this.#centerY = 390;
-        this.#height = 32;
+        this.#x = 280;
+        this.#centerY = 385;
+        this.#height = 40;
 
         context.font = `400 ${this.#height}px Xim-Sans`;
         this.#width = context.measureText(this.#text).width;

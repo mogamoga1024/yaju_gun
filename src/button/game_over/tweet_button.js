@@ -9,13 +9,13 @@ class TweetButton extends Button {
     constructor() {
         super();
         this.#text = "つぶやく";
-        this.#centerY = 390;
-        this.#height = 32;
+        this.#centerY = 385;
+        this.#height = 40;
 
         context.font = `400 ${this.#height}px Xim-Sans`;
         this.#width = context.measureText(this.#text).width;
 
-        this.#x = canvas.width - this.#width - 300;
+        this.#x = canvas.width - this.#width - 280;
     }
     
     draw() {

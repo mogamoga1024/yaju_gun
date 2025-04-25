@@ -83,8 +83,7 @@ document.addEventListener("visibilitychange", () => {
         isFirst = false;
         loadImage("asset/こちらを見つめる先輩.png").then(image => {
             drawLoading.backgroundImage = image;
-            // SceneManager.start(new TitleScene(true));
-            SceneManager.start(new GameOverScene(114514), false);
+            SceneManager.start(new TitleScene(true));
         });
     }
 })();
@@ -110,4 +109,12 @@ const debugBtn2 = document.querySelector("#sound-room");
 debugBtn2.addEventListener("click", () => {
     window.open("../test/sound.html", "_blank");
 });
+
+const debugBtn3 = document.querySelector("#self-destruction");
+debugBtn3.addEventListener("click", () => {
+    Howler.stop();
+    SceneManager.start(new GameOverScene(114514), false);
+});
+
+
 

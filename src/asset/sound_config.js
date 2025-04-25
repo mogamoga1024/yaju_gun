@@ -32,7 +32,8 @@ const kotodamaNameList = [];
     add1(s, "爆発", "m4a", {volume: 0.5});
     add1(s, "横向くんだよ90度！", "mp3", {volume: 0.3});
     add1(s, "レベルアップ", "mp3", {volume: 0.1});
-
+    add1(s, "ブッチッパ！", "mp3", {volume: 0.5});
+    
     // 野獣先輩
     add1(s, "息継ぎ", "m4a", {volume: 0.95, loop: true});
     add2(s, "ムキムキ息継ぎ", "息継ぎ", "m4a", {volume: 0.95, rate: 0.6, loop: true});

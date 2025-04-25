@@ -74,13 +74,56 @@ class GameOverScene extends Scene {
         context.fillStyle = "#fff";
         context.strokeStyle = "rgb(255, 0, 128)";
 
-        this.#drawTitle();
-        this.#drawLevel();
-        this.#drawScore();
-        this.#drawComment();
-
-        this.#gotoTitleBtn.draw();
-        this.#tweetBtn.draw();
+        const btp = SoundStorage.get("ブッチッパ！");
+        if (btp.isOK) {
+            let shouldAnimation = true;
+            btp.on("playerror", () => {
+                btp.off("playerror");
+                shouldAnimation = false;
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                context.fillStyle = "rgb(255, 128, 170)";
+                context.fillRect(0, 0, canvas.width, canvas.height);
+                this.#drawTitle();
+                this.#drawLevel();
+                this.#drawScore();
+                this.#drawComment();
+                this.#gotoTitleBtn.draw();
+                this.#tweetBtn.draw();
+            });
+            let drawCount = 0;
+            playSound(btp);
+            const anime = () => {
+                if (shouldAnimation) {
+                    const seek = btp.seek();
+                    if (drawCount === 0 && seek > 0.1) {
+                        drawCount += 1;
+                        this.#drawTitle();
+                    }
+                    else if (drawCount === 1 && seek > 0.3) {
+                        drawCount += 1;
+                        this.#drawLevel();
+                        this.#drawScore();
+                        this.#gotoTitleBtn.draw();
+                        this.#tweetBtn.draw();
+                    }
+                    else if (drawCount === 2 && seek > 0.5) {
+                        this.#drawComment();
+                        btp.off("playerror");
+                        shouldAnimation = false;
+                    }
+                    requestAnimationFrame(anime);
+                }
+            };
+            anime();
+        }
+        else {
+            this.#drawTitle();
+            this.#drawLevel();
+            this.#drawScore();
+            this.#drawComment();
+            this.#gotoTitleBtn.draw();
+            this.#tweetBtn.draw();
+        }
     }
 
     #drawTitle() {

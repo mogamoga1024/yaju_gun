@@ -2,6 +2,8 @@
 class GameOverScene extends Scene {
     #score = 0; 
     #canClick = false;
+    #gotoTitleBtn = null;
+    #tweetBtn = null;
 
     constructor(score) {
         super();
@@ -10,6 +12,10 @@ class GameOverScene extends Scene {
 
     onStart() {
         console.log("GameOverScene:onStart");
+
+        this.#gotoTitleBtn = new GotoTitleButton();
+        this.#tweetBtn = new TweetButton();
+
         this.state = "loaded";
         this.#update();
         setTimeout(() => {
@@ -34,6 +40,9 @@ class GameOverScene extends Scene {
         this.#drawLevel();
         this.#drawScore();
         this.#drawComment();
+
+        this.#gotoTitleBtn.draw();
+        this.#tweetBtn.draw();
     }
 
     #drawTitle() {

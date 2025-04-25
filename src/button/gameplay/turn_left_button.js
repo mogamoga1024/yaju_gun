@@ -1,5 +1,5 @@
 
-class TurnLeftButton {
+class TurnLeftButton extends Button {
     #startX = 0;
     #startY = 0;
     #x = 0;
@@ -9,6 +9,7 @@ class TurnLeftButton {
     #frameCount = 0;
 
     constructor(left) {
+        super();
         this.#startX = left;
         this.#startY = canvas.height / 2;
         this.#y = this.#startY - this.#height / 2;

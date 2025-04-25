@@ -1,6 +1,8 @@
 
 class GameOverScene extends Scene {
+    #levelText = "";
     #score = 0; 
+    #comment = "";
     #canClick = false;
     #gotoTitleBtn = null;
     #tweetBtn = null;
@@ -12,6 +14,43 @@ class GameOverScene extends Scene {
 
     onStart() {
         console.log("GameOverScene:onStart");
+
+        const maxLevel = 50;
+        this.#levelText = "Lv.";
+        if (level < maxLevel) {
+            this.#levelText += String(level);
+        }
+        else if (level === maxLevel) {
+            this.#levelText += "MAX";
+        }
+        else {
+            this.#levelText += `MAX+${level - maxLevel}`;
+        }
+
+        if (level <= 5) {
+            this.#comment = "はぁ～つっかえ";
+        }
+        else if (level <= 10) {
+            this.#comment = "へなちょこ";
+        }
+        else if (level <= 20) {
+            this.#comment = "もうちょっと力入れないとダメだね";
+        }
+        else if (level <= 30) {
+            this.#comment = "ま、多少はね？";
+        }
+        else if (level === 36) {
+            this.#comment = "36…普通だな！";
+        }
+        else if (level <= 40) {
+            this.#comment = "なんか足んねえよなぁ？";
+        }
+        else if (level <= 49) {
+            this.#comment = "お～ええやん";
+        }
+        else /*if (level >= 50)*/ {
+            this.#comment = "やりますねえ！";
+        }
 
         this.#gotoTitleBtn = new GotoTitleButton();
         this.#tweetBtn = new TweetButton();
@@ -54,19 +93,8 @@ class GameOverScene extends Scene {
 
     #drawLevel() {
         context.font = "400 40px Xim-Sans";
-        const maxLevel = 50;
-        let text = "Lv.";
-        if (level < maxLevel) {
-            text += String(level);
-        }
-        else if (level === maxLevel) {
-            text += "MAX";
-        }
-        else {
-            text += `MAX+${level - maxLevel}`;
-        }
-        const width = context.measureText(text).width;
-        context.fillText(text, (canvas.width - width) / 2, 150);
+        const width = context.measureText(this.#levelText).width;
+        context.fillText(this.#levelText, (canvas.width - width) / 2, 150);
     }
 
     #drawScore() {
@@ -78,41 +106,29 @@ class GameOverScene extends Scene {
 
     #drawComment() {
         context.font = "400 40px Xim-Sans";
-        let text = "";
-        if (level <= 5) {
-            text = "はぁ～つっかえ";
-        }
-        else if (level <= 10) {
-            text = "へなちょこ";
-        }
-        else if (level <= 20) {
-            text = "もうちょっと力入れないとダメだね";
-        }
-        else if (level <= 30) {
-            text = "ま、多少はね？";
-        }
-        else if (level === 36) {
-            text = "36…普通だな！";
-        }
-        else if (level <= 40) {
-            text = "なんか足んねえよなぁ？";
-        }
-        else if (level <= 49) {
-            text = "お～ええやん";
-        }
-        else /*if (level >= 50)*/ {
-            text = "やりますねえ！";
-        }
-        const width = context.measureText(text).width;
-        context.fillText(text, (canvas.width - width) / 2, 280);
+        const width = context.measureText(this.#comment).width;
+        context.fillText(this.#comment, (canvas.width - width) / 2, 280);
     }
 
     onClick(e) {
         if (!this.#canClick) {
             return;
         }
-        
-        // todo 仮
-        SceneManager.start(new TitleScene(), false);
+
+        const rect = e.target.getBoundingClientRect();
+        const {x, y} = this.canvasXY(e.offsetX, e.offsetY, rect);
+
+        if (this.#gotoTitleBtn.isTargeted(x, y)) {
+            SceneManager.start(new TitleScene(), false);
+        }
+        else if (this.#tweetBtn.isTargeted(x, y)) {
+            const link = document.createElement("a");
+            const text = `${this.#levelText}\nSCORE：${this.#score}\n総評：${this.#comment}`;
+            const hashtags = "やじゅがん,野獣先輩,ぎゃるがん3あくしろよ";
+            link.href = `https://twitter.com/intent/tweet?url=https://mogamoga1024.github.io/yaju_gun/&text=${encodeURIComponent(text)}&hashtags=${encodeURIComponent(hashtags)}`;
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+            link.click();
+        }
     }
 }

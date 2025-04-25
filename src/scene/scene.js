@@ -11,4 +11,11 @@ class Scene {
     onTouchStart(e) {}
     onTouchEnd(e) {}
     onTouchCancel(e) {}
+
+    canvasXY(offsetX, offsetY, rect) {
+        return {
+            x: offsetX * canvas.width / rect.width,
+            y: offsetY * canvas.height / rect.height
+        };
+    }
 }

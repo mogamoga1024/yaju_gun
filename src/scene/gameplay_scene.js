@@ -446,7 +446,7 @@ class GameplayScene extends Scene {
             return;
         }
         const rect = e.target.getBoundingClientRect();
-        const {x, y} = this.#canvasXY(e.offsetX, e.offsetY, rect);
+        const {x, y} = this.canvasXY(e.offsetX, e.offsetY, rect);
         if (this.#shotPosList.length === 0) {
             this.#shotPosList.push({x, y});
         }
@@ -468,7 +468,7 @@ class GameplayScene extends Scene {
             }
             const offsetX = touch.clientX - rect.left;
             const offsetY = touch.clientY - rect.top;
-            const {x, y} = this.#canvasXY(offsetX, offsetY, rect);
+            const {x, y} = this.canvasXY(offsetX, offsetY, rect);
             this.#shotPosList.push({x, y});
         }
     }
@@ -481,7 +481,7 @@ class GameplayScene extends Scene {
 
     onMouseMove(e) {
         const rect = e.target.getBoundingClientRect();
-        const {x, y} = this.#canvasXY(e.offsetX, e.offsetY, rect);
+        const {x, y} = this.canvasXY(e.offsetX, e.offsetY, rect);
         this.#pc.mouseX = x;
         this.#pc.mouseY = y;
     }
@@ -567,13 +567,6 @@ class GameplayScene extends Scene {
         // 万が一何も選ばれなかった場合、最初の敵を返す
         // 浮動小数点による丸め誤差対策
         return new enemyClassList[0](centerX, this.#viewAngle);
-    }
-
-    #canvasXY(offsetX, offsetY, rect) {
-        return {
-            x: offsetX * canvas.width / rect.width,
-            y: offsetY * canvas.height / rect.height
-        };
     }
 
     #calcNextExp(nextLevel) {

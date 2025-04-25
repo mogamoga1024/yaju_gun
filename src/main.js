@@ -108,7 +108,7 @@ debugBtn1.addEventListener("click", () => {
 
 const debugBtn2 = document.querySelector("#sound-room");
 debugBtn2.addEventListener("click", () => {
-    window.open("../test/sound.html", "_blank");
+    window.open("./test/sound.html", "_blank");
 });
 
 const debugBtn3 = document.querySelector("#self-destruction");

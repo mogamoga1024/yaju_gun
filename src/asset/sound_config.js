@@ -25,13 +25,15 @@ const kotodamaNameList = [];
     add1(b, "ほのぼの神社", "mp3", {volume: 0.5, loop: true});
     add1(b, "Smart Boy(Daily Unchi Special Mix)", "mp3", {volume: 0.5, loop: true});
 
-    // 効果音
+    // 効果音 gameplay
     add1(s, "ドンッ", "mp3", {volume: 0.8});
     add1(s, "銃声", "mp3", {volume: 0.3});
     add1(s, "大破", "mp3", {volume: 0.6});
     add1(s, "爆発", "m4a", {volume: 0.5});
     add1(s, "横向くんだよ90度！", "mp3", {volume: 0.3});
     add1(s, "レベルアップ", "mp3", {volume: 0.1});
+    
+    // 効果音 game over
     add1(s, "ブッチッパ！", "mp3", {volume: 0.5});
     
     // 野獣先輩
@@ -44,6 +46,6 @@ const kotodamaNameList = [];
     add1(s, "アアッー！(高音)", "mp3", {volume: 0.8});
 
     // 言霊
-    add1(k, "アイスティー");
+    add1(k, "アイスティー", "mp3", {volume: 0.7});
     add1(k, "FOO↑気持ちいい", "mp3", {volume: 0.9});
 })();

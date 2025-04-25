@@ -49,7 +49,7 @@ class GameOverScene extends Scene {
             this.#comment = "いいゾ～これ";
         }
         else /*if (level >= 50)*/ {
-            this.#comment = "やりますねえ！";
+            this.#comment = "やりますねぇ！";
         }
 
         this.#gotoTitleBtn = new GotoTitleButton();
@@ -150,6 +150,8 @@ class GameOverScene extends Scene {
     }
 
     #drawComment() {
+        playSound(SoundStorage.get(this.#comment));
+
         context.lineWidth = 5;
         context.font = "400 60px Xim-Sans";
         const width = context.measureText(this.#comment).width;

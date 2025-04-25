@@ -65,15 +65,14 @@ class GameOverScene extends Scene {
 
     #update() {
         context.clearRect(0, 0, canvas.width, canvas.height);
-        context.fillStyle = "rgb(255, 0, 128)";
+        context.fillStyle = "rgb(255, 128, 170)";
         context.fillRect(0, 0, canvas.width, canvas.height);
 
         context.textAlign = "start";
         context.textBaseline = "top";
-        // context.lineJoin = "round";
+        context.lineJoin = "round";
         context.fillStyle = "#fff";
-        // context.strokeStyle = "#eee";
-        // context.lineWidth = 5;
+        context.strokeStyle = "rgb(255, 0, 128)";
 
         this.#drawTitle();
         this.#drawLevel();
@@ -85,29 +84,33 @@ class GameOverScene extends Scene {
     }
 
     #drawTitle() {
+        context.lineWidth = 12;
         context.font = "400 80px 'Noto Sans JP'";
         const text = "リザルト";
         const width = context.measureText(text).width;
-        context.fillText(text, (canvas.width - width) / 2, 30);
+        drawStrokeText(context, text, (canvas.width - width) / 2, 30);
     }
 
     #drawLevel() {
+        context.lineWidth = 5;
         context.font = "400 40px Xim-Sans";
         const width = context.measureText(this.#levelText).width;
-        context.fillText(this.#levelText, (canvas.width - width) / 2, 150);
+        drawStrokeText(context, this.#levelText, (canvas.width - width) / 2, 150);
     }
 
     #drawScore() {
+        context.lineWidth = 5;
         context.font = "400 40px Xim-Sans";
         const text = `SCORE ${this.#score}`;
         const width = context.measureText(text).width;
-        context.fillText(text, (canvas.width - width) / 2, 200);
+        drawStrokeText(context, text, (canvas.width - width) / 2, 200);
     }
 
     #drawComment() {
-        context.font = "400 40px Xim-Sans";
+        context.lineWidth = 5;
+        context.font = "400 50px Xim-Sans";
         const width = context.measureText(this.#comment).width;
-        context.fillText(this.#comment, (canvas.width - width) / 2, 280);
+        drawStrokeText(context, this.#comment, (canvas.width - width) / 2, 275);
     }
 
     onClick(e) {

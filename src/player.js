@@ -19,8 +19,8 @@ class Player {
             canvas.width / 2, canvas.height / 2, 0,
             canvas.width / 2, canvas.height / 2, canvas.width / 2 - 100 * damageRate
         );
-        gradient.addColorStop(0, "rgba(255, 0, 128, 0)");
-        gradient.addColorStop(1, `rgba(255, 0, 128, ${damageRate})`);
+        gradient.addColorStop(0, "rgba(255, 128, 170, 0)");
+        gradient.addColorStop(1, `rgba(255, 128, 170, ${damageRate})`);
         context.fillStyle = gradient;
         context.fillRect(0, 0, canvas.width, canvas.height);
         context.restore();

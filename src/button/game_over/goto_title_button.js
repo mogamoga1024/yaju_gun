@@ -21,9 +21,12 @@ class GotoTitleButton extends Button {
         context.save();
         context.textAlign = "start";
         context.textBaseline = "middle";
+        context.lineJoin = "round";
         context.fillStyle = "#fff";
+        context.lineWidth = 5;
+        context.strokeStyle = "rgb(255, 0, 128)";
         context.font = `400 ${this.#height}px Xim-Sans`;
-        context.fillText(this.#text, this.#x, this.#centerY);
+        drawStrokeText(context, this.#text, this.#x, this.#centerY);
         context.restore();
     }
 

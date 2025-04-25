@@ -7,7 +7,7 @@ const cookiePath = "/yaju_gun";
 
 let level = 1;
 function balanceFactor() {
-    return (level + 50 + 10) * 1.1;
+    return (level + 50 + 20) * 1.1;
 }
 
 const isPC = (function() {

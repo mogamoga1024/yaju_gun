@@ -16,7 +16,7 @@ class TitleScene extends Scene {
         if (!this.#canClick) setTimeout(() => {
             // ゲームオーバー画面から戻ってきたときに連打しているとすぐ開始してしまうため
             this.#canClick = true;
-        }, 1000);
+        }, 500);
     }
 
     #update() {

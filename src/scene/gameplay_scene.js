@@ -137,7 +137,7 @@ class GameplayScene extends Scene {
                 }
                 if (this.#player.state === "dead") {
                     setTimeout(() => {
-                        SceneManager.start(new TitleScene(), false);
+                        SceneManager.start(new GameOverScene(this.#score), false);
                     }, 3000);
                 }
                 else {

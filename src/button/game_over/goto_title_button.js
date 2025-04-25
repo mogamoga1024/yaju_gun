@@ -28,7 +28,18 @@ class GotoTitleButton extends Button {
     }
 
     isTargeted(crosshairX, crosshairY) {
-        // todo
-        return false;
+        if (crosshairX < this.#x) {
+            return false;
+        }
+        if (crosshairX > this.#x + this.#width) {
+            return false;
+        }
+        if (crosshairY < this.#centerY - this.#height / 2) {
+            return false;
+        }
+        if (crosshairY > this.#centerY + this.#height / 2) {
+            return false;
+        }
+        return true;
     }
 }

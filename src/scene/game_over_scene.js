@@ -111,6 +111,7 @@ class GameOverScene extends Scene {
         if (!this.#canClick) {
             return;
         }
+        
         // todo 仮
         SceneManager.start(new TitleScene(), false);
     }

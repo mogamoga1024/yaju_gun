@@ -581,7 +581,7 @@ class GameplayScene extends Scene {
             return Math.floor(5 * Math.pow(nextLevel + this.#maxLevel, 1/8));
         }
         else {
-            return 100;
+            return 50;
         }
     }
 

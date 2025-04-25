@@ -83,7 +83,8 @@ document.addEventListener("visibilitychange", () => {
         isFirst = false;
         loadImage("asset/こちらを見つめる先輩.png").then(image => {
             drawLoading.backgroundImage = image;
-            SceneManager.start(new TitleScene(true));
+            // SceneManager.start(new TitleScene(true));
+            SceneManager.start(new GameOverScene(114514), false);
         });
     }
 })();

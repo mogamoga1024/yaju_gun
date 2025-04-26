@@ -131,7 +131,7 @@ class GameOverScene extends Scene {
         context.font = "400 80px 'Noto Sans JP'";
         const text = "リザルト";
         const width = context.measureText(text).width;
-        drawStrokeText(context, text, (canvas.width - width) / 2, 30);
+        drawStrokeText(context, text, (canvas.width - width) / 2, 25);
     }
 
     #drawLevel() {

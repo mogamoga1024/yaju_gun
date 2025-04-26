@@ -37,11 +37,11 @@ const kotodamaNameList = [];
     add1(s, "ブッチッパ！", "mp3", {volume: 0.5});
     add1(s, "は？", "mp3", {volume: 0.6});
     add1(s, "へなちょこ", "mp3", {volume: 0.6});
-    add1(s, "もうちょっと力入れないとダメだね", "mp3", {volume: 1});
-    add1(s, "ま、多少はね？", "mp3", {volume: 1});
+    add1(s, "もうちょっと力入れないとダメだね", "mp3", {volume: 0.9});
+    add1(s, "ま、多少はね？", "mp3", {volume: 0.9});
     add1(s, "36…普通だな！", "mp3", {volume: 0.8});
     add1(s, "なんか足んねぇよなぁ？", "mp3", {volume: 0.4});
-    add1(s, "いいゾ～これ", "mp3", {volume: 1});
+    add1(s, "いいゾ～これ", "mp3", {volume: 0.9});
     add1(s, "やりますねぇ！", "mp3", {volume: 0.7});
     
     // 野獣先輩

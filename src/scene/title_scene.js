@@ -59,7 +59,7 @@ class TitleScene extends Scene {
         context.textBaseline = "middle";
         context.lineJoin = "round";
         context.lineWidth = 12;
-        const baseY = 180;
+        const baseY = 140;
     
         // 各パートとフォント設定
         const parts = [

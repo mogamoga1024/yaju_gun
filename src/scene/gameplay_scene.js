@@ -203,8 +203,7 @@ class GameplayScene extends Scene {
 
         // 画面の状態による差異
         if (this.#isKMRTalking) {
-            this.#message.isTransient = false;
-            this.#message.text = "なんですか？";
+            this.#drawKMRTalking();
         }
         else if (this.#isTutorial) {
             this.#message.isTransient = false;
@@ -662,5 +661,12 @@ class GameplayScene extends Scene {
         Cookies.set("level", String(level), {expires: 365, path: cookiePath});
         Cookies.set("score", String(this.#score), {expires: 365, path: cookiePath});
         Cookies.set("hp", String(this.#player?.hp ?? 0), {expires: 365, path: cookiePath});
+    }
+
+    #drawKMRTalking() {
+        this.#message.isTransient = false;
+        this.#message.text = "なんですか？";
+
+        // todo
     }
 }

@@ -8,8 +8,8 @@ class QuitButton extends Button {
 
     constructor() {
         super();
-        this.#x = 0;
-        this.#y = 0;
+        this.#x = 60;
+        this.#y = 70;
         this.#width = 230;
         this.#height = 150;
     }

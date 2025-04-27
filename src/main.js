@@ -10,10 +10,10 @@ let difficulty = "normal";
 function balanceFactor() {
     let a;
     if (difficulty === "easy") {
-        a = 0;
+        a = 35;
     }
     else if (difficulty === "normal") {
-        a = 35;
+        a = 55;
     }
     else /*if (difficulty === "hard")*/ {
         a = 70;

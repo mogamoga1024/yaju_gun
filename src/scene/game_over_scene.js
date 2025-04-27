@@ -15,6 +15,10 @@ class GameOverScene extends Scene {
     onStart() {
         console.log("GameOverScene:onStart");
 
+        Cookies.remove("level", {path: cookiePath});
+        Cookies.remove("score", {path: cookiePath});
+        Cookies.remove("hp", {path: cookiePath});
+
         const maxLevel = 50;
         this.#levelText = "Lv.";
         if (level < maxLevel) {

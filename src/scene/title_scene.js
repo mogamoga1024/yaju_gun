@@ -12,6 +12,10 @@ class TitleScene extends Scene {
     #hardBtn = null;
     #startBtn = null;
 
+    #prevLevel = 1;
+    #prevHp = undefined;
+    #prevScore = 0;
+
     constructor(canClick = false) {
         super();
         this.#canClick = canClick;
@@ -21,6 +25,25 @@ class TitleScene extends Scene {
         console.log("TitleScene:onStart");
         this.#backgroundImage = await loadImage("asset/やじゅがん.png");
 
+        const strDifficulty = Cookies.get("difficulty");
+        if (strDifficulty !== undefined) {
+            difficulty = strDifficulty;
+        }
+
+        const strHp = Cookies.get("hp");
+        const strLevel = Cookies.get("level");
+        const strScore = Cookies.get("score");
+        if (strLevel !== undefined && strHp !== undefined && strScore !== undefined) {
+            const hp = Number(strHp);
+            const score = Number(strScore);
+            if (hp > 0 && score > 0) {
+                this.#startPoint = "continue";
+                this.#prevLevel = Number(strLevel);
+                this.#prevHp = hp;
+                this.#prevScore = score;
+            }
+        }
+        
         this.#hajimeBtn = new HajimeButton();
         this.#tudukiBtn = new TudukiButton();
         this.#easyBtn = new EasyButton();
@@ -81,7 +104,14 @@ class TitleScene extends Scene {
         }
         else if (this.#startBtn.isTargeted(x, y)) {
             // todo はーい、よーいスタート
-            SceneManager.start(new GameplayScene(!isPC));
+            if (this.#startPoint === "new") {
+                level = 1;
+                SceneManager.start(new GameplayScene(!isPC));
+            }
+            else /*if (this.#startPoint = "continue")*/ {
+                level = this.#prevLevel;
+                SceneManager.start(new GameplayScene(!isPC, this.#prevHp, this.#prevScore));
+            }
         }
     }
 

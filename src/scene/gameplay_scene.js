@@ -64,6 +64,9 @@ class GameplayScene extends Scene {
 
     async onStart() {
         console.log("GameplayScene:onStart");
+
+        Cookies.set("difficulty", difficulty, {expires: 365, path: cookiePath});
+
         this.#backgroundImage = await loadImage("asset/草原.png");
         await this.#preload();
 
@@ -111,7 +114,6 @@ class GameplayScene extends Scene {
             });
         }
 
-        level = 1;
         this.#nextExp = this.#calcNextExp(level);
 
         this.#turnLeftBtn = new TurnLeftButton(10);
@@ -625,7 +627,6 @@ class GameplayScene extends Scene {
     }
     
     save() {
-        Cookies.set("difficulty", difficulty, {expires: 365, path: cookiePath});
         Cookies.set("level", String(level), {expires: 365, path: cookiePath});
         Cookies.set("score", String(this.#score), {expires: 365, path: cookiePath});
         Cookies.set("hp", String(this.#player?.hp ?? 0), {expires: 365, path: cookiePath});

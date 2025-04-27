@@ -3,6 +3,9 @@ class TitleScene extends Scene {
     #backgroundImage = null;
     #canClick = false;
 
+    #startPoint = "new"; // new or continue
+    #difficulty = "normal"; // easy or normal or hard
+
     #hajimeBtn = null;
     #tudukiBtn = null;
     #easyBtn = null;
@@ -61,19 +64,19 @@ class TitleScene extends Scene {
         const {x, y} = this.canvasXY(e.offsetX, e.offsetY, rect);
 
         if (this.#hajimeBtn.isTargeted(x, y)) {
-            // todo
+            this.#startPoint = "new";
         }
         else if (this.#tudukiBtn.isTargeted(x, y)) {
-            // todo
+            this.#startPoint = "continue";
         }
         else if (this.#easyBtn.isTargeted(x, y)) {
-            // todo
+            this.#difficulty = "easy";
         }
         else if (this.#normalBtn.isTargeted(x, y)) {
-            // todo
+            this.#difficulty = "normal";
         }
         else if (this.#hardBtn.isTargeted(x, y)) {
-            // todo
+            this.#difficulty = "hard";
         }
         else if (this.#startBtn.isTargeted(x, y)) {
             // todo はーい、よーいスタート

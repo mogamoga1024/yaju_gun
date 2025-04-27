@@ -30,6 +30,8 @@ class GameplayScene extends Scene {
     #nippleDx = 0;
     #touchXMap = new Map();
 
+    #kmr = null;
+
     #shouldAnimation = true;
     #enemyCreateFrame = 0;
     #honsyaCreateFrame = 0;
@@ -116,6 +118,7 @@ class GameplayScene extends Scene {
 
         this.#nextExp = this.#calcNextExp(level);
 
+        this.#kmr = new KMR();
         this.#turnLeftBtn = new TurnLeftButton(10);
         this.#turnRightBtn = new TurnRightButton(10);
 
@@ -205,6 +208,9 @@ class GameplayScene extends Scene {
 
         // メッセージウィンドウの描画
         MessageWindow.drawText(this.#message.text, this.#message.isTransient);
+
+        // KMRの描画
+        this.#kmr.draw();
 
         // 照準の描画
         if (isPC) {
@@ -531,6 +537,7 @@ class GameplayScene extends Scene {
         plpiss("照準1");
         plpiss("照準2");
         plpiss("爆発スプライト_170");
+        plpiss("座るKMR");
         
         // 音声
         for (const name of bgmNameList) {

@@ -1,4 +1,49 @@
 
 class TudukiButton extends Button {
-    // todo
+    #x = 0;
+    #centerY = 0;
+    #width = 0;
+    #height = 0;
+    #text = "";
+
+    constructor() {
+        super();
+        this.#text = "つづきから";
+        this.#centerY = 230;
+        this.#height = 40;
+
+        context.font = `400 ${this.#height}px Xim-Sans`;
+        this.#width = context.measureText(this.#text).width;
+
+        this.#x = canvas.width - this.#width - 220;
+    }
+    
+    draw() {
+        context.save();
+        context.textAlign = "start";
+        context.textBaseline = "top";
+        context.lineJoin = "round";
+        context.fillStyle = "#000";
+        context.strokeStyle = "#eee";
+        context.lineWidth = 5;
+        context.font = `400 ${this.#height}px Xim-Sans`;
+        drawStrokeText(context, this.#text, this.#x, this.#centerY);
+        context.restore();
+    }
+
+    isTargeted(crosshairX, crosshairY) {
+        if (crosshairX < this.#x) {
+            return false;
+        }
+        if (crosshairX > this.#x + this.#width) {
+            return false;
+        }
+        if (crosshairY < this.#centerY - this.#height / 2) {
+            return false;
+        }
+        if (crosshairY > this.#centerY + this.#height / 2) {
+            return false;
+        }
+        return true;
+    }
 }

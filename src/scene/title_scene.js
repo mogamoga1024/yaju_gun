@@ -3,6 +3,13 @@ class TitleScene extends Scene {
     #backgroundImage = null;
     #canClick = false;
 
+    #hajimeBtn = null;
+    #tudukiBtn = null;
+    #easyBtn = null;
+    #normalBtn = null;
+    #hardBtn = null;
+    #startBtn = null;
+
     constructor(canClick = false) {
         super();
         this.#canClick = canClick;
@@ -11,6 +18,14 @@ class TitleScene extends Scene {
     async onStart() {
         console.log("TitleScene:onStart");
         this.#backgroundImage = await loadImage("asset/やじゅがん.png");
+
+        this.#hajimeBtn = new HajimeButton();
+        this.#tudukiBtn = new TudukiButton();
+        this.#easyBtn = new EasyButton();
+        this.#normalBtn = new NormalButton();
+        this.#hardBtn = new HardButton();
+        this.#startBtn = new StartButton();
+
         this.state = "loaded";
         this.#update();
         if (!this.#canClick) setTimeout(() => {
@@ -27,29 +42,43 @@ class TitleScene extends Scene {
         context.globalAlpha = 1;
 
         this.#drawTitle();
-
-        context.textAlign = "start";
-        context.textBaseline = "top";
-        context.lineJoin = "round";
-        context.font = "400 40px Xim-Sans";
-        context.fillStyle = "#000";
-        context.strokeStyle = "#eee";
-        context.lineWidth = 5;
-
-        {
-            const text = `${isPC ? "Click" : "Tap"} To Start`;
-            const width = context.measureText(text).width;
-            drawStrokeText(context, text, (canvas.width - width)  / 2, 300);
-        }
-
         this.#drawHighScore();
+
+        this.#hajimeBtn.draw();
+        this.#tudukiBtn.draw();
+        this.#easyBtn.draw();
+        this.#normalBtn.draw();
+        this.#hardBtn.draw();
+        this.#startBtn.draw();
     }
     
     onClick(e) {
         if (!this.#canClick) {
             return;
         }
-        SceneManager.start(new GameplayScene(!isPC));
+
+        const rect = e.target.getBoundingClientRect();
+        const {x, y} = this.canvasXY(e.offsetX, e.offsetY, rect);
+
+        if (this.#hajimeBtn.isTargeted(x, y)) {
+            // todo
+        }
+        else if (this.#tudukiBtn.isTargeted(x, y)) {
+            // todo
+        }
+        else if (this.#easyBtn.isTargeted(x, y)) {
+            // todo
+        }
+        else if (this.#normalBtn.isTargeted(x, y)) {
+            // todo
+        }
+        else if (this.#hardBtn.isTargeted(x, y)) {
+            // todo
+        }
+        else if (this.#startBtn.isTargeted(x, y)) {
+            // todo はーい、よーいスタート
+            SceneManager.start(new GameplayScene(!isPC));
+        }
     }
 
     #drawTitle() {

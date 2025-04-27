@@ -66,7 +66,9 @@ if (!isPC) {
 document.addEventListener("visibilitychange", () => {
     if (document.hidden) {
         Howler.stop();
-        if (SceneManager.scene() instanceof GameplayScene) {
+        const scene = SceneManager.scene();
+        if (scene instanceof GameplayScene) {
+            scene.save();
             SceneManager.start(new TitleScene(), false);
         }
     } else {

@@ -5,6 +5,10 @@ class Player {
     #maxHp = 4;
     #mutekiFrameCount = 0;
 
+    get hp() {
+        return this.#hp;
+    }
+
     drawCrosshair(x, y, willHit = false) {
         const image = ImageStorage.get(willHit ? "照準2" : "照準1");
         const size = 80;

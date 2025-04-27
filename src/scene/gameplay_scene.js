@@ -621,4 +621,11 @@ class GameplayScene extends Scene {
         const measure = context.measureText(text);
         drawStrokeText(context, text, canvas.width - measure.width - 20, 20);
     }
+    
+    save() {
+        Cookies.set("difficulty", difficulty, {expires: 365, path: cookiePath});
+        Cookies.set("level", String(level), {expires: 365, path: cookiePath});
+        Cookies.set("score", String(this.#score), {expires: 365, path: cookiePath});
+        Cookies.set("hp", String(this.#player?.hp ?? 0), {expires: 365, path: cookiePath});
+    }
 }

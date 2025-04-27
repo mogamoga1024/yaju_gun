@@ -677,5 +677,20 @@ class GameplayScene extends Scene {
         this.#quitBtn.draw();
         this.#backBtn.draw();
         this.#complainBtn.draw();
+
+        for (const {x, y} of this.#shotPosList) {
+            if (this.#quitBtn.isTargeted(x, y)) {
+                // todo
+                break;
+            }
+            else if (this.#backBtn.isTargeted(x, y)) {
+                // todo
+                break;
+            }
+            else if (this.#complainBtn.isTargeted(x, y)) {
+                // todo
+                break;
+            }
+        }
     }
 }

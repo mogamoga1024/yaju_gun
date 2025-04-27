@@ -47,10 +47,10 @@ class TitleScene extends Scene {
         this.#drawTitle();
         this.#drawHighScore();
 
-        this.#hajimeBtn.draw();
+        this.#hajimeBtn.draw(true);
         this.#tudukiBtn.draw();
         this.#easyBtn.draw();
-        this.#normalBtn.draw();
+        this.#normalBtn.draw(true);
         this.#hardBtn.draw();
         this.#startBtn.draw();
     }
@@ -65,18 +65,31 @@ class TitleScene extends Scene {
 
         if (this.#hajimeBtn.isTargeted(x, y)) {
             this.#startPoint = "new";
+            this.#hajimeBtn.draw(true);
+            this.#tudukiBtn.draw();
         }
         else if (this.#tudukiBtn.isTargeted(x, y)) {
             this.#startPoint = "continue";
+            this.#hajimeBtn.draw();
+            this.#tudukiBtn.draw(true);
         }
         else if (this.#easyBtn.isTargeted(x, y)) {
             this.#difficulty = "easy";
+            this.#easyBtn.draw(true);
+            this.#normalBtn.draw();
+            this.#hardBtn.draw();
         }
         else if (this.#normalBtn.isTargeted(x, y)) {
             this.#difficulty = "normal";
+            this.#easyBtn.draw();
+            this.#normalBtn.draw(true);
+            this.#hardBtn.draw();
         }
         else if (this.#hardBtn.isTargeted(x, y)) {
             this.#difficulty = "hard";
+            this.#easyBtn.draw();
+            this.#normalBtn.draw();
+            this.#hardBtn.draw(true);
         }
         else if (this.#startBtn.isTargeted(x, y)) {
             // todo はーい、よーいスタート

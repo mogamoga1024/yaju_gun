@@ -18,14 +18,20 @@ class NormalButton extends Button {
         this.#x = (canvas.width - this.#width) / 2;
     }
     
-    draw() {
+    draw(isSelected = false) {
         context.save();
         context.textAlign = "start";
         context.textBaseline = "top";
         context.lineJoin = "round";
-        context.fillStyle = "#000";
-        context.strokeStyle = "#eee";
         context.lineWidth = 5;
+        if (isSelected) {
+            context.fillStyle = "#f00";
+            context.strokeStyle = "#ff0";
+        }
+        else {
+            context.fillStyle = "#000";
+            context.strokeStyle = "#eee";
+        }
         context.font = `400 ${this.#height}px Xim-Sans`;
         drawStrokeText(context, this.#text, this.#x, this.#centerY);
         context.restore();

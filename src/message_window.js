@@ -18,7 +18,7 @@ class MessageWindow {
 
     static #drawWindow() {
         context.beginPath();
-        context.fillStyle = "rgba(0, 128, 255, 0.5)";
+        context.fillStyle = "rgba(0, 128, 255, 0.7)";
         context.roundRect(this.#x, this.#y, this.#width, this.#height, 20);
         context.fill();
     }

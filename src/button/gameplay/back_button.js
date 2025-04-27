@@ -4,7 +4,7 @@ class BackButton extends Button {
     #y = 0;
     #width = 0;
     #height = 0;
-    #text = "";
+    #text = "何でもない";
 
     constructor() {
         super();

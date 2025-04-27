@@ -4,7 +4,7 @@ class ComplainButton extends Button {
     #y = 0;
     #width = 0;
     #height = 0;
-    #text = "";
+    #text = "チラチラ\n見てただろ";
 
     constructor() {
         super();

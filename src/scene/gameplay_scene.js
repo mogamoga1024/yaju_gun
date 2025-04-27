@@ -31,6 +31,7 @@ class GameplayScene extends Scene {
     #touchXMap = new Map();
 
     #kmr = null;
+    #isKMRTalking = false;
 
     #shouldAnimation = true;
     #enemyCreateFrame = 0;
@@ -165,19 +166,12 @@ class GameplayScene extends Scene {
 
         context.clearRect(0, 0, canvas.width, canvas.height);
 
-        // メッセージ
-        if (this.#isTutorial) {
-            this.#message.isTransient = false;
-            if (isPC) {
-                this.#message.text = "クリックで攻撃\nAキーとDキーで移動";
+        // プレイヤーの攻撃音と火花の追加
+        if (this.#shotPosList.length > 0) {
+            playSound(this.#gunshotSound);
+            for (const {x, y} of this.#shotPosList) {
+                addSparks(x, y);
             }
-            else {
-                this.#message.text = "タップで攻撃\n指を押したまま動かすと移動";
-            }
-        }
-        else {
-            this.#message.isTransient = true;
-            this.#message.text = "";
         }
 
         // 背景の描画
@@ -186,8 +180,9 @@ class GameplayScene extends Scene {
 
         // 敵と言霊の描画
         let willHit = false;
+        const willHitCond = entity => isPC && !willHit && entity.isTargeted(this.#pc.mouseX, this.#pc.mouseY);
         this.#sortedEntityList().forEach(entity => {
-            if (isPC && !willHit && entity.isTargeted(this.#pc.mouseX, this.#pc.mouseY)) {
+            if (willHitCond(entity)) {
                 willHit = true;
             }
             entity.draw();
@@ -207,9 +202,25 @@ class GameplayScene extends Scene {
         this.#turnRightBtn.draw(this.#shouldWarnRight);
 
         // メッセージウィンドウの描画
+        if (this.#isTutorial) {
+            this.#message.isTransient = false;
+            if (isPC) {
+                this.#message.text = "クリックで攻撃\nAキーとDキーで移動";
+            }
+            else {
+                this.#message.text = "タップで攻撃\n指を押したまま動かすと移動";
+            }
+        }
+        else {
+            this.#message.isTransient = true;
+            this.#message.text = "";
+        }
         MessageWindow.drawText(this.#message.text, this.#message.isTransient);
 
         // KMRの描画
+        if (willHitCond(this.#kmr)) {
+            willHit = true;
+        }
         this.#kmr.draw();
 
         // 照準の描画
@@ -252,7 +263,37 @@ class GameplayScene extends Scene {
             return;
         }
 
-        // PCでのキーイベントの捕捉
+        // KMRが押されたときの処理
+        if (!this.#isKMRTalking) {
+            for (const {x, y} of this.#shotPosList) {
+                if (this.#kmr.isTargeted(x, y)) {
+                    this.#isKMRTalking = true;
+                    break;
+                }
+            }
+        }
+        
+        // KMRと会話中なら処理はここまで
+        if (this.#isKMRTalking) {
+            this.#shotPosList = [];
+            return;
+        }
+
+        // 横向くんだよ90度ボタンが押されたときの処理
+        for (const {x, y} of this.#shotPosList) {
+            if (this.#turnLeftBtn.isTargeted(x, y)) {
+                this.#playYokomukunSound();
+                this.#viewAngle = (this.#viewAngle + 90) % 360;
+                break;
+            }
+            if (this.#turnRightBtn.isTargeted(x, y)) {
+                this.#playYokomukunSound();
+                this.#viewAngle = (this.#viewAngle + 270) % 360;
+                break;
+            }
+        }
+
+        // 移動系イベントによる移動
         if (isPC) {
             const speed = 4;
             if (this.#pc.isPressed.left) {
@@ -268,28 +309,6 @@ class GameplayScene extends Scene {
         }
         else if (this.#useNipple) {
             this.#viewAngle = (this.#viewAngle + this.#nippleDx) % 360;
-        }
-
-        // ボタンが押されたときの処理
-        for (const {x, y} of this.#shotPosList) {
-            if (this.#turnLeftBtn.isTargeted(x, y)) {
-                this.#playYokomukunSound();
-                this.#viewAngle = (this.#viewAngle + 90) % 360;
-                break;
-            }
-            if (this.#turnRightBtn.isTargeted(x, y)) {
-                this.#playYokomukunSound();
-                this.#viewAngle = (this.#viewAngle + 270) % 360;
-                break;
-            }
-        }
-
-        // プレイヤーの攻撃
-        if (this.#shotPosList.length > 0) {
-            playSound(this.#gunshotSound);
-            for (const {x, y} of this.#shotPosList) {
-                addSparks(x, y);
-            }
         }
 
         // 敵の被弾と状態の更新

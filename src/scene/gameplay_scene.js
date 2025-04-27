@@ -46,6 +46,10 @@ class GameplayScene extends Scene {
     #shouldWarnLeft = false;
     #shouldWarnRight = false;
 
+    #quitBtn = null;
+    #backBtn = null;
+    #complainBtn = null;
+
     #bgm = null;
 
     #message = {
@@ -122,6 +126,9 @@ class GameplayScene extends Scene {
         this.#kmr = new KMR();
         this.#turnLeftBtn = new TurnLeftButton(10);
         this.#turnRightBtn = new TurnRightButton(10);
+        this.#quitBtn = new QuitButton();
+        this.#backBtn = new BackButton();
+        this.#complainBtn = new ComplainButton();
 
         MessageWindow.init(10, 10);
 
@@ -203,7 +210,7 @@ class GameplayScene extends Scene {
 
         // 画面の状態による差異
         if (this.#isKMRTalking) {
-            this.#drawKMRTalking();
+            this.#kmrTalking();
         }
         else if (this.#isTutorial) {
             this.#message.isTransient = false;
@@ -663,10 +670,12 @@ class GameplayScene extends Scene {
         Cookies.set("hp", String(this.#player?.hp ?? 0), {expires: 365, path: cookiePath});
     }
 
-    #drawKMRTalking() {
+    #kmrTalking() {
         this.#message.isTransient = false;
         this.#message.text = "なんですか？";
 
-        // todo
+        this.#quitBtn.draw();
+        this.#backBtn.draw();
+        this.#complainBtn.draw();
     }
 }

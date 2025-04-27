@@ -14,6 +14,7 @@ class KunekuneSenpai extends Entity {
     #imageListIndexDelta = 1;
     #opacity = 1;
     #explosion = null;
+    baseScore = 0;
 
     constructor(centerX, viewAngle, temaeRate = 0.15) {
         super(temaeRate);

@@ -9,6 +9,15 @@ class Player {
         return this.#hp;
     }
 
+    constructor(hp = 4) {
+        if (hp <= 0 || hp > this.#maxHp) {
+            this.#hp = this.#maxHp;
+        }
+        else {
+            this.#hp = hp;
+        }
+    }
+
     drawCrosshair(x, y, willHit = false) {
         const image = ImageStorage.get(willHit ? "照準2" : "照準1");
         const size = 80;

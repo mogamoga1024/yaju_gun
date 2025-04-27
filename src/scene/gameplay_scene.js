@@ -7,7 +7,7 @@ class GameplayScene extends Scene {
     #enemyList = [];
     #kotodamaList = [];
 
-    #player = new Player();
+    #player = null;
 
     // 範囲：[0, 360)
     // 0で真正面 90で左 180で後ろ 270で右
@@ -55,9 +55,11 @@ class GameplayScene extends Scene {
     #fadeOutAlpha = 0;
     #fadeOutDuration = 5000;
 
-    constructor(useNipple) {
+    constructor(useNipple, hp = undefined, score = 0) {
         super();
         this.#useNipple = useNipple;
+        this.#player = new Player(hp);
+        this.#score = score;
     }
 
     async onStart() {

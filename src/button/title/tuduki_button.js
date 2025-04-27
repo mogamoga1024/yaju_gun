@@ -9,7 +9,7 @@ class TudukiButton extends Button {
     constructor() {
         super();
         this.#text = "つづきから";
-        this.#centerY = 230;
+        this.#centerY = 240;
         this.#height = 40;
 
         context.font = `400 ${this.#height}px Xim-Sans`;

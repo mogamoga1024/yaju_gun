@@ -10,7 +10,7 @@ class HajimeButton extends Button {
         super();
         this.#text = "はじめから";
         this.#x = 220;
-        this.#centerY = 230;
+        this.#centerY = 240;
         this.#height = 40;
 
         context.font = `400 ${this.#height}px Xim-Sans`;

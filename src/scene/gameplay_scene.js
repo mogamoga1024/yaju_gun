@@ -393,8 +393,8 @@ class GameplayScene extends Scene {
             }
         }
 
-        // スコアの値によって、チュートリアルを終わる
-        if (this.#isTutorial && this.#score >= 200) {
+        // 敵を全滅させたらチュートリアルを終わる
+        if (this.#isTutorial && this.#enemyList.length === 0) {
             this.#isTutorial = false;
             stopSound(this.#bgm);
             this.#bgm = SoundStorage.get("Smart Boy(Daily Unchi Special Mix)");

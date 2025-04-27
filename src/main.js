@@ -65,11 +65,16 @@ if (!isPC) {
 
 document.addEventListener("visibilitychange", () => {
     if (document.hidden) {
-        // todo 全ての音を停止させる
-        // todo ゲームを中断し、タイトル画面に遷移させる
+        Howler.stop();
+        if (SceneManager.scene() instanceof GameplayScene) {
+            SceneManager.start(new TitleScene(), false);
+        }
     } else {
-        // todo 再度、音を取得する
-        // todo GameplayScene.#isFirstもtrueにしなければならない
+        // 音が取得できていないならばリロードする
+        const scene = SceneManager.scene();
+        if (scene instanceof GameplayScene && scene.state !== "loaded") {
+            window.location.reload();
+        }
     }
 });
 

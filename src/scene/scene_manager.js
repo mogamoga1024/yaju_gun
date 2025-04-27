@@ -2,6 +2,10 @@
 class SceneManager {
     static #scene = null;
 
+    static scene() {
+        return this.#scene;
+    }
+
     static #init() {
         window.addEventListener("keydown", e => {
             if (this.#scene?.state !== "loaded") return;

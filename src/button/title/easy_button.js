@@ -10,7 +10,7 @@ class EasyButton extends Button {
         super();
         this.#text = "簡単";
         this.#x = 300;
-        this.#centerY = 300;
+        this.#centerY = 320;
         this.#height = 40;
 
         context.font = `400 ${this.#height}px Xim-Sans`;
@@ -20,7 +20,7 @@ class EasyButton extends Button {
     draw(isSelected = false) {
         context.save();
         context.textAlign = "start";
-        context.textBaseline = "top";
+        context.textBaseline = "middle";
         context.lineJoin = "round";
         context.lineWidth = 5;
         if (isSelected) {

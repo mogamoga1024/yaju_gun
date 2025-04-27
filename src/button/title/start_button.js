@@ -9,7 +9,7 @@ class StartButton extends Button {
     constructor() {
         super();
         this.#text = "スタート";
-        this.#centerY = 350;
+        this.#centerY = 385;
         this.#height = 70;
 
         context.font = `400 ${this.#height}px Xim-Sans`;
@@ -21,7 +21,7 @@ class StartButton extends Button {
     draw() {
         context.save();
         context.textAlign = "start";
-        context.textBaseline = "top";
+        context.textBaseline = "middle";
         context.lineJoin = "round";
         context.fillStyle = "#000";
         context.strokeStyle = "#eee";

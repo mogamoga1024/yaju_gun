@@ -46,7 +46,7 @@ class TitleScene extends Scene {
         this.#drawTitle();
         this.#drawHighScore();
 
-        this.#drawStartPoint();
+        this.#drawStartPointBtn();
         this.#drawDifficultyBtn();
         this.#startBtn.draw();
     }
@@ -61,11 +61,11 @@ class TitleScene extends Scene {
 
         if (this.#hajimeBtn.isTargeted(x, y)) {
             this.#startPoint = "new";
-            this.#drawStartPoint();
+            this.#drawStartPointBtn();
         }
         else if (this.#tudukiBtn.isTargeted(x, y)) {
             this.#startPoint = "continue";
-            this.#drawStartPoint();
+            this.#drawStartPointBtn();
         }
         else if (this.#easyBtn.isTargeted(x, y)) {
             difficulty = "easy";
@@ -172,7 +172,7 @@ class TitleScene extends Scene {
         drawStrokeText(context, text, canvas.width - measure.width - 20, 20);
     }
 
-    #drawStartPoint() {
+    #drawStartPointBtn() {
         this.#hajimeBtn.draw(this.#startPoint === "new");
         this.#tudukiBtn.draw(this.#startPoint === "continue");
     }

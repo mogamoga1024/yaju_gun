@@ -201,8 +201,12 @@ class GameplayScene extends Scene {
         this.#turnLeftBtn.draw(this.#shouldWarnLeft);
         this.#turnRightBtn.draw(this.#shouldWarnRight);
 
-        // メッセージウィンドウの描画
-        if (this.#isTutorial) {
+        // 画面の状態による差異
+        if (this.#isKMRTalking) {
+            this.#message.isTransient = false;
+            this.#message.text = "なんですか？";
+        }
+        else if (this.#isTutorial) {
             this.#message.isTransient = false;
             if (isPC) {
                 this.#message.text = "クリックで攻撃\nAキーとDキーで移動";
@@ -215,6 +219,8 @@ class GameplayScene extends Scene {
             this.#message.isTransient = true;
             this.#message.text = "";
         }
+
+        // メッセージウィンドウの描画
         MessageWindow.drawText(this.#message.text, this.#message.isTransient);
 
         // KMRの描画

@@ -4,7 +4,6 @@ class TitleScene extends Scene {
     #canClick = false;
 
     #startPoint = "new"; // new or continue
-    #difficulty = "normal"; // easy or normal or hard
 
     #hajimeBtn = null;
     #tudukiBtn = null;
@@ -47,11 +46,8 @@ class TitleScene extends Scene {
         this.#drawTitle();
         this.#drawHighScore();
 
-        this.#hajimeBtn.draw(true);
-        this.#tudukiBtn.draw();
-        this.#easyBtn.draw();
-        this.#normalBtn.draw(true);
-        this.#hardBtn.draw();
+        this.#drawStartPoint();
+        this.#drawDifficultyBtn();
         this.#startBtn.draw();
     }
     
@@ -65,31 +61,23 @@ class TitleScene extends Scene {
 
         if (this.#hajimeBtn.isTargeted(x, y)) {
             this.#startPoint = "new";
-            this.#hajimeBtn.draw(true);
-            this.#tudukiBtn.draw();
+            this.#drawStartPoint();
         }
         else if (this.#tudukiBtn.isTargeted(x, y)) {
             this.#startPoint = "continue";
-            this.#hajimeBtn.draw();
-            this.#tudukiBtn.draw(true);
+            this.#drawStartPoint();
         }
         else if (this.#easyBtn.isTargeted(x, y)) {
-            this.#difficulty = "easy";
-            this.#easyBtn.draw(true);
-            this.#normalBtn.draw();
-            this.#hardBtn.draw();
+            difficulty = "easy";
+            this.#drawDifficultyBtn();
         }
         else if (this.#normalBtn.isTargeted(x, y)) {
-            this.#difficulty = "normal";
-            this.#easyBtn.draw();
-            this.#normalBtn.draw(true);
-            this.#hardBtn.draw();
+            difficulty = "normal";
+            this.#drawDifficultyBtn();
         }
         else if (this.#hardBtn.isTargeted(x, y)) {
-            this.#difficulty = "hard";
-            this.#easyBtn.draw();
-            this.#normalBtn.draw();
-            this.#hardBtn.draw(true);
+            difficulty = "hard";
+            this.#drawDifficultyBtn();
         }
         else if (this.#startBtn.isTargeted(x, y)) {
             // todo はーい、よーいスタート
@@ -182,5 +170,16 @@ class TitleScene extends Scene {
         const text = String(`HIGT SCORE ${highScore}`);
         const measure = context.measureText(text);
         drawStrokeText(context, text, canvas.width - measure.width - 20, 20);
+    }
+
+    #drawStartPoint() {
+        this.#hajimeBtn.draw(this.#startPoint === "new");
+        this.#tudukiBtn.draw(this.#startPoint === "continue");
+    }
+
+    #drawDifficultyBtn() {
+        this.#easyBtn.draw(difficulty === "easy");
+        this.#normalBtn.draw(difficulty === "normal");
+        this.#hardBtn.draw(difficulty === "hard");
     }
 }

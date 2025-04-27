@@ -6,8 +6,19 @@ const context = canvas.getContext("2d");
 const cookiePath = "/yaju_gun";
 
 let level = 1;
+let difficulty = "normal";
 function balanceFactor() {
-    return (level + 50 + 20) * 1.1;
+    let a;
+    if (difficulty === "easy") {
+        a = 0;
+    }
+    else if (difficulty === "normal") {
+        a = 35;
+    }
+    else /*if (difficulty === "hard")*/ {
+        a = 70;
+    }
+    return (level + a) * 1.1;
 }
 
 const isPC = (function() {

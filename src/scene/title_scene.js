@@ -103,15 +103,26 @@ class TitleScene extends Scene {
             this.#drawDifficultyBtn();
         }
         else if (this.#startBtn.isTargeted(x, y)) {
-            // todo はーい、よーいスタート
-            if (this.#startPoint === "new") {
-                level = 1;
-                SceneManager.start(new GameplayScene(!isPC));
+            this.#canClick = false;
+            if (Howler.ctx !== null && (Howler.ctx.state === "suspended" || Howler.ctx.state === "interrupted")) {
+                Howler.ctx.resume().then(() => {
+                    this.#start();
+                });
             }
-            else /*if (this.#startPoint = "continue")*/ {
-                level = this.#prevLevel;
-                SceneManager.start(new GameplayScene(!isPC, this.#prevHp, this.#prevScore));
+            else {
+                this.#start();
             }
+        }
+    }
+
+    #start() {
+        if (this.#startPoint === "new") {
+            level = 1;
+            SceneManager.start(new GameplayScene(!isPC));
+        }
+        else /*if (this.#startPoint = "continue")*/ {
+            level = this.#prevLevel;
+            SceneManager.start(new GameplayScene(!isPC, this.#prevHp, this.#prevScore));
         }
     }
 

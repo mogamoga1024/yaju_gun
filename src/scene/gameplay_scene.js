@@ -696,7 +696,7 @@ class GameplayScene extends Scene {
             return;
         }
         else if (this.#hasComplained) {
-            this.#message.text = this.#complainList[this.#complainIndex].kmr;
+            // 何もしない
         }
         else {
             this.#message.text = "なんですか？";
@@ -724,6 +724,7 @@ class GameplayScene extends Scene {
             }
             else if (this.#complainBtn.isTargeted(x, y)) {
                 this.#hasComplained = true;
+                this.#message.text = this.#complainList[this.#complainIndex].kmr;
                 if (this.#complainIndex < this.#complainList.length - 1) {
                     this.#complainIndex += 1;
                 }

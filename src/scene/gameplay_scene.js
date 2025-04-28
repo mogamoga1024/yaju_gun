@@ -692,7 +692,7 @@ class GameplayScene extends Scene {
     #kmrTalking() {
         this.#message.isTransient = false;
         if (this.#isQuitting) {
-            this.#message.text = "じゃ、流します";
+            this.#message.text = "じゃ、終わります";
             return;
         }
         else if (this.#hasComplained) {

@@ -109,6 +109,11 @@ document.addEventListener("visibilitychange", () => {
 
 // debug
 
+const domDebguText = document.querySelector("#debug-text");
+// setInterval(() => {
+//     domDebguText.innerText = Howler.ctx.state;
+// }, 500);
+
 const debug = {
     canCreateEnemy: true,
 };

@@ -30,9 +30,6 @@ class GameplayScene extends Scene {
     #nippleDx = 0;
     #touchXMap = new Map();
 
-    #kmr = null;
-    #isKMRTalking = false;
-
     #shouldAnimation = true;
     #enemyCreateFrame = 0;
     #honsyaCreateFrame = 0;
@@ -45,6 +42,10 @@ class GameplayScene extends Scene {
     #turnRightBtn = null;
     #shouldWarnLeft = false;
     #shouldWarnRight = false;
+
+    #kmr = null;
+    #isKMRTalking = false;
+    #isQuitting = false;
 
     #quitBtn = null;
     #backBtn = null;
@@ -674,7 +675,13 @@ class GameplayScene extends Scene {
 
     #kmrTalking() {
         this.#message.isTransient = false;
-        this.#message.text = "なんですか？";
+        if (this.#isQuitting) {
+            this.#message.text = "じゃ、流します";
+            return;
+        }
+        else {
+            this.#message.text = "なんですか？";
+        }
 
         this.#quitBtn.draw();
         this.#backBtn.draw();
@@ -682,7 +689,12 @@ class GameplayScene extends Scene {
 
         for (const {x, y} of this.#shotPosList) {
             if (this.#quitBtn.isTargeted(x, y)) {
-                // todo
+                this.#isQuitting = true;
+                setTimeout(() => {
+                    Howler.stop();
+                    this.save();
+                    SceneManager.start(new TitleScene(), false);
+                }, 2000);
                 break;
             }
             else if (this.#backBtn.isTargeted(x, y)) {

@@ -272,6 +272,8 @@ class GameplayScene extends Scene {
             }
             context.fillStyle = `rgba(255, 128, 170, ${this.#fadeOutAlpha})`;
             context.fillRect(0, 0, canvas.width, canvas.height);
+
+            this.#shotPosList = [];
             return;
         }
 
@@ -684,7 +686,7 @@ class GameplayScene extends Scene {
                 break;
             }
             else if (this.#backBtn.isTargeted(x, y)) {
-                // todo
+                this.#isKMRTalking = false;
                 break;
             }
             else if (this.#complainBtn.isTargeted(x, y)) {

@@ -46,6 +46,22 @@ class GameplayScene extends Scene {
     #kmr = null;
     #isKMRTalking = false;
     #isQuitting = false;
+    #hasComplained = false;
+    #complainList = [
+        {
+            mur: "チラチラ\n見てただろ",
+            kmr: "いや、見てないですよ"
+        },
+        {
+            mur: "嘘つけ\n絶対見てたゾ",
+            kmr: "なんで見る必要なんかあるんですか"
+        },
+        {
+            mur: "見たけりゃ\n見せてやるよ",
+            kmr: "やめてくれよ…(絶望)"
+        },
+    ];
+    #complainIndex = 0;
 
     #quitBtn = null;
     #backBtn = null;
@@ -679,13 +695,16 @@ class GameplayScene extends Scene {
             this.#message.text = "じゃ、流します";
             return;
         }
+        else if (this.#hasComplained) {
+            this.#message.text = this.#complainList[this.#complainIndex].kmr;
+        }
         else {
             this.#message.text = "なんですか？";
         }
 
         this.#quitBtn.draw();
         this.#backBtn.draw();
-        this.#complainBtn.draw();
+        this.#complainBtn.draw(this.#complainList[this.#complainIndex].mur);
 
         for (const {x, y} of this.#shotPosList) {
             if (this.#quitBtn.isTargeted(x, y)) {
@@ -699,10 +718,18 @@ class GameplayScene extends Scene {
             }
             else if (this.#backBtn.isTargeted(x, y)) {
                 this.#isKMRTalking = false;
+                this.#hasComplained = false;
+                this.#complainIndex = 0;
                 break;
             }
             else if (this.#complainBtn.isTargeted(x, y)) {
-                // todo
+                this.#hasComplained = true;
+                if (this.#complainIndex < this.#complainList.length - 1) {
+                    this.#complainIndex += 1;
+                }
+                else {
+                    // todo
+                }
                 break;
             }
         }

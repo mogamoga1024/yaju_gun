@@ -4,7 +4,6 @@ class ComplainButton extends Button {
     #y = 0;
     #width = 0;
     #height = 0;
-    #text = "チラチラ\n見てただろ";
 
     constructor() {
         super();
@@ -14,7 +13,7 @@ class ComplainButton extends Button {
         this.#x = canvas.width - this.#width - 60;
     }
     
-    draw() {
+    draw(text) {
         context.beginPath();
         context.fillStyle = "rgba(0, 128, 255, 0.7)";
         context.roundRect(this.#x, this.#y, this.#width, this.#height, 20);
@@ -22,7 +21,7 @@ class ComplainButton extends Button {
 
         const fontSize = 32;
         const lineHeight = fontSize * 1.1;
-        const lineTextList = this.#text.split("\n");
+        const lineTextList = text.split("\n");
         let y = this.#y + (this.#height - lineHeight * lineTextList.length) / 2 + (lineHeight - fontSize) / 2;
 
         const x = this.#x + this.#width / 2;

@@ -11,6 +11,8 @@ class KMR extends Entity {
     #despairH = 0;
     #despairImage = null;
     #isDespair = false;
+    #prevText = "";
+    #soundId = -1;
 
     constructor() {
         super();
@@ -35,6 +37,21 @@ class KMR extends Entity {
         else {
             context.drawImage(this.#sittingImage, this.#sittingX, this.#sittingY, this.#sittingW, this.#sittingH);
         }
+    }
+
+    say(text) {
+        if (this.#soundId !== -1) {
+            stopSound(SoundStorage.get(this.#prevText), this.#soundId);
+        }
+        this.#prevText = text;
+        playSound(SoundStorage.get(text)).then(id => {
+            if (text !== this.#prevText) {
+                stopSound(SoundStorage.get(text), id);
+            }
+            else {
+                this.#soundId = id;
+            }
+        });
     }
 
     isTargeted(crosshairX, crosshairY) {

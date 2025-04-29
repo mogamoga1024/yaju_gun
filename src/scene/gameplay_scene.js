@@ -58,7 +58,7 @@ class GameplayScene extends Scene {
         },
         {
             mur: "見たけりゃ\n見せてやるよ",
-            kmr: "やめてくれよ…(絶望)"
+            kmr: "やめてくれよ…（絶望）"
         },
     ];
     #complainIndex = 0;
@@ -726,6 +726,7 @@ class GameplayScene extends Scene {
             else if (this.#complainBtn.isTargeted(x, y)) {
                 this.#hasComplained = true;
                 this.#message.text = this.#complainList[this.#complainIndex].kmr;
+                this.#kmr.say(this.#message.text);
                 if (this.#complainIndex < this.#complainList.length - 1) {
                     this.#complainIndex += 1;
                 }

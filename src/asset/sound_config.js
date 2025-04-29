@@ -54,14 +54,14 @@ const kotodamaNameList = [];
     add1(s, "アアッー！(高音)", "mp3", {volume: 0.8});
 
     // KMR
-    add1(s, "いや、見てないですよ ", "mp3", {volume: 1});
-    add1(s, "なんで見る必要なんかあるんですか ", "mp3", {volume: 1});
-    add1(s, "やめてくれよ…(絶望)", "mp3", {volume: 1});
+    add1(s, "いや、見てないですよ", "mp3", {volume: 1});
+    add1(s, "なんで見る必要なんかあるんですか", "mp3", {volume: 1});
+    add1(s, "やめてくれよ…（絶望）", "mp3", {volume: 1});
 
     // MRU
-    add1(s, "チラチラ見てただろ", "mp3", {volume: 1});
-    add1(s, "うそつけ絶対見てたゾ", "mp3", {volume: 1});
-    add1(s, "見たけりゃ見せてやるよ", "mp3", {volume: 1});
+    // add1(s, "チラチラ見てただろ", "mp3", {volume: 1});
+    // add1(s, "うそつけ絶対見てたゾ", "mp3", {volume: 1});
+    // add1(s, "見たけりゃ見せてやるよ", "mp3", {volume: 1});
 
     // AKYS
     add1(s, "人間の屑がこの野郎", "mp3", {volume: 1});

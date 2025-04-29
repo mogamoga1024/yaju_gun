@@ -709,6 +709,10 @@ class GameplayScene extends Scene {
         this.#backBtn.draw();
         this.#complainBtn.draw(this.#complainList[this.#complainIndex].mur);
 
+        if (this.#player.state !== "alive") {
+            return;
+        }
+
         for (const {x, y} of this.#shotPosList) {
             if (this.#quitBtn.isTargeted(x, y)) {
                 this.#isQuitting = true;

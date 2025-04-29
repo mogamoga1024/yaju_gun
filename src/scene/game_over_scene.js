@@ -84,8 +84,8 @@ class GameOverScene extends Scene {
         const btp = SoundStorage.get("ブッチッパ！");
         if (btp.isOK) {
             let shouldAnimation = true;
+            btp.off("playerror");
             btp.on("playerror", () => {
-                btp.off("playerror");
                 shouldAnimation = false;
                 context.clearRect(0, 0, canvas.width, canvas.height);
                 context.fillStyle = "rgb(255, 128, 170)";

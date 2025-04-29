@@ -736,7 +736,8 @@ class GameplayScene extends Scene {
                 }
                 else {
                     this.#kmr.despair(true);
-                    // todo
+                    this.#player.state = "dying";
+                    this.#score = -1145148101919;
                 }
                 break;
             }

@@ -68,6 +68,7 @@ class GameplayScene extends Scene {
     #complainBtn = null;
 
     #bgm = null;
+    #bgmId = -1;
 
     #message = {
         text: "",
@@ -97,7 +98,7 @@ class GameplayScene extends Scene {
         this.#bgm = SoundStorage.get("ほのぼの神社");
         this.#gunshotSound = SoundStorage.get("銃声");
 
-        playSound(this.#bgm);
+        playSound(this.#bgm).then(id => this.#bgmId = id);
 
         // debug start
         // 0 <= centerX < canvas.width * 2
@@ -459,7 +460,7 @@ class GameplayScene extends Scene {
             this.#isTutorial = false;
             stopSound(this.#bgm);
             this.#bgm = SoundStorage.get("Smart Boy(Daily Unchi Special Mix)");
-            playSound(this.#bgm);
+            playSound(this.#bgm).then(id => this.#bgmId = id);
         }
         
         // 後処理
@@ -745,6 +746,7 @@ class GameplayScene extends Scene {
         Howler._howls.forEach(howl => {
             const playingIds = howl._getSoundIds().filter(id => howl.playing(id));
             playingIds.forEach(id => {
+                if (id === this.#bgmId) return;
                 howl.mute(shouldMute, id);
             });
         });

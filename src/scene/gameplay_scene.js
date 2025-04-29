@@ -70,6 +70,8 @@ class GameplayScene extends Scene {
     #bgm = null;
     #bgmId = -1;
 
+    #soundIdList = [];
+
     #message = {
         text: "",
         isTransient: true,
@@ -272,10 +274,10 @@ class GameplayScene extends Scene {
                     Cookies.set("high_score", String(this.#score), {expires: 365, path: cookiePath});
                 }
 
-                Howler._howls.forEach(howl => {
-                    const playingIds = howl._getSoundIds().filter(id => howl.playing(id));
+                Howler._howls.forEach(sound => {
+                    const playingIds = sound._getSoundIds().filter(id => sound.playing(id));
                     playingIds.forEach(id => {
-                        howl.fade(howl.volume(id), 0, this.#fadeOutDuration, id);
+                        sound.fade(sound.volume(id), 0, this.#fadeOutDuration, id);
                     });
                 });
                 setTimeout(() => {
@@ -300,7 +302,7 @@ class GameplayScene extends Scene {
             for (const {x, y} of this.#shotPosList) {
                 if (this.#kmr.isTargeted(x, y)) {
                     this.#isKMRTalking = true;
-                    this.#mute(true);
+                    this.#togglePlay(false);
                     break;
                 }
             }
@@ -728,7 +730,7 @@ class GameplayScene extends Scene {
                 this.#isKMRTalking = false;
                 this.#hasComplained = false;
                 this.#complainIndex = 0;
-                this.#mute(false);
+                this.#togglePlay(true);
                 break;
             }
             else if (this.#complainBtn.isTargeted(x, y)) {
@@ -748,12 +750,16 @@ class GameplayScene extends Scene {
         }
     }
 
-    #mute(shouldMute) {
-        Howler._howls.forEach(howl => {
-            const playingIds = howl._getSoundIds().filter(id => howl.playing(id));
-            playingIds.forEach(id => {
-                if (id === this.#bgmId) return;
-                howl.mute(shouldMute, id);
+    #togglePlay(shouldPlay) {
+        Howler._howls.forEach(sound => {
+            this.#soundIdList = sound._getSoundIds().filter(id => id !== this.#bgmId && sound.playing(id));
+            this.#soundIdList.forEach(id => {
+                if (shouldPlay) {
+                    playSound(sound, id);
+                }
+                else {
+                    stopSound(sound, id);
+                }
             });
         });
     }

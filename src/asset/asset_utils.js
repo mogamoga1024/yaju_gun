@@ -45,16 +45,17 @@ function loadSound(name, parentPath = "") {
     });
 }
 
-function playSound(sound) {
+function playSound(sound, id = undefined) {
+    // todo 画面復帰時にresumeしてるから、普通にsound.play(id)でいいかもしれない
     return new Promise(resolve => {
         // https://github.com/goldfire/howler.js/issues/1753
         if (Howler.ctx.state === "suspended" || Howler.ctx.state === "interrupted") {
             Howler.ctx.resume().then(() => {
-                resolve(sound.play());
+                resolve(sound.play(id));
             });
         }
         else {
-            resolve(sound.play());
+            resolve(sound.play(id));
         }
     });
 }

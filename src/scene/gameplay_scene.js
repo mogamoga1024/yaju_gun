@@ -3,6 +3,7 @@ class GameplayScene extends Scene {
     static #isFirst = true;
     #backgroundImage = null;
     #gunshotSound = null;
+    #gunshotSoundId = -1;
 
     #enemyList = [];
     #kotodamaList = [];
@@ -70,7 +71,7 @@ class GameplayScene extends Scene {
     #bgm = null;
     #bgmId = -1;
 
-    #soundIdList = [];
+    #soundList = [];
 
     #message = {
         text: "",
@@ -195,7 +196,7 @@ class GameplayScene extends Scene {
 
         // プレイヤーの攻撃音と火花の追加
         if (this.#shotPosList.length > 0) {
-            playSound(this.#gunshotSound);
+            this.#gunshotSoundId = this.#gunshotSound.play();
             for (const {x, y} of this.#shotPosList) {
                 addSparks(x, y);
             }
@@ -751,16 +752,27 @@ class GameplayScene extends Scene {
     }
 
     #togglePlay(shouldPlay) {
+        if (!shouldPlay) {
+            this.#soundList = [];
+        }
         Howler._howls.forEach(sound => {
-            this.#soundIdList = sound._getSoundIds().filter(id => id !== this.#bgmId && sound.playing(id));
-            this.#soundIdList.forEach(id => {
-                if (shouldPlay) {
-                    playSound(sound, id);
-                }
-                else {
-                    stopSound(sound, id);
-                }
-            });
+            if (!shouldPlay) {
+                sound._getSoundIds().forEach(id => {
+                    if (id === this.#gunshotSoundId) return;
+                    if (id === this.#bgmId) return;
+                    if (sound.playing(id)) {
+                        this.#soundList.push({sound, id});
+                    }
+                });
+            }
+        });
+        this.#soundList.forEach(({sound, id}) => {
+            if (shouldPlay) {
+                playSound(sound, id);
+            }
+            else {
+                sound.pause(id);
+            }
         });
     }
 }

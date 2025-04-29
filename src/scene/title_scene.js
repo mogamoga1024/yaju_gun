@@ -5,7 +5,6 @@ class TitleScene extends Scene {
 
     #canContinue = false;
     #startPoint = "new"; // new or continue
-    #difficulty = "normal";
 
     #hajimeBtn = null;
     #tudukiBtn = null;
@@ -29,7 +28,7 @@ class TitleScene extends Scene {
 
         const strDifficulty = Cookies.get("difficulty");
         if (strDifficulty !== undefined) {
-            this.#difficulty = strDifficulty;
+            difficulty = strDifficulty;
         }
 
         const strHp = Cookies.get("hp");
@@ -94,15 +93,15 @@ class TitleScene extends Scene {
             this.#drawStartPointBtn();
         }
         else if (this.#easyBtn.isTargeted(x, y)) {
-            this.#difficulty = "easy";
+            difficulty = "easy";
             this.#drawDifficultyBtn();
         }
         else if (this.#normalBtn.isTargeted(x, y)) {
-            this.#difficulty = "normal";
+            difficulty = "normal";
             this.#drawDifficultyBtn();
         }
         else if (this.#hardBtn.isTargeted(x, y)) {
-            this.#difficulty = "hard";
+            difficulty = "hard";
             this.#drawDifficultyBtn();
         }
         else if (this.#startBtn.isTargeted(x, y)) {
@@ -222,8 +221,8 @@ class TitleScene extends Scene {
     }
 
     #drawDifficultyBtn() {
-        this.#easyBtn.draw(this.#difficulty === "easy");
-        this.#normalBtn.draw(this.#difficulty === "normal");
-        this.#hardBtn.draw(this.#difficulty === "hard");
+        this.#easyBtn.draw(difficulty === "easy");
+        this.#normalBtn.draw(difficulty === "normal");
+        this.#hardBtn.draw(difficulty === "hard");
     }
 }

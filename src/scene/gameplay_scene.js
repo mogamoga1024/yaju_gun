@@ -771,7 +771,7 @@ class GameplayScene extends Scene {
                 playSound(sound, id);
             }
             else {
-                sound.pause(id);
+                pauseSound(sound, id)
             }
         });
     }

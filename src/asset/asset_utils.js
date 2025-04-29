@@ -62,9 +62,23 @@ function playSound(sound, id = undefined) {
 
 function stopSound(sound, id) {
     sound.stop(id);
+    // 何故かstopしても停止しない現象があり、トラウマになった
     const timer = setInterval(() => {
         if (sound.playing(id)) {
             sound.stop(id);
+        }
+        else {
+            clearInterval(timer);
+        }
+    }, 100);
+}
+
+function pauseSound(sound, id) {
+    sound.pause(id);
+    // stopを真似た
+    const timer = setInterval(() => {
+        if (sound.playing(id)) {
+            sound.pause(id);
         }
         else {
             clearInterval(timer);

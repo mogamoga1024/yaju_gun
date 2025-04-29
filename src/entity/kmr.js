@@ -1,45 +1,69 @@
 
 class KMR extends Entity {
-    #x = 0;
-    #y = 0;
-    #width = 0;
-    #height = 0;
+    #sittingX = 0;
+    #sittingY = 0;
+    #sittingW = 0;
+    #sittingH = 0;
     #sittingImage = null;
+    #despairX = 0;
+    #despairY = 0;
+    #despairW = 0;
+    #despairH = 0;
     #despairImage = null;
-    #isDespair = true;
+    #isDespair = false;
 
     constructor() {
         super();
         this.#sittingImage = ImageStorage.get("座るKMR");
         this.#despairImage = ImageStorage.get("絶望KMR");
-        this.#width = this.#sittingImage.width * 0.4;
-        this.#height = this.#sittingImage.height * 0.4;
-        this.#x = 15;
-        this.#y = canvas.height - this.#height - 15;
+
+        this.#sittingW = this.#sittingImage.width * 0.4;
+        this.#sittingH = this.#sittingImage.height * 0.4;
+        this.#sittingX = 15;
+        this.#sittingY = canvas.height - this.#sittingH - 15;
+
+        this.#despairH = this.#sittingH;
+        this.#despairW = this.#despairH * this.#despairImage.width / this.#despairImage.height;
+        this.#despairX = 15;
+        this.#despairY = canvas.height - this.#despairH - 15;
     }
 
     draw() {
-        const image = this.#isDespair ? this.#despairImage : this.#sittingImage;
-        context.drawImage(image, this.#x, this.#y, this.#width, this.#height);
+        if (this.#isDespair) {
+            context.drawImage(this.#despairImage, this.#despairX, this.#despairY, this.#despairW, this.#despairH);
+        }
+        else {
+            context.drawImage(this.#sittingImage, this.#sittingX, this.#sittingY, this.#sittingW, this.#sittingH);
+        }
     }
 
     isTargeted(crosshairX, crosshairY) {
-        if (crosshairX < this.#x) {
+        let x, y, w, h;
+        if (this.#isDespair) {
+            x = this.#despairX; y = this.#despairY;
+            w = this.#despairW; h = this.#despairH;
+        }
+        else {
+            x = this.#sittingX; y = this.#sittingY;
+            w = this.#sittingW; h = this.#sittingH;
+        }
+
+        if (crosshairX < x) {
             return false;
         }
-        if (crosshairX > this.#x + this.#width) {
+        if (crosshairX > x + w) {
             return false;
         }
-        if (crosshairY < this.#y) {
+        if (crosshairY < y) {
             return false;
         }
-        if (crosshairY > this.#y + this.#height) {
+        if (crosshairY > y + h) {
             return false;
         }
         return true;
     }
 
     despair(isDespair) {
-        this.#isDespair = despair;
+        this.#isDespair = isDespair;
     }
 }

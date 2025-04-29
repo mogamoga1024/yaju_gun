@@ -730,6 +730,7 @@ class GameplayScene extends Scene {
                     this.#complainIndex += 1;
                 }
                 else {
+                    this.#kmr.despair(true);
                     // todo
                 }
                 break;

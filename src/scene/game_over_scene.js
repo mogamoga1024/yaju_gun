@@ -31,7 +31,10 @@ class GameOverScene extends Scene {
             this.#levelText += `MAX+${level - maxLevel}`;
         }
 
-        if (level <= 5) {
+        if (this.#score < 0) {
+            this.#comment = "人間の屑がこの野郎";
+        }
+        else if (level <= 5) {
             this.#comment = "は？";
         }
         else if (level <= 10) {

@@ -63,6 +63,9 @@ const kotodamaNameList = [];
     add1(s, "うそつけ絶対見てたゾ", "mp3", {volume: 1});
     add1(s, "見たけりゃ見せてやるよ", "mp3", {volume: 1});
 
+    // AKYS
+    add1(s, "人間の屑がこの野郎", "mp3", {volume: 1});
+
     // 言霊
     add1(k, "アイスティー", "mp3", {volume: 0.7});
     add1(k, "FOO↑気持ちいい", "mp3", {volume: 0.9});

@@ -182,7 +182,7 @@ class GameplayScene extends Scene {
     }
 
     #update() {
-        if (debug.canCreateEnemy && !this.#isTutorial) {
+        if (debug.canCreateEnemy && !this.#isTutorial && !this.#isKMRTalking) {
             if (this.#enemyList.length < 8 * (1 + balanceFactor() / 100)) {
                 this.#enemyCreateFrame++;
             }

@@ -299,6 +299,7 @@ class GameplayScene extends Scene {
             for (const {x, y} of this.#shotPosList) {
                 if (this.#kmr.isTargeted(x, y)) {
                     this.#isKMRTalking = true;
+                    this.#mute(true);
                     break;
                 }
             }
@@ -721,6 +722,7 @@ class GameplayScene extends Scene {
                 this.#isKMRTalking = false;
                 this.#hasComplained = false;
                 this.#complainIndex = 0;
+                this.#mute(false);
                 break;
             }
             else if (this.#complainBtn.isTargeted(x, y)) {
@@ -737,5 +739,14 @@ class GameplayScene extends Scene {
                 break;
             }
         }
+    }
+
+    #mute(shouldMute) {
+        Howler._howls.forEach(howl => {
+            const playingIds = howl._getSoundIds().filter(id => howl.playing(id));
+            playingIds.forEach(id => {
+                howl.mute(shouldMute, id);
+            });
+        });
     }
 }

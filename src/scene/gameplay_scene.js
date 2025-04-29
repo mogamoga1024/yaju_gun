@@ -712,6 +712,7 @@ class GameplayScene extends Scene {
         for (const {x, y} of this.#shotPosList) {
             if (this.#quitBtn.isTargeted(x, y)) {
                 this.#isQuitting = true;
+                playSound(SoundStorage.get("じゃ、流します"));
                 setTimeout(() => {
                     Howler.stop();
                     this.save();

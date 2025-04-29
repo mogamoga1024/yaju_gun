@@ -54,6 +54,7 @@ const kotodamaNameList = [];
     add1(s, "アアッー！(高音)", "mp3", {volume: 0.8});
 
     // KMR
+    add1(s, "じゃ、流します", "mp3", {volume: 0.5});
     add1(s, "いや、見てないですよ", "mp3", {volume: 1});
     add1(s, "なんで見る必要なんかあるんですか", "mp3", {volume: 1});
     add1(s, "やめてくれよ…（絶望）", "mp3", {volume: 1});

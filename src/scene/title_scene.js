@@ -3,7 +3,9 @@ class TitleScene extends Scene {
     #backgroundImage = null;
     #canClick = false;
 
+    #canContinue = false;
     #startPoint = "new"; // new or continue
+    #difficulty = "normal";
 
     #hajimeBtn = null;
     #tudukiBtn = null;
@@ -27,7 +29,7 @@ class TitleScene extends Scene {
 
         const strDifficulty = Cookies.get("difficulty");
         if (strDifficulty !== undefined) {
-            difficulty = strDifficulty;
+            this.#difficulty = strDifficulty;
         }
 
         const strHp = Cookies.get("hp");
@@ -37,6 +39,7 @@ class TitleScene extends Scene {
             const hp = Number(strHp);
             const score = Number(strScore);
             if (hp > 0 && score > 0) {
+                this.#canContinue = true;
                 this.#startPoint = "continue";
                 this.#prevLevel = Number(strLevel);
                 this.#prevHp = hp;
@@ -45,7 +48,7 @@ class TitleScene extends Scene {
         }
         
         this.#hajimeBtn = new HajimeButton();
-        this.#tudukiBtn = new TudukiButton();
+        this.#tudukiBtn = new TudukiButton(this.#canContinue);
         this.#easyBtn = new EasyButton();
         this.#normalBtn = new NormalButton();
         this.#hardBtn = new HardButton();
@@ -91,15 +94,15 @@ class TitleScene extends Scene {
             this.#drawStartPointBtn();
         }
         else if (this.#easyBtn.isTargeted(x, y)) {
-            difficulty = "easy";
+            this.#difficulty = "easy";
             this.#drawDifficultyBtn();
         }
         else if (this.#normalBtn.isTargeted(x, y)) {
-            difficulty = "normal";
+            this.#difficulty = "normal";
             this.#drawDifficultyBtn();
         }
         else if (this.#hardBtn.isTargeted(x, y)) {
-            difficulty = "hard";
+            this.#difficulty = "hard";
             this.#drawDifficultyBtn();
         }
         else if (this.#startBtn.isTargeted(x, y)) {
@@ -219,8 +222,8 @@ class TitleScene extends Scene {
     }
 
     #drawDifficultyBtn() {
-        this.#easyBtn.draw(difficulty === "easy");
-        this.#normalBtn.draw(difficulty === "normal");
-        this.#hardBtn.draw(difficulty === "hard");
+        this.#easyBtn.draw(this.#difficulty === "easy");
+        this.#normalBtn.draw(this.#difficulty === "normal");
+        this.#hardBtn.draw(this.#difficulty === "hard");
     }
 }

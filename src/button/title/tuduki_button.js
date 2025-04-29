@@ -5,12 +5,14 @@ class TudukiButton extends Button {
     #width = 0;
     #height = 0;
     #text = "";
+    #isActive = false;
 
-    constructor() {
+    constructor(isActive) {
         super();
         this.#text = "つづきから";
         this.#centerY = 260;
         this.#height = 40;
+        this.#isActive = isActive;
 
         context.font = `400 ${this.#height}px Xim-Sans`;
         this.#width = context.measureText(this.#text).width;
@@ -24,7 +26,12 @@ class TudukiButton extends Button {
         context.textBaseline = "middle";
         context.lineJoin = "round";
         context.lineWidth = 5;
-        if (isSelected) {
+        if (!this.#isActive) {
+            context.globalAlpha = 0.5
+            context.fillStyle = "#888";
+            context.strokeStyle = "#ccc";
+        }
+        else if (isSelected) {
             context.fillStyle = "#f00";
             context.strokeStyle = "#ff0";
         }
@@ -38,6 +45,9 @@ class TudukiButton extends Button {
     }
 
     isTargeted(crosshairX, crosshairY) {
+        if (!this.#isActive) {
+            return false;
+        }
         if (crosshairX < this.#x) {
             return false;
         }

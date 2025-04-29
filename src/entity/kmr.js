@@ -6,10 +6,12 @@ class KMR extends Entity {
     #height = 0;
     #sittingImage = null;
     #despairImage = null;
+    #isDespair = true;
 
     constructor() {
         super();
         this.#sittingImage = ImageStorage.get("座るKMR");
+        this.#despairImage = ImageStorage.get("絶望KMR");
         this.#width = this.#sittingImage.width * 0.4;
         this.#height = this.#sittingImage.height * 0.4;
         this.#x = 15;
@@ -17,7 +19,8 @@ class KMR extends Entity {
     }
 
     draw() {
-        context.drawImage(this.#sittingImage, this.#x, this.#y, this.#width, this.#height);
+        const image = this.#isDespair ? this.#despairImage : this.#sittingImage;
+        context.drawImage(image, this.#x, this.#y, this.#width, this.#height);
     }
 
     isTargeted(crosshairX, crosshairY) {
@@ -34,5 +37,9 @@ class KMR extends Entity {
             return false;
         }
         return true;
+    }
+
+    despair(isDespair) {
+        this.#isDespair = despair;
     }
 }

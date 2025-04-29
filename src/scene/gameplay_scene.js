@@ -588,6 +588,7 @@ class GameplayScene extends Scene {
         plpiss("照準2");
         plpiss("爆発スプライト_170");
         plpiss("座るKMR");
+        plpiss("絶望KMR");
         
         // 音声
         for (const name of bgmNameList) {

@@ -5,6 +5,7 @@ const canvas = document.querySelector("#game-canvas");
 const context = canvas.getContext("2d");
 const cookiePath = "/yaju_gun";
 
+const FPS = 60;
 let level = 1;
 let difficulty = "normal";
 function balanceFactor() {
@@ -109,38 +110,17 @@ document.addEventListener("visibilitychange", () => {
 
 // debug
 
-const domDebguText = document.querySelector("#debug-text");
-// setInterval(() => {
-//     domDebguText.innerText = Howler.ctx.state;
-// }, 500);
-
-const domDebguFps = document.querySelector("#debug-fps");
-// (function() {
-//     let prevTime = -1;
-//     // const anime = (time) => {
-//     //     if (prevTime !== -1) {
-//     //         const fps = 1000 / (time - prevTime);
-//     //         domDebguFps.innerText = fps.toFixed(1);
-//     //     }
-//     //     prevTime = time;
-//     //     requestAnimationFrame(anime);
-//     // };
-//     // anime(performance.now());
-//     // setInterval(() => {
-//     //     const time = performance.now();
-//     //     if (prevTime !== -1) {
-//     //         const fps = 1000 / (time - prevTime);
-//     //         domDebguFps.innerText = fps.toFixed(1);
-//     //     }
-//     //     prevTime = time;
-//     // }, 1000 / 60);
-// })();
-
 const debug = {
     canCreateEnemy: true,
+    shouldDisplayFPS: true,
 };
 
+const domDebguText = document.querySelector("#debug-text");
+const domDebguFps = document.querySelector("#debug-fps");
 const debugBtn1 = document.querySelector("#create-enemy");
+const debugBtn2 = document.querySelector("#sound-room");
+const debugBtn3 = document.querySelector("#self-destruction");
+
 debugBtn1.addEventListener("click", () => {
     debug.canCreateEnemy = !debug.canCreateEnemy;
     if (debug.canCreateEnemy) {
@@ -151,12 +131,10 @@ debugBtn1.addEventListener("click", () => {
     }
 });
 
-const debugBtn2 = document.querySelector("#sound-room");
 debugBtn2.addEventListener("click", () => {
     window.open("./test/sound.html", "_blank");
 });
 
-const debugBtn3 = document.querySelector("#self-destruction");
 debugBtn3.addEventListener("click", () => {
     Howler.stop();
     SceneManager.start(new GameOverScene(114514), false);

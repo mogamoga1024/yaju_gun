@@ -164,11 +164,11 @@ class GameplayScene extends Scene {
 
     #startAnimation() {
         let prevTime = -1;
-        const deltaTime = 1 / 60;
+        const deltaTime = 1 / FPS;
         const anime = (time) => {
             if (this.#shouldAnimation) {
                 if (prevTime === -1 || time - prevTime >= deltaTime * 1000 * 0.9) {
-                    if (prevTime !== -1) {
+                    if (debug.shouldDisplayFPS && prevTime !== -1) {
                         const fps = 1000 / (time - prevTime);
                         domDebguFps.innerText = fps.toFixed(1);
                     }

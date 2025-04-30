@@ -114,6 +114,8 @@ const domDebguText = document.querySelector("#debug-text");
 //     domDebguText.innerText = Howler.ctx.state;
 // }, 500);
 
+const domDebguFps = document.querySelector("#debug-fps");
+
 const debug = {
     canCreateEnemy: true,
 };

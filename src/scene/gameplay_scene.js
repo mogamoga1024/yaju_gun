@@ -168,6 +168,10 @@ class GameplayScene extends Scene {
         const anime = (time) => {
             if (this.#shouldAnimation) {
                 if (prevTime === -1 || time - prevTime >= deltaTime * 1000 * 0.9) {
+                    if (prevTime !== -1) {
+                        const fps = 1000 / (time - prevTime);
+                        domDebguFps.innerText = fps.toFixed(1);
+                    }
                     prevTime = time;
                     this.#update();
                 }

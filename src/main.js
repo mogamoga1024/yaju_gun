@@ -115,6 +115,18 @@ const domDebguText = document.querySelector("#debug-text");
 // }, 500);
 
 const domDebguFps = document.querySelector("#debug-fps");
+(function() {
+    let prevTime = -1;
+    const anime = (time) => {
+        if (prevTime !== -1) {
+            const fps = 1000 / (time - prevTime);
+            domDebguFps.innerText = fps.toFixed(1);
+        }
+        prevTime = time;
+        requestAnimationFrame(anime);
+    };
+    anime(performance.now());
+})();
 
 const debug = {
     canCreateEnemy: true,

@@ -115,18 +115,26 @@ const domDebguText = document.querySelector("#debug-text");
 // }, 500);
 
 const domDebguFps = document.querySelector("#debug-fps");
-(function() {
-    let prevTime = -1;
-    const anime = (time) => {
-        if (prevTime !== -1) {
-            const fps = 1000 / (time - prevTime);
-            domDebguFps.innerText = fps.toFixed(1);
-        }
-        prevTime = time;
-        requestAnimationFrame(anime);
-    };
-    anime(performance.now());
-})();
+// (function() {
+//     let prevTime = -1;
+//     // const anime = (time) => {
+//     //     if (prevTime !== -1) {
+//     //         const fps = 1000 / (time - prevTime);
+//     //         domDebguFps.innerText = fps.toFixed(1);
+//     //     }
+//     //     prevTime = time;
+//     //     requestAnimationFrame(anime);
+//     // };
+//     // anime(performance.now());
+//     // setInterval(() => {
+//     //     const time = performance.now();
+//     //     if (prevTime !== -1) {
+//     //         const fps = 1000 / (time - prevTime);
+//     //         domDebguFps.innerText = fps.toFixed(1);
+//     //     }
+//     //     prevTime = time;
+//     // }, 1000 / 60);
+// })();
 
 const debug = {
     canCreateEnemy: true,

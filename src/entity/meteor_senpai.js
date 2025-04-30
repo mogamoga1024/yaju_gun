@@ -50,7 +50,7 @@ class MeteorSenpai extends Entity {
     draw() {
         // いんゆめくんの描画
         context.save();
-        context.globalAlpha = this.#opacity * 0.2;
+        context.globalAlpha = this.#opacity * 0.3;
         context.translate(this.#virtualCenterX, this.#virtualCenterY);
         context.rotate(this.#inymRadian);
         context.drawImage(this.#inymImage, -this.#diagonal / 2, -this.#diagonal / 2, this.#diagonal, this.#diagonal);

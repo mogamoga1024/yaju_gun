@@ -9,6 +9,8 @@ const FPS = 60;
 
 let level = 1;
 let difficulty = "normal";
+let actualFPS = 60;
+
 function balanceFactor() {
     let a;
     if (difficulty === "easy") {
@@ -19,6 +21,9 @@ function balanceFactor() {
     }
     else /*if (difficulty === "hard")*/ {
         a = 70;
+    }
+    if (actualFPS < 40) {
+        a -= 15;
     }
     return (level + a) * 1.1;
 }

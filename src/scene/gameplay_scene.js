@@ -169,15 +169,15 @@ class GameplayScene extends Scene {
         const anime = (time) => {
             if (this.#shouldAnimation) {
                 if (prevTime === -1 || time - prevTime >= deltaTime * 1000 * 0.9) {
-                    const fps = calcFps(time, prevTime);
+                    actualFPS = calcFps(time, prevTime);
                     if (debug.shouldDisplayFPS && prevTime !== -1) {
-                        domDebguFps.innerText = fps.toFixed(1);
+                        domDebguFps.innerText = actualFPS.toFixed(1);
                     }
                     prevTime = time;
                     this.#update();
                     // iOSで低電力モードだと30FPSになるっぽい
                     // 他、環境によって30FPSになることはあるっぽい
-                    if (prevTime !== -1 && fps < 40) {
+                    if (prevTime !== -1 && actualFPS < 40) {
                         this.#update();
                     }
                 }

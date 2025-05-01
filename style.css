@@ -70,6 +70,10 @@ hr {
   border: none;
 }
 
+ul {
+  padding-left: 1em;
+}
+
 #debug {
   width: 100%;
   max-width: 800px;

@@ -109,6 +109,14 @@ document.addEventListener("visibilitychange", () => {
     }
 })();
 
+// error
+
+const domError = document.querySelector("#error");
+window.addEventListener("error", e => {
+    const text = `【${e.filename.split("/").pop()}:${e.lineno}】${e.message}`;
+    domError.innerHTML += text + "<br>";
+});
+
 // debug
 
 const debug = {

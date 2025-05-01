@@ -411,13 +411,13 @@ class GameplayScene extends Scene {
         }
 
         // 敵の生成
-        if (this.#enemyCreateFrame >= (60 * 1.25) / (1 + balanceFactor() / 100)) {
+        if (this.#enemyCreateFrame >= (FPS * 1.25) / (1 + balanceFactor() / 100)) {
             this.#enemyList.push(this.#createRandomEnemy());
             this.#enemyCreateFrame = 0;
         }
 
         // 本社生成
-        if (this.#honsyaCreateFrame >= 60 * 60) {
+        if (this.#honsyaCreateFrame >= FPS * 60) {
             this.#enemyList.push(new Honsya(this.#viewAngle));
             this.#honsyaCreateFrame = 0;
         }

@@ -53,7 +53,7 @@ class Player {
         playSound(SoundStorage.get("ドンッ"));
         playSound(SoundStorage.get("アアッー！(高音)"));
         
-        this.#mutekiFrameCount = 60 * 2;
+        this.#mutekiFrameCount = FPS * 2;
     }
 
     heal(amount) {

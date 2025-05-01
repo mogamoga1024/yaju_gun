@@ -165,15 +165,21 @@ class GameplayScene extends Scene {
     #startAnimation() {
         let prevTime = -1;
         const deltaTime = 1 / FPS;
+        const calcFps = (time, prevTime) => 1000 / (time - prevTime);
         const anime = (time) => {
             if (this.#shouldAnimation) {
                 if (prevTime === -1 || time - prevTime >= deltaTime * 1000 * 0.9) {
+                    const fps = calcFps(time, prevTime);
                     if (debug.shouldDisplayFPS && prevTime !== -1) {
-                        const fps = 1000 / (time - prevTime);
                         domDebguFps.innerText = fps.toFixed(1);
                     }
                     prevTime = time;
                     this.#update();
+                    // iOSで低電力モードだと30FPSになるっぽい
+                    // 他、環境によって30FPSになることはあるっぽい
+                    if (prevTime !== -1 && fps < 40) {
+                        this.#update();
+                    }
                 }
                 if (this.#player.state === "dead") {
                     setTimeout(() => {
@@ -189,6 +195,10 @@ class GameplayScene extends Scene {
     }
 
     #update() {
+        if (this.#player.state === "dead") {
+            return;
+        }
+
         if (debug.canCreateEnemy && !this.#isTutorial && !this.#isKMRTalking) {
             if (this.#enemyList.length < 8 * (1 + balanceFactor() / 100)) {
                 this.#enemyCreateFrame++;

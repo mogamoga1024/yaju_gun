@@ -6,6 +6,7 @@ const context = canvas.getContext("2d");
 const cookiePath = "/yaju_gun";
 
 const FPS = 60;
+
 let level = 1;
 let difficulty = "normal";
 function balanceFactor() {

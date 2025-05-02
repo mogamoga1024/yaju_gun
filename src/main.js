@@ -23,7 +23,7 @@ function balanceFactor() {
         a = 70;
     }
     if (actualFPS < 40) {
-        a -= 15;
+        a -= 32;
     }
     return (level + a) * 1.1;
 }

@@ -5,6 +5,7 @@ class EasyButton extends Button {
     #width = 0;
     #height = 0;
     #text = "";
+    #isActive = false;
 
     constructor() {
         super();
@@ -23,7 +24,12 @@ class EasyButton extends Button {
         context.textBaseline = "middle";
         context.lineJoin = "round";
         context.lineWidth = 5;
-        if (isSelected) {
+        if (!this.#isActive) {
+            context.globalAlpha = 0.5
+            context.fillStyle = "#888";
+            context.strokeStyle = "#ccc";
+        }
+        else if (isSelected) {
             context.fillStyle = "#f00";
             context.strokeStyle = "#ff0";
         }
@@ -37,6 +43,9 @@ class EasyButton extends Button {
     }
 
     isTargeted(crosshairX, crosshairY) {
+        if (!this.#isActive) {
+            return false;
+        }
         if (crosshairX < this.#x) {
             return false;
         }
@@ -50,5 +59,9 @@ class EasyButton extends Button {
             return false;
         }
         return true;
+    }
+
+    active(isActive) {
+        this.#isActive = isActive;
     }
 }

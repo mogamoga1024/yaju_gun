@@ -71,8 +71,12 @@ class TitleScene extends Scene {
         this.#drawTitle();
         this.#drawHighScore();
 
-        this.#drawStartPointBtn();
-        this.#drawDifficultyBtn();
+        this.#hajimeBtn.draw(this.#startPoint === "new");
+        this.#tudukiBtn.draw(this.#startPoint === "continue");
+        this.#easyBtn.draw(difficulty === "easy");
+        this.#normalBtn.draw(difficulty === "normal");
+        this.#hardBtn.draw(difficulty === "hard");
+        
         this.#startBtn.draw();
     }
     
@@ -86,23 +90,23 @@ class TitleScene extends Scene {
 
         if (this.#hajimeBtn.isTargeted(x, y)) {
             this.#startPoint = "new";
-            this.#drawStartPointBtn();
+            this.#update();
         }
         else if (this.#tudukiBtn.isTargeted(x, y)) {
             this.#startPoint = "continue";
-            this.#drawStartPointBtn();
+            this.#update();
         }
         else if (this.#easyBtn.isTargeted(x, y)) {
             difficulty = "easy";
-            this.#drawDifficultyBtn();
+            this.#update();
         }
         else if (this.#normalBtn.isTargeted(x, y)) {
             difficulty = "normal";
-            this.#drawDifficultyBtn();
+            this.#update();
         }
         else if (this.#hardBtn.isTargeted(x, y)) {
             difficulty = "hard";
-            this.#drawDifficultyBtn();
+            this.#update();
         }
         else if (this.#startBtn.isTargeted(x, y)) {
             this.#canClick = false;
@@ -197,7 +201,7 @@ class TitleScene extends Scene {
 
     #drawHighScore() {
         let highScore = 0;
-        const strHighScore = Cookies.get("high_score");
+        const strHighScore = Cookies.get(`${difficulty}_high_score`);
         if (strHighScore !== undefined) {
             highScore = Number(strHighScore);
         }
@@ -213,16 +217,5 @@ class TitleScene extends Scene {
         const text = String(`HIGT SCORE ${highScore}`);
         const measure = context.measureText(text);
         drawStrokeText(context, text, canvas.width - measure.width - 20, 20);
-    }
-
-    #drawStartPointBtn() {
-        this.#hajimeBtn.draw(this.#startPoint === "new");
-        this.#tudukiBtn.draw(this.#startPoint === "continue");
-    }
-
-    #drawDifficultyBtn() {
-        this.#easyBtn.draw(difficulty === "easy");
-        this.#normalBtn.draw(difficulty === "normal");
-        this.#hardBtn.draw(difficulty === "hard");
     }
 }

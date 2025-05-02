@@ -1,10 +1,9 @@
 
-const domGameCanvasWrapper = document.querySelector("#game-canvas-wrapper");
 const domNotice = document.querySelector("#notice");
 const canvas = document.querySelector("#game-canvas");
 const context = canvas.getContext("2d");
-const cookiePath = "/yaju_gun";
 
+const COOKIE_PATH = "/yaju_gun";
 const FPS = 60;
 
 let level = 1;
@@ -52,6 +51,8 @@ const isPC = (function() {
 })();
 
 if (!isPC) {
+    const domGameCanvasWrapper = document.querySelector("#game-canvas-wrapper");
+
     domNotice.style.display = "none";
     domGameCanvasWrapper.style.marginTop = "0";
 
@@ -84,6 +85,11 @@ if (!isPC) {
     };
     adjustCanvas();
     window.addEventListener("resize", adjustCanvas);
+}
+
+if (!/android/i.test(navigator.userAgent)) {
+    const domAndroid = document.querySelector("#android");
+    domAndroid.style.display = "none";
 }
 
 document.addEventListener("visibilitychange", () => {

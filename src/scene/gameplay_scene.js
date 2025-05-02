@@ -93,7 +93,7 @@ class GameplayScene extends Scene {
     async onStart() {
         console.log("GameplayScene:onStart");
 
-        Cookies.set("difficulty", difficulty, {expires: 365, path: cookiePath});
+        Cookies.set("difficulty", difficulty, {expires: 365, path: COOKIE_PATH});
 
         this.#backgroundImage = await loadImage("asset/草原.png");
         await this.#preload();
@@ -286,7 +286,7 @@ class GameplayScene extends Scene {
                     highScore = Number(strHighScore);
                 }
                 if (this.#score > highScore) {
-                    Cookies.set(`${difficulty}_high_score`, String(this.#score), {expires: 365, path: cookiePath});
+                    Cookies.set(`${difficulty}_high_score`, String(this.#score), {expires: 365, path: COOKIE_PATH});
                 }
 
                 Howler._howls.forEach(sound => {
@@ -704,9 +704,9 @@ class GameplayScene extends Scene {
     }
     
     save() {
-        Cookies.set("level", String(level), {expires: 365, path: cookiePath});
-        Cookies.set("score", String(this.#score), {expires: 365, path: cookiePath});
-        Cookies.set("hp", String(this.#player?.hp ?? 0), {expires: 365, path: cookiePath});
+        Cookies.set("level", String(level), {expires: 365, path: COOKIE_PATH});
+        Cookies.set("score", String(this.#score), {expires: 365, path: COOKIE_PATH});
+        Cookies.set("hp", String(this.#player?.hp ?? 0), {expires: 365, path: COOKIE_PATH});
     }
 
     #kmrTalking() {

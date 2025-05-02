@@ -317,7 +317,7 @@ class GameplayScene extends Scene {
             for (const {x, y} of this.#shotPosList) {
                 if (this.#kmr.isTargeted(x, y)) {
                     this.#isKMRTalking = true;
-                    this.#togglePlay(false);
+                    this.#togglePlaySound(false);
                     break;
                 }
             }
@@ -745,7 +745,7 @@ class GameplayScene extends Scene {
                 this.#isKMRTalking = false;
                 this.#hasComplained = false;
                 this.#complainIndex = 0;
-                this.#togglePlay(true);
+                this.#togglePlaySound(true);
                 break;
             }
             else if (this.#complainBtn.isTargeted(x, y)) {
@@ -765,7 +765,7 @@ class GameplayScene extends Scene {
         }
     }
 
-    #togglePlay(shouldPlay) {
+    #togglePlaySound(shouldPlay) {
         if (!shouldPlay) {
             this.#soundList = [];
         }

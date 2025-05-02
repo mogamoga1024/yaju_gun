@@ -8,7 +8,7 @@ class NormalButton extends Button {
 
     constructor() {
         super();
-        this.#text = "普通";
+        this.#text = NORMAL_NAME;
         this.#centerY = 320;
         this.#height = 40;
 

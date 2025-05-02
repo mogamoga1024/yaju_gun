@@ -28,6 +28,22 @@ function balanceFactor() {
     return (level + a) * 1.1;
 }
 
+const EASY_NAME = "ひで";
+const NORMAL_NAME = "ノンケ";
+const HARD_NAME = "迫真";
+
+function difficultyName() {
+    if (difficulty === "easy") {
+        return EASY_NAME;
+    }
+    else if (difficulty === "normal") {
+        return NORMAL_NAME;
+    }
+    else /*if (difficulty === "hard")*/ {
+        return HARD_NAME;
+    }
+}
+
 const isPC = (function() {
     const mobileRegex = /iphone;|(android|nokia|blackberry|bb10;).+mobile|android.+fennec|opera.+mobi|windows phone|symbianos/i;
     const isMobileByUa = mobileRegex.test(navigator.userAgent);

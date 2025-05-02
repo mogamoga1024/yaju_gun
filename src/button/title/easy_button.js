@@ -8,8 +8,8 @@ class EasyButton extends Button {
 
     constructor() {
         super();
-        this.#text = "簡単";
-        this.#x = 300;
+        this.#text = EASY_NAME;
+        this.#x = 280;
         this.#centerY = 320;
         this.#height = 40;
 

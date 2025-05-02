@@ -1,4 +1,5 @@
 
+const domGameCanvasWrapper = document.querySelector("#game-canvas-wrapper");
 const domNotice = document.querySelector("#notice");
 const canvas = document.querySelector("#game-canvas");
 const context = canvas.getContext("2d");
@@ -51,8 +52,6 @@ const isPC = (function() {
 })();
 
 if (!isPC) {
-    const domGameCanvasWrapper = document.querySelector("#game-canvas-wrapper");
-
     domNotice.style.display = "none";
     domGameCanvasWrapper.style.marginTop = "0";
 

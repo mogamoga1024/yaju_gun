@@ -68,6 +68,8 @@ class GameplayScene extends Scene {
     #backBtn = null;
     #complainBtn = null;
 
+    #mdkrSnpi = null;
+
     #bgm = null;
     #bgmId = -1;
     #bgmDefaultVolume = 0;
@@ -151,6 +153,8 @@ class GameplayScene extends Scene {
         this.#quitBtn = new QuitButton();
         this.#backBtn = new BackButton();
         this.#complainBtn = new ComplainButton();
+
+        this.#mdkrSnpi = new MedikaraSenpai();
 
         MessageWindow.init(10, 10);
 
@@ -271,6 +275,12 @@ class GameplayScene extends Scene {
         }
         this.#kmr.draw();
 
+        // 目力先輩の描画
+        if (willHitCond(this.#mdkrSnpi)) {
+            willHit = true;
+        }
+        this.#mdkrSnpi.draw();
+
         // 照準の描画
         if (isPC) {
             this.#player.drawCrosshair(this.#pc.mouseX, this.#pc.mouseY, willHit);
@@ -330,6 +340,14 @@ class GameplayScene extends Scene {
         if (this.#isKMRTalking) {
             this.#shotPosList = [];
             return;
+        }
+
+        // 目力先輩が押されたときの処理
+        for (const {x, y} of this.#shotPosList) {
+            if (this.#mdkrSnpi.isTargeted(x, y)) {
+                // todo
+                break;
+            }
         }
 
         // 横向くんだよ90度ボタンが押されたときの処理

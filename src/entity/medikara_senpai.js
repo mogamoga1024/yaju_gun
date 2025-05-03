@@ -7,7 +7,7 @@ class MedikaraSenpai extends Entity {
     #chargeImage1 = 0;
     #chargeImage2 = 0;
     #kaihouImage = 0;
-    #powerGauge = 99;
+    #powerGauge = 0;
     #chargeFrameCount = 0;
     #fullFrameCount = 0;
 

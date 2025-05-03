@@ -7,8 +7,9 @@ class MedikaraSenpai extends Entity {
     #chargeImage1 = 0;
     #chargeImage2 = 0;
     #kaihouImage = 0;
-    #powerGauge = 0;
+    #powerGauge = 99;
     #chargeFrameCount = 0;
+    #fullFrameCount = 0;
 
     constructor() {
         super();
@@ -26,7 +27,15 @@ class MedikaraSenpai extends Entity {
     draw() {
         // todo
         let image;
-        if (this.#chargeFrameCount > 0) {
+        if (this.#powerGauge >= 100) {
+            if (Math.sin(this.#fullFrameCount / 5) > 0) {
+                image = this.#chargeImage1;
+            }
+            else {
+                image = this.#chargeImage2;
+            }
+        }
+        else if (this.#chargeFrameCount > 0) {
             image = this.#chargeImage2;
         }
         else {
@@ -47,6 +56,9 @@ class MedikaraSenpai extends Entity {
     }
 
     update() {
+        if (this.#powerGauge >= 100) {
+            this.#fullFrameCount++;
+        }
         if (this.#chargeFrameCount > 0) {
             this.#chargeFrameCount--;
         }
@@ -70,7 +82,8 @@ class MedikaraSenpai extends Entity {
     }
 
     charge() {
-        if (this.#powerGauge === 100) {
+        if (this.#powerGauge >= 100) {
+            this.#powerGauge = 100;
             return;
         }
         this.#powerGauge += 1;

@@ -387,7 +387,7 @@ class GameplayScene extends Scene {
 
         // 敵の被弾と状態の更新
         this.#sortedEntityList("desc").forEach(entity => {
-            if (this.#mdkrSnpi.isRoaring) {
+            if (this.#mdkrSnpi.isRoaring && entity.state === "alive") {
                 entity.takeDamage(); // todo 即死させる
             }
             else if (this.#shotPosList.length > 0) {

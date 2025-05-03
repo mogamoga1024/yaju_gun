@@ -81,10 +81,13 @@ class MedikaraSenpai extends Entity {
         return true;
     }
 
-    charge() {
+    charge(needSound = false) {
         if (this.#powerGauge >= 100) {
             this.#powerGauge = 100;
             return;
+        }
+        if (needSound) {
+            // todo 音
         }
         this.#powerGauge += 1;
         this.#chargeFrameCount = 8;

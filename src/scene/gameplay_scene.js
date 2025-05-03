@@ -340,7 +340,7 @@ class GameplayScene extends Scene {
         for (const {x, y} of this.#shotPosList) {
             if (this.#mdkrSnpi.isTargeted(x, y)) {
                 // todo
-                this.#mdkrSnpi.charge();
+                this.#mdkrSnpi.charge(true);
                 break;
             }
         }

@@ -25,6 +25,10 @@ body {
   font-style: normal;
 }
 
+h1 span {
+  font-size: 0.6em;
+}
+
 #game-canvas-wrapper {
   position: relative;
   width: fit-content;

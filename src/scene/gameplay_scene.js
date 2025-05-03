@@ -336,18 +336,22 @@ class GameplayScene extends Scene {
             }
         }
         
-        // KMRと会話中なら処理はここまで
-        if (this.#isKMRTalking) {
-            this.#shotPosList = [];
-            return;
-        }
-
         // 目力先輩が押されたときの処理
         for (const {x, y} of this.#shotPosList) {
             if (this.#mdkrSnpi.isTargeted(x, y)) {
                 // todo
+                this.#mdkrSnpi.charge();
                 break;
             }
+        }
+
+        // 目力先輩の状態の更新
+        this.#mdkrSnpi.update();
+
+        // KMRと会話中なら処理はここまで
+        if (this.#isKMRTalking) {
+            this.#shotPosList = [];
+            return;
         }
 
         // 横向くんだよ90度ボタンが押されたときの処理
@@ -420,7 +424,7 @@ class GameplayScene extends Scene {
             }
         }
 
-        // ボタンの更新
+        // ボタンの状態の更新
         this.#turnLeftBtn.update(this.#shouldWarnLeft);
         this.#turnRightBtn.update(this.#shouldWarnRight);
 

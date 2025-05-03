@@ -4,26 +4,35 @@ class MedikaraSenpai extends Entity {
     #y = 0;
     #width = 0;
     #height = 0;
-    #tameImage1 = 0;
-    #tameImage2 = 0;
+    #chargeImage1 = 0;
+    #chargeImage2 = 0;
     #kaihouImage = 0;
+    #powerGauge = 0;
+    #chargeFrameCount = 0;
 
     constructor() {
         super();
         
-        this.#tameImage1 = ImageStorage.get("目力先輩/溜め1");
-        this.#tameImage2 = ImageStorage.get("目力先輩/溜め2");
+        this.#chargeImage1 = ImageStorage.get("目力先輩/溜め1");
+        this.#chargeImage2 = ImageStorage.get("目力先輩/溜め2");
         this.#kaihouImage = ImageStorage.get("目力先輩/解放");
 
         this.#height = 90;
-        this.#width = this.#height * this.#tameImage1.width / this.#tameImage1.height;
+        this.#width = this.#height * this.#chargeImage1.width / this.#chargeImage1.height;
         this.#x = canvas.width - this.#width - 15;
         this.#y = canvas.height - this.#height - 35;
     }
 
     draw() {
         // todo
-        context.drawImage(this.#tameImage1, this.#x, this.#y, this.#width, this.#height);
+        let image;
+        if (this.#chargeFrameCount > 0) {
+            image = this.#chargeImage2;
+        }
+        else {
+            image = this.#chargeImage1;
+        }
+        context.drawImage(image, this.#x, this.#y, this.#width, this.#height);
 
         context.save();
         context.textAlign = "center";
@@ -33,11 +42,14 @@ class MedikaraSenpai extends Entity {
         context.strokeStyle = "#eee";
         context.lineWidth = 5;
         context.font = `400 30px Xim-Sans`;
-        drawStrokeText(context, "100%", this.#x + this.#width / 2, this.#y + this.#height + 5);
+        drawStrokeText(context, `${this.#powerGauge}%`, this.#x + this.#width / 2, this.#y + this.#height + 5);
         context.restore();
     }
 
     update() {
+        if (this.#chargeFrameCount > 0) {
+            this.#chargeFrameCount--;
+        }
         // todo
     }
 
@@ -55,5 +67,13 @@ class MedikaraSenpai extends Entity {
             return false;
         }
         return true;
+    }
+
+    charge() {
+        if (this.#powerGauge === 100) {
+            return;
+        }
+        this.#powerGauge += 1;
+        this.#chargeFrameCount = 8;
     }
 }

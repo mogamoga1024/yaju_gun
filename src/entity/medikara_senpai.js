@@ -7,9 +7,10 @@ class MedikaraSenpai extends Entity {
     #chargeImage1 = 0;
     #chargeImage2 = 0;
     #kaihouImage = 0;
-    #powerGauge = 0;
+    #powerGauge = 100;
     #chargeFrameCount = 0;
     #fullFrameCount = 0;
+    isRoaring = false;
 
     constructor() {
         super();
@@ -81,6 +82,16 @@ class MedikaraSenpai extends Entity {
         return true;
     }
 
+    onTouched() {
+        if (this.#powerGauge >= 100) {
+            // this.#powerGauge = 0;
+            this.#roar();
+        }
+        else {
+            this.charge(true);
+        }
+    }
+
     charge(needSound = false) {
         if (this.#powerGauge >= 100) {
             this.#powerGauge = 100;
@@ -91,5 +102,13 @@ class MedikaraSenpai extends Entity {
         }
         this.#powerGauge += 1;
         this.#chargeFrameCount = 8;
+    }
+
+    #roar() {
+        this.isRoaring = true;
+        // todo sound onEndでfalseにする
+        setTimeout(() => {
+            this.isRoaring = false;
+        }, 1000);
     }
 }

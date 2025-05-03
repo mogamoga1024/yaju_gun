@@ -339,8 +339,7 @@ class GameplayScene extends Scene {
         // 目力先輩が押されたときの処理
         for (const {x, y} of this.#shotPosList) {
             if (this.#mdkrSnpi.isTargeted(x, y)) {
-                // todo
-                this.#mdkrSnpi.charge(true);
+                this.#mdkrSnpi.onTouched();
                 break;
             }
         }
@@ -388,7 +387,12 @@ class GameplayScene extends Scene {
 
         // 敵の被弾と状態の更新
         this.#sortedEntityList("desc").forEach(entity => {
-            if (this.#shotPosList.length > 0) {
+            if (this.#mdkrSnpi.isRoaring) {
+                entity.takeDamage(); // todo 即死させる
+            }
+            else if (this.#shotPosList.length > 0) {
+                // プレイヤーの攻撃が敵を貫通してほしくないため、
+                // 攻撃が当たった場合は、this.#shotPosListからshotを削除する
                 for (let i = this.#shotPosList.length - 1; i >= 0; i--) {
                     const {x, y} = this.#shotPosList[i];
                     if (entity.isTargeted(x, y)) {

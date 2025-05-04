@@ -106,18 +106,10 @@ class MedikaraSenpai extends Entity {
 
     #roar() {
         this.isRoaring = true;
-        for (const sound of SoundStorage.each()) {
-            // todo 目力先輩は無視
-            sound.volume(sound.defaultVolume * 0.25);
-        }
         
         // todo sound onEndでfalseにする
-        // todo KMR中にBGMが元の大きさに戻るバグ setTimmeoutだと起こってしまう
         setTimeout(() => {
             this.isRoaring = false;
-            for (const sound of SoundStorage.each()) {
-                sound.volume(sound.defaultVolume);
-            }
         }, 1000);
     }
 }

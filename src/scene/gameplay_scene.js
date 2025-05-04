@@ -104,7 +104,7 @@ class GameplayScene extends Scene {
         this.#bgm = SoundStorage.get("ほのぼの神社");
         this.#gunshotSound = SoundStorage.get("銃声");
 
-        playSound(this.#bgm).then(id => this.#bgmId = id);
+        this.#bgmId = this.#bgm.play();
 
         // debug start
         // 0 <= centerX < canvas.width * 2
@@ -508,7 +508,7 @@ class GameplayScene extends Scene {
             this.#isTutorial = false;
             stopSound(this.#bgm);
             this.#bgm = SoundStorage.get("Smart Boy(Daily Unchi Special Mix)");
-            playSound(this.#bgm).then(id => this.#bgmId = id);
+            this.#bgmId = this.#bgm.play();
         }
         
         // 後処理

@@ -105,9 +105,9 @@ class Honsya extends Entity {
         return true;
     }
 
-    takeDamage() {
+    takeDamage(damage = 1) {
         SoundStorage.get("謎の金属音").play();
-        this.#hp -= 1;
+        this.#hp -= damage;
         if (this.#hp <= 0) {
             SoundStorage.get("爆発").play();
             SoundStorage.get("あーいいっすねー").play();

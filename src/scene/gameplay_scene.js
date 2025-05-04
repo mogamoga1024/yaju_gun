@@ -402,7 +402,7 @@ class GameplayScene extends Scene {
         this.#sortedEntityList("desc").forEach(entity => {
             if (this.#mdkrSnpi.isRoaring && entity.state === "alive") {
                 const damageSoundVolume = (entity instanceof Kotodama) ? crashSoundVolume : explosionSoundVolume;
-                entity.takeDamage(1145148101919, damageSoundVolume);
+                entity.instantDeath(damageSoundVolume);
             }
             else if (this.#shotPosList.length > 0) {
                 // プレイヤーの攻撃が敵を貫通してほしくないため、

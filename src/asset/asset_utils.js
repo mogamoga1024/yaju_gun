@@ -42,6 +42,7 @@ function loadSound(name, parentPath = "") {
         }
         const sound = new Howl(option);
         sound.name = name;
+        sound.defaultVolume = option.volume;
     });
 }
 

@@ -72,7 +72,6 @@ class GameplayScene extends Scene {
 
     #bgm = null;
     #bgmId = -1;
-    #bgmDefaultVolume = 0;
 
     #soundList = [];
 
@@ -329,8 +328,7 @@ class GameplayScene extends Scene {
                 if (this.#kmr.isTargeted(x, y)) {
                     this.#isKMRTalking = true;
                     this.#togglePlaySound(false);
-                    this.#bgmDefaultVolume = this.#bgm.volume();
-                    this.#bgm.volume(this.#bgmDefaultVolume * 0.5);
+                    this.#bgm.volume(this.#bgm.defaultVolume * 0.5);
                     break;
                 }
             }
@@ -780,7 +778,7 @@ class GameplayScene extends Scene {
                 this.#hasComplained = false;
                 this.#complainIndex = 0;
                 this.#togglePlaySound(true);
-                this.#bgm.volume(this.#bgmDefaultVolume);
+                this.#bgm.volume(this.#bgm.defaultVolume);
                 break;
             }
             else if (this.#complainBtn.isTargeted(x, y)) {

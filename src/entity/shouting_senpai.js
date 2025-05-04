@@ -124,10 +124,10 @@ class ShoutingSenpai extends Entity {
         return true;
     }
 
-    takeDamage() {
+    takeDamage(damage = 1, damageSoundVolume) {
         SoundStorage.get(this.#text).stop(this.#shoutSoundId);
         this.state = "dying";
-        this.#explosion = new Explosion();
+        this.#explosion = new Explosion(damageSoundVolume);
     }
 
     getXRange() {

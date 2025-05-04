@@ -83,9 +83,9 @@ class KunekuneSenpai extends Entity {
         return true;
     }
 
-    takeDamage() {
+    takeDamage(damage = 1, damageSoundVolume) {
         this.state = "dying";
-        this.#explosion = new Explosion();
+        this.#explosion = new Explosion(damageSoundVolume);
     }
 
     getXRange() {

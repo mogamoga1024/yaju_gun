@@ -91,10 +91,10 @@ class RunningSenpai extends Entity {
         return true;
     }
 
-    takeDamage() {
+    takeDamage(damage = 1, damageSoundVolume) {
         SoundStorage.get("息継ぎ").stop(this.#ikitugiSoundId);
         this.state = "dying";
-        this.#explosion = new Explosion();
+        this.#explosion = new Explosion(damageSoundVolume);
     }
 
     getXRange() {

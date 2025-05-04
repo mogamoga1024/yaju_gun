@@ -8,9 +8,13 @@ class Explosion {
     #imageIndexMax = 67;
     shouldDisappear = false;
     
-    constructor() {
+    constructor(damageSoundVolume) {
         this.#image = ImageStorage.get("爆発スプライト_170");
-        SoundStorage.get("爆発").play();
+        const explosionSound = SoundStorage.get("爆発");
+        const id = explosionSound.play();
+        if (damageSoundVolume !== undefined) {
+            explosionSound.volume(damageSoundVolume, id);
+        }
     }
 
     draw(centerX, centerY, sideSize) {

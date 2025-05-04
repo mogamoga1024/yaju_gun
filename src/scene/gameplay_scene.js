@@ -383,10 +383,26 @@ class GameplayScene extends Scene {
             this.#viewAngle = (this.#viewAngle + this.#nippleDx) % 360;
         }
 
+        const explosionSound = SoundStorage.get("爆発");
+        const crashSound = SoundStorage.get("大破");
+        let explosionSoundVolume = explosionSound.defaultVolume;
+        let crashSoundVolume = crashSound.defaultVolume;
+        if (this.#mdkrSnpi.isRoaring) {
+            const enemyCount = this.#enemyList.filter(e => e.state === "alive").length;
+            const kotodamaCount = this.#kotodamaList.filter(k => k.state === "alive").length;
+            if (enemyCount > 1) {
+                explosionSoundVolume = explosionSound.defaultVolume * Math.pow(0.85, enemyCount);
+            }
+            if (kotodamaCount > 1) {
+                crashSoundVolume = crashSound.defaultVolume * Math.pow(0.85, kotodamaCount);
+            }
+        }
+
         // 敵の被弾と状態の更新
         this.#sortedEntityList("desc").forEach(entity => {
             if (this.#mdkrSnpi.isRoaring && entity.state === "alive") {
-                entity.takeDamage(1145148101919);
+                const damageSoundVolume = (entity instanceof Kotodama) ? crashSoundVolume : explosionSoundVolume;
+                entity.takeDamage(1145148101919, damageSoundVolume);
             }
             else if (this.#shotPosList.length > 0) {
                 // プレイヤーの攻撃が敵を貫通してほしくないため、

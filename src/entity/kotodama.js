@@ -80,8 +80,12 @@ class Kotodama extends Entity {
         return true;
     }
 
-    takeDamage() {
-        SoundStorage.get("大破").play();
+    takeDamage(damage = 1, damageSoundVolume) {
+        const crashSound = SoundStorage.get("大破");
+        const id = crashSound.play();
+        if (damageSoundVolume !== undefined) {
+            crashSound.volume(damageSoundVolume, id);
+        }
         this.state = "dead";
     }
 

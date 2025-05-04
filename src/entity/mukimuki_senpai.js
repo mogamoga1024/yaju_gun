@@ -101,13 +101,13 @@ class MukimukiSenpai extends Entity {
         return true;
     }
 
-    takeDamage(damage = 1) {
+    takeDamage(damage = 1, damageSoundVolume) {
         SoundStorage.get("ムキムキオォン！").play();
         this.#hp -= damage;
         if (this.#hp <= 0) {
             SoundStorage.get("ムキムキ息継ぎ").stop(this.#ikitugiSoundId);
             this.state = "dying";
-            this.#explosion = new Explosion();
+            this.#explosion = new Explosion(damageSoundVolume);
         }
     }
 

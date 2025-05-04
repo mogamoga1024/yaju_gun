@@ -10,6 +10,7 @@ class MedikaraSenpai extends Entity {
     #powerGauge = 100;
     #chargeFrameCount = 0;
     #fullFrameCount = 0;
+    #explosionSound = null;
     isRoaring = false;
 
     constructor() {
@@ -23,6 +24,8 @@ class MedikaraSenpai extends Entity {
         this.#width = this.#height * this.#chargeImage1.width / this.#chargeImage1.height;
         this.#x = canvas.width - this.#width - 15;
         this.#y = canvas.height - this.#height - 35;
+
+        this.#explosionSound = SoundStorage.get("爆発");
     }
 
     draw() {
@@ -106,9 +109,12 @@ class MedikaraSenpai extends Entity {
 
     #roar() {
         this.isRoaring = true;
+        this.#explosionSound.volume(this.#explosionSound.defaultVolume * 0.25);
+        
         // todo sound onEndでfalseにする
         setTimeout(() => {
             this.isRoaring = false;
+            this.#explosionSound.volume(this.#explosionSound.defaultVolume);
         }, 1000);
     }
 }

@@ -308,7 +308,7 @@ class GameplayScene extends Scene {
                 });
                 setTimeout(() => {
                     this.#enemyList.forEach(enemy => enemy.end());
-                    stopSound(this.#bgm);
+                    this.#bgm.stop(this.#bgmId);
                 }, this.#fadeOutDuration);
             }
             this.#fadeOutAlpha += 0.004;
@@ -506,7 +506,7 @@ class GameplayScene extends Scene {
         // 敵を全滅させたらチュートリアルを終わる
         if (this.#isTutorial && this.#enemyList.length === 0) {
             this.#isTutorial = false;
-            stopSound(this.#bgm);
+            this.#bgm.stop(this.#bgmId);
             this.#bgm = SoundStorage.get("Smart Boy(Daily Unchi Special Mix)");
             this.#bgmId = this.#bgm.play();
         }

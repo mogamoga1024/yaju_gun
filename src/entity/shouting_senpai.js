@@ -62,9 +62,7 @@ class ShoutingSenpai extends Entity {
     }
 
     end() {
-        if (this.#shoutSoundId !== -1) {
-            stopSound(SoundStorage.get(this.#text), this.#shoutSoundId);
-        }
+        SoundStorage.get(this.#text).stop(this.#shoutSoundId);
     }
 
     draw() {

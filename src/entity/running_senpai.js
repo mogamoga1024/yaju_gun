@@ -30,9 +30,7 @@ class RunningSenpai extends Entity {
     }
 
     end() {
-        if (this.#ikitugiSoundId !== -1) {
-            stopSound(SoundStorage.get("息継ぎ"), this.#ikitugiSoundId);
-        }
+        SoundStorage.get("息継ぎ").stop(this.#ikitugiSoundId);
     }
 
     draw() {

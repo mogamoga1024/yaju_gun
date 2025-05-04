@@ -34,9 +34,7 @@ class MukimukiSenpai extends Entity {
     }
 
     end() {
-        if (this.#ikitugiSoundId !== -1) {
-            stopSound(SoundStorage.get("ムキムキ息継ぎ"), this.#ikitugiSoundId);
-        }
+        SoundStorage.get("ムキムキ息継ぎ").stop(this.#ikitugiSoundId);
     }
 
     draw() {

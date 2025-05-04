@@ -30,7 +30,7 @@ const $soundContainer = $("#sound-container");
             }
             if (isPlaying) {
                 isPlaying = false;
-                stopSound(sound, id);
+                sound.stop(id);
                 $btn.css("background-color", "");
             } else {
                 isPlaying = true;

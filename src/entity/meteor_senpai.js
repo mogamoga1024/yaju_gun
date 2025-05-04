@@ -38,9 +38,7 @@ class MeteorSenpai extends Entity {
     }
 
     end() {
-        if (this.#meteorSoundId !== -1) {
-            stopSound(SoundStorage.get("ンアッー！（ねっとり）"), this.#meteorSoundId);
-        }
+        SoundStorage.get("ンアッー！（ねっとり）").stop(this.#meteorSoundId);
     }
 
     draw() {
@@ -126,9 +124,7 @@ class MeteorSenpai extends Entity {
         SoundStorage.get("爆発").play();
         this.state = "dying";
         this.#explosion = new Explosion();
-        if (this.#meteorSoundId !== -1) {
-            stopSound(SoundStorage.get("ンアッー！（ねっとり）"), this.#meteorSoundId);
-        }
+        SoundStorage.get("ンアッー！（ねっとり）").stop(this.#meteorSoundId);
     }
 
     getXRange() {

@@ -34,11 +34,7 @@ class MeteorSenpai extends Entity {
         this.#oriHeight = this.#yajuImageList[0].height * 1.5;
         this.#updateBounds(viewAngle);
 
-        playSound(SoundStorage.get("ンアッー！（ねっとり）")).then(id => {
-            if (this.state === "alive") {
-                this.#meteorSoundId = id;
-            }
-        });
+        this.#meteorSoundId = SoundStorage.get("ンアッー！（ねっとり）").play();
     }
 
     end() {

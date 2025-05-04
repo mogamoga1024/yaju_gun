@@ -30,11 +30,7 @@ class MukimukiSenpai extends Entity {
         this.#oriHeight = this.#imageList[0].height * 2.4;
         this.#updateBounds(viewAngle);
 
-        playSound(SoundStorage.get("ムキムキ息継ぎ")).then(id => {
-            if (this.state === "alive") {
-                this.#ikitugiSoundId = id;
-            }
-        });
+        this.#ikitugiSoundId = SoundStorage.get("ムキムキ息継ぎ").play();
     }
 
     end() {

@@ -26,11 +26,7 @@ class RunningSenpai extends Entity {
         this.#oriHeight = this.#imageList[0].height * 2.5;
         this.#updateBounds(viewAngle);
 
-        playSound(SoundStorage.get("息継ぎ")).then(id => {
-            if (this.state === "alive") {
-                this.#ikitugiSoundId = id;
-            }
-        });
+        this.#ikitugiSoundId = SoundStorage.get("息継ぎ").play();
     }
 
     end() {

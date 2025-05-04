@@ -150,11 +150,7 @@ class ShoutingSenpai extends Entity {
 
     shout(viewAngle) {
         if (this.#textIndex === 0) {
-            playSound(SoundStorage.get(this.#text)).then(id => {
-                if (this.state === "alive") {
-                    this.#shoutSoundId = id;
-                }
-            });
+            this.#shoutSoundId = SoundStorage.get(this.#text).play();
         }
         const height = this.#oriHeight * this.temaeRate;
         const centerY = this.#y + height * 0.1; // 顔当たりの座標

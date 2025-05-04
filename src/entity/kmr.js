@@ -41,17 +41,10 @@ class KMR extends Entity {
 
     say(text) {
         if (this.#soundId !== -1) {
-            stopSound(SoundStorage.get(this.#prevText), this.#soundId);
+            SoundStorage.get(this.#prevText).stop(this.#soundId);
         }
         this.#prevText = text;
-        playSound(SoundStorage.get(text)).then(id => {
-            if (text !== this.#prevText) {
-                stopSound(SoundStorage.get(text), id);
-            }
-            else {
-                this.#soundId = id;
-            }
-        });
+        this.#soundId = SoundStorage.get(text).play();
     }
 
     isTargeted(crosshairX, crosshairY) {

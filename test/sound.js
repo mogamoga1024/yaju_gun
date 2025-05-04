@@ -34,7 +34,7 @@ const $soundContainer = $("#sound-container");
                 $btn.css("background-color", "");
             } else {
                 isPlaying = true;
-                id = await playSound(sound);
+                id = sound.play();
                 $btn.css("background-color", "rgba(255, 100, 100, 0.3)");
             }
         });

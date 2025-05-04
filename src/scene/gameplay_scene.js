@@ -436,7 +436,7 @@ class GameplayScene extends Scene {
 
         // レベル処理
         if (this.#nextExp <= 0) {
-            playSound(SoundStorage.get("レベルアップ"));
+            SoundStorage.get("レベルアップ").play();
             level += 1;
             this.#nextExp = this.#calcNextExp(level);
         }
@@ -663,7 +663,7 @@ class GameplayScene extends Scene {
 
     #playYokomukunSound() {
         SoundStorage.get("横向くんだよ90度！").stop();
-        playSound(SoundStorage.get("横向くんだよ90度！"));
+        SoundStorage.get("横向くんだよ90度！").play();
     }
 
     #createRandomEnemy() {
@@ -767,7 +767,7 @@ class GameplayScene extends Scene {
         for (const {x, y} of this.#shotPosList) {
             if (this.#quitBtn.isTargeted(x, y)) {
                 this.#isQuitting = true;
-                playSound(SoundStorage.get("じゃ、流します"));
+                SoundStorage.get("じゃ、流します").play();
                 setTimeout(() => {
                     Howler.stop();
                     this.save();
@@ -817,10 +817,10 @@ class GameplayScene extends Scene {
         });
         this.#soundList.forEach(({sound, id}) => {
             if (shouldPlay) {
-                playSound(sound, id);
+                sound.play(id);
             }
             else {
-                pauseSound(sound, id)
+                sound.pause(id);
             }
         });
     }

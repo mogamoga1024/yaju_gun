@@ -98,7 +98,7 @@ class GameOverScene extends Scene {
                 this.#tweetBtn.draw();
             });
             let drawCount = 0;
-            playSound(btp);
+            btp.play();
             const anime = () => {
                 if (shouldAnimation) {
                     const seek = btp.seek();
@@ -157,7 +157,7 @@ class GameOverScene extends Scene {
     }
 
     #drawComment() {
-        playSound(SoundStorage.get(this.#comment));
+        SoundStorage.get(this.#comment).play();
 
         context.lineWidth = 5;
         context.font = "400 60px Xim-Sans";

@@ -41,7 +41,7 @@ class Player {
 
     takeDamage(power) {
         if (this.#mutekiFrameCount > 0) {
-            playSound(SoundStorage.get("謎の金属音"));
+            SoundStorage.get("謎の金属音").play();
             return;
         }
 
@@ -50,8 +50,8 @@ class Player {
             this.#hp = 0;
             this.state = "dying";
         }
-        playSound(SoundStorage.get("ドンッ"));
-        playSound(SoundStorage.get("アアッー！(高音)"));
+        SoundStorage.get("ドンッ").play();
+        SoundStorage.get("アアッー！(高音)").play();
         
         this.#mutekiFrameCount = FPS * 2;
     }

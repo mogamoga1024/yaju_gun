@@ -81,7 +81,7 @@ class Kotodama extends Entity {
     }
 
     takeDamage() {
-        playSound(SoundStorage.get("大破"));
+        SoundStorage.get("大破").play();
         this.state = "dead";
     }
 

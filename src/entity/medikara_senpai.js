@@ -51,7 +51,17 @@ class MedikaraSenpai extends Entity {
         else {
             image = this.#chargeImage1;
         }
-        context.drawImage(image, this.#x, this.#y, this.#width, this.#height);
+
+        if (this.isRoaring) {
+            const w = this.#width * 2;
+            const h = this.#height * 2;
+            const x = this.#x - (w - this.#width) / 2;
+            const y = this.#y - (h - this.#height) / 2;
+            context.drawImage(image, x, y, w, h);
+        }
+        else {
+            context.drawImage(image, this.#x, this.#y, this.#width, this.#height);
+        }
 
         context.save();
         context.textAlign = "center";

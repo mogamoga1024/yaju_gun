@@ -112,6 +112,7 @@ class MedikaraSenpai extends Entity {
         }
         
         // todo sound onEndでfalseにする
+        // todo KMR中にBGMが元の大きさに戻るバグ setTimmeoutだと起こってしまう
         setTimeout(() => {
             this.isRoaring = false;
             for (const sound of SoundStorage.each()) {

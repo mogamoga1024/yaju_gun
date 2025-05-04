@@ -106,7 +106,6 @@ class MukimukiSenpai extends Entity {
         this.#hp -= damage;
         if (this.#hp <= 0) {
             SoundStorage.get("ムキムキ息継ぎ").stop(this.#ikitugiSoundId);
-            SoundStorage.get("爆発").play();
             this.state = "dying";
             this.#explosion = new Explosion();
         }

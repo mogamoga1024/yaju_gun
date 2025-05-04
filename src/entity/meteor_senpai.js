@@ -122,7 +122,6 @@ class MeteorSenpai extends Entity {
 
     takeDamage() {
         SoundStorage.get("ンアッー！（ねっとり）").stop(this.#meteorSoundId);
-        SoundStorage.get("爆発").play();
         this.state = "dying";
         this.#explosion = new Explosion();
     }

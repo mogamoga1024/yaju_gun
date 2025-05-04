@@ -8,6 +8,7 @@ class Explosion {
     
     constructor() {
         this.#image = ImageStorage.get("爆発スプライト_170");
+        SoundStorage.get("爆発").play();
     }
 
     draw(centerX, centerY, sideSize) {

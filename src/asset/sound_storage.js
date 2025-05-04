@@ -10,9 +10,9 @@ class SoundStorage {
         return this.#dic.get(name);
     }
 
-    static *each() {
-        for (const [name, sound] of this.#dic) {
-            yield sound;
-        }
-    }
+    // static *each() {
+    //     for (const [name, sound] of this.#dic) {
+    //         yield sound;
+    //     }
+    // }
 }

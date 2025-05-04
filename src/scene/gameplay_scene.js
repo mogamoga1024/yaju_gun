@@ -335,10 +335,12 @@ class GameplayScene extends Scene {
         }
         
         // 目力先輩が押されたときの処理
-        for (const {x, y} of this.#shotPosList) {
-            if (this.#mdkrSnpi.isTargeted(x, y)) {
-                this.#mdkrSnpi.onTouched();
-                break;
+        if (!this.#isKMRTalking) {
+            for (const {x, y} of this.#shotPosList) {
+                if (this.#mdkrSnpi.isTargeted(x, y)) {
+                    this.#mdkrSnpi.onTouched();
+                    break;
+                }
             }
         }
 

@@ -7,7 +7,12 @@ class MedikaraSenpai extends Entity {
     #chargeImage1 = 0;
     #chargeImage2 = 0;
     #kaihouImage = 0;
-    #powerGauge = 100;
+    #chargeSound = null;
+    #chargeSoundId = -1;
+    #roarSound = null;
+    #roarSoundId = -1;
+    #roarTimerId = -1;
+    #powerGauge = 90;
     #chargeFrameCount = 0;
     #fullFrameCount = 0;
     isRoaring = false;
@@ -19,6 +24,8 @@ class MedikaraSenpai extends Entity {
         this.#chargeImage2 = ImageStorage.get("目力先輩/溜め2");
         this.#kaihouImage = ImageStorage.get("目力先輩/解放");
 
+        this.#roarSound = SoundStorage.get("目力先輩/アー！");
+
         this.#height = 90;
         this.#width = this.#height * this.#chargeImage1.width / this.#chargeImage1.height;
         this.#x = canvas.width - this.#width - 15;
@@ -26,9 +33,11 @@ class MedikaraSenpai extends Entity {
     }
 
     draw() {
-        // todo
         let image;
-        if (this.#powerGauge >= 100) {
+        if (this.isRoaring) {
+            image = this.#kaihouImage;
+        }
+        else if (this.#powerGauge >= 100) {
             if (Math.sin(this.#fullFrameCount / 5) > 0) {
                 image = this.#chargeImage1;
             }
@@ -63,7 +72,6 @@ class MedikaraSenpai extends Entity {
         if (this.#chargeFrameCount > 0) {
             this.#chargeFrameCount--;
         }
-        // todo
     }
 
     isTargeted(crosshairX, crosshairY) {
@@ -83,8 +91,15 @@ class MedikaraSenpai extends Entity {
     }
 
     onTouched() {
+        if (this.isRoaring) {
+            return;
+        }
+        if (this.#chargeSound !== null) {
+            this.#chargeSound.stop(this.#chargeSoundId);
+            this.#chargeSound = null;
+        }
         if (this.#powerGauge >= 100) {
-            // this.#powerGauge = 0;
+            this.#powerGauge = 0;
             this.#roar();
         }
         else {
@@ -98,7 +113,13 @@ class MedikaraSenpai extends Entity {
             return;
         }
         if (needSound) {
-            // todo 音
+            if (Math.random() < 0.5) {
+                this.#chargeSound = SoundStorage.get("目力先輩/ヌウン");
+            }
+            else {
+                this.#chargeSound = SoundStorage.get("目力先輩/ヘッヘッ");
+            }
+            this.#chargeSoundId = this.#chargeSound.play();
         }
         this.#powerGauge += 1;
         this.#chargeFrameCount = 8;
@@ -106,10 +127,30 @@ class MedikaraSenpai extends Entity {
 
     #roar() {
         this.isRoaring = true;
-        
-        // todo sound onEndでfalseにする
-        setTimeout(() => {
-            this.isRoaring = false;
-        }, 1000);
+        if (this.#roarSoundId !== -1) {
+            this.#roarSound.off("playerror", this.#roarSoundId);
+            this.#roarSound.off("end", this.#roarSoundId);
+        }
+        if (this.#roarTimerId !== -1) {
+            clearTimeout(this.#roarTimerId);
+            this.#roarTimerId = -1;
+        }
+
+        if (this.#roarSound.isOK) {
+            this.#roarSoundId = this.#roarSound.play();
+            const fn = () => {
+                this.isRoaring = false;
+                this.#roarSound.off("playerror", this.#roarSoundId);
+                this.#roarSound.off("end", this.#roarSoundId);
+                this.#roarSoundId = -1;
+            };
+            this.#roarSound.on("playerror", fn, this.#roarSoundId);
+            this.#roarSound.on("end", fn, this.#roarSoundId);
+        }
+        else {
+            this.#roarTimerId = setTimeout(() => {
+                this.isRoaring = false;
+            }, 250);
+        }
     }
 }

@@ -1,5 +1,7 @@
 
 class MedikaraSenpai extends Entity {
+    static POWER_GAUGE_DEF = 90;
+
     #x = 0;
     #y = 0;
     #width = 0;
@@ -12,7 +14,7 @@ class MedikaraSenpai extends Entity {
     #roarSound = null;
     #roarSoundId = -1;
     #roarTimerId = -1;
-    #powerGauge = 90;
+    #powerGauge = MedikaraSenpai.POWER_GAUGE_DEF;
     #chargeFrameCount = 0;
     #fullFrameCount = 0;
     isRoaring = false;
@@ -27,7 +29,7 @@ class MedikaraSenpai extends Entity {
         return this.#powerGauge;
     }
 
-    constructor(powerGauge = 90) {
+    constructor(powerGauge = MedikaraSenpai.POWER_GAUGE_DEF) {
         super();
 
         this.#powerGauge = powerGauge;

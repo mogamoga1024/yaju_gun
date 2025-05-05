@@ -284,10 +284,12 @@ class GameplayScene extends Scene {
         this.#kmr.draw();
 
         // 目力先輩の描画
-        if (willHitCond(this.#mdkrSnpi)) {
-            willHit = true;
+        if (!this.#isTutorial) {
+            if (willHitCond(this.#mdkrSnpi)) {
+                willHit = true;
+            }
+            this.#mdkrSnpi.draw();
         }
-        this.#mdkrSnpi.draw();
 
         // 照準の描画
         if (isPC) {

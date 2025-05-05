@@ -723,10 +723,21 @@ class GameplayScene extends Scene {
 
     #calcNextExp(nextLevel) {
         if (nextLevel < this.#maxLevel) {
+            // MEMO
+            // nextLevel 50  -> return 8
+            // nextLevel 100 -> return 9
+            // nextLevel 200 -> return 9
+            // nextLevel 300 -> return 10
             return Math.floor(5 * (nextLevel + this.#maxLevel) ** (1/8));
         }
-        else {
-            return 50;
+        else if (difficulty === "easy") {
+            return 9;
+        }
+        else if (difficulty === "normal") {
+            return 10;
+        }
+        else /*if (difficulty === "hard")*/ {
+            return 20;
         }
     }
 

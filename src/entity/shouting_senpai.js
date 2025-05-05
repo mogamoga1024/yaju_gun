@@ -15,8 +15,9 @@ class ShoutingSenpai extends Entity {
     #imageListIndexDelta = 1;
     #text = kotodamaNameList[Math.floor(Math.random() * kotodamaNameList.length)];
     #textIndex = 0;
-    #kotodamaType = "uneune"; // "uneune" or "kurukuru"
-    #kotodamaColor = null;
+    #ktdmType = "uneune"; // "uneune" or "kurukuru"
+    #ktdmColor = null;
+    #ktdmDirection = 1;
     #shoutSoundId = -1;
     #opacity = 1;
     #explosion = null;
@@ -33,31 +34,38 @@ class ShoutingSenpai extends Entity {
         this.#updateBounds(viewAngle);
 
         if (Math.random() < 0.5) {
-            this.#kotodamaType = "uneune";
+            this.#ktdmType = "uneune";
         }
         else {
-            this.#kotodamaType = "kurukuru"
+            this.#ktdmType = "kurukuru";
         }
 
         switch (Math.floor(Math.random() * 3)) {
             case 0:
-                this.#kotodamaColor = {
+                this.#ktdmColor = {
                     stroke: "#B00000",
                     fill: "255, 192, 203"
                 };
                 break;
             case 1:
-                this.#kotodamaColor = {
+                this.#ktdmColor = {
                     stroke: "#007000",
                     fill: "144, 238, 144"
                 };
                 break;
             case 2:
-                this.#kotodamaColor = {
+                this.#ktdmColor = {
                     stroke: "#0030B0",
                     fill: "173, 216, 230"
                 };
                 break;
+        }
+
+        if (Math.random() < 0.5) {
+            this.#ktdmDirection = 1;
+        }
+        else {
+            this.#ktdmDirection = -1;
         }
     }
 
@@ -160,7 +168,7 @@ class ShoutingSenpai extends Entity {
         const centerY = this.#y + height * 0.1; // 顔当たりの座標
         const char = this.#text[this.#textIndex];
         this.#textIndex = (this.#textIndex + 1) % this.#text.length;
-        return new Kotodama(this, char, this.#centerX, centerY, viewAngle, this.temaeRate, this.#kotodamaType, this.#kotodamaColor);
+        return new Kotodama(this, char, this.#centerX, centerY, viewAngle, this.temaeRate, this.#ktdmType, this.#ktdmColor, this.#ktdmDirection);
     }
 
     #updateBounds(viewAngle) {

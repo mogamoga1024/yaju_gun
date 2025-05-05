@@ -14,10 +14,11 @@ class Kotodama extends Entity {
     #radian = 0;
     #type = "uneune"; // "uneune" or "kurukuru"
     #color = null;
+    #direction = 1;
     healAmount = 0;
     score = 10;
 
-    constructor(shooter, text, centerX, centerY, viewAngle, temaeRate, type, color) {
+    constructor(shooter, text, centerX, centerY, viewAngle, temaeRate, type, color, direction) {
         super(temaeRate);
         this.shooter = shooter;
         this.#text = text;
@@ -25,6 +26,7 @@ class Kotodama extends Entity {
         this.#oriCenterY = centerY;
         this.#type = type;
         this.#color = color;
+        this.#direction = direction;
         this.#oriFontSize = 250;
         this.#updateBounds(viewAngle);
     }
@@ -44,7 +46,7 @@ class Kotodama extends Entity {
 
     update(viewAngle) {
         this.#frameCount++;
-        this.#radian += 0.02 * (1 + balanceFactor() / 200);
+        this.#radian += 0.02 * (1 + balanceFactor() / 200) * Math.sign(this.#direction);
 
         const temaeRateMax = 1;
         if (this.temaeRate >= temaeRateMax) {

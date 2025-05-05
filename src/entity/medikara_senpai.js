@@ -43,7 +43,7 @@ class MedikaraSenpai extends Entity {
         this.#height = 90;
         this.#width = this.#height * this.#chargeImage1.width / this.#chargeImage1.height;
         this.#x = canvas.width - this.#width - 15;
-        this.#y = canvas.height - this.#height - 35;
+        this.#y = canvas.height - this.#height - 20;
     }
 
     draw() {

@@ -60,9 +60,9 @@ const kotodamaNameList = [];
     add1(s, "やめてくれよ…（絶望）", "mp3", {volume: 1});
 
     // 目力先輩
-    add1(s, "目力先輩/ヌウン", "mp3", {volume: 0.5});
-    add1(s, "目力先輩/ヘッヘッ", "mp3", {volume: 0.5});
-    add1(s, "目力先輩/アー！", "mp3", {volume: 0.5});
+    add1(s, "目力先輩/ヌウン", "mp3", {volume: 0.7});
+    add1(s, "目力先輩/ヘッヘッ", "mp3", {volume: 0.7});
+    add1(s, "目力先輩/アー！", "mp3", {volume: 0.7});
 
     // MRU
     // add1(s, "チラチラ見てただろ", "mp3", {volume: 1});

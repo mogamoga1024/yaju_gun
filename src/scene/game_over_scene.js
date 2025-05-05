@@ -18,6 +18,7 @@ class GameOverScene extends Scene {
         Cookies.remove("level", {path: COOKIE_PATH});
         Cookies.remove("score", {path: COOKIE_PATH});
         Cookies.remove("hp", {path: COOKIE_PATH});
+        Cookies.remove("mdkr", {path: COOKIE_PATH});
 
         const maxLevel = 50;
         this.#levelText = "Lv.";

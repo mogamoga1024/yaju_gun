@@ -69,6 +69,7 @@ class GameplayScene extends Scene {
     #complainBtn = null;
 
     #mdkrSnpi = null;
+    #mdkrPowerGauge = undefined;
 
     #bgm = null;
     #bgmId = -1;
@@ -85,10 +86,11 @@ class GameplayScene extends Scene {
     #fadeOutAlpha = 0;
     #fadeOutDuration = 5000;
 
-    constructor(useNipple, hp = undefined, score = 0) {
+    constructor(useNipple, hp = undefined, mdkrPowerGauge = undefined, score = 0) {
         super();
         this.#useNipple = useNipple;
         this.#player = new Player(hp);
+        this.#mdkrPowerGauge = mdkrPowerGauge;
         this.#score = score;
     }
 
@@ -153,7 +155,7 @@ class GameplayScene extends Scene {
         this.#backBtn = new BackButton();
         this.#complainBtn = new ComplainButton();
 
-        this.#mdkrSnpi = new MedikaraSenpai();
+        this.#mdkrSnpi = new MedikaraSenpai(this.#mdkrPowerGauge);
 
         Sparks.reset();
         MessageWindow.init(10, 10);
@@ -764,6 +766,7 @@ class GameplayScene extends Scene {
         Cookies.set("level", String(level), {expires: 365, path: COOKIE_PATH});
         Cookies.set("score", String(this.#score), {expires: 365, path: COOKIE_PATH});
         Cookies.set("hp", String(this.#player?.hp ?? 0), {expires: 365, path: COOKIE_PATH});
+        Cookies.set("mdkr", String(this.#mdkrSnpi?.powerGauge ?? 90), {expires: 365, path: COOKIE_PATH});
     }
 
     #kmrTalking() {

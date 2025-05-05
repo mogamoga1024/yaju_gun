@@ -15,6 +15,7 @@ class TitleScene extends Scene {
 
     #prevLevel = 1;
     #prevHp = undefined;
+    #prevMdkr = undefined;
     #prevScore = 0;
 
     #defaultDifficulty = "";
@@ -35,16 +36,19 @@ class TitleScene extends Scene {
         this.#defaultDifficulty = difficulty;
 
         const strHp = Cookies.get("hp");
+        const strMdkr = Cookies.get("mdkr");
         const strLevel = Cookies.get("level");
         const strScore = Cookies.get("score");
-        if (strLevel !== undefined && strHp !== undefined && strScore !== undefined) {
+        if (strLevel !== undefined && strHp !== undefined && strMdkr !== undefined && strScore !== undefined) {
             const hp = Number(strHp);
+            const mdkr = Number(strMdkr);
             const score = Number(strScore);
             if (hp > 0 && score > 0) {
                 this.#canContinue = true;
                 this.#startPoint = "continue";
                 this.#prevLevel = Number(strLevel);
                 this.#prevHp = hp;
+                this.#prevMdkr = mdkr;
                 this.#prevScore = score;
             }
         }
@@ -140,7 +144,7 @@ class TitleScene extends Scene {
         }
         else /*if (this.#startPoint = "continue")*/ {
             level = this.#prevLevel;
-            SceneManager.start(new GameplayScene(!isPC, this.#prevHp, this.#prevScore));
+            SceneManager.start(new GameplayScene(!isPC, this.#prevHp, this.#prevMdkr, this.#prevScore));
         }
     }
 

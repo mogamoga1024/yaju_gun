@@ -23,10 +23,15 @@ class MedikaraSenpai extends Entity {
     get centerY() {
         return this.#y + this.#height;
     }
+    get powerGauge() {
+        return this.#powerGauge;
+    }
 
-    constructor() {
+    constructor(powerGauge = 90) {
         super();
-        
+
+        this.#powerGauge = powerGauge;
+
         this.#chargeImage1 = ImageStorage.get("目力先輩/溜め1");
         this.#chargeImage2 = ImageStorage.get("目力先輩/溜め2");
         this.#kaihouImage = ImageStorage.get("目力先輩/解放");

@@ -115,7 +115,7 @@ class MeteorSenpai extends Entity {
         }
 
         const radius = this.#diagonal / 2;
-        const d = Math.sqrt(Math.pow(crosshairX - this.#virtualCenterX, 2) + Math.pow(crosshairY - this.#virtualCenterY, 2));
+        const d = Math.sqrt((crosshairX - this.#virtualCenterX) ** 2 + (crosshairY - this.#virtualCenterY) ** 2);
 
         return d <= radius;
     }
@@ -146,7 +146,7 @@ class MeteorSenpai extends Entity {
     #updateBounds(viewAngle) {
         this.#width = this.#oriWidth * this.temaeRate;
         this.#height = this.#oriHeight * this.temaeRate;
-        this.#diagonal = Math.sqrt(Math.pow(this.#width, 2) + Math.pow(this.#height, 2));
+        this.#diagonal = Math.sqrt(this.#width ** 2 + this.#height ** 2);
 
         const canvasCenterX = canvas.width / 2;
         const offsetX = (canvasCenterX * (viewAngle / 90)) % (canvasCenterX * 4);

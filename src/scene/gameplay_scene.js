@@ -393,10 +393,10 @@ class GameplayScene extends Scene {
             const enemyCount = this.#enemyList.filter(e => e.state === "alive").length;
             const kotodamaCount = this.#kotodamaList.filter(k => k.state === "alive").length;
             if (enemyCount > 1) {
-                explosionSoundVolume = explosionSound.defaultVolume * Math.pow(0.85, enemyCount);
+                explosionSoundVolume = explosionSound.defaultVolume * 0.85 ** enemyCount;
             }
             if (kotodamaCount > 1) {
-                crashSoundVolume = crashSound.defaultVolume * Math.pow(0.85, kotodamaCount);
+                crashSoundVolume = crashSound.defaultVolume * 0.85 ** kotodamaCount;
             }
         }
 
@@ -711,7 +711,7 @@ class GameplayScene extends Scene {
 
     #calcNextExp(nextLevel) {
         if (nextLevel < this.#maxLevel) {
-            return Math.floor(5 * Math.pow(nextLevel + this.#maxLevel, 1/8));
+            return Math.floor(5 * (nextLevel + this.#maxLevel) ** (1/8));
         }
         else {
             return 50;

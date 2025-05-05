@@ -38,4 +38,46 @@
             sparks = sparks.filter(s => s.opacity > 0);
         }
     };
+
+    let impactFrameCount = 0;
+    const impactMap = new Map();
+
+    window.drawImpactLines = (focalX, focalY) => {
+        context.save();
+    
+        context.lineWidth = 2;
+    
+        const maxSegmentCount = 4;
+        const maxSegmentLineCount = 3;
+
+        for (const color of ["black", "white"]) {
+            context.strokeStyle = color;
+            for (let i = 0; i < maxSegmentCount; i++) {
+                for (let j = 0; j < maxSegmentLineCount; j++) {
+                    let radian, offset;
+                    if (impactFrameCount % 6 === 0) {
+                        radian = Math.random() * Math.PI * 2 / maxSegmentCount + Math.PI * 2 / maxSegmentCount * i;
+                        offset = 200 + Math.random() * 50;
+                        impactMap.set(`${color}_${i}_${j}`, {radian, offset});
+                    }
+                    else {
+                        ({radian, offset} = impactMap.get(`${color}_${i}_${j}`));
+                    }
+
+                    const startX = focalX + Math.cos(radian) * offset;
+                    const startY = focalY + Math.sin(radian) * offset;
+                    const endX = focalX + Math.cos(radian) * Math.sqrt(canvas.width ** 2 + canvas.height ** 2);
+                    const endY = focalY + Math.sin(radian) * Math.sqrt(canvas.width ** 2 + canvas.height ** 2);
+                    context.beginPath();
+                    context.moveTo(startX, startY);
+                    context.lineTo(endX, endY);
+                    context.stroke();
+                }
+            }
+        }
+        context.restore();
+
+        impactFrameCount++;
+    }
 })();
+

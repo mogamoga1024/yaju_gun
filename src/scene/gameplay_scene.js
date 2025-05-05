@@ -235,6 +235,11 @@ class GameplayScene extends Scene {
             entity.draw();
         });
 
+        // 目力先輩の集中線の描画
+        if (this.#mdkrSnpi.isRoaring) {
+            drawImpactLines(this.#mdkrSnpi.centerX, this.#mdkrSnpi.centerY);
+        }
+
         // ダメージ描写の描画
         this.#player.drawDamageOverlay();
 
@@ -289,6 +294,7 @@ class GameplayScene extends Scene {
         // 火花の描画
         Sparks.draw(context);
 
+        // プレイヤーが死にゆくまでの処理
         if (this.#player.state === "dying") {
             if (this.#fadeOutAlpha === 0) {
                 let highScore = 0;

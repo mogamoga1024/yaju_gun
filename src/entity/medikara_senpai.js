@@ -17,6 +17,13 @@ class MedikaraSenpai extends Entity {
     #fullFrameCount = 0;
     isRoaring = false;
 
+    get centerX() {
+        return this.#x + this.#width;
+    }
+    get centerY() {
+        return this.#y + this.#height;
+    }
+
     constructor() {
         super();
         

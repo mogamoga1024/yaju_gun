@@ -155,6 +155,7 @@ class GameplayScene extends Scene {
 
         this.#mdkrSnpi = new MedikaraSenpai();
 
+        Sparks.reset();
         MessageWindow.init(10, 10);
 
         this.state = "loaded";
@@ -216,7 +217,7 @@ class GameplayScene extends Scene {
         if (this.#shotPosList.length > 0) {
             this.#gunshotSoundId = this.#gunshotSound.play();
             for (const {x, y} of this.#shotPosList) {
-                addSparks(x, y);
+                Sparks.add(x, y);
             }
         }
 
@@ -286,7 +287,7 @@ class GameplayScene extends Scene {
         }
 
         // 火花の描画
-        drawSparks(context);
+        Sparks.draw(context);
 
         if (this.#player.state === "dying") {
             if (this.#fadeOutAlpha === 0) {

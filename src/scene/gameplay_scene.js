@@ -97,6 +97,9 @@ class GameplayScene extends Scene {
     async onStart() {
         console.log("GameplayScene:onStart");
 
+        // 中断されなかった場合、タイトル画面で難易度がnormalになってしまうため
+        Cookies.set("difficulty", difficulty, {expires: 365, path: COOKIE_PATH});
+
         this.#backgroundImage = await loadImage("asset/草原.png");
         await this.#preload();
 

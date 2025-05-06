@@ -140,7 +140,7 @@ class GameplayScene extends Scene {
                 this.#nippleDx = 0;
             });
             this.#nipple.on("move", (e, data) => {
-                this.#nippleDx = data.vector.x * -6;
+                this.#nippleDx = data.vector.x * -12;
                 while (this.#nippleDx < 0) {
                     this.#nippleDx += 360;
                 }
@@ -375,7 +375,7 @@ class GameplayScene extends Scene {
 
         // 移動系イベントによる移動
         if (isPC) {
-            const speed = 4;
+            const speed = 8;
             if (this.#pc.isPressed.left) {
                 this.#viewAngle = (this.#viewAngle + speed) % 360;
             }

@@ -32,6 +32,7 @@ class GameplayScene extends Scene {
     #touchXMap = new Map();
 
     #shouldAnimation = true;
+    #animeTimer = -1;
     #enemyCreateFrame = 0;
     #honsyaCreateFrame = 0;
 
@@ -167,34 +168,28 @@ class GameplayScene extends Scene {
 
     onEnd() {
         this.#shouldAnimation = false;
+        clearInterval(this.#animeTimer);
         this.#nipple?.destroy();
     }
 
     #startAnimation() {
-        let prevTime = -1;
-        const deltaTime = 1 / FPS;
-        const anime = (time) => {
-            if (this.#shouldAnimation) {
-                if (prevTime === -1 || time - prevTime >= deltaTime * 1000 * 0.9) {
-                    if (debug.shouldDisplayFPS && prevTime !== -1) {
-                        const fps = 1000 / (time - prevTime);
-                        domDebguFps.innerText = fps.toFixed(1);
-                    }
-                    prevTime = time;
-                    this.#update();
-                    this.#update(); // 60fps時代の名残
-                }
-                if (this.#player.state === "dead") {
-                    setTimeout(() => {
-                        SceneManager.start(new GameOverScene(this.#score), false);
-                    }, 3000);
-                }
-                else {
-                    requestAnimationFrame(anime);
-                }
+        const anime = () => {
+            if (!this.#shouldAnimation) {
+                return;
+            }
+
+            this.#update();
+            this.#update(); // 60fps時代の名残
+
+            if (this.#player.state === "dead") {
+                this.#shouldAnimation = false;
+                setTimeout(() => {
+                    SceneManager.start(new GameOverScene(this.#score), false);
+                }, 3000);
             }
         };
-        anime(performance.now());
+        this.#animeTimer = setInterval(anime, 1000 / FPS);
+        anime();
     }
 
     #update() {

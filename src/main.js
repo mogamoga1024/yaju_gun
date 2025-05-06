@@ -13,13 +13,13 @@ let difficulty = "normal";
 function balanceFactor() {
     let a;
     if (difficulty === "easy") {
-        a = 3;
+        a = 35;
     }
     else if (difficulty === "normal") {
-        a = 23;
+        a = 55;
     }
     else /*if (difficulty === "hard")*/ {
-        a = 38;
+        a = 70;
     }
     return (level + a) * 1.1;
 }

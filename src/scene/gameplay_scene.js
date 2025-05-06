@@ -182,6 +182,7 @@ class GameplayScene extends Scene {
                     }
                     prevTime = time;
                     this.#update();
+                    this.#update(); // 60fps時代の名残
                 }
                 if (this.#player.state === "dead") {
                     setTimeout(() => {
@@ -467,13 +468,13 @@ class GameplayScene extends Scene {
         }
 
         // 敵の生成
-        if (this.#enemyCreateFrame >= (FPS * 1.25) / (1 + balanceFactor() / 100)) {
+        if (this.#enemyCreateFrame >= 75 / (1 + balanceFactor() / 100)) {
             this.#enemyList.push(this.#createRandomEnemy());
             this.#enemyCreateFrame = 0;
         }
 
         // 本社生成
-        if (this.#honsyaCreateFrame >= FPS * 60) {
+        if (this.#honsyaCreateFrame >= 3600) {
             this.#enemyList.push(new Honsya(this.#viewAngle));
             this.#honsyaCreateFrame = 0;
         }

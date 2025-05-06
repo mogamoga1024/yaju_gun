@@ -8,7 +8,7 @@ class ShoutingSenpai extends Entity {
     #oriHeight = 0;
     #centerX = 0;
     #frameCount = 0;
-    #canShoutFrameCount = Math.floor((-FPS * 2) / (1 + balanceFactor() / 100));
+    #canShoutFrameCount = Math.floor((-120) / (1 + balanceFactor() / 100));
     #imageList = [];
     #animeFrameMax = 5;
     #imageListIndex = 0;
@@ -106,7 +106,7 @@ class ShoutingSenpai extends Entity {
         }
 
         if (this.#textIndex === 0 && this.#canShoutFrameCount > 0) {
-            this.#canShoutFrameCount = Math.floor((-FPS * 4) / (1 + balanceFactor() / 100));
+            this.#canShoutFrameCount = Math.floor((-240) / (1 + balanceFactor() / 100));
         }
         this.#canShoutFrameCount++;
 
@@ -157,7 +157,7 @@ class ShoutingSenpai extends Entity {
         if (this.#canShoutFrameCount < 0) {
             return false;
         }
-        return this.#canShoutFrameCount % FPS === 0;
+        return this.#canShoutFrameCount % 60 === 0;
     }
 
     shout(viewAngle) {

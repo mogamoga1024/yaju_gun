@@ -45,6 +45,7 @@ class Kotodama extends Entity {
     }
 
     update(viewAngle) {
+        throw new Error("30fps未対応");
         this.#frameCount++;
         this.#radian += 0.02 * (1 + balanceFactor() / 200) * Math.sign(this.#direction);
 

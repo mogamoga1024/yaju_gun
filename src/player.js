@@ -64,6 +64,7 @@ class Player {
     }
 
     update() {
+        throw new Error("30fps未対応");
         if (this.#mutekiFrameCount > 0) {
             this.#mutekiFrameCount -= 1;
         }

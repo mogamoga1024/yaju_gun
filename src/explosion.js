@@ -34,6 +34,7 @@ class Explosion {
     }
 
     update() {
+        throw new Error("30fps未対応");
         this.#frameCount++;
         if (this.#frameCount % 1 === 0) {
             this.#imageIndex++;

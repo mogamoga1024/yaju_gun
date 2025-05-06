@@ -465,8 +465,11 @@ class GameplayScene extends Scene {
         // レベル処理
         if (this.#nextExp <= 0) {
             SoundStorage.get("レベルアップ").play();
+        }
+        while (this.#nextExp <= 0) {
             level += 1;
-            this.#nextExp = this.#calcNextExp(level);
+            const overflow = -this.#nextExp;
+            this.#nextExp = this.#calcNextExp(level) - overflow;
         }
 
         // 敵の生成

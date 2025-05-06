@@ -5,25 +5,21 @@ const canvas = document.querySelector("#game-canvas");
 const context = canvas.getContext("2d");
 
 const COOKIE_PATH = "/yaju_gun";
-const FPS = 60;
+const FPS = 30; // スマホの低電力モードだとブラウザの描画が30fpsになってしまうため
 
 let level = 1;
 let difficulty = "normal";
-let actualFPS = 60;
 
 function balanceFactor() {
     let a;
     if (difficulty === "easy") {
-        a = 35;
+        a = 3;
     }
     else if (difficulty === "normal") {
-        a = 55;
+        a = 23;
     }
     else /*if (difficulty === "hard")*/ {
-        a = 70;
-    }
-    if (actualFPS < 40) {
-        a -= 32;
+        a = 38;
     }
     return (level + a) * 1.1;
 }

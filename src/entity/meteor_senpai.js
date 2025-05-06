@@ -71,7 +71,6 @@ class MeteorSenpai extends Entity {
     }
 
     update(viewAngle) {
-        throw new Error("30fps未対応");
         this.#frameCount++;
         this.#explosion?.update();
 

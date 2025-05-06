@@ -90,7 +90,6 @@ class MedikaraSenpai extends Entity {
     }
 
     update() {
-        throw new Error("30fps未対応");
         if (this.#powerGauge >= 100) {
             this.#fullFrameCount++;
         }

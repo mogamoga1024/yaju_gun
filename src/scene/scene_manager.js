@@ -6,6 +6,8 @@ class SceneManager {
         return this.#scene;
     }
 
+    static #debug = 0;
+
     static #init() {
         window.addEventListener("keydown", e => {
             if (this.#scene?.state !== "loaded") return;
@@ -16,6 +18,10 @@ class SceneManager {
             this.#scene?.onKeyUp(e);
         });
         canvas.addEventListener("click", e => {
+            // MEMO: GameOverSceneでonClickが呼び出されない現象があったためデバグ
+            if (this.#scene instanceof GameOverScene) {
+                domDebguText.innerText = ++this.#debug;
+            }
             if (this.#scene?.state !== "loaded") return;
             this.#scene?.onClick(e);
         });

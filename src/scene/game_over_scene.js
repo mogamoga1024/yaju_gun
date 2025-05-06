@@ -167,7 +167,8 @@ class GameOverScene extends Scene {
     }
 
     onClick(e) {
-        domDebguText.innerText = this.#canClick ? "押せる！" : "押せないよ！";
+        // MEMO: 何故か、そもそもonClickが呼び出されていない模様。謎
+        // domDebguText.innerText = this.#canClick ? "押せる！" : "押せないよ！";
 
         if (!this.#canClick) {
             return;

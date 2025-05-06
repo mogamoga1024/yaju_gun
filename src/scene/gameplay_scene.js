@@ -172,26 +172,27 @@ class GameplayScene extends Scene {
 
     #startAnimation() {
         let prevTime = -1;
-        const deltaTime = 1 / FPS;
         const anime = (time) => {
-            if (this.#shouldAnimation) {
-                if (prevTime === -1 || time - prevTime >= deltaTime * 1000 * 0.9) {
-                    if (debug.shouldDisplayFPS && prevTime !== -1) {
-                        const fps = 1000 / (time - prevTime);
-                        domDebguFps.innerText = fps.toFixed(1);
-                    }
-                    prevTime = time;
-                    this.#update();
-                    this.#update(); // 60fps時代の名残
+            if (!this.#shouldAnimation) {
+                return;
+            }
+            const fps = 1000 / (time - prevTime);
+            if (prevTime === -1 || fps < FPS + 10) {
+                if (debug.shouldDisplayFPS && prevTime !== -1) {
+                    domDebguFps.innerText = fps.toFixed(1);
                 }
-                if (this.#player.state === "dead") {
-                    setTimeout(() => {
-                        SceneManager.start(new GameOverScene(this.#score), false);
-                    }, 3000);
-                }
-                else {
-                    requestAnimationFrame(anime);
-                }
+                prevTime = time;
+                this.#update();
+                this.#update(); // 60fps時代の名残
+            }
+            if (this.#player.state === "dead") {
+                this.#shouldAnimation = false;
+                setTimeout(() => {
+                    SceneManager.start(new GameOverScene(this.#score), false);
+                }, 3000);
+            }
+            else {
+                requestAnimationFrame(anime);
             }
         };
         anime(performance.now());

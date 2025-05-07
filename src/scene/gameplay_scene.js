@@ -115,17 +115,13 @@ class GameplayScene extends Scene {
         // this.#enemyList.push(new MukimukiSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new ShoutingSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new KunekuneSenpai(canvas.width / 2, this.#viewAngle));
+        this.#enemyList.push(new PunchSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new Honsya(this.#viewAngle));
         // debug end
 
-        // debug start
-        // this.#enemyList.push(new KunekuneSenpai(canvas.width / 2, this.#viewAngle, 0.5));
-        // this.#enemyList.push(new MeteorSenpai(canvas.width / 2, this.#viewAngle, 0.5));
-        // debug end
-
         // チュートリアル用
-        this.#enemyList.push(new KunekuneSenpai(canvas.width / 2, this.#viewAngle));
-        this.#enemyList.push(new KunekuneSenpai(canvas.width / 2 * 3, this.#viewAngle));
+        // this.#enemyList.push(new KunekuneSenpai(canvas.width / 2, this.#viewAngle));
+        // this.#enemyList.push(new KunekuneSenpai(canvas.width / 2 * 3, this.#viewAngle));
 
         if (this.#useNipple) {
             this.#nipple = nipplejs.create({

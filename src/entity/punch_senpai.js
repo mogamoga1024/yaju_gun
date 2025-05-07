@@ -18,8 +18,9 @@ class PunchSenpai extends Entity {
             const image = ImageStorage.get(`パンチ先輩/${i}`);
             this.#imageList.push(image);
         }
-        this.#width = this.#imageList[0].width;
-        this.#height = this.#imageList[0].height;
+        this.#width = this.#imageList[0].width * 3;
+        this.#height = this.#imageList[0].height * 3;
+        this.#y = canvas.height;
         this.#updateBounds(viewAngle);
     }
 
@@ -46,6 +47,10 @@ class PunchSenpai extends Entity {
         }
 
         // todo this.#frameCount
+        this.#y -= 3 * (1 + balanceFactor() / 100);
+        if (this.#y < canvas.height - this.#height) {
+            this.#y = canvas.height - this.#height;
+        }
 
         this.#updateBounds(viewAngle);
     }
@@ -92,7 +97,5 @@ class PunchSenpai extends Entity {
         if (this.#x + this.#width > canvas.width * 2) {
             this.#x = this.#x - canvas.width * 2;
         }
-
-        // todo this.#y
     }
 }

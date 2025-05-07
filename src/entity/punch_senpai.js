@@ -10,6 +10,7 @@ class PunchSenpai extends Entity {
     #imageListIndex = 0;
     #opacity = 1;
     #explosion = null;
+    #entrySoundId = -1;
     #canAttack = false;
     canAttackForever = true;
     static spawnWeight = 0.125;
@@ -25,6 +26,12 @@ class PunchSenpai extends Entity {
         this.#height = this.#imageList[0].height * 3;
         this.#y = canvas.height;
         this.#updateBounds(viewAngle);
+
+        this.#entrySoundId = SoundStorage.get("暴れんなよ…").play();
+    }
+
+    end() {
+        SoundStorage.get("暴れんなよ…").stop(this.#entrySoundId);
     }
 
     draw() {
@@ -85,11 +92,13 @@ class PunchSenpai extends Entity {
     }
 
     instantDeath(damageSoundVolume) {
+        SoundStorage.get("暴れんなよ…").stop(this.#entrySoundId);
         this.state = "dying";
         this.#explosion = new Explosion(damageSoundVolume);
     }
 
     takeDamage() {
+        SoundStorage.get("暴れんなよ…").stop(this.#entrySoundId);
         this.state = "dying";
         this.#explosion = new Explosion();
     }

@@ -59,6 +59,11 @@ const kotodamaNameList = [];
     add1(s, "あーいいっすねー", "mp3", {volume: 1});
     add1(s, "アアッー！(高音)", "mp3", {volume: 0.8});
 
+    // パンチ
+    // add1(k, "お前のことが好きだったんだよ！", "mp3", {volume: 0.7});
+    add1(s, "暴れんなよ…", "mp3", {volume: 0.5});
+    // add1(k, "いきますよ～イクイク", "mp3", {volume: 0.7});
+
     // KMR
     add1(s, "じゃ、流します", "mp3", {volume: 0.5});
     add1(s, "いや、見てないですよ", "mp3", {volume: 1});
@@ -83,7 +88,6 @@ const kotodamaNameList = [];
     add1(k, "FOO↑気持ちいい", "mp3", {volume: 0.9});
     // add1(k, "いいよ！来いよ！胸にかけて胸に！", "mp3", {volume: 0.7});
     // add1(k, "おまたせ", "mp3", {volume: 1});
-    // add1(k, "お前のことが好きだったんだよ！", "mp3", {volume: 0.7});
     // add1(k, "こ↑こ↓", "mp3", {volume: 0.8});
     // add1(k, "これもうわかんねぇな", "mp3", {volume: 1});
     add1(k, "じゃけん夜行きましょうね", "mp3", {volume: 0.9});

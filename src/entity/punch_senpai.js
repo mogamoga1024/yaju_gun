@@ -50,6 +50,9 @@ class PunchSenpai extends Entity {
         this.#y -= 3 * (1 + balanceFactor() / 100);
         if (this.#y < canvas.height - this.#height) {
             this.#y = canvas.height - this.#height;
+            if (this.#frameCount % 5 === 0) {
+                this.#imageListIndex = (this.#imageListIndex + 1) % this.#imageList.length
+            }
         }
 
         this.#updateBounds(viewAngle);

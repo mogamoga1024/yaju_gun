@@ -706,6 +706,9 @@ class GameplayScene extends Scene {
         if (level >= 30) {
             enemyClassList.push(MukimukiSenpai);
         }
+        if (level >= 40) {
+            enemyClassList.push(PunchSenpai);
+        }
         const totalWeight = enemyClassList.reduce((sum, enemyClass) => sum + enemyClass.spawnWeight, 0);
         const centerX = Math.random() * (canvas.width * 2);
 

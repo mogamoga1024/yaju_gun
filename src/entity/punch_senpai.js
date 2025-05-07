@@ -12,6 +12,7 @@ class PunchSenpai extends Entity {
     #explosion = null;
     #canAttack = false;
     canAttackForever = true;
+    static spawnWeight = 0.125;
 
     constructor(centerX, viewAngle, temaeRate = 1) {
         super(temaeRate);

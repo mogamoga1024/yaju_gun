@@ -659,6 +659,10 @@ class GameplayScene extends Scene {
         for (let i = 0; i <= 5; i++) {
             plpiss(`くねくね先輩/${i}`);
         }
+        for (let i = 0; i <= 6; i++) {
+            plpiss(`パンチ先輩/${i}`);
+        }
+
         plpiss("本社");
         plpiss("いんゆめくん");
         plpiss("照準1");

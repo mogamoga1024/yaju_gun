@@ -7,6 +7,7 @@ class Entity {
     hasGivenExp = false;
     score = 100;
     static spawnWeight = 1;
+    canAttackForever = false;
 
     constructor(temaeRate = 1) {
         this.temaeRate = temaeRate;
@@ -19,4 +20,8 @@ class Entity {
     instantDeath(damageSoundVolume) {}
     takeDamage() {}
     getXRange() { return {leftX: 0, rightX: 0}; }
+
+    canAttack() {
+        return this.temaeRate >= 1; 
+    }
 }

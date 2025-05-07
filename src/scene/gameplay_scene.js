@@ -491,15 +491,17 @@ class GameplayScene extends Scene {
         // プレイヤーの被弾と状態の更新
         for (let i = this.#enemyList.length - 1; i >= 0; i--) {
             const enemy = this.#enemyList[i];
-            if (enemy.temaeRate >= 1) {
-                this.#enemyList.splice(i, 1);
-                enemy.end();
+            if (enemy.canAttack()) {
+                if (!enemy.canAttackForever) {
+                    this.#enemyList.splice(i, 1);
+                    enemy.end();
+                }
                 this.#player.takeDamage(enemy.power);
             }
         }
         for (let i = this.#kotodamaList.length - 1; i >= 0; i--) {
             const kotodama = this.#kotodamaList[i];
-            if (kotodama.temaeRate >= 1) {
+            if (kotodama.canAttack()) {
                 this.#kotodamaList.splice(i, 1);
                 this.#player.takeDamage(kotodama.power);
             }

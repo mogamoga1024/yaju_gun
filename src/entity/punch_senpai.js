@@ -10,8 +10,10 @@ class PunchSenpai extends Entity {
     #imageListIndex = 0;
     #opacity = 1;
     #explosion = null;
+    #canAttack = false;
+    canAttackForever = true;
 
-    constructor(centerX, viewAngle, temaeRate = 0.15) {
+    constructor(centerX, viewAngle, temaeRate = 1) {
         super(temaeRate);
         this.#centerX = centerX;
         for (let i = 0; i <= 6; i++) {
@@ -35,6 +37,7 @@ class PunchSenpai extends Entity {
 
     update(viewAngle) {
         this.#frameCount++;
+        this.#canAttack = false;
         this.#explosion?.update();
 
         if (this.state === "dying") {
@@ -52,6 +55,9 @@ class PunchSenpai extends Entity {
             this.#y = canvas.height - this.#height;
             if (this.#frameCount % 5 === 0) {
                 this.#imageListIndex = (this.#imageListIndex + 1) % this.#imageList.length
+                if (this.#imageListIndex === 4) {
+                    this.#canAttack = true;
+                }
             }
         }
 
@@ -91,6 +97,10 @@ class PunchSenpai extends Entity {
         const leftX = this.#x;
         const rightX = leftX + this.#width;
         return {leftX, rightX};
+    }
+
+    canAttack() {
+        return this.#canAttack;
     }
 
     #updateBounds(viewAngle) {

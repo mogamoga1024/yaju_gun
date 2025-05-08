@@ -292,8 +292,7 @@ class GameplayScene extends Scene {
             }
         }
         else {
-            this.#message.isTransient = true;
-            this.#message.text = "";
+            this.#message = lyrics(this.#bgm);
         }
 
         // メッセージウィンドウの描画

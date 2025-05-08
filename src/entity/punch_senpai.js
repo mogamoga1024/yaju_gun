@@ -13,7 +13,7 @@ class PunchSenpai extends Entity {
     #entrySoundId = -1;
     #canAttack = false;
     canAttackForever = true;
-    static spawnWeight = 0.125;
+    static spawnWeight = 0.25;
 
     constructor(centerX, viewAngle, temaeRate = 1) {
         super(temaeRate);

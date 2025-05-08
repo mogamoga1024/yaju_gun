@@ -28,18 +28,8 @@ const kotodamaNameList = [];
     const k = kotodamaNameList;
 
     // BGM
-    // add3(b, "ほのぼの神社", "mp3", {volume: 0.5, loop: true});
-    add3(b, "Smart Boy(Daily Unchi Special Mix)", "mp3", {volume: 0.6});
-    add3(b, "Namagusa Monk", "m4a", {volume: 0.35});
-    add3(b, "PLUMBER(qwerty Remix)", "m4a", {volume: 0.5});
-    add3(b, "中華淫行", "m4a", {volume: 0.45});
-    add3(b, "パラオナボーイ／feat.重音テト", "mp3", {volume: 0.9});
-    add3(b, "snow prizm (Ketsupine mix)", "mp3", {volume: 0.2});
-    add3(b, "「愛のカタチ」四部合唱【山崎まさゆき】", "mp3", {volume: 0.9});
-    add3(b, "星空.flv", "m4a", {volume: 0.45});
-    add3(b, "シン・怪文書アレンジ／さとうささら", "m4a", {volume: 0.6});
-    add3(b, "PLUMBER", "m4a", {volume: 0.35});
-    add3(b, "太いぜ。", "mp3", {volume: 0.6});
+    add3(b, "ほのぼの神社", "mp3", {volume: 0.5, loop: true});
+    add3(b, "Smart Boy(Daily Unchi Special Mix)", "mp3", {volume: 0.6, loop: true});
 
     // 効果音 gameplay
     add1(s, "ドンッ", "mp3", {volume: 0.8});

@@ -72,7 +72,6 @@ class GameplayScene extends Scene {
     #mdkrPowerGauge = MedikaraSenpai.POWER_GAUGE_DEF;
 
     #bgm = null;
-    #bgmId = -1;
 
     #soundList = [];
 
@@ -103,10 +102,41 @@ class GameplayScene extends Scene {
         this.#backgroundImage = await loadImage("asset/草原.png");
         await this.#preload();
 
-        this.#bgm = SoundStorage.get("ほのぼの神社");
-        this.#gunshotSound = SoundStorage.get("銃声");
+        // BGMをシャッフル
+        for (let i = bgmNameList.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [bgmNameList[i], bgmNameList[j]] = [bgmNameList[j], bgmNameList[i]];
+        }
+        // BGMを再生
+        let bgli = 0;
+        const playBGM = () => {
+            loadSound(bgmNameList[bgli]).then(bgm => {
+                if (this.#player.state !== "alive") {
+                    bgm.unload();
+                    return;
+                }
+                const playNextBGM = () => {
+                    bgli = (bgli + 1) % bgmNameList.length;
+                    bgm.off("end");
+                    bgm.off("playerror");
+                    bgm.unload();
+                    this.#bgm = null;
+                    playBGM();
+                };
+                if (bgm.isOK) {
+                    this.#bgm = bgm;
+                    bgm.on("end", playNextBGM);
+                    bgm.on("playerror", playNextBGM);
+                    bgm.play();
+                }
+                else {
+                    playNextBGM();
+                }
+            });
+        };
+        playBGM();
 
-        this.#bgmId = this.#bgm.play();
+        this.#gunshotSound = SoundStorage.get("銃声");
 
         // debug start
         // 0 <= centerX < canvas.width * 2
@@ -311,7 +341,8 @@ class GameplayScene extends Scene {
                 });
                 setTimeout(() => {
                     this.#enemyList.forEach(enemy => enemy.end());
-                    this.#bgm.stop(this.#bgmId);
+                    this.#bgm?.stop();
+                    this.#bgm?.unload();
                 }, this.#fadeOutDuration);
             }
             this.#fadeOutAlpha += 0.004;
@@ -332,7 +363,6 @@ class GameplayScene extends Scene {
                 if (this.#kmr.isTargeted(x, y)) {
                     this.#isKMRTalking = true;
                     this.#togglePlaySound(false);
-                    this.#bgm.volume(this.#bgm.defaultVolume * 0.5, this.#bgmId);
                     break;
                 }
             }
@@ -531,9 +561,6 @@ class GameplayScene extends Scene {
         // 敵を全滅させたらチュートリアルを終わる
         if (this.#isTutorial && this.#enemyList.length === 0) {
             this.#isTutorial = false;
-            this.#bgm.stop(this.#bgmId);
-            this.#bgm = SoundStorage.get("Smart Boy(Daily Unchi Special Mix)");
-            this.#bgmId = this.#bgm.play();
         }
         
         // 後処理
@@ -673,9 +700,6 @@ class GameplayScene extends Scene {
         plpiss("目力先輩/解放");
         
         // 音声
-        for (const name of bgmNameList) {
-            plpsss(name);
-        }
         for (const name of seNameList) {
             plpsss(name);
         }
@@ -825,7 +849,6 @@ class GameplayScene extends Scene {
                 this.#hasComplained = false;
                 this.#complainIndex = 0;
                 this.#togglePlaySound(true);
-                this.#bgm.volume(this.#bgm.defaultVolume, this.#bgmId);
                 break;
             }
             else if (this.#complainBtn.isTargeted(x, y)) {
@@ -853,7 +876,6 @@ class GameplayScene extends Scene {
             if (!shouldPlay) {
                 sound._getSoundIds().forEach(id => {
                     if (id === this.#gunshotSoundId) return;
-                    if (id === this.#bgmId) return;
                     if (sound.playing(id)) {
                         this.#soundList.push({sound, id});
                     }

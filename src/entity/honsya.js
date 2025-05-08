@@ -14,6 +14,7 @@ class Honsya extends Entity {
     #opacity = 1;
     #explosion = null;
     healAmount = 9999;
+    chargeAmound = 25;
     score = 3000;
 
     constructor(viewAngle) {

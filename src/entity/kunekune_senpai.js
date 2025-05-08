@@ -15,6 +15,8 @@ class KunekuneSenpai extends Entity {
     #opacity = 1;
     #explosion = null;
     healAmount = 0;
+    exp = 0;
+    chargeAmound = 0;
     score = 0;
 
     constructor(centerX, viewAngle, temaeRate = 0.15) {

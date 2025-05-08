@@ -127,11 +127,11 @@ class MedikaraSenpai extends Entity {
             this.#roar();
         }
         else {
-            this.charge(true);
+            this.charge(1, true);
         }
     }
 
-    charge(needSound = false) {
+    charge(amount, needSound = false) {
         if (this.#powerGauge >= 100) {
             this.#powerGauge = 100;
             return;
@@ -145,7 +145,11 @@ class MedikaraSenpai extends Entity {
             }
             this.#chargeSoundId = this.#chargeSound.play();
         }
-        this.#powerGauge += 1;
+        this.#powerGauge += amount;
+        if (this.#powerGauge >= 100) {
+            this.#powerGauge = 100;
+            // todo 音とか鳴らしたいな… ヌゥーン みたいな
+        }
         this.#chargeFrameCount = 8;
     }
 

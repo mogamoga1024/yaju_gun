@@ -5,6 +5,8 @@ class Entity {
     healAmount = 0.05;
     power = 1;
     hasGivenExp = false;
+    exp = 1;
+    chargeAmound = 1;
     score = 100;
     static spawnWeight = 1;
     canAttackForever = false;

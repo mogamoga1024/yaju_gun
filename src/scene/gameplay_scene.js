@@ -428,9 +428,9 @@ class GameplayScene extends Scene {
             if (enemy.state === "dying" && !enemy.hasGivenExp) {
                 this.#player.heal(enemy.healAmount);
                 enemy.hasGivenExp = true;
-                this.#nextExp -= 1;
+                this.#nextExp -= enemy.exp;
                 this.#score += enemy.score;
-                this.#mdkrSnpi.charge();
+                this.#mdkrSnpi.charge(enemy.chargeAmound);
             }
             else if (enemy.state === "dead") {
                 this.#enemyList.splice(i, 1);
@@ -445,7 +445,7 @@ class GameplayScene extends Scene {
             const kotodama = this.#kotodamaList[i];
             if (kotodama.state === "dead" || kotodama.shooter.state === "dying") {
                 this.#score += kotodama.score;
-                this.#mdkrSnpi.charge();
+                this.#mdkrSnpi.charge(enemy.chargeAmound);
                 this.#kotodamaList.splice(i, 1);
             }
         }

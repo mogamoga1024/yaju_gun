@@ -18,7 +18,7 @@ class MessageWindow {
 
     static #drawWindow() {
         context.beginPath();
-        context.fillStyle = "rgba(0, 128, 255, 0.7)";
+        context.fillStyle = "rgba(0, 128, 255, 0.2)";
         context.roundRect(this.#x, this.#y, this.#width, this.#height, 20);
         context.fill();
     }
@@ -44,12 +44,15 @@ class MessageWindow {
 
         context.textAlign = "center";
         context.textBaseline = "top";
+        context.lineJoin = "round";
+        context.lineWidth = 4;
         context.font = `400 ${fontSize}px Xim-Sans`;
         context.fillStyle = "#fff";
+        context.strokeStyle = "#1a1a1a";
 
         for (let i = 0; i < lineTextList.length; i++) {
             const lineText = lineTextList[i];
-            context.fillText(lineText, canvas.width / 2, y);
+            drawStrokeText(context, lineText, canvas.width / 2, y);
             y += lineHeight;
         }
     }

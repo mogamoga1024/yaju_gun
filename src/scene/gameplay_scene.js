@@ -445,7 +445,7 @@ class GameplayScene extends Scene {
             const kotodama = this.#kotodamaList[i];
             if (kotodama.state === "dead" || kotodama.shooter.state === "dying") {
                 this.#score += kotodama.score;
-                this.#mdkrSnpi.charge(enemy.chargeAmound);
+                this.#mdkrSnpi.charge(kotodama.chargeAmound);
                 this.#kotodamaList.splice(i, 1);
             }
         }

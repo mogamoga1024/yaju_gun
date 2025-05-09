@@ -19,5 +19,5 @@ function drawLoading() {
     context.strokeStyle = "#fff";
     context.lineWidth = 5;
     context.lineJoin = "round";
-    drawStrokeText(context, text, canvas.width - 280, 370);
+    drawStrokeText(context, text, canvas.width - 320, 370);
 }

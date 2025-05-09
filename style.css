@@ -1,12 +1,8 @@
 
-@font-face {
-	font-family: "Xim-Sans";
-	src: url(./asset/Xim-Sans-Handwritten.ttf);
-  font-display: block; /* フォントが読み込まれるまで代替フォントを出さない */
-}
-
 :root {
-  font-family: Xim-Sans;
+  font-family: "Noto Sans JP", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
   touch-action: manipulation;
   font-size: 24px;
 }
@@ -18,11 +14,12 @@ body {
   color: #202122;
 }
 
-.noto-sans-jp {
-  font-family: "Noto Sans JP", sans-serif;
-  font-optical-sizing: auto;
+.fw-400 {
+  font-weight: 400;
+}
+
+.fw-900 {
   font-weight: 900;
-  font-style: normal;
 }
 
 h1 span {

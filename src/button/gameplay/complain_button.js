@@ -28,7 +28,7 @@ class ComplainButton extends Button {
 
         context.textAlign = "center";
         context.textBaseline = "top";
-        context.font = `400 ${fontSize}px Xim-Sans`;
+        context.font = `400 ${fontSize}px 'Noto Sans JP'`;
         context.fillStyle = "#fff";
 
         for (let i = 0; i < lineTextList.length; i++) {

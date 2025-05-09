@@ -14,7 +14,7 @@ class EasyButton extends Button {
         this.#centerY = 320;
         this.#height = 40;
 
-        context.font = `400 ${this.#height}px Xim-Sans`;
+        context.font = `400 ${this.#height}px 'Noto Sans JP'`;
         this.#width = context.measureText(this.#text).width;
     }
     
@@ -37,7 +37,7 @@ class EasyButton extends Button {
             context.fillStyle = "#000";
             context.strokeStyle = "#eee";
         }
-        context.font = `400 ${this.#height}px Xim-Sans`;
+        context.font = `400 ${this.#height}px 'Noto Sans JP'`;
         drawStrokeText(context, this.#text, this.#x, this.#centerY);
         context.restore();
     }

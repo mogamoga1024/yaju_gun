@@ -84,7 +84,7 @@ class MedikaraSenpai extends Entity {
         context.fillStyle = "#000";
         context.strokeStyle = "#eee";
         context.lineWidth = 5;
-        context.font = `400 30px Xim-Sans`;
+        context.font = `400 30px 'Noto Sans JP'`;
         drawStrokeText(context, `${this.#powerGauge}%`, this.#x + this.#width / 2, this.#y + this.#height + 5);
         context.restore();
     }

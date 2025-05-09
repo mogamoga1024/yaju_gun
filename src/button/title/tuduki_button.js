@@ -14,7 +14,7 @@ class TudukiButton extends Button {
         this.#height = 40;
         this.#isActive = isActive;
 
-        context.font = `400 ${this.#height}px Xim-Sans`;
+        context.font = `400 ${this.#height}px 'Noto Sans JP'`;
         this.#width = context.measureText(this.#text).width;
 
         this.#x = canvas.width - this.#width - 220;
@@ -39,7 +39,7 @@ class TudukiButton extends Button {
             context.fillStyle = "#000";
             context.strokeStyle = "#eee";
         }
-        context.font = `400 ${this.#height}px Xim-Sans`;
+        context.font = `400 ${this.#height}px 'Noto Sans JP'`;
         drawStrokeText(context, this.#text, this.#x, this.#centerY);
         context.restore();
     }

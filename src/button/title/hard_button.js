@@ -13,7 +13,7 @@ class HardButton extends Button {
         this.#centerY = 320;
         this.#height = 40;
 
-        context.font = `400 ${this.#height}px Xim-Sans`;
+        context.font = `400 ${this.#height}px 'Noto Sans JP'`;
         this.#width = context.measureText(this.#text).width;
 
         this.#x = canvas.width - this.#width - 280;
@@ -38,7 +38,7 @@ class HardButton extends Button {
             context.fillStyle = "#000";
             context.strokeStyle = "#eee";
         }
-        context.font = `400 ${this.#height}px Xim-Sans`;
+        context.font = `400 ${this.#height}px 'Noto Sans JP'`;
         drawStrokeText(context, this.#text, this.#x, this.#centerY);
         context.restore();
     }

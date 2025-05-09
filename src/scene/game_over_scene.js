@@ -144,14 +144,14 @@ class GameOverScene extends Scene {
 
     #drawLevel() {
         context.lineWidth = 5;
-        context.font = "400 50px Xim-Sans";
+        context.font = "400 50px 'Noto Sans JP'";
         const width = context.measureText(this.#levelText).width;
         drawStrokeText(context, this.#levelText, (canvas.width - width) / 2, 140);
     }
 
     #drawScore() {
         context.lineWidth = 5;
-        context.font = "400 50px Xim-Sans";
+        context.font = "400 50px 'Noto Sans JP'";
         const text = `SCORE ${this.#score}`;
         const width = context.measureText(text).width;
         drawStrokeText(context, text, (canvas.width - width) / 2, 195);
@@ -161,7 +161,7 @@ class GameOverScene extends Scene {
         SoundStorage.get(this.#comment).play();
 
         context.lineWidth = 5;
-        context.font = "400 60px Xim-Sans";
+        context.font = "400 60px 'Noto Sans JP'";
         const width = context.measureText(this.#comment).width;
         drawStrokeText(context, this.#comment, (canvas.width - width) / 2, 270);
     }

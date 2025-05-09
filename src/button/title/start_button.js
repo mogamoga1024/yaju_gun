@@ -12,7 +12,7 @@ class StartButton extends Button {
         this.#centerY = 385;
         this.#height = 70;
 
-        context.font = `400 ${this.#height}px Xim-Sans`;
+        context.font = `400 ${this.#height}px 'Noto Sans JP'`;
         this.#width = context.measureText(this.#text).width;
 
         this.#x = (canvas.width - this.#width) / 2;
@@ -26,7 +26,7 @@ class StartButton extends Button {
         context.fillStyle = "#000";
         context.strokeStyle = "#eee";
         context.lineWidth = 5;
-        context.font = `400 ${this.#height}px Xim-Sans`;
+        context.font = `400 ${this.#height}px 'Noto Sans JP'`;
         drawStrokeText(context, this.#text, this.#x, this.#centerY);
         context.restore();
     }

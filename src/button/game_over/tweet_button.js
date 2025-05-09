@@ -12,7 +12,7 @@ class TweetButton extends Button {
         this.#centerY = 385;
         this.#height = 40;
 
-        context.font = `400 ${this.#height}px Xim-Sans`;
+        context.font = `400 ${this.#height}px 'Noto Sans JP'`;
         this.#width = context.measureText(this.#text).width;
 
         this.#x = canvas.width - this.#width - 280;
@@ -26,7 +26,7 @@ class TweetButton extends Button {
         context.fillStyle = "#fff";
         context.lineWidth = 5;
         context.strokeStyle = "rgb(255, 0, 128)";
-        context.font = `400 ${this.#height}px Xim-Sans`;
+        context.font = `400 ${this.#height}px 'Noto Sans JP'`;
         drawStrokeText(context, this.#text, this.#x, this.#centerY);
         context.restore();
     }

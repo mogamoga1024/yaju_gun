@@ -748,7 +748,7 @@ class GameplayScene extends Scene {
     #drawLevel() {
         context.textAlign = "start";
         context.textBaseline = "top";
-        context.font = "400 40px Xim-Sans";
+        context.font = "400 40px 'Noto Sans JP'";
         context.fillStyle = "#000";
         context.strokeStyle = "#eee";
         context.lineWidth = 5;
@@ -769,7 +769,7 @@ class GameplayScene extends Scene {
     #drawScore() {
         context.textAlign = "start";
         context.textBaseline = "top";
-        context.font = "400 40px Xim-Sans";
+        context.font = "400 40px 'Noto Sans JP'";
         context.fillStyle = "#000";
         context.strokeStyle = "#eee";
         context.lineWidth = 5;

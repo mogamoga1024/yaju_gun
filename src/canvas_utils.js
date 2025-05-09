@@ -14,7 +14,7 @@ function drawLoading() {
     const text = "Loading...";
     context.textAlign = "start";
     context.textBaseline = "top";
-    context.font = "400 60px Xim-Sans";
+    context.font = "400 60px 'Noto Sans JP'";
     context.fillStyle = "#000";
     context.strokeStyle = "#fff";
     context.lineWidth = 5;

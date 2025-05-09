@@ -225,7 +225,7 @@ class TitleScene extends Scene {
         context.textAlign = "start";
         context.textBaseline = "top";
         context.lineJoin = "round";
-        context.font = "400 40px Xim-Sans";
+        context.font = "400 40px 'Noto Sans JP'";
         context.fillStyle = "#000";
         context.strokeStyle = "#eee";
         context.lineWidth = 5;

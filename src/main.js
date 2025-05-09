@@ -141,6 +141,7 @@ domH1.addEventListener("click", e => {
         alert("デバグ機能開放");
         domError.style.display = "block";
         domDebug.style.display = "block";
+        h1ClickCount = Number.NEGATIVE_INFINITY;
     }
 });
 

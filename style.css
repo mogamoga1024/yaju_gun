@@ -23,8 +23,9 @@ body {
   font-weight: 900;
 }
 
-h1 span {
-  font-size: 0.6em;
+h1 {
+  text-align: center;
+  ruby-position: under;
 }
 
 #game-canvas-wrapper {
@@ -53,10 +54,6 @@ h1 span {
 #android {
   text-align: center;
   color: red;
-}
-
-h1 {
-  text-align: center;
 }
 
 .description {

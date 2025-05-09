@@ -59,11 +59,12 @@ class SceneManager {
             this.#init();
         }
 
+        this.#scene = scene;
+
         if (needDrawLoading) {
             drawLoading();
         }
 
         scene.onStart();
-        this.#scene = scene;
     }
 }

@@ -13,11 +13,11 @@ function drawLoading() {
 
     const text = "Loading...";
     context.textAlign = "start";
-    context.textBaseline = "top";
+    context.textBaseline = "middle";
     context.font = "400 60px 'Noto Sans JP'";
     context.fillStyle = "#000";
     context.strokeStyle = "#fff";
     context.lineWidth = 5;
     context.lineJoin = "round";
-    drawStrokeText(context, text, canvas.width - 320, 370);
+    drawStrokeText(context, text, canvas.width - 320, 390);
 }

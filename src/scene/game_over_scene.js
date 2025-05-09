@@ -168,7 +168,7 @@ class GameOverScene extends Scene {
 
     onClick(e) {
         // MEMO: 何故か、そもそもonClickが呼び出されていない模様。謎
-        // domDebguText.innerText = this.#canClick ? "押せる！" : "押せないよ！";
+        // domDebugText.innerText = this.#canClick ? "押せる！" : "押せないよ！";
 
         if (!this.#canClick) {
             return;
@@ -178,7 +178,7 @@ class GameOverScene extends Scene {
         const {x, y} = this.canvasXY(e.offsetX, e.offsetY, rect);
 
         if (this.#gotoTitleBtn.isTargeted(x, y)) {
-            domDebguText.innerText = "";
+            domDebugText.innerText = "";
             SceneManager.start(new TitleScene(), false);
         }
         else if (this.#tweetBtn.isTargeted(x, y)) {

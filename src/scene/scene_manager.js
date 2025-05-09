@@ -19,12 +19,12 @@ class SceneManager {
         });
         canvas.addEventListener("click", e => {
             // DEBUG: そもそも呼び出されている？
-            domDebguText.innerText = ++this.#debug;
+            domDebugText.innerText = ++this.#debug;
 
             // DEBUG: GameOverSceneでonClickが呼び出されない現象があったためデバグ
             if (this.#scene instanceof GameOverScene) {
                 // DEBUG: GameOverSceneで呼び出されないことがあった。何故？
-                domDebguText.innerText = ++this.#debug;
+                domDebugText.innerText = ++this.#debug;
             }
             if (this.#scene?.state !== "loaded") return;
             this.#scene?.onClick(e);

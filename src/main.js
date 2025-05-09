@@ -131,6 +131,19 @@ document.addEventListener("visibilitychange", () => {
     }
 })();
 
+// 開発者モード
+
+const domH1 = document.querySelector("h1");
+let h1ClickCount = 0;
+domH1.addEventListener("click", e => {
+    h1ClickCount++;
+    if (h1ClickCount >= 40) {
+        alert("デバグ機能開放");
+        domError.style.display = "block";
+        domDebug.style.display = "block";
+    }
+});
+
 // error
 
 const domError = document.querySelector("#error");
@@ -143,11 +156,11 @@ window.addEventListener("error", e => {
 
 const debug = {
     canCreateEnemy: true,
-    shouldDisplayFPS: true,
 };
 
-const domDebguText = document.querySelector("#debug-text");
-const domDebguFps = document.querySelector("#debug-fps");
+const domDebug = document.querySelector("#debug");
+const domDebugText = document.querySelector("#debug-text");
+const domDebugFps = document.querySelector("#debug-fps");
 const debugBtn1 = document.querySelector("#create-enemy");
 const debugBtn2 = document.querySelector("#sound-room");
 const debugBtn3 = document.querySelector("#self-destruction");

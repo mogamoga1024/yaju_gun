@@ -174,9 +174,6 @@ class GameplayScene extends Scene {
             }
             const fps = 1000 / (time - prevTime);
             if (prevTime === -1 || fps < FPS + 10) {
-                if (debug.shouldDisplayFPS && prevTime !== -1) {
-                    domDebguFps.innerText = fps.toFixed(1);
-                }
                 prevTime = time;
                 this.#update();
                 this.#update(); // 60fps時代の名残

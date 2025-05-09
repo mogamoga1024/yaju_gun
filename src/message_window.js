@@ -40,10 +40,10 @@ class MessageWindow {
         const fontSize = 32;
         const lineHeight = fontSize * 1.1;
         const lineTextList = text.split("\n");
-        let y = this.#y + (this.#height - lineHeight * lineTextList.length) / 2 + (lineHeight - fontSize) / 2;
+        let y = this.#y + (this.#height - lineHeight * lineTextList.length) / 2 + lineHeight / 2;
 
         context.textAlign = "center";
-        context.textBaseline = "top";
+        context.textBaseline = "middle";
         context.font = `400 ${fontSize}px 'Noto Sans JP'`;
         context.fillStyle = "#fff";
 

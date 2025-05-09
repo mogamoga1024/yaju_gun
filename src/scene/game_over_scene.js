@@ -77,7 +77,7 @@ class GameOverScene extends Scene {
         context.fillRect(0, 0, canvas.width, canvas.height);
 
         context.textAlign = "start";
-        context.textBaseline = "top";
+        context.textBaseline = "middle";
         context.lineJoin = "round";
         context.fillStyle = "#fff";
         context.strokeStyle = "rgb(255, 0, 128)";
@@ -139,14 +139,14 @@ class GameOverScene extends Scene {
         context.font = "400 80px 'Noto Sans JP'";
         const text = "リザルト";
         const width = context.measureText(text).width;
-        drawStrokeText(context, text, (canvas.width - width) / 2, 25);
+        drawStrokeText(context, text, (canvas.width - width) / 2, 65);
     }
 
     #drawLevel() {
         context.lineWidth = 5;
         context.font = "400 50px 'Noto Sans JP'";
         const width = context.measureText(this.#levelText).width;
-        drawStrokeText(context, this.#levelText, (canvas.width - width) / 2, 140);
+        drawStrokeText(context, this.#levelText, (canvas.width - width) / 2, 165);
     }
 
     #drawScore() {
@@ -154,7 +154,7 @@ class GameOverScene extends Scene {
         context.font = "400 50px 'Noto Sans JP'";
         const text = `SCORE ${this.#score}`;
         const width = context.measureText(text).width;
-        drawStrokeText(context, text, (canvas.width - width) / 2, 195);
+        drawStrokeText(context, text, (canvas.width - width) / 2, 220);
     }
 
     #drawComment() {
@@ -163,7 +163,7 @@ class GameOverScene extends Scene {
         context.lineWidth = 5;
         context.font = "400 60px 'Noto Sans JP'";
         const width = context.measureText(this.#comment).width;
-        drawStrokeText(context, this.#comment, (canvas.width - width) / 2, 270);
+        drawStrokeText(context, this.#comment, (canvas.width - width) / 2, 300);
     }
 
     onClick(e) {

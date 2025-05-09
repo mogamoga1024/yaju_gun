@@ -747,7 +747,7 @@ class GameplayScene extends Scene {
 
     #drawLevel() {
         context.textAlign = "start";
-        context.textBaseline = "top";
+        context.textBaseline = "middle";
         context.font = "400 40px 'Noto Sans JP'";
         context.fillStyle = "#000";
         context.strokeStyle = "#eee";
@@ -763,12 +763,12 @@ class GameplayScene extends Scene {
         else {
             text += `MAX+${level - this.#maxLevel}`;
         }
-        drawStrokeText(context, text, 20, 20);
+        drawStrokeText(context, text, 20, 40);
     }
 
     #drawScore() {
         context.textAlign = "start";
-        context.textBaseline = "top";
+        context.textBaseline = "middle";
         context.font = "400 40px 'Noto Sans JP'";
         context.fillStyle = "#000";
         context.strokeStyle = "#eee";
@@ -777,7 +777,7 @@ class GameplayScene extends Scene {
 
         const text = String(`SCORE ${this.#score}`);
         const measure = context.measureText(text);
-        drawStrokeText(context, text, canvas.width - measure.width - 20, 20);
+        drawStrokeText(context, text, canvas.width - measure.width - 20, 40);
     }
     
     save() {

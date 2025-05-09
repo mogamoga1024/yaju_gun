@@ -223,7 +223,7 @@ class TitleScene extends Scene {
         }
 
         context.textAlign = "start";
-        context.textBaseline = "top";
+        context.textBaseline = "middle";
         context.lineJoin = "round";
         context.font = "400 40px 'Noto Sans JP'";
         context.fillStyle = "#000";
@@ -232,6 +232,6 @@ class TitleScene extends Scene {
 
         const text = String(`HIGT SCORE ${highScore}`);
         const measure = context.measureText(text);
-        drawStrokeText(context, text, canvas.width - measure.width - 20, 20);
+        drawStrokeText(context, text, canvas.width - measure.width - 20, 40);
     }
 }

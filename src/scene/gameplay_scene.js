@@ -291,14 +291,7 @@ class GameplayScene extends Scene {
         // プレイヤーが死にゆくまでの処理
         if (this.#player.state === "dying") {
             if (this.#fadeOutAlpha === 0) {
-                let highScore = 0;
-                const strHighScore = Cookies.get(`${difficulty}_high_score`);
-                if (strHighScore !== undefined) {
-                    highScore = Number(strHighScore);
-                }
-                if (this.#score > highScore) {
-                    Cookies.set(`${difficulty}_high_score`, String(this.#score), {expires: 365, path: COOKIE_PATH});
-                }
+                this.save();
 
                 Howler._howls.forEach(sound => {
                     const playingIds = sound._getSoundIds().filter(id => sound.playing(id));
@@ -779,11 +772,26 @@ class GameplayScene extends Scene {
     }
     
     save() {
-        Cookies.set("difficulty", difficulty, {expires: 365, path: COOKIE_PATH});
-        Cookies.set("level", String(level), {expires: 365, path: COOKIE_PATH});
-        Cookies.set("score", String(this.#score), {expires: 365, path: COOKIE_PATH});
-        Cookies.set("hp", String(this.#player?.hp ?? 0), {expires: 365, path: COOKIE_PATH});
-        Cookies.set("mdkr", String(this.#mdkrSnpi?.powerGauge ?? this.#mdkrPowerGauge), {expires: 365, path: COOKIE_PATH});
+        if (this.#player === null) {
+            return;
+        }
+        if (this.#player.hp <= 0) {
+            let highScore = 0;
+            const strHighScore = Cookies.get(`${difficulty}_high_score`);
+            if (strHighScore !== undefined) {
+                highScore = Number(strHighScore);
+            }
+            if (this.#score > highScore) {
+                Cookies.set(`${difficulty}_high_score`, String(this.#score), {expires: 365, path: COOKIE_PATH});
+            }
+        }
+        else {
+            Cookies.set("difficulty", difficulty, {expires: 365, path: COOKIE_PATH});
+            Cookies.set("level", String(level), {expires: 365, path: COOKIE_PATH});
+            Cookies.set("score", String(this.#score), {expires: 365, path: COOKIE_PATH});
+            Cookies.set("hp", String(this.#player.hp), {expires: 365, path: COOKIE_PATH});
+            Cookies.set("mdkr", String(this.#mdkrSnpi?.powerGauge ?? this.#mdkrPowerGauge), {expires: 365, path: COOKIE_PATH});
+        }
     }
 
     #kmrTalking() {

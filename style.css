@@ -1,18 +1,23 @@
-
 :root {
   font-family: "Noto Sans JP", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
   touch-action: manipulation;
   font-size: 24px;
+
+  --bg-color: #1e1e1e;
+  --text-color: #e0e0e0;
+  --accent-color: #ff6f61;
+  --subtle-border: #3a3a3a;
+  --notice-color: #ff5555;
 }
 
 body {
   margin: 0;
   padding: 0;
   padding-bottom: 1rem;
-  background-color: #f8f9fa;
-  color: #202122;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 .fw-400 {
@@ -26,6 +31,7 @@ body {
 h1 {
   text-align: center;
   ruby-position: under;
+  color: var(--text-color);
 }
 
 #game-canvas-wrapper {
@@ -46,14 +52,10 @@ h1 {
   margin-top: 24px;
 }
 
-#notice {
-  text-align: center;
-  color: red;
-}
-
+#notice,
 #android {
   text-align: center;
-  color: red;
+  color: var(--notice-color);
 }
 
 .description {
@@ -71,7 +73,7 @@ h1 {
 
 hr {
   height: 1px;
-  background-color: #a2a9b1;
+  background-color: var(--subtle-border);
   border: none;
 }
 
@@ -79,17 +81,10 @@ ul {
   padding-left: 1rem;
 }
 
-#debug {
-  display: none;
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto 24px;
-}
-
+#debug,
 #error {
   display: none;
   width: 100%;
   max-width: 800px;
   margin: 0 auto 24px;
 }
-

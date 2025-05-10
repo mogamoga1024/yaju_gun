@@ -154,8 +154,15 @@ domH1.addEventListener("click", e => {
 // error
 
 window.addEventListener("error", e => {
-    const text = `【${e.filename.split("/").pop()}:${e.lineno}】${e.message}`;
-    domError.innerHTML += text + "<br>";
+    const point = `${e.filename.split("/").pop()}:${e.lineno}`;
+    const message = e.message;
+    // domError.innerHTML += `【${point}】${message}<br>`;
+    alert(`ごめんエラー(TωT)\n${point}\n${message}`);
+    const scene = SceneManager.scene();
+    if (scene instanceof GameplayScene) {
+        scene.save();
+    }
+    location.reload();
 });
 
 // debug

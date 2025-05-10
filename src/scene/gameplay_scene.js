@@ -353,9 +353,7 @@ class GameplayScene extends Scene {
             }
         }
         else {
-            // 浮動小数の誤差考慮
-            const nippleDx = Math.abs(this.#nippleDx) < 1 ? 0 : this.#nippleDx;
-            let dx = nippleDx / this.#nippleRadius * -6;
+            let dx = this.#nippleDx / this.#nippleRadius * -6;
             while (dx < 0) {
                 dx += 360;
             }
@@ -579,7 +577,7 @@ class GameplayScene extends Scene {
         let totalDx = 0;
         for (const touch of e.touches) {
             const prevTouch = this.#touchXMap.get(touch.identifier);
-            let dx = touch.clientX - prevTouch.x;
+            let dx = Math.round(touch.clientX - prevTouch.x);
             if (Math.abs(dx) > this.#nippleRadius) {
                 dx = Math.sign(dx) * this.#nippleRadius;
             }

@@ -9,7 +9,7 @@ class StartButton extends Button {
     constructor() {
         super();
         this.#text = "スタート";
-        this.#centerY = 385;
+        this.#centerY = 395;
         this.#height = 70;
 
         context.font = `400 ${this.#height}px 'Noto Sans JP'`;
@@ -25,8 +25,8 @@ class StartButton extends Button {
         context.lineJoin = "round";
         context.fillStyle = "#000";
         context.strokeStyle = "#eee";
-        context.lineWidth = 5;
-        context.font = `400 ${this.#height}px 'Noto Sans JP'`;
+        context.lineWidth = 8;
+        context.font = `900 ${this.#height}px 'Noto Sans JP'`;
         drawStrokeText(context, this.#text, this.#x, this.#centerY);
         context.restore();
     }

@@ -17,7 +17,7 @@ class TudukiButton extends Button {
         context.font = `400 ${this.#height}px 'Noto Sans JP'`;
         this.#width = context.measureText(this.#text).width;
 
-        this.#x = canvas.width - this.#width - 220;
+        this.#x = canvas.width - this.#width - 180;
     }
     
     draw(isSelected = false) {

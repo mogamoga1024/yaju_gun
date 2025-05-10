@@ -16,7 +16,7 @@ class HardButton extends Button {
         context.font = `400 ${this.#height}px 'Noto Sans JP'`;
         this.#width = context.measureText(this.#text).width;
 
-        this.#x = canvas.width - this.#width - 280;
+        this.#x = canvas.width - this.#width - 230;
     }
     
     draw(isSelected = false) {

@@ -9,7 +9,7 @@ class HajimeButton extends Button {
     constructor() {
         super();
         this.#text = "はじめから";
-        this.#x = 220;
+        this.#x = 180;
         this.#centerY = 260;
         this.#height = 40;
 

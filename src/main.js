@@ -133,7 +133,7 @@ document.addEventListener("visibilitychange", () => {
 
 // 開発者モード
 
-const domError = document.querySelector("#error");
+const domError = document.querySelector("#error"); // 使ってないけど、まあ、残してる
 const domDebug = document.querySelector("#debug");
 
 domError.style.display = "block";

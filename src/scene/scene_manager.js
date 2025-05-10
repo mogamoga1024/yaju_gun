@@ -33,6 +33,10 @@ class SceneManager {
             if (this.#scene?.state !== "loaded") return;
             this.#scene?.onTouchStart(e);
         });
+        canvas.addEventListener("touchmove", e => {
+            if (this.#scene?.state !== "loaded") return;
+            this.#scene?.onTouchMove(e);
+        });
         canvas.addEventListener("touchend", e => {
             if (this.#scene?.state !== "loaded") return;
             this.#scene?.onTouchEnd(e);

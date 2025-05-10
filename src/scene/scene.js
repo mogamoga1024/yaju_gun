@@ -9,6 +9,7 @@ class Scene {
     onClick(e) {}
     onMouseMove(e) {}
     onTouchStart(e) {}
+    onTouchMove(e) {}
     onTouchEnd(e) {}
     onTouchCancel(e) {}
 

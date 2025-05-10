@@ -694,16 +694,17 @@ class GameplayScene extends Scene {
 
     #createRandomEnemy() {
         const enemyClassList = [RunningSenpai];
-        if (level >= 10) {
+        const tmpLevel = difficulty === "hard" ? 8101919 : level;
+        if (tmpLevel >= 10) {
             enemyClassList.push(MeteorSenpai);
         }
-        if (level >= 20) {
+        if (tmpLevel >= 20) {
             enemyClassList.push(ShoutingSenpai);
         }
-        if (level >= 30) {
+        if (tmpLevel >= 30) {
             enemyClassList.push(MukimukiSenpai);
         }
-        if (level >= 40) {
+        if (tmpLevel >= 40) {
             enemyClassList.push(PunchSenpai);
         }
         const totalWeight = enemyClassList.reduce((sum, enemyClass) => sum + enemyClass.spawnWeight, 0);

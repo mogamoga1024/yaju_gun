@@ -1,5 +1,4 @@
 
-const domGameCanvasWrapper = document.querySelector("#game-canvas-wrapper");
 const domNotice = document.querySelector("#notice");
 const canvas = document.querySelector("#game-canvas");
 const context = canvas.getContext("2d");
@@ -49,7 +48,7 @@ const isPC = (function() {
 
 if (!isPC) {
     domNotice.style.display = "none";
-    domGameCanvasWrapper.style.marginTop = "0";
+    canvas.style.marginTop = "0";
 
     const showNoticeIfPortrait = () => {
         const angle = screen.orientation.angle;

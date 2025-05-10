@@ -52,18 +52,13 @@ a:active {
   color: #ffd580;
 }
 
-#game-canvas-wrapper {
-  position: relative;
-  width: fit-content;
-  margin: 16px auto 0;
-  user-select: none;
-  -webkit-user-select: none;
-}
-
 #game-canvas {
   display: block;
   height: 100svh;
   max-height: 500px;
+  margin: 16px auto 0;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 #description-container {

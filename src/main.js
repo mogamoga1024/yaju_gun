@@ -67,9 +67,8 @@ if (!isPC) {
 
 if (!isPC) {
     const adjustCanvas = () => {
-        const deviceWidth = window.innerWidth;
-        if (deviceWidth < canvas.width) {
-            canvas.style.width = `${deviceWidth}px`;
+        if (window.innerWidth < canvas.width) {
+            canvas.style.width = `${window.innerWidth}px`;
             canvas.style.height = "auto";
         }
         else {

@@ -27,6 +27,7 @@ class GameplayScene extends Scene {
         mouseY: canvas.height / 2,
     };
     #nippleDx = 0;
+    #nippleRadius = 50;
     #touchXMap = new Map();
 
     #shouldAnimation = true;
@@ -352,7 +353,13 @@ class GameplayScene extends Scene {
             }
         }
         else {
-            this.#viewAngle = (this.#viewAngle + this.#nippleDx) % 360;
+            // 浮動小数の誤差考慮
+            const nippleDx = Math.abs(this.#nippleDx) < 1 ? 0 : this.#nippleDx;
+            let dx = nippleDx / this.#nippleRadius * -6;
+            while (dx < 0) {
+                dx += 360;
+            }
+            this.#viewAngle = (this.#viewAngle + dx) % 360;
         }
 
         const explosionSound = SoundStorage.get("爆発");
@@ -564,20 +571,31 @@ class GameplayScene extends Scene {
 
     onTouchStart(e) {
         for (const touch of e.changedTouches) {
-            this.#touchXMap.set(touch.identifier, touch.clientX);
+            this.#touchXMap.set(touch.identifier, {x: touch.clientX, dx: 0});
         }
     }
 
     onTouchMove(e) {
-        // todo
+        let totalDx = 0;
+        for (const touch of e.touches) {
+            const prevTouch = this.#touchXMap.get(touch.identifier);
+            let dx = touch.clientX - prevTouch.x;
+            if (Math.abs(dx) > this.#nippleRadius) {
+                dx = Math.sign(dx) * this.#nippleRadius;
+            }
+            prevTouch.dx = dx;
+            totalDx += dx;
+        }
+        this.#nippleDx = totalDx;
     }
 
     onTouchEnd(e) {
         const rect = e.target.getBoundingClientRect();
         for (const touch of e.changedTouches) {
-            const startX = this.#touchXMap.get(touch.identifier);
+            const prevTouch = this.#touchXMap.get(touch.identifier);
             this.#touchXMap.delete(touch.identifier);
-            if (touch.clientX !== startX) {
+            this.#nippleDx -= prevTouch.dx;
+            if (touch.clientX !== prevTouch.x) {
                 continue;
             }
             const offsetX = touch.clientX - rect.left;
@@ -591,6 +609,7 @@ class GameplayScene extends Scene {
         for (const touch of e.changedTouches) {
             this.#touchXMap.delete(touch.identifier);
         }
+        this.#nippleDx = 0;
     }
 
     onMouseMove(e) {

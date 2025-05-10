@@ -133,6 +133,12 @@ document.addEventListener("visibilitychange", () => {
 
 // 開発者モード
 
+const domError = document.querySelector("#error");
+const domDebug = document.querySelector("#debug");
+
+domError.style.display = "block";
+domDebug.style.display = "block";
+
 const domH1 = document.querySelector("h1");
 let h1ClickCount = 0;
 domH1.addEventListener("click", e => {
@@ -147,7 +153,6 @@ domH1.addEventListener("click", e => {
 
 // error
 
-const domError = document.querySelector("#error");
 window.addEventListener("error", e => {
     const text = `【${e.filename.split("/").pop()}:${e.lineno}】${e.message}`;
     domError.innerHTML += text + "<br>";
@@ -159,7 +164,6 @@ const debug = {
     canCreateEnemy: true,
 };
 
-const domDebug = document.querySelector("#debug");
 const domDebugText = document.querySelector("#debug-text");
 const domDebugFps = document.querySelector("#debug-fps");
 const debugBtn1 = document.querySelector("#create-enemy");

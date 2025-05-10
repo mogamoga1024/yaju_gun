@@ -95,6 +95,8 @@ class GameplayScene extends Scene {
     async onStart() {
         console.log("GameplayScene:onStart");
 
+        canvas.style.touchAction = "none";
+
         // 中断されなかった場合、タイトル画面で難易度がnormalになってしまうため
         Cookies.set("difficulty", difficulty, {expires: 365, path: COOKIE_PATH});
 
@@ -141,6 +143,7 @@ class GameplayScene extends Scene {
 
     onEnd() {
         this.#shouldAnimation = false;
+        canvas.style.touchAction = "";
     }
 
     #startAnimation() {

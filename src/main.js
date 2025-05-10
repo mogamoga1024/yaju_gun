@@ -53,31 +53,27 @@ if (!isPC) {
     const showNoticeIfPortrait = () => {
         const angle = screen.orientation.angle;
         if (angle === 0 || angle === 180) {
+            canvas.style.width = "100%";
+            canvas.style.height = "auto";
             domNotice.style.display = "";
             domNotice.innerText = "スマホを横にして❤";
         }
         else {
+            canvas.style.width = "auto";
+            canvas.style.height = "100svh";
             domNotice.style.display = "none";
             window.scrollTo(0, 0);
         }
     };
     showNoticeIfPortrait();
     window.addEventListener("orientationchange", showNoticeIfPortrait);
-}
 
-if (!isPC) {
-    const adjustCanvas = () => {
-        if (window.innerWidth < canvas.width) {
-            canvas.style.width = `${window.innerWidth}px`;
-            canvas.style.height = "auto";
+    window.addEventListener("scroll", () => {
+        const angle = screen.orientation.angle;
+        if (angle === 90 || angle === 270) {
+            canvas.style.height = `${window.innerHeight}px`;
         }
-        else {
-            canvas.style.width = "auto";
-            canvas.style.height = "100svh";
-        }
-    };
-    adjustCanvas();
-    window.addEventListener("resize", adjustCanvas);
+    });
 }
 
 if (!/android/i.test(navigator.userAgent)) {

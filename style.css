@@ -17,6 +17,8 @@ body {
   padding-bottom: 1rem;
   background-color: var(--bg-color);
   color: var(--text-color);
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .fw-400 {
@@ -56,8 +58,6 @@ a:active {
   height: 100svh;
   max-height: 500px;
   margin: 16px auto 0;
-  user-select: none;
-  -webkit-user-select: none;
 }
 
 #description-container {

@@ -176,6 +176,8 @@ const domDebugFps = document.querySelector("#debug-fps");
 const debugBtn1 = document.querySelector("#create-enemy");
 const debugBtn2 = document.querySelector("#sound-room");
 const debugBtn3 = document.querySelector("#self-destruction");
+const debugBtn4 = document.querySelector("#force-error");
+const debugBtn5 = document.querySelector("#delete-cookie");
 
 debugBtn1.addEventListener("click", () => {
     debug.canCreateEnemy = !debug.canCreateEnemy;
@@ -196,5 +198,19 @@ debugBtn3.addEventListener("click", () => {
     SceneManager.start(new GameOverScene(114514), false);
 });
 
+debugBtn4.addEventListener("click", () => {
+    throw new Error("強制エラー発生");
+});
 
-
+debugBtn5.addEventListener("click", () => {
+    Cookies.remove("easy_high_score", {path: COOKIE_PATH});
+    Cookies.remove("normal_high_score", {path: COOKIE_PATH});
+    Cookies.remove("hard_high_score", {path: COOKIE_PATH});
+    Cookies.remove("difficulty", {path: COOKIE_PATH});
+    Cookies.remove("level", {path: COOKIE_PATH});
+    Cookies.remove("score", {path: COOKIE_PATH});
+    Cookies.remove("hp", {path: COOKIE_PATH});
+    Cookies.remove("mdkr", {path: COOKIE_PATH});
+    alert("リロードします");
+    location.reload();
+});

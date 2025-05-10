@@ -140,11 +140,11 @@ class TitleScene extends Scene {
     #start() {
         if (this.#startPoint === "new") {
             level = 1;
-            SceneManager.start(new GameplayScene(!isPC));
+            SceneManager.start(new GameplayScene());
         }
         else /*if (this.#startPoint = "continue")*/ {
             level = this.#prevLevel;
-            SceneManager.start(new GameplayScene(!isPC, this.#prevHp, this.#prevMdkr, this.#prevScore));
+            SceneManager.start(new GameplayScene(this.#prevHp, this.#prevMdkr, this.#prevScore));
         }
     }
 

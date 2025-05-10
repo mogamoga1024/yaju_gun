@@ -26,8 +26,6 @@ class GameplayScene extends Scene {
         mouseX: canvas.width / 2,
         mouseY: canvas.height / 2,
     };
-    #useNipple = false;
-    #nipple = null;
     #nippleDx = 0;
     #touchXMap = new Map();
 
@@ -86,9 +84,8 @@ class GameplayScene extends Scene {
     #fadeOutAlpha = 0;
     #fadeOutDuration = 5000;
 
-    constructor(useNipple, hp = undefined, mdkrPowerGauge = MedikaraSenpai.POWER_GAUGE_DEF, score = 0) {
+    constructor(hp = undefined, mdkrPowerGauge = MedikaraSenpai.POWER_GAUGE_DEF, score = 0) {
         super();
-        this.#useNipple = useNipple;
         this.#player = new Player(hp);
         this.#mdkrPowerGauge = mdkrPowerGauge;
         this.#score = score;
@@ -123,26 +120,6 @@ class GameplayScene extends Scene {
         this.#enemyList.push(new KunekuneSenpai(canvas.width / 2, this.#viewAngle));
         this.#enemyList.push(new KunekuneSenpai(canvas.width / 2 * 3, this.#viewAngle));
 
-        if (this.#useNipple) {
-            this.#nipple = nipplejs.create({
-                zone: domGameCanvasWrapper,
-                color: "#f00",
-                lockX: true,
-                fadeTime: 0,
-                dataOnly: true,
-            });
-
-            this.#nipple.on("end", (e, data) => {
-                this.#nippleDx = 0;
-            });
-            this.#nipple.on("move", (e, data) => {
-                this.#nippleDx = data.vector.x * -6;
-                while (this.#nippleDx < 0) {
-                    this.#nippleDx += 360;
-                }
-            });
-        }
-
         this.#nextExp = this.#calcNextExp(level);
 
         this.#kmr = new KMR();
@@ -163,7 +140,6 @@ class GameplayScene extends Scene {
 
     onEnd() {
         this.#shouldAnimation = false;
-        this.#nipple?.destroy();
     }
 
     #startAnimation() {
@@ -375,7 +351,7 @@ class GameplayScene extends Scene {
                 this.#viewAngle = (this.#viewAngle + 180) % 360;
             }
         }
-        else if (this.#useNipple) {
+        else {
             this.#viewAngle = (this.#viewAngle + this.#nippleDx) % 360;
         }
 

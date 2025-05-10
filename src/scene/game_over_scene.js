@@ -184,7 +184,7 @@ class GameOverScene extends Scene {
         else if (this.#tweetBtn.isTargeted(x, y)) {
             const link = document.createElement("a");
             const text = `やじゅがん（${difficultyName()}）\n${this.#levelText}\nSCORE：${this.#score}\n評価：${this.#comment}`;
-            const hashtags = "やじゅがん,野獣先輩,ぎゃるがん2やれ,ぎゃるがん3あくしろよ";
+            const hashtags = "やじゅがん,野獣先輩,ぎゃるがん3あくしろよ";
             link.href = `https://twitter.com/intent/tweet?url=https://mogamoga1024.github.io/yaju_gun/&text=${encodeURIComponent(text)}&hashtags=${encodeURIComponent(hashtags)}`;
             link.target = "_blank";
             link.rel = "noopener noreferrer";

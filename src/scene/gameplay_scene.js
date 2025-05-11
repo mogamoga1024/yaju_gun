@@ -303,6 +303,7 @@ class GameplayScene extends Scene {
                     this.#isKMRTalking = true;
                     this.#togglePlaySound(false);
                     this.#bgm.volume(this.#bgm.defaultVolume * 0.5, this.#bgmId);
+                    canvas.style.touchAction = "";
                     break;
                 }
             }
@@ -832,6 +833,7 @@ class GameplayScene extends Scene {
                 this.#complainIndex = 0;
                 this.#togglePlaySound(true);
                 this.#bgm.volume(this.#bgm.defaultVolume, this.#bgmId);
+                canvas.style.touchAction = "none";
                 break;
             }
             else if (this.#complainBtn.isTargeted(x, y)) {

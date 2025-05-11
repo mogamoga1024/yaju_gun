@@ -168,6 +168,7 @@ window.addEventListener("error", e => {
 const debug = {
     isActive: true,
     canCreateEnemy: true,
+    isMuteki: false,
 };
 
 const domDebugText = document.querySelector("#debug-text");
@@ -176,6 +177,7 @@ const debugBtn2 = document.querySelector("#sound-room");
 const debugBtn3 = document.querySelector("#self-destruction");
 const debugBtn4 = document.querySelector("#force-error");
 const debugBtn5 = document.querySelector("#delete-cookie");
+const debugBtn6 = document.querySelector("#muteki");
 
 debugBtn1.addEventListener("click", () => {
     debug.canCreateEnemy = !debug.canCreateEnemy;
@@ -211,4 +213,14 @@ debugBtn5.addEventListener("click", () => {
     Cookies.remove("mdkr", {path: COOKIE_PATH});
     alert("リロードします");
     location.reload();
+});
+
+debugBtn6.addEventListener("click", () => {
+    debug.isMuteki = !debug.isMuteki;
+    if (debug.isMuteki) {
+        debugBtn6.innerText = "ダメージ有効化";
+    }
+    else {
+        debugBtn6.innerText = "ダメージ無効化";
+    }
 });

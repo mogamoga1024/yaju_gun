@@ -40,7 +40,7 @@ class Player {
     }
 
     takeDamage(power) {
-        if (this.#mutekiFrameCount > 0) {
+        if (debug.isMuteki || this.#mutekiFrameCount > 0) {
             SoundStorage.get("謎の金属音").play();
             return;
         }

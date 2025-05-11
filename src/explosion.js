@@ -30,7 +30,7 @@ class Explosion {
         const dx = centerX - sideSize / 2;
         const dy = centerY - sideSize / 2;
 
-        context.globalAlpha = 1 - (this.#imageIndex / this.#imageIndexMax) ** 4;
+        context.globalAlpha = (1 - (this.#imageIndex / this.#imageIndexMax) ** 4) * (1 - this.#temaeRate * 0.75);
         context.drawImage(this.#image, sx, sy, sSize, sSize, dx, dy, sideSize, sideSize);
         context.globalAlpha = 1;
     }

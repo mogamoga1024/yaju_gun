@@ -48,18 +48,26 @@ const isPC = (function() {
 
 if (!isPC) {
     domNotice.style.display = "none";
-    canvas.style.marginTop = "0";
 
-    const iw = Math.max(window.innerWidth, window.innerHeight);
-    const ih = Math.min(window.innerWidth, window.innerHeight);
-    const ch = iw * (canvas.height / canvas.width);
-    if (ch > ih) {
-        const cw = canvas.width * (ih / canvas.height);
-        canvas.style.maxWidth = `${cw}px`;
-    }
-    else {
-        canvas.style.maxWidth = `${iw}px`;
-    }
+    const resizeCanvas = () => {
+        const iw = Math.max(window.innerWidth, window.innerHeight);
+        const ih = Math.min(window.innerWidth, window.innerHeight);
+        const ch = iw * (canvas.height / canvas.width);
+        if (ch > ih) {
+            const cw = canvas.width * (ih / canvas.height);
+            canvas.style.maxWidth = `${cw}px`;
+        }
+        else {
+            canvas.style.maxWidth = `${iw}px`;
+        }
+    };
+    resizeCanvas();
+    window.addEventListener("scroll", () => {
+        const angle = screen.orientation.angle;
+        if (angle === 90 || angle === 270) {
+            resizeCanvas();
+        }
+    });
 
     const showNoticeIfPortrait = () => {
         const angle = screen.orientation.angle;

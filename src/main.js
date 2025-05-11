@@ -135,10 +135,8 @@ document.addEventListener("visibilitychange", () => {
 
 // 開発者モード
 
-const domError = document.querySelector("#error"); // 使ってないけど、まあ、残してる
 const domDebug = document.querySelector("#debug");
 
-domError.style.display = "block";
 domDebug.style.display = "block";
 
 const domH1 = document.querySelector("h1");
@@ -147,7 +145,6 @@ domH1.addEventListener("click", e => {
     h1ClickCount++;
     if (h1ClickCount >= 40) {
         alert("デバグ機能開放");
-        domError.style.display = "block";
         domDebug.style.display = "block";
         h1ClickCount = Number.NEGATIVE_INFINITY;
     }
@@ -158,7 +155,6 @@ domH1.addEventListener("click", e => {
 window.addEventListener("error", e => {
     const point = `${e.filename.split("/").pop()}:${e.lineno}`;
     const message = e.message;
-    // domError.innerHTML += `【${point}】${message}<br>`;
     alert(`ごめんエラー(TωT)\n${point}\n${message}`);
     const scene = SceneManager.scene();
     if (scene instanceof GameplayScene) {

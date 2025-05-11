@@ -95,8 +95,7 @@ ul {
   padding-left: 1rem;
 }
 
-#debug,
-#error {
+#debug {
   display: none;
   width: 100%;
   max-width: 800px;

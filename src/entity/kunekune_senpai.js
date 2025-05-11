@@ -45,7 +45,7 @@ class KunekuneSenpai extends Entity {
         this.#explosion?.update();
 
         if (this.state === "dying") {
-            this.#opacity -= 0.01;
+            this.#opacity -= 0.017;
             if (this.#opacity <= 0 || this.#explosion.shouldDisappear) {
                 this.state = "dead";
             }

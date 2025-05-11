@@ -166,11 +166,11 @@ window.addEventListener("error", e => {
 // debug
 
 const debug = {
+    isActive: true,
     canCreateEnemy: true,
 };
 
 const domDebugText = document.querySelector("#debug-text");
-const domDebugFps = document.querySelector("#debug-fps");
 const debugBtn1 = document.querySelector("#create-enemy");
 const debugBtn2 = document.querySelector("#sound-room");
 const debugBtn3 = document.querySelector("#self-destruction");

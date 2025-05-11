@@ -104,7 +104,7 @@ class MukimukiSenpai extends Entity {
     instantDeath(damageSoundVolume) {
         SoundStorage.get("ムキムキ息継ぎ").stop(this.#ikitugiSoundId);
         this.state = "dying";
-        this.#explosion = new Explosion(damageSoundVolume);
+        this.#explosion = new Explosion(this.temaeRate, damageSoundVolume);
     }
 
     takeDamage() {
@@ -113,7 +113,7 @@ class MukimukiSenpai extends Entity {
         if (this.#hp <= 0) {
             SoundStorage.get("ムキムキ息継ぎ").stop(this.#ikitugiSoundId);
             this.state = "dying";
-            this.#explosion = new Explosion();
+            this.#explosion = new Explosion(this.temaeRate);
         }
     }
 

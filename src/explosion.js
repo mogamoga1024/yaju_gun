@@ -6,9 +6,11 @@ class Explosion {
     #image = null;
     #imageIndex = 0;
     #imageIndexMax = 67;
+    #temaeRate = 0;
     shouldDisappear = false;
     
-    constructor(damageSoundVolume) {
+    constructor(temaeRate, damageSoundVolume) {
+        this.#temaeRate = temaeRate;
         this.#image = ImageStorage.get("爆発スプライト_170");
         const explosionSound = SoundStorage.get("爆発");
         const id = explosionSound.play();

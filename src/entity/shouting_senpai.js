@@ -135,13 +135,13 @@ class ShoutingSenpai extends Entity {
     instantDeath(damageSoundVolume) {
         SoundStorage.get(this.#text).stop(this.#shoutSoundId);
         this.state = "dying";
-        this.#explosion = new Explosion(damageSoundVolume);
+        this.#explosion = new Explosion(this.temaeRate, damageSoundVolume);
     }
 
     takeDamage() {
         SoundStorage.get(this.#text).stop(this.#shoutSoundId);
         this.state = "dying";
-        this.#explosion = new Explosion();
+        this.#explosion = new Explosion(this.temaeRate);
     }
 
     getXRange() {

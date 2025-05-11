@@ -94,13 +94,13 @@ class PunchSenpai extends Entity {
     instantDeath(damageSoundVolume) {
         SoundStorage.get("暴れんなよ…").stop(this.#entrySoundId);
         this.state = "dying";
-        this.#explosion = new Explosion(damageSoundVolume);
+        this.#explosion = new Explosion(this.temaeRate, damageSoundVolume);
     }
 
     takeDamage() {
         SoundStorage.get("暴れんなよ…").stop(this.#entrySoundId);
         this.state = "dying";
-        this.#explosion = new Explosion();
+        this.#explosion = new Explosion(this.temaeRate);
     }
 
     getXRange() {

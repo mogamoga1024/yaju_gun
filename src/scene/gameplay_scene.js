@@ -115,12 +115,12 @@ class GameplayScene extends Scene {
         // this.#enemyList.push(new MukimukiSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new ShoutingSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new KunekuneSenpai(canvas.width / 2, this.#viewAngle));
-        this.#enemyList.push(new PunchSenpai(canvas.width / 2, this.#viewAngle));
+        // this.#enemyList.push(new PunchSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new Honsya(this.#viewAngle));
         // debug end
 
         // チュートリアル用
-        // this.#enemyList.push(new KunekuneSenpai(canvas.width / 2, this.#viewAngle));
+        this.#enemyList.push(new KunekuneSenpai(canvas.width / 2, this.#viewAngle));
         this.#enemyList.push(new KunekuneSenpai(canvas.width / 2 * 3, this.#viewAngle));
 
         this.#nextExp = this.#calcNextExp(level);

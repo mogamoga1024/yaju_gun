@@ -168,7 +168,7 @@ window.addEventListener("error", e => {
 const debug = {
     isActive: true,
     canCreateEnemy: true,
-    isMuteki: true,
+    isMuteki: false,
 };
 
 const domDebugText = document.querySelector("#debug-text");

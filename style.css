@@ -78,7 +78,8 @@ a:active {
   line-height: 40px;
 }
 
-.gal-gun {
+.gal-gun,
+#bug {
   padding: 0.5rem 0;
   overflow-wrap: break-word;
   word-break: keep-all;

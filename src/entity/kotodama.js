@@ -30,8 +30,7 @@ class Kotodama extends Entity {
     }
 
     draw() {
-        // context.font = `400 ${this.#fontSize}px 'Noto Sans JP'`;
-        context.font = `400 ${this.#fontSize}px sans-serif`;
+        context.font = `400 ${this.#fontSize}px Xim-Sans`;
         context.textAlign = "center";
         context.textBaseline = "middle";
         context.lineWidth = 10 * this.temaeRate;
@@ -43,11 +42,11 @@ class Kotodama extends Entity {
         context.fillText(this.#text, this.#centerX, this.#centerY);
 
         // 当たり判定のデバッグ用
-        context.beginPath();
-        context.arc(this.#centerX, this.#centerY, this.#fontSize / 2, 0, Math.PI * 2);
-        context.fillStyle = `rgba(0, 0, 255, 0.5)`;
-        context.fill();
-        context.closePath();
+        // context.beginPath();
+        // context.arc(this.#centerX, this.#centerY, this.#fontSize / 2, 0, Math.PI * 2);
+        // context.fillStyle = `rgba(0, 0, 255, 0.5)`;
+        // context.fill();
+        // context.closePath();
     }
 
     update(viewAngle) {

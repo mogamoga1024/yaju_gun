@@ -113,14 +113,14 @@ class GameplayScene extends Scene {
         // this.#enemyList.push(new MeteorSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new RunningSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new MukimukiSenpai(canvas.width / 2, this.#viewAngle));
-        this.#enemyList.push(new ShoutingSenpai(canvas.width / 2, this.#viewAngle));
+        // this.#enemyList.push(new ShoutingSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new KunekuneSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new PunchSenpai(canvas.width / 2, this.#viewAngle));
         // this.#enemyList.push(new Honsya(this.#viewAngle));
         // debug end
 
         // チュートリアル用
-        // this.#enemyList.push(new KunekuneSenpai(canvas.width / 2, this.#viewAngle));
+        this.#enemyList.push(new KunekuneSenpai(canvas.width / 2, this.#viewAngle));
         this.#enemyList.push(new KunekuneSenpai(canvas.width / 2 * 3, this.#viewAngle));
 
         this.#nextExp = this.#calcNextExp(level);
@@ -154,6 +154,9 @@ class GameplayScene extends Scene {
             }
             const fps = 1000 / (time - prevTime);
             if (prevTime === -1 || fps < FPS + 10) {
+                // if (fps < 16) {
+                //     console.error(fps);
+                // }
                 prevTime = time;
                 this.#update();
                 this.#update(); // 60fps時代の名残

@@ -1,3 +1,10 @@
+
+@font-face {
+	font-family: "Xim-Sans";
+	src: url(./asset/Xim-Sans-Handwritten.ttf);
+  font-display: block; /* フォントが読み込まれるまで代替フォントを出さない */
+}
+
 :root {
   font-family: "Noto Sans JP", sans-serif;
   font-optical-sizing: auto;
@@ -20,6 +27,10 @@ body {
   user-select: none;
   -webkit-user-select: none;
   -webkit-touch-callout: none;
+}
+
+.xim {
+  font-family: "Xim-Sans";
 }
 
 .fw-400 {

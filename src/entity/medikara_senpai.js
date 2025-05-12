@@ -38,6 +38,7 @@ class MedikaraSenpai extends Entity {
         this.#chargeImage2 = ImageStorage.get("目力先輩/溜め2");
         this.#kaihouImage = ImageStorage.get("目力先輩/解放");
 
+        this.#chargeSound = SoundStorage.get("目力先輩/ヌウン_ヘッヘッ");
         this.#roarSound = SoundStorage.get("目力先輩/アー！");
 
         this.#height = 90;
@@ -118,10 +119,6 @@ class MedikaraSenpai extends Entity {
         if (this.isRoaring) {
             return;
         }
-        if (this.#chargeSound !== null) {
-            this.#chargeSound.stop(this.#chargeSoundId);
-            this.#chargeSound = null;
-        }
         if (this.#powerGauge >= 100) {
             this.#powerGauge = 0;
             this.#roar();
@@ -136,25 +133,22 @@ class MedikaraSenpai extends Entity {
             this.#powerGauge = 100;
             return;
         }
+        this.#chargeSound.stop(this.#chargeSoundId);
         if (needSound) {
-            if (Math.random() < 0.5) {
-                this.#chargeSound = SoundStorage.get("目力先輩/ヌウン");
-            }
-            else {
-                this.#chargeSound = SoundStorage.get("目力先輩/ヘッヘッ");
-            }
             this.#chargeSoundId = this.#chargeSound.play();
         }
         this.#powerGauge += amount;
         if (this.#powerGauge >= 100) {
             this.#powerGauge = 100;
-            this.#chargeSound = SoundStorage.get("目力先輩/ヌウン");
-            this.#chargeSoundId = this.#chargeSound.play();
+            if (!needSound) {
+                this.#chargeSoundId = this.#chargeSound.play();
+            }
         }
         this.#chargeFrameCount = 8;
     }
 
     #roar() {
+        this.#chargeSound.stop(this.#chargeSoundId);
         this.isRoaring = true;
         if (this.#roarSoundId !== -1) {
             this.#roarSound.off("playerror", this.#roarSoundId);

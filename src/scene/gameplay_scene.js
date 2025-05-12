@@ -586,6 +586,10 @@ class GameplayScene extends Scene {
         let totalDx = 0;
         for (const touch of e.touches) {
             const prevTouch = this.#touchXMap.get(touch.identifier);
+            if (prevTouch === undefined) {
+                // MEMO: 何故か undefined であることがあった
+                continue;
+            }
             let dx = Math.round(touch.clientX - prevTouch.x);
             if (Math.abs(dx) > this.#nippleRadius) {
                 dx = Math.sign(dx) * this.#nippleRadius;

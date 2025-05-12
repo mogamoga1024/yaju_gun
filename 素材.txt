@@ -1,6 +1,7 @@
 
 フォント
 Noto Sans Japanese
+Xim Sans
 
 （勝手に使ってごめんなさい…）
 

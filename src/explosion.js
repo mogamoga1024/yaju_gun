@@ -1,7 +1,5 @@
 
 class Explosion {
-    static #playingCount = 0;
-
     #frameCount = 0;
     #image = null;
     #imageIndex = 0;

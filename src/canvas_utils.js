@@ -7,9 +7,8 @@ function drawStrokeText(context, text, x, y) {
 function drawLoading() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     
-    context.globalAlpha = 0.8;
-    drawBackgroundImage(drawLoading.backgroundImage);
-    context.globalAlpha = 1;
+    // todo
+    const senapi = drawLoading.spinningSenpaiImage;
 
     const text = "Loading...";
     context.textAlign = "start";

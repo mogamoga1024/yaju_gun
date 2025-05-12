@@ -126,8 +126,8 @@ document.addEventListener("visibilitychange", () => {
     function createTitleScene() {
         if (!isFirst) return;
         isFirst = false;
-        loadImage("asset/こちらを見つめる先輩.png").then(image => {
-            drawLoading.backgroundImage = image;
+        loadImage("asset/回る先輩_W120_H151.png").then(image => {
+            drawLoading.spinningSenpaiImage = image;
             SceneManager.start(new TitleScene(true));
         });
     }

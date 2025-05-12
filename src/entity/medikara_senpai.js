@@ -148,7 +148,8 @@ class MedikaraSenpai extends Entity {
         this.#powerGauge += amount;
         if (this.#powerGauge >= 100) {
             this.#powerGauge = 100;
-            // todo 音とか鳴らしたいな… ヌゥーン みたいな
+            this.#chargeSound = SoundStorage.get("目力先輩/ヌウン");
+            this.#chargeSoundId = this.#chargeSound.play();
         }
         this.#chargeFrameCount = 8;
     }

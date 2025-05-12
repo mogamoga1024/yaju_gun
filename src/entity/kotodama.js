@@ -3,8 +3,6 @@ class Kotodama extends Entity {
     shooter = null;
     #centerX = 0;
     #centerY = 0;
-    #width = 0;
-    #height = 0;
     #fontSize = 0;
     #text = "";
     #oriFontSize = 0;
@@ -32,7 +30,8 @@ class Kotodama extends Entity {
     }
 
     draw() {
-        context.font = `400 ${this.#fontSize}px 'Noto Sans JP'`;
+        // context.font = `400 ${this.#fontSize}px 'Noto Sans JP'`;
+        context.font = `400 ${this.#fontSize}px sans-serif`;
         context.textAlign = "center";
         context.textBaseline = "middle";
         context.lineWidth = 10 * this.temaeRate;
@@ -42,6 +41,13 @@ class Kotodama extends Entity {
         
         context.fillStyle = `rgba(${this.#color.fill}, ${0.5 + this.temaeRate / 2})`;
         context.fillText(this.#text, this.#centerX, this.#centerY);
+
+        // 当たり判定のデバッグ用
+        context.beginPath();
+        context.arc(this.#centerX, this.#centerY, this.#fontSize / 2, 0, Math.PI * 2);
+        context.fillStyle = `rgba(0, 0, 255, 0.5)`;
+        context.fill();
+        context.closePath();
     }
 
     update(viewAngle) {
@@ -65,21 +71,11 @@ class Kotodama extends Entity {
         if (this.state !== "alive") {
             return false;
         }
-        const x = this.#centerX - this.#width / 2;
-        const y = this.#centerY - this.#height / 2;
-        if (crosshairX < x) {
-            return false;
-        }
-        if (crosshairX > x + this.#width) {
-            return false;
-        }
-        if (crosshairY < y) {
-            return false;
-        }
-        if (crosshairY > y + this.#height) {
-            return false;
-        }
-        return true;
+        
+        const radius = this.#fontSize / 2;
+        const d = Math.sqrt((crosshairX - this.#centerX) ** 2 + (crosshairY - this.#centerY) ** 2);
+
+        return d <= radius;
     }
 
     instantDeath(damageSoundVolume) {
@@ -97,19 +93,13 @@ class Kotodama extends Entity {
     }
 
     getXRange() {
-        const leftX = this.#centerX - this.#width / 2;
-        const rightX = leftX + this.#width;
+        const leftX = this.#centerX - this.#fontSize / 2;
+        const rightX = leftX + this.#fontSize;
         return {leftX, rightX};
     }
 
     #updateBounds(viewAngle) {
         this.#fontSize = this.#oriFontSize * this.temaeRate;
-        context.font = `400 ${this.#fontSize}px 'Noto Sans JP'`;
-        context.textAlign = "center";
-        context.textBaseline = "middle";
-        const measure = context.measureText(this.#text);
-        this.#width = measure.width;
-        this.#height = this.#fontSize;
 
         const canvasCenterX = canvas.width / 2;
         const offsetX = (canvasCenterX * (viewAngle / 90)) % (canvasCenterX * 4);
@@ -129,7 +119,7 @@ class Kotodama extends Entity {
             this.#centerY += Math.cos(this.#radian) * 100 * this.temaeRate;
         }
 
-        if (this.#centerX + this.#width / 2 > canvas.width * 2) {
+        if (this.#centerX + this.#fontSize / 2 > canvas.width * 2) {
             this.#centerX = this.#centerX - canvas.width * 2;
         }
     }

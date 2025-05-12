@@ -16,6 +16,7 @@ class GameOverScene extends Scene {
         console.log("GameOverScene:onStart");
 
         Cookies.remove("level", {path: COOKIE_PATH});
+        Cookies.remove("next_exp", {path: COOKIE_PATH});
         Cookies.remove("score", {path: COOKIE_PATH});
         Cookies.remove("hp", {path: COOKIE_PATH});
         Cookies.remove("mdkr", {path: COOKIE_PATH});

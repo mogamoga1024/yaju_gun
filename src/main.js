@@ -208,6 +208,7 @@ debugBtn5.addEventListener("click", () => {
     Cookies.remove("hard_high_score", {path: COOKIE_PATH});
     Cookies.remove("difficulty", {path: COOKIE_PATH});
     Cookies.remove("level", {path: COOKIE_PATH});
+    Cookies.remove("next_exp", {path: COOKIE_PATH});
     Cookies.remove("score", {path: COOKIE_PATH});
     Cookies.remove("hp", {path: COOKIE_PATH});
     Cookies.remove("mdkr", {path: COOKIE_PATH});

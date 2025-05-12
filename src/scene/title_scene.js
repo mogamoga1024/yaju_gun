@@ -14,6 +14,7 @@ class TitleScene extends Scene {
     #startBtn = null;
 
     #prevLevel = 1;
+    #prevNextExp = undefined;
     #prevHp = undefined;
     #prevMdkr = undefined;
     #prevScore = 0;
@@ -38,18 +39,22 @@ class TitleScene extends Scene {
         const strHp = Cookies.get("hp");
         const strMdkr = Cookies.get("mdkr");
         const strLevel = Cookies.get("level");
+        const strNextExp = Cookies.get("next_exp");
         const strScore = Cookies.get("score");
-        if (strLevel !== undefined && strHp !== undefined && strMdkr !== undefined && strScore !== undefined) {
-            const hp = Number(strHp);
-            const mdkr = Number(strMdkr);
-            const score = Number(strScore);
-            if (hp > 0 && score > 0) {
+        if (strLevel !== undefined && strNextExp !== undefined && strHp !== undefined && strMdkr !== undefined && strScore !== undefined) {
+            const prevLevel = Number(strLevel);
+            const prevNextExp = Number(strNextExp);
+            const prevHp = Number(strHp);
+            const prevMdkr = Number(strMdkr);
+            const prevScore = Number(strScore);
+            if (prevHp > 0 && prevScore > 0) {
                 this.#canContinue = true;
                 this.#startPoint = "continue";
-                this.#prevLevel = Number(strLevel);
-                this.#prevHp = hp;
-                this.#prevMdkr = mdkr;
-                this.#prevScore = score;
+                this.#prevLevel = prevLevel;
+                this.#prevNextExp = prevNextExp;
+                this.#prevHp = prevHp;
+                this.#prevMdkr = prevMdkr;
+                this.#prevScore = prevScore;
             }
         }
         
@@ -144,7 +149,7 @@ class TitleScene extends Scene {
         }
         else /*if (this.#startPoint = "continue")*/ {
             level = this.#prevLevel;
-            SceneManager.start(new GameplayScene(this.#prevHp, this.#prevMdkr, this.#prevScore));
+            SceneManager.start(new GameplayScene(this.#prevHp, this.#prevMdkr, this.#prevScore, this.#prevNextExp));
         }
     }
 

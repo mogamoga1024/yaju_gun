@@ -85,11 +85,17 @@ class GameplayScene extends Scene {
     #fadeOutAlpha = 0;
     #fadeOutDuration = 5000;
 
-    constructor(hp = undefined, mdkrPowerGauge = MedikaraSenpai.POWER_GAUGE_DEF, score = 0) {
+    constructor(hp = undefined, mdkrPowerGauge = MedikaraSenpai.POWER_GAUGE_DEF, score = 0, nextExp = undefined) {
         super();
         this.#player = new Player(hp);
         this.#mdkrPowerGauge = mdkrPowerGauge;
         this.#score = score;
+        if (nextExp === undefined) {
+            this.#nextExp = this.#calcNextExp(level);
+        }
+        else {
+            this.#nextExp = nextExp;
+        }
     }
 
     async onStart() {
@@ -122,8 +128,6 @@ class GameplayScene extends Scene {
         // チュートリアル用
         this.#enemyList.push(new KunekuneSenpai(canvas.width / 2, this.#viewAngle));
         this.#enemyList.push(new KunekuneSenpai(canvas.width / 2 * 3, this.#viewAngle));
-
-        this.#nextExp = this.#calcNextExp(level);
 
         this.#kmr = new KMR();
         this.#turnLeftBtn = new TurnLeftButton(10);
@@ -798,6 +802,7 @@ class GameplayScene extends Scene {
         else {
             Cookies.set("difficulty", difficulty, {expires: 365, path: COOKIE_PATH});
             Cookies.set("level", String(level), {expires: 365, path: COOKIE_PATH});
+            Cookies.set("next_exp", String(this.#nextExp), {expires: 365, path: COOKIE_PATH});
             Cookies.set("score", String(this.#score), {expires: 365, path: COOKIE_PATH});
             Cookies.set("hp", String(this.#player.hp), {expires: 365, path: COOKIE_PATH});
             Cookies.set("mdkr", String(this.#mdkrSnpi?.powerGauge ?? this.#mdkrPowerGauge), {expires: 365, path: COOKIE_PATH});

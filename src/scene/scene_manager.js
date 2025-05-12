@@ -1,6 +1,7 @@
 
 class SceneManager {
     static #scene = null;
+    static #loadingTimer = -1;
 
     static scene() {
         return this.#scene;
@@ -57,6 +58,8 @@ class SceneManager {
             throw new Error("Sceneが未指定");
         }
 
+        clearInterval(this.#loadingTimer);
+
         if (this.#scene !== null) {
             this.#scene.onEnd();
         }
@@ -67,7 +70,13 @@ class SceneManager {
         this.#scene = scene;
 
         if (needDrawLoading) {
-            drawLoading();
+            this.#loadingTimer = setInterval(() => {
+                if (scene.state === "loaded") {
+                    clearInterval(this.#loadingTimer);
+                    return;
+                }
+                drawLoading();
+            }, 1000 / FPS * 4);
         }
 
         scene.onStart();

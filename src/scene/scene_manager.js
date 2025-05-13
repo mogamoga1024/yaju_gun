@@ -10,6 +10,9 @@ class SceneManager {
     static #debug = 0;
 
     static #init() {
+        window.addEventListener("visibilitychange", e => {
+            this.#scene?.onVisibilityChange(e);
+        });
         window.addEventListener("keydown", e => {
             if (this.#scene?.state !== "loaded") return;
             this.#scene?.onKeyDown(e);

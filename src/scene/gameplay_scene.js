@@ -150,6 +150,19 @@ class GameplayScene extends Scene {
         canvas.style.touchAction = "";
     }
 
+    onVisibilityChange(e) {
+        if (document.hidden) {
+            Howler.stop();
+            this.save();
+            SceneManager.start(new TitleScene(), false);
+        } else {
+            // 音が取得できていないならばリロードする
+            if (this.state !== "loaded") {
+                window.location.reload();
+            }
+        }
+    }
+
     #startAnimation() {
         let prevTime = -1;
         const anime = (time) => {

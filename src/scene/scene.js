@@ -4,6 +4,7 @@ class Scene {
     prevScene = null;
     onStart() {}
     onEnd() {}
+    onVisibilityChange(e) {}
     onKeyDown(e) {}
     onKeyUp(e) {}
     onClick(e) {}

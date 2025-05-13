@@ -82,6 +82,10 @@ class GameOverScene extends Scene {
         clearInterval(this.#goodEndTimer);
     }
 
+    onVisibilityChange(e) {
+        // todo
+    }
+
     #update() {
         context.clearRect(0, 0, canvas.width, canvas.height);
         context.fillStyle = "rgb(255, 128, 170)";

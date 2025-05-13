@@ -89,27 +89,6 @@ if (!/android/i.test(navigator.userAgent)) {
     domAndroid.style.display = "none";
 }
 
-document.addEventListener("visibilitychange", () => {
-    if (document.hidden) {
-        const scene = SceneManager.scene();
-        if (scene instanceof GameplayScene) {
-            Howler.stop();
-            scene.save();
-            SceneManager.start(new TitleScene(), false);
-        }
-        else if (scene instanceof GameOverScene && !isPC) {
-            Howler.stop();
-            SceneManager.start(new TitleScene(), false);
-        }
-    } else {
-        // 音が取得できていないならばリロードする
-        const scene = SceneManager.scene();
-        if (scene instanceof GameplayScene && scene.state !== "loaded") {
-            window.location.reload();
-        }
-    }
-});
-
 (function() {
     const $loading = document.querySelector("#loading");
     const $app = document.querySelector("#app");

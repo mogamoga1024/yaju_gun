@@ -97,6 +97,10 @@ document.addEventListener("visibilitychange", () => {
             scene.save();
             SceneManager.start(new TitleScene(), false);
         }
+        else if (scene instanceof GameOverScene && !isPC) {
+            Howler.stop();
+            SceneManager.start(new TitleScene(), false);
+        }
     } else {
         // 音が取得できていないならばリロードする
         const scene = SceneManager.scene();

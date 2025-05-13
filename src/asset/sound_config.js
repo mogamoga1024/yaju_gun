@@ -49,7 +49,7 @@ const kotodamaNameList = [];
     add1(s, "36…普通だな！", "mp3", {volume: 0.8});
     add1(s, "なんか足んねぇよなぁ？", "mp3", {volume: 0.4});
     add1(s, "いいゾ～これ", "mp3", {volume: 0.9});
-    add1(s, "やりますねぇ！", "mp3", {volume: 1});
+    add1(s, "やりますねぇ！", "mp3", {volume: 0.9});
     
     // 野獣先輩
     add1(s, "息継ぎ", "m4a", {volume: 0.95, loop: true});

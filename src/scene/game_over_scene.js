@@ -66,10 +66,6 @@ class GameOverScene extends Scene {
 
         this.state = "loaded";
         this.#update();
-        setTimeout(() => {
-            // すぐにタイトル画面に戻ってほしくないため
-            this.#canClick = true;
-        }, 500);
     }
 
     onEnd() {
@@ -217,6 +213,7 @@ class GameOverScene extends Scene {
     }
 
     #drawComment() {
+        this.#canClick = true;
         SoundStorage.get(this.#comment).play();
 
         context.lineWidth = 5;

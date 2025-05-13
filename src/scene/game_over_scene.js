@@ -72,6 +72,10 @@ class GameOverScene extends Scene {
         }, 500);
     }
 
+    onEnd() {
+        Howler.stop();
+    }
+
     #update() {
         context.clearRect(0, 0, canvas.width, canvas.height);
         context.fillStyle = "rgb(255, 128, 170)";
@@ -83,55 +87,109 @@ class GameOverScene extends Scene {
         context.fillStyle = "#fff";
         context.strokeStyle = "rgb(255, 0, 128)";
 
-        const btp = SoundStorage.get("ブッチッパ！");
-        if (btp.isOK) {
-            const id = btp.play();
-            let shouldAnimation = true;
-            btp.on("playerror", () => {
-                shouldAnimation = false;
-                context.clearRect(0, 0, canvas.width, canvas.height);
-                context.fillStyle = "rgb(255, 128, 170)";
-                context.fillRect(0, 0, canvas.width, canvas.height);
+        if (level >= 50) {
+            const bgm = SoundStorage.get("あの頃の夏の思い出神社");
+            if (bgm.isOK) {
+                const startTime = 38.6;
+                const endTime = 50;
+                bgm.volume(0);
+                bgm.seek(startTime);
+                bgm.fade(0, bgm.defaultVolume, (endTime - startTime) * 1000);
+                const id = bgm.play();
+                let shouldAnimation = true;
+                bgm.on("playerror", () => {
+                    shouldAnimation = false;
+                    // todo
+                    context.clearRect(0, 0, canvas.width, canvas.height);
+                    context.fillStyle = "rgb(255, 128, 170)";
+                    context.fillRect(0, 0, canvas.width, canvas.height);
+                    this.#drawTitle();
+                    this.#drawLevel();
+                    this.#drawScore();
+                    this.#drawComment();
+                    this.#gotoTitleBtn.draw();
+                    this.#tweetBtn.draw();
+                    bgm.off("playerror", id);
+                }, id);
+                let drawCount = 0; // todo
+                const anime = () => {
+                    if (shouldAnimation) {
+                        const seek = bgm.seek();
+                        if (seek > endTime) {
+                            this.#drawTitle();
+                            this.#drawLevel();
+                            this.#drawScore();
+                            this.#drawComment();
+                            this.#gotoTitleBtn.draw();
+                            this.#tweetBtn.draw();
+                            bgm.off("playerror", id);
+                            shouldAnimation = false;
+                        }
+                        requestAnimationFrame(anime);
+                    }
+                };
+                anime();
+            }
+            else {
                 this.#drawTitle();
                 this.#drawLevel();
                 this.#drawScore();
                 this.#drawComment();
                 this.#gotoTitleBtn.draw();
                 this.#tweetBtn.draw();
-                btp.off("playerror", id);
-            }, id);
-            let drawCount = 0;
-            const anime = () => {
-                if (shouldAnimation) {
-                    const seek = btp.seek();
-                    if (drawCount === 0 && seek > 0.1) {
-                        drawCount += 1;
-                        this.#drawTitle();
-                    }
-                    else if (drawCount === 1 && seek > 0.3) {
-                        drawCount += 1;
-                        this.#drawLevel();
-                        this.#drawScore();
-                        this.#gotoTitleBtn.draw();
-                        this.#tweetBtn.draw();
-                    }
-                    else if (drawCount === 2 && seek > 0.5) {
-                        this.#drawComment();
-                        btp.off("playerror", id);
-                        shouldAnimation = false;
-                    }
-                    requestAnimationFrame(anime);
-                }
-            };
-            anime();
+            }
         }
         else {
-            this.#drawTitle();
-            this.#drawLevel();
-            this.#drawScore();
-            this.#drawComment();
-            this.#gotoTitleBtn.draw();
-            this.#tweetBtn.draw();
+            const btp = SoundStorage.get("ブッチッパ！");
+            if (btp.isOK) {
+                const id = btp.play();
+                let shouldAnimation = true;
+                btp.on("playerror", () => {
+                    shouldAnimation = false;
+                    context.clearRect(0, 0, canvas.width, canvas.height);
+                    context.fillStyle = "rgb(255, 128, 170)";
+                    context.fillRect(0, 0, canvas.width, canvas.height);
+                    this.#drawTitle();
+                    this.#drawLevel();
+                    this.#drawScore();
+                    this.#drawComment();
+                    this.#gotoTitleBtn.draw();
+                    this.#tweetBtn.draw();
+                    btp.off("playerror", id);
+                }, id);
+                let drawCount = 0;
+                const anime = () => {
+                    if (shouldAnimation) {
+                        const seek = btp.seek();
+                        if (drawCount === 0 && seek > 0.1) {
+                            drawCount += 1;
+                            this.#drawTitle();
+                        }
+                        else if (drawCount === 1 && seek > 0.3) {
+                            drawCount += 1;
+                            this.#drawLevel();
+                            this.#drawScore();
+                            this.#gotoTitleBtn.draw();
+                            this.#tweetBtn.draw();
+                        }
+                        else if (drawCount === 2 && seek > 0.5) {
+                            this.#drawComment();
+                            btp.off("playerror", id);
+                            shouldAnimation = false;
+                        }
+                        requestAnimationFrame(anime);
+                    }
+                };
+                anime();
+            }
+            else {
+                this.#drawTitle();
+                this.#drawLevel();
+                this.#drawScore();
+                this.#drawComment();
+                this.#gotoTitleBtn.draw();
+                this.#tweetBtn.draw();
+            }
         }
     }
 

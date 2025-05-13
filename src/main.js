@@ -91,9 +91,9 @@ if (!/android/i.test(navigator.userAgent)) {
 
 document.addEventListener("visibilitychange", () => {
     if (document.hidden) {
-        Howler.stop();
         const scene = SceneManager.scene();
         if (scene instanceof GameplayScene) {
+            Howler.stop();
             scene.save();
             SceneManager.start(new TitleScene(), false);
         }

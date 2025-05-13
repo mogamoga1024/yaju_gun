@@ -28,8 +28,9 @@ const kotodamaNameList = [];
     const k = kotodamaNameList;
 
     // BGM
-    add3(b, "ほのぼの神社", "mp3", {volume: 0.5, loop: true});
+    add3(b, "ほのぼの神社", "mp3", {volume: 0.6, loop: true});
     add3(b, "Smart Boy(Daily Unchi Special Mix)", "mp3", {volume: 0.6, loop: true});
+    add3(b, "あの頃の夏の思い出神社", "m4a", {volume: 0.6, loop: true});
 
     // 効果音 gameplay
     add1(s, "ドンッ", "mp3", {volume: 0.8});

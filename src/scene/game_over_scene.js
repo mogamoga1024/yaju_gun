@@ -1,5 +1,7 @@
 
 class GameOverScene extends Scene {
+    #maxLevel = 50;
+    #backgroundImage = null;
     #levelText = "";
     #score = 0; 
     #comment = "";
@@ -12,7 +14,7 @@ class GameOverScene extends Scene {
         this.#score = score;
     }
 
-    onStart() {
+    async onStart() {
         console.log("GameOverScene:onStart");
 
         Cookies.remove("level", {path: COOKIE_PATH});
@@ -21,16 +23,19 @@ class GameOverScene extends Scene {
         Cookies.remove("hp", {path: COOKIE_PATH});
         Cookies.remove("mdkr", {path: COOKIE_PATH});
 
-        const maxLevel = 50;
+        if (level >= this.#maxLevel) {
+            this.#backgroundImage = await loadImage("asset/good.png");
+        }
+
         this.#levelText = "Lv.";
-        if (level < maxLevel) {
+        if (level < this.#maxLevel) {
             this.#levelText += String(level);
         }
-        else if (level === maxLevel) {
+        else if (level === this.#maxLevel) {
             this.#levelText += "MAX";
         }
         else {
-            this.#levelText += `MAX+${level - maxLevel}`;
+            this.#levelText += `MAX+${level - this.#maxLevel}`;
         }
 
         if (this.#score < 0) {
@@ -83,7 +88,7 @@ class GameOverScene extends Scene {
         context.fillStyle = "#fff";
         context.strokeStyle = "rgb(255, 0, 128)";
 
-        if (level >= 50) {
+        if (level >= this.#maxLevel) {
             const bgm = SoundStorage.get("あの頃の夏の思い出神社");
             if (bgm.isOK) {
                 const startTime = 38.6;
@@ -95,10 +100,8 @@ class GameOverScene extends Scene {
                 let shouldAnimation = true;
                 bgm.on("playerror", () => {
                     shouldAnimation = false;
-                    // todo
                     context.clearRect(0, 0, canvas.width, canvas.height);
-                    context.fillStyle = "rgb(255, 128, 170)";
-                    context.fillRect(0, 0, canvas.width, canvas.height);
+                    drawBackgroundImage(this.#backgroundImage);
                     this.#drawTitle();
                     this.#drawLevel();
                     this.#drawScore();
@@ -107,11 +110,12 @@ class GameOverScene extends Scene {
                     this.#tweetBtn.draw();
                     bgm.off("playerror", id);
                 }, id);
-                let drawCount = 0; // todo
                 const anime = () => {
                     if (shouldAnimation) {
                         const seek = bgm.seek();
                         if (seek > endTime) {
+                            context.clearRect(0, 0, canvas.width, canvas.height);
+                            drawBackgroundImage(this.#backgroundImage);
                             this.#drawTitle();
                             this.#drawLevel();
                             this.#drawScore();

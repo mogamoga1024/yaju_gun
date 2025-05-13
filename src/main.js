@@ -133,6 +133,20 @@ document.addEventListener("visibilitychange", () => {
     }
 })();
 
+const drawConfetti = new ConfettiGenerator({
+    target: "game-canvas",
+    max: 100,
+    size: 1,
+    animate: true,
+    props: ["square", "triangle"],
+    colors: [[165,104,246], [230,61,135], [0,199,228], [253,214,126]],
+    clock: 25,
+    rotate: true,
+    start_from_edge: false,
+    width: canvas.width,
+    height: canvas.height,
+});
+
 // 開発者モード
 
 const domDebug = document.querySelector("#debug");

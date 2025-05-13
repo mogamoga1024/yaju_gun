@@ -8,6 +8,7 @@ class GameOverScene extends Scene {
     #canClick = false;
     #gotoTitleBtn = null;
     #tweetBtn = null;
+    #goodEndTimer = -1;
 
     constructor(score) {
         super();
@@ -75,18 +76,13 @@ class GameOverScene extends Scene {
 
     onEnd() {
         Howler.stop();
+        clearInterval(this.#goodEndTimer);
     }
 
     #update() {
         context.clearRect(0, 0, canvas.width, canvas.height);
         context.fillStyle = "rgb(255, 128, 170)";
         context.fillRect(0, 0, canvas.width, canvas.height);
-
-        context.textAlign = "start";
-        context.textBaseline = "middle";
-        context.lineJoin = "round";
-        context.fillStyle = "#fff";
-        context.strokeStyle = "rgb(255, 0, 128)";
 
         if (level >= this.#maxLevel) {
             const bgm = SoundStorage.get("あの頃の夏の思い出神社");
@@ -99,29 +95,15 @@ class GameOverScene extends Scene {
                 const id = bgm.play();
                 let shouldAnimation = true;
                 bgm.on("playerror", () => {
-                    shouldAnimation = false;
-                    context.clearRect(0, 0, canvas.width, canvas.height);
-                    drawBackgroundImage(this.#backgroundImage);
-                    this.#drawTitle();
-                    this.#drawLevel();
-                    this.#drawScore();
-                    this.#drawComment();
-                    this.#gotoTitleBtn.draw();
-                    this.#tweetBtn.draw();
+                    this.#drawGoodEnd();
                     bgm.off("playerror", id);
+                    shouldAnimation = false;
                 }, id);
                 const anime = () => {
                     if (shouldAnimation) {
                         const seek = bgm.seek();
                         if (seek > endTime) {
-                            context.clearRect(0, 0, canvas.width, canvas.height);
-                            drawBackgroundImage(this.#backgroundImage);
-                            this.#drawTitle();
-                            this.#drawLevel();
-                            this.#drawScore();
-                            this.#drawComment();
-                            this.#gotoTitleBtn.draw();
-                            this.#tweetBtn.draw();
+                            this.#drawGoodEnd();
                             bgm.off("playerror", id);
                             shouldAnimation = false;
                         }
@@ -131,12 +113,7 @@ class GameOverScene extends Scene {
                 anime();
             }
             else {
-                this.#drawTitle();
-                this.#drawLevel();
-                this.#drawScore();
-                this.#drawComment();
-                this.#gotoTitleBtn.draw();
-                this.#tweetBtn.draw();
+                this.#drawGoodEnd();
             }
         }
         else {
@@ -193,37 +170,80 @@ class GameOverScene extends Scene {
         }
     }
 
+    #drawGoodEnd() {
+        clearInterval(this.#goodEndTimer);
+        this.#goodEndTimer = setInterval(() => {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            drawBackgroundImage(this.#backgroundImage);
+            this.#drawTitle();
+            this.#drawLevel();
+            this.#drawScore();
+            this.#drawComment();
+            this.#gotoTitleBtn.draw();
+            this.#tweetBtn.draw();
+            drawConfetti();
+        }, 1000 / FPS);
+    }
+
     #drawTitle() {
+        context.save();
+        context.textAlign = "start";
+        context.textBaseline = "middle";
+        context.lineJoin = "round";
+        context.fillStyle = "#fff";
+        context.strokeStyle = "rgb(255, 0, 128)";
         context.lineWidth = 12;
         context.font = "400 80px 'Noto Sans JP'";
         const text = "リザルト";
         const width = context.measureText(text).width;
         drawStrokeText(context, text, (canvas.width - width) / 2, 65);
+        context.restore();
     }
 
     #drawLevel() {
+        context.save();
+        context.textAlign = "start";
+        context.textBaseline = "middle";
+        context.lineJoin = "round";
+        context.fillStyle = "#fff";
+        context.strokeStyle = "rgb(255, 0, 128)";
         context.lineWidth = 5;
         context.font = "400 50px 'Noto Sans JP'";
         const width = context.measureText(this.#levelText).width;
         drawStrokeText(context, this.#levelText, (canvas.width - width) / 2, 165);
+        context.restore();
     }
 
     #drawScore() {
+        context.save();
+        context.textAlign = "start";
+        context.textBaseline = "middle";
+        context.lineJoin = "round";
+        context.fillStyle = "#fff";
+        context.strokeStyle = "rgb(255, 0, 128)";
         context.lineWidth = 5;
         context.font = "400 50px 'Noto Sans JP'";
         const text = `SCORE ${this.#score}`;
         const width = context.measureText(text).width;
         drawStrokeText(context, text, (canvas.width - width) / 2, 220);
+        context.restore();
     }
 
     #drawComment() {
+        context.save();
         this.#canClick = true;
         SoundStorage.get(this.#comment).play();
 
+        context.textAlign = "start";
+        context.textBaseline = "middle";
+        context.lineJoin = "round";
+        context.fillStyle = "#fff";
+        context.strokeStyle = "rgb(255, 0, 128)";
         context.lineWidth = 5;
         context.font = "400 60px 'Noto Sans JP'";
         const width = context.measureText(this.#comment).width;
         drawStrokeText(context, this.#comment, (canvas.width - width) / 2, 300);
+        context.restore();
     }
 
     onClick(e) {

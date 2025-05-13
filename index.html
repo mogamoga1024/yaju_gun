@@ -66,7 +66,9 @@
       学生です
     </div>
   </div>
-  <div id="app" style="display: none;">
+
+  <!-- https://stackoverflow.com/questions/24077725/mobile-safari-sometimes-does-not-trigger-the-click-event -->
+  <div id="app" style="display: none;" onclick="void(0);">
     <canvas id="game-canvas" width="900" height="450"></canvas>
     <div id="description-container">
       <div id="debug">

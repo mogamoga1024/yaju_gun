@@ -10,6 +10,7 @@ class GameOverScene extends Scene {
     #tweetBtn = null;
     #hasPlayedComment = false;
     #goodEndTimer = -1;
+    #shouldAnimation = false;
 
     constructor(score) {
         super();
@@ -77,6 +78,7 @@ class GameOverScene extends Scene {
 
     onEnd() {
         Howler.stop();
+        this.#shouldAnimation = false;
         clearInterval(this.#goodEndTimer);
     }
 
@@ -94,19 +96,19 @@ class GameOverScene extends Scene {
                 bgm.seek(startTime);
                 bgm.fade(0, bgm.defaultVolume, (endTime - startTime) * 1000);
                 const id = bgm.play();
-                let shouldAnimation = true;
+                this.#shouldAnimation = true;
                 bgm.on("playerror", () => {
                     this.#drawGoodEnd();
                     bgm.off("playerror", id);
-                    shouldAnimation = false;
+                    this.#shouldAnimation = false;
                 }, id);
                 const anime = () => {
-                    if (shouldAnimation) {
+                    if (this.#shouldAnimation) {
                         const seek = bgm.seek();
                         if (seek > endTime) {
                             this.#drawGoodEnd();
                             bgm.off("playerror", id);
-                            shouldAnimation = false;
+                            this.#shouldAnimation = false;
                         }
                         requestAnimationFrame(anime);
                     }
@@ -121,9 +123,9 @@ class GameOverScene extends Scene {
             const btp = SoundStorage.get("ブッチッパ！");
             if (btp.isOK) {
                 const id = btp.play();
-                let shouldAnimation = true;
+                this.#shouldAnimation = true;
                 btp.on("playerror", () => {
-                    shouldAnimation = false;
+                    this.#shouldAnimation = false;
                     context.clearRect(0, 0, canvas.width, canvas.height);
                     context.fillStyle = "rgb(255, 128, 170)";
                     context.fillRect(0, 0, canvas.width, canvas.height);
@@ -137,7 +139,7 @@ class GameOverScene extends Scene {
                 }, id);
                 let drawCount = 0;
                 const anime = () => {
-                    if (shouldAnimation) {
+                    if (this.#shouldAnimation) {
                         const seek = btp.seek();
                         if (drawCount === 0 && seek > 0.1) {
                             drawCount += 1;
@@ -153,7 +155,7 @@ class GameOverScene extends Scene {
                         else if (drawCount === 2 && seek > 0.5) {
                             this.#drawComment();
                             btp.off("playerror", id);
-                            shouldAnimation = false;
+                            this.#shouldAnimation = false;
                         }
                         requestAnimationFrame(anime);
                     }

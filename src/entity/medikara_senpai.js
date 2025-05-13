@@ -133,8 +133,8 @@ class MedikaraSenpai extends Entity {
             this.#powerGauge = 100;
             return;
         }
-        this.#chargeSound.stop(this.#chargeSoundId);
         if (needSound) {
+            this.#chargeSound.stop(this.#chargeSoundId);
             this.#chargeSoundId = this.#chargeSound.play();
         }
         this.#powerGauge += amount;

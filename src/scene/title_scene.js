@@ -28,8 +28,7 @@ class TitleScene extends Scene {
 
     async onStart() {
         console.log("TitleScene:onStart");
-        // this.#backgroundImage = await loadImage("asset/やじゅがん.png");
-        this.#backgroundImage = await loadImage("asset/good.png");
+        this.#backgroundImage = await loadImage("asset/やじゅがん.png");
 
         const strDifficulty = Cookies.get("difficulty");
         if (strDifficulty !== undefined) {

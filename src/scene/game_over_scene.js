@@ -8,6 +8,7 @@ class GameOverScene extends Scene {
     #canClick = false;
     #gotoTitleBtn = null;
     #tweetBtn = null;
+    #hasPlayedComment = false;
     #goodEndTimer = -1;
 
     constructor(score) {
@@ -232,7 +233,11 @@ class GameOverScene extends Scene {
     #drawComment() {
         context.save();
         this.#canClick = true;
-        SoundStorage.get(this.#comment).play();
+
+        if (!this.#hasPlayedComment) {
+            this.#hasPlayedComment = true;
+            SoundStorage.get(this.#comment).play();
+        }
 
         context.textAlign = "start";
         context.textBaseline = "middle";

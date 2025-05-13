@@ -178,6 +178,7 @@ const debugBtn3 = document.querySelector("#self-destruction");
 const debugBtn4 = document.querySelector("#force-error");
 const debugBtn5 = document.querySelector("#delete-cookie");
 const debugBtn6 = document.querySelector("#muteki");
+const debugBtn7 = document.querySelector("#level-max");
 
 debugBtn1.addEventListener("click", () => {
     debug.canCreateEnemy = !debug.canCreateEnemy;
@@ -223,5 +224,11 @@ debugBtn6.addEventListener("click", () => {
     }
     else {
         debugBtn6.innerText = "ダメージ無効化";
+    }
+});
+
+debugBtn7.addEventListener("click", () => {
+    if (level < 50) {
+        level = 50;
     }
 });

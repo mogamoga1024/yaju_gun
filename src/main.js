@@ -130,23 +130,6 @@ const drawConfetti = new ConfettiGenerator({
     height: canvas.height,
 });
 
-// 開発者モード
-
-const domDebug = document.querySelector("#debug");
-
-domDebug.style.display = "block";
-
-const domH1 = document.querySelector("h1");
-let h1ClickCount = 0;
-domH1.addEventListener("click", e => {
-    h1ClickCount++;
-    if (h1ClickCount >= 40) {
-        alert("デバグ機能開放");
-        domDebug.style.display = "block";
-        h1ClickCount = Number.NEGATIVE_INFINITY;
-    }
-});
-
 // error
 
 window.addEventListener("error", e => {
@@ -160,10 +143,29 @@ window.addEventListener("error", e => {
     location.reload();
 });
 
+// 開発者モード
+
+const domDebug = document.querySelector("#debug");
+const domH1 = document.querySelector("h1");
+let h1ClickCount = 0;
+
+if ((new URL(window.location.href)).searchParams.has("d")) {
+    domDebug.style.display = "block";
+    h1ClickCount = Number.NEGATIVE_INFINITY;
+}
+
+domH1.addEventListener("click", e => {
+    h1ClickCount++;
+    if (h1ClickCount >= 40) {
+        alert("デバグ機能開放");
+        domDebug.style.display = "block";
+        h1ClickCount = Number.NEGATIVE_INFINITY;
+    }
+});
+
 // debug
 
 const debug = {
-    isActive: true,
     canCreateEnemy: true,
     isMuteki: false,
 };

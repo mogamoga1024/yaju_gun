@@ -7,8 +7,6 @@ class SceneManager {
         return this.#scene;
     }
 
-    static #debug = 0;
-
     static #init() {
         window.addEventListener("visibilitychange", e => {
             this.#scene?.onVisibilityChange(e);

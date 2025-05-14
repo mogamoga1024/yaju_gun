@@ -22,15 +22,6 @@ class SceneManager {
             this.#scene?.onKeyUp(e);
         });
         canvas.addEventListener("click", e => {
-            if (debug.isActive) {
-                // DEBUG: そもそも呼び出されている？
-                domDebugText.innerText = ++this.#debug;
-                // DEBUG: GameOverSceneでonClickが呼び出されない現象があったためデバグ
-                if (this.#scene instanceof GameOverScene) {
-                    // DEBUG: GameOverSceneで呼び出されないことがあった。何故？
-                    domDebugText.innerText = ++this.#debug;
-                }
-            }
             if (this.#scene?.state !== "loaded") return;
             this.#scene?.onClick(e);
         });

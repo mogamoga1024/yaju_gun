@@ -1,5 +1,8 @@
 
 class GameOverScene extends Scene {
+    #isRedisplay = false;
+    #isFirstClick = true;
+    #isEnd = false;
     #maxLevel = 50;
     #backgroundImage = null;
     #levelText = "";
@@ -12,8 +15,9 @@ class GameOverScene extends Scene {
     #goodEndTimer = -1;
     #shouldAnimation = false;
 
-    constructor(score) {
+    constructor(score, isRedisplay = false) {
         super();
+        this.#isRedisplay = isRedisplay;
         this.#score = score;
     }
 
@@ -78,18 +82,42 @@ class GameOverScene extends Scene {
 
     onEnd() {
         Howler.stop();
+        this.#isEnd = true;
         this.#shouldAnimation = false;
         clearInterval(this.#goodEndTimer);
     }
 
     onVisibilityChange(e) {
-        // todo
+        if (isPC) {
+            return;
+        }
+        if (document.hidden) {
+            Howler.stop();
+        }
+        else {
+            SceneManager.start(new GameOverScene(this.#score, true), false);
+        }
     }
 
     #update() {
         context.clearRect(0, 0, canvas.width, canvas.height);
         context.fillStyle = "rgb(255, 128, 170)";
         context.fillRect(0, 0, canvas.width, canvas.height);
+
+        if (this.#isRedisplay) {
+            if (level >= this.#maxLevel) {
+                this.#drawGoodEnd();
+            }
+            else {
+                this.#drawTitle();
+                this.#drawLevel();
+                this.#drawScore();
+                this.#drawComment();
+                this.#gotoTitleBtn.draw();
+                this.#tweetBtn.draw();
+            }
+            return;
+        }
 
         if (level >= this.#maxLevel) {
             const bgm = SoundStorage.get("あの頃の夏の思い出神社");
@@ -240,7 +268,7 @@ class GameOverScene extends Scene {
         context.save();
         this.#canClick = true;
 
-        if (!this.#hasPlayedComment) {
+        if (!this.#hasPlayedComment && !this.#isRedisplay) {
             this.#hasPlayedComment = true;
             SoundStorage.get(this.#comment).play();
         }
@@ -258,6 +286,24 @@ class GameOverScene extends Scene {
     }
 
     onClick(e) {
+        if (this.#isRedisplay && this.#isFirstClick && level >= this.#maxLevel) {
+            const bgm = SoundStorage.get("あの頃の夏の思い出神社");
+            bgm.volume(bgm.defaultVolume);
+            bgm.seek(38.6);
+            if (Howler.ctx !== null && (Howler.ctx.state === "suspended" || Howler.ctx.state === "interrupted")) {
+                Howler.ctx.resume().then(() => {
+                    if (!this.#isEnd) {
+                        bgm.play();
+                    }
+                });
+            }
+            else {
+                bgm.play();
+            }
+        }
+
+        this.#isFirstClick = false;
+
         if (!this.#canClick) {
             return;
         }
@@ -266,9 +312,13 @@ class GameOverScene extends Scene {
         const {x, y} = this.canvasXY(e.offsetX, e.offsetY, rect);
 
         if (this.#gotoTitleBtn.isTargeted(x, y)) {
+            this.#canClick = false;
             SceneManager.start(new TitleScene(), false);
         }
         else if (this.#tweetBtn.isTargeted(x, y)) {
+            if (!isPC) {
+                this.#canClick = false;
+            }
             const link = document.createElement("a");
             const text = `やじゅがん（${difficultyName()}）\n${this.#levelText}\nSCORE：${this.#score}\n評価：${this.#comment}`;
             const hashtags = "やじゅがん,野獣先輩,ぎゃるがん3あくしろよ";

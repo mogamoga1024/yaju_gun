@@ -621,6 +621,10 @@ class GameplayScene extends Scene {
         const rect = e.target.getBoundingClientRect();
         for (const touch of e.changedTouches) {
             const prevTouch = this.#touchXMap.get(touch.identifier);
+            // タイトル画面で指をつけて、ゲーム画面で指を離すをundefinedになる
+            if (prevTouch === undefined) {
+                continue;
+            }
             this.#touchXMap.delete(touch.identifier);
             this.#nippleDx -= prevTouch.dx;
             if (touch.clientX !== prevTouch.x) {

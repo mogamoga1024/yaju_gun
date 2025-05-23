@@ -1,5 +1,10 @@
 
 @media screen and (max-width: 1000px) {
+  canvas, summary, a {
+    /* これでiOS Safariでクリック可能だと認識されるらしい */
+    cursor: pointer;
+  }
+
   h1 {
     font-size: 1.5rem;
   }

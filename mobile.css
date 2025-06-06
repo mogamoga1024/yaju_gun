@@ -9,11 +9,14 @@
     font-size: 1.5rem;
   }
 
+  #canvas-container {
+    margin-top: 32px;
+  }
+
   #game-canvas {
     width: 100%;
     height: auto;
     max-height: none;
-    margin-top: 32px;
   }
 
   #notice, #android {

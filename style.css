@@ -65,11 +65,15 @@ a:active {
   color: #ffd580;
 }
 
+#canvas-container {
+  width: fit-content;
+  margin: 16px auto 0;
+}
+
 #game-canvas {
   display: block;
   height: 100svh;
   max-height: 500px;
-  margin: 16px auto 0;
 }
 
 #description-container {

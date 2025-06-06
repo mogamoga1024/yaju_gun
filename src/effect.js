@@ -79,5 +79,23 @@
 
         impactFrameCount++;
     }
+
+    const canvasContainer = document.querySelector("#canvas-container");
+
+    window.ripple = (centerX, centerY) => {
+        const circle = document.createElement("span");
+        circle.classList.add("ripple-effect");
+        const radius = 25;
+        circle.style.left = (centerX - radius) + "px";
+        circle.style.top = (centerY - radius) + "px";
+        canvasContainer.appendChild(circle);
+
+        circle.addEventListener("animationend", () => {
+            circle.remove();
+        });
+        circle.addEventListener("animationcancel", () => {
+            circle.remove();
+        });
+    }
 })();
 

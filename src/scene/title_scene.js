@@ -105,8 +105,7 @@ class TitleScene extends Scene {
             return;
         }
         const rect = e.target.getBoundingClientRect();
-        const {x, y} = this.canvasXY(e.offsetX, e.offsetY, rect);
-        this.#onClick(x, y);
+        this.#onClick(e.offsetX, e.offsetY, rect);
     }
 
     onTouchEnd(e) {
@@ -114,14 +113,17 @@ class TitleScene extends Scene {
         const touch = e.changedTouches[0];
         const offsetX = touch.clientX - rect.left;
         const offsetY = touch.clientY - rect.top;
-        const {x, y} = this.canvasXY(offsetX, offsetY, rect);
-        this.#onClick(x, y);
+        this.#onClick(offsetX, offsetY, rect);
     }
     
-    #onClick(x, y) {
+    #onClick(offsetX, offsetY, rect) {
         if (!this.#canClick) {
             return;
         }
+
+        ripple(offsetX, offsetY);
+
+        const {x, y} = this.canvasXY(offsetX, offsetY, rect);
 
         if (this.#hajimeBtn.isTargeted(x, y)) {
             this.#startPoint = "new";

@@ -748,22 +748,29 @@ class GameplayScene extends Scene {
     }
 
     #calcNextExp(nextLevel) {
-        if (nextLevel < this.#maxLevel) {
-            // MEMO
-            // nextLevel 50  -> return 8
-            // nextLevel 100 -> return 9
-            // nextLevel 200 -> return 9
-            // nextLevel 300 -> return 10
-            return Math.floor(5 * (nextLevel + this.#maxLevel) ** (1/8));
-        }
-        else if (difficulty === "easy") {
-            return 9;
+        if (difficulty === "easy") {
+            if (nextLevel < this.#maxLevel) {
+                return 4;
+            }
+            else {
+                return 6;
+            }
         }
         else if (difficulty === "normal") {
-            return 10;
+            if (nextLevel < this.#maxLevel) {
+                return 6;
+            }
+            else {
+                return 8;
+            }
         }
         else /*if (difficulty === "hard")*/ {
-            return 20;
+            if (nextLevel < this.#maxLevel) {
+                return 8;
+            }
+            else {
+                return 20;
+            }
         }
     }
 

@@ -290,8 +290,7 @@ class GameOverScene extends Scene {
             return;
         }
         const rect = e.target.getBoundingClientRect();
-        const {x, y} = this.canvasXY(e.offsetX, e.offsetY, rect);
-        this.#onClick(x, y);
+        this.#onClick(e.offsetX, e.offsetY, rect);
     }
 
     onTouchEnd(e) {
@@ -299,11 +298,10 @@ class GameOverScene extends Scene {
         const touch = e.changedTouches[0];
         const offsetX = touch.clientX - rect.left;
         const offsetY = touch.clientY - rect.top;
-        const {x, y} = this.canvasXY(offsetX, offsetY, rect);
-        this.#onClick(x, y);
+        this.#onClick(offsetX, offsetY, rect);
     }
 
-    #onClick(x, y) {
+    #onClick(offsetX, offsetY, rect) {
         if (this.#isRedisplay && this.#isFirstClick && level >= this.#maxLevel) {
             const bgm = SoundStorage.get("あの頃の夏の思い出神社");
             bgm.volume(bgm.defaultVolume);
@@ -325,6 +323,10 @@ class GameOverScene extends Scene {
         if (!this.#canClick) {
             return;
         }
+
+        ripple(offsetX, offsetY);
+
+        const {x, y} = this.canvasXY(offsetX, offsetY, rect);
 
         if (this.#gotoTitleBtn.isTargeted(x, y)) {
             this.#canClick = false;
